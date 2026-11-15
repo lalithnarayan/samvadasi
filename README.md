@@ -1,4 +1,4 @@
-# संवदसि · Samvadasi — samavada.si
+# संवद.सि · Samvadasi — samavada.si
 
 > संवदसि (*saṃvadasi*) — “you converse”.
 
