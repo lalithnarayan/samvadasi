@@ -1,6 +1,7 @@
 'use client'
-import { useState } from 'react'
-import { iast, ktaCell, splitScript, LAKARA_NAMES, padaOf, tinCell, toScript, colorOfIdx, type DhatuLite, type LakaraId, type PadaId } from '@/lib/grammar'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { familyView, iast, ktaCell, splitScript, LAKARA_NAMES, padaOf, tinCell, toScript, colorOfIdx, type Derived, type DhatuLite, type FamilyId, type LakaraId, type PadaId, type VoiceId } from '@/lib/grammar'
 import { meaningOf, type UIKey } from '@/lib/i18n'
 import { DEEP, TINT, useSamvada } from '@/components/samvada/state'
 import { SiteNav } from '@/components/samvada/SiteNav'
@@ -18,15 +19,38 @@ const SPOKEN: LakaraId[] = ['lat', 'lan', 'lrt', 'lot', 'vidhi']
 const LITERARY: LakaraId[] = ['lit', 'lut', 'lun', 'ashir', 'lrn']
 const COLH = [['num.0', 'एक'], ['num.1', 'द्वि'], ['num.2', 'बहु']] as const
 const PADA_SK: Record<PadaId, string> = { P: 'परस्मैपद', A: 'आत्मनेपद' }
+const FAMS: { id: FamilyId; sk: string }[] = [{ id: 'mula', sk: 'मूल' }, { id: 'nic', sk: 'णिच्' }, { id: 'san', sk: 'सन्' }, { id: 'yan', sk: 'यङ्' }]
+const VOICES: { id: VoiceId; sk: string }[] = [{ id: 'kartari', sk: 'कर्तरि' }, { id: 'karmani', sk: 'कर्मणि' }]
+type Rel = DhatuLite & { prefixes: string[] }
 
-export function VerbClient({ d, examples }: { d: D; examples: Ex[] }) {
-  const { subj, when, gen, num, sc, tr, t, lang } = useSamvada()
+export function VerbClient({ d: base, examples, relatives = [] }: { d: D; examples: Ex[]; relatives?: Rel[] }) {
+  const { subj, when, gen, num, sc, tr, t, lang, query } = useSamvada()
   const colh = COLH.map(([k, sk]) => `${t(k)} · ${toScript(sk, sc)}`)
-  const mean = meaningOf(d, lang, sc)
-  const [pada, setPada] = useState<PadaId>(padaOf(d))
+  const mean = meaningOf(base, lang, sc)
+  // Verb family (सनादि) and voice (प्रयोग): stored for everyday and prefixed verbs, asked from Vidyut for the rest.
+  const [fam, setFam] = useState<FamilyId>('mula')
+  const [voice, setVoice] = useState<VoiceId>('kartari')
+  const [derived, setDerived] = useState<Derived | null>(base.derived || null)
+  const [loading, setLoading] = useState<'idle' | 'busy' | 'error'>('idle')
+  const wantsFamily = fam !== 'mula' || voice !== 'kartari'
+  useEffect(() => {
+    if (!wantsFamily || derived || loading === 'busy') return
+    setLoading('busy')
+    fetch('/api/grammar', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'derived', aupadeshika: base.aupadeshika, gana: base.gana, prefixes: base.prefixes }) })
+      .then((r) => r.json()).then((j) => { if (j.derived) { setDerived(j.derived); setLoading('idle') } else setLoading('error') })
+      .catch(() => setLoading('error'))
+  }, [wantsFamily, derived, loading, base.aupadeshika, base.gana, base.prefixes])
+  const view = familyView(base, fam, voice, derived)
+  const d: D = view ? { ...base, ...view } : base
+  const missing = wantsFamily && !view
+  const [padaPick, setPada] = useState<PadaId>(padaOf(base))
+  const pada: PadaId = d.padas.includes(padaPick) ? padaPick : padaOf(d)
+  const rootRel = relatives.find((r) => !r.prefixes.length)
+  const prefixed = relatives.filter((r) => r.prefixes.length)
+  const lat3 = (x: DhatuLite) => tinCell(x, 'lat', 0)?.form || x.display
   const font = `var(--font-sk-${sc})`, deep = DEEP[subj.color]
   const dict = `https://ambuda.org/tools/dictionaries/mw,apte/${encodeURIComponent(d.root)}`
-  const req = (lak: string, idx: number) => ({ aupadeshika: d.aupadeshika, gana: d.gana, prefixes: d.prefixes, lak, idx, pada })
+  const req = (lak: string, idx: number) => ({ aupadeshika: d.aupadeshika, gana: d.gana, prefixes: d.prefixes, lak, idx, pada, sanadi: fam === 'mula' ? null : fam, prayoga: voice })
   const kta0 = ktaCell(d, 'm', 0)
 
   const grid = (lak: LakaraId, literary = false) => {
@@ -81,7 +105,8 @@ export function VerbClient({ d, examples }: { d: D; examples: Ex[] }) {
         <div className="grid items-end gap-6 lg:grid-cols-2 lg:gap-16">
           <div className="flex flex-col gap-1.5">
             <span className="eyebrow" style={{ color: deep }}>{t('vb.eyebrow', { code: d.code })}</span>
-            <p lang="sa" className="m-0 text-[clamp(96px,13vw,200px)] leading-[1.25]" style={{ fontFamily: sc === 'deva' ? 'var(--font-display)' : font }}>{toScript(d.display, sc)}</p>
+            {rootRel && <Link href={`/verb/${rootRel.slug}${query}`} className="self-start text-sm font-semibold underline-offset-2 hover:underline">{t('pre.root')}: <span style={{ fontFamily: font }}>{toScript(rootRel.display, sc)}</span> · {meaningOf(rootRel, lang, sc).main} ↗</Link>}
+            <p lang="sa" className={cn('m-0 leading-[1.25]', d.display.includes('+') ? 'text-[clamp(56px,8vw,128px)]' : 'text-[clamp(96px,13vw,200px)]')} style={{ fontFamily: sc === 'deva' ? 'var(--font-display)' : font }}>{toScript(d.display, sc)}</p>
             <p className="disp m-0 text-[clamp(26px,3vw,40px)] font-extrabold">
               <span style={mean.sanskrit ? { fontFamily: font } : undefined}>{mean.main}</span>{mean.sub && <span className="font-sans text-lg font-normal opacity-70"> · {mean.sub}</span>}
               {tr && <span className="font-sans text-lg font-normal italic opacity-65"> · {iast(d.root)}</span>}
@@ -116,7 +141,59 @@ export function VerbClient({ d, examples }: { d: D; examples: Ex[] }) {
           </div>
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-2">
+        <section aria-labelledby="famh" className="flex flex-col gap-3">
+          <div className="flex flex-wrap items-baseline gap-3">
+            <h2 id="famh" className="disp m-0 text-2xl font-extrabold">{t('fam.title')}</h2>
+            <span className="text-sm opacity-75">{t('fam.hint')}</span>
+          </div>
+          <div role="group" aria-label={t('fam.title')} className="grid grid-cols-2 gap-2.5 lg:grid-cols-4">
+            {FAMS.map((f) => {
+              const on = f.id === fam
+              const v = familyView(base, f.id, voice, derived)
+              const sample = v ? tinCell(v, 'lat', 0)?.form : null
+              return (
+                <button key={f.id} aria-pressed={on} onClick={() => setFam(f.id)}
+                  className={cn('pill flex min-h-[92px] flex-col gap-1 rounded-[22px] border px-4 py-3 text-left', on ? 'border-ink bg-ink text-stone' : 'border-ink/15 bg-paper')}>
+                  <span className="flex items-baseline gap-2"><span className="text-lg font-bold" style={{ fontFamily: font }}>{toScript(f.sk, sc)}</span><span className="text-[13px] font-semibold opacity-80">{t(`fam.${f.id}` as UIKey)}</span></span>
+                  <span lang="sa" className="text-[22px] leading-normal font-semibold" style={{ fontFamily: font }}>{sample ? toScript(sample, sc) : (derived ? '—' : '…')}</span>
+                </button>
+              )
+            })}
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="disp text-lg font-extrabold">{t('voice.title')}</span>
+            <div role="group" aria-label={t('voice.title')} className="seg">
+              {VOICES.map((v) => (
+                <button key={v.id} aria-pressed={v.id === voice} onClick={() => setVoice(v.id)} className={cn('pill flex min-h-11 flex-col items-center justify-center rounded-full px-4 leading-tight', v.id === voice && 'bg-ink text-stone')}>
+                  <span className="text-[15px] font-bold" style={{ fontFamily: font }}>{toScript(v.sk, sc)}</span><span className="text-[11px] font-semibold">{t(`voice.${v.id}` as UIKey)}</span>
+                </button>
+              ))}
+            </div>
+            <span className="text-sm opacity-75">{voice === 'karmani' ? t('voice.note') : t('voice.hint')}</span>
+          </div>
+          {loading === 'busy' && <p className="m-0 text-sm opacity-75">{t('fam.loading')}</p>}
+          {loading === 'error' && <p className="m-0 text-sm">{t('fam.error')}</p>}
+          {missing && derived && <p className="m-0 text-sm">{t('fam.none')}</p>}
+        </section>
+
+        {prefixed.length > 0 && (
+          <section aria-labelledby="preh" className="flex flex-col gap-3">
+            <div className="flex flex-wrap items-baseline gap-3">
+              <h2 id="preh" className="disp m-0 text-2xl font-extrabold">{t('pre.title')}</h2>
+              <span className="text-sm opacity-75">{t('pre.hint')}</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {prefixed.map((r) => (
+                <Link key={r.slug} href={`/verb/${r.slug}${query}`} className="pill flex min-h-11 items-baseline gap-2 rounded-full border border-ink/15 bg-paper px-4 py-2 no-underline">
+                  <span lang="sa" className="text-lg font-bold" style={{ fontFamily: font }}>{toScript(lat3(r), sc)}</span>
+                  <span className="text-[13px] opacity-80">{meaningOf(r, lang, sc).main}</span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {!missing && <div className="grid gap-5 lg:grid-cols-2">
           {d.participle && (
             <section className="flex min-w-0 flex-col gap-3.5 rounded-[26px] bg-paper p-[clamp(18px,2vw,28px)]" style={{ border: when === 'kta' ? `1.5px solid ${deep}` : '1px solid rgb(36 33 29 / .12)' }}>
               <div className="flex flex-wrap items-baseline gap-3">
@@ -147,13 +224,13 @@ export function VerbClient({ d, examples }: { d: D; examples: Ex[] }) {
             </section>
           )}
           {SPOKEN.map((l) => grid(l))}
-        </div>
+        </div>}
 
         <div className="mt-4 flex flex-col gap-1.5 border-t border-ink/25 pt-4">
           <span className="disp text-2xl font-extrabold">{t('vb.litH')}</span>
-          <span className="text-[15px] opacity-80">{t('vb.litP')}</span>
+          <span className="text-[15px] opacity-80">{wantsFamily ? t('fam.literary') : t('vb.litP')}</span>
         </div>
-        <div className="grid gap-5 lg:grid-cols-2">{LITERARY.map((l) => grid(l, true))}</div>
+        {!wantsFamily && <div className="grid gap-5 lg:grid-cols-2">{LITERARY.map((l) => grid(l, true))}</div>}
 
         {examples.length > 0 && (
           <section className="flex flex-col gap-3">

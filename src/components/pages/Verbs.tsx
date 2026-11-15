@@ -17,12 +17,16 @@ const COLS = {
   2: [{ c: 'u', sk: 'वयम्', en: 'col.we', base: 6 }, { c: 'm', sk: 'यूयम्', en: 'col.youAll', base: 3 }, { c: 'p', sk: 'ते · ताः · भवन्तः', en: 'col.they', base: 0 }],
 } as const
 
-type Props = { rows: DhatuLite[]; q: string; scope: 'everyday' | 'all'; page: number; pages: number; found: number; total: number }
+type Props = { rows: DhatuLite[]; q: string; scope: 'everyday' | 'prefixed' | 'all'; page: number; pages: number; found: number; total: number; prefixedTotal: number }
 
-export function VerbsClient({ rows, q, scope, page, pages, found, total }: Props) {
+export function VerbsClient({ rows: allRows, q, scope, page, pages, found, total, prefixedTotal }: Props) {
   const { subj, when, num, gen, sc, tr, query, t, lang } = useSamvada()
   const router = useRouter()
   const [text, setText] = useState(q)
+  // "With prefixes": filter by the root (गम्, विश्, भू …)
+  const [rootPick, setRootPick] = useState('')
+  const roots = scope === 'prefixed' ? [...new Set(allRows.map((d) => d.root))] : []
+  const rows = scope === 'prefixed' && rootPick ? allRows.filter((d) => d.root === rootPick) : allRows
   const w = WHENS.find((x) => x.id === when)!
   const kta = when === 'kta'
   const font = `var(--font-sk-${sc})`
@@ -39,7 +43,7 @@ export function VerbsClient({ rows, q, scope, page, pages, found, total }: Props
         <div className="grid items-end gap-6 lg:grid-cols-2 lg:gap-16">
           <div className="flex flex-col gap-3.5">
             <span className="eyebrow" style={{ color: DEEP[subj.color] }}>{t('nav.verbs')}</span>
-            <h1 className="disp m-0 text-[clamp(44px,6.4vw,96px)] leading-[0.95] font-extrabold">{scope === 'everyday' ? t('v.everyday', { n: found }) : t('v.dhatus', { n: total.toLocaleString('en-IN') })}</h1>
+            <h1 className="disp m-0 text-[clamp(44px,6.4vw,96px)] leading-[0.95] font-extrabold">{scope === 'everyday' ? t('v.everyday', { n: found }) : scope === 'prefixed' ? t('v.prefixedH', { n: found }) : t('v.dhatus', { n: total.toLocaleString('en-IN') })}</h1>
             <p className="m-0 max-w-[520px] text-lg leading-relaxed">{t('v.showing', { when: `${toScript(w.name, sc)} ${t(`when.${w.id}`)}`, count: t(`v.c${num}`) })}</p>
           </div>
           <form className="flex flex-col gap-3" onSubmit={(e) => { e.preventDefault(); go({ q: text, scope: text ? 'all' : scope, page: '' }) }}>
@@ -49,13 +53,25 @@ export function VerbsClient({ rows, q, scope, page, pages, found, total }: Props
               <button className="pill h-14 shrink-0 rounded-full bg-ink px-6 text-[15px] font-semibold text-stone">{t('v.search')}</button>
             </div>
             <div role="group" aria-label={t('v.which')} className="seg self-start">
-              {(['everyday', 'all'] as const).map((s) => (
-                <button type="button" key={s} aria-pressed={scope === s} onClick={() => { setText(''); go({ scope: s === 'all' ? 'all' : '', q: '', page: '' }) }}
+              {(['everyday', 'prefixed', 'all'] as const).map((s) => (
+                <button type="button" key={s} aria-pressed={scope === s} onClick={() => { setText(''); setRootPick(''); go({ scope: s === 'everyday' ? '' : s, q: '', page: '' }) }}
                   className={cn('pill min-h-11 rounded-full px-4 text-sm font-semibold', scope === s && 'bg-ink text-stone')}>
-                  {s === 'everyday' ? t('v.everydayBtn') : t('v.wholeBtn', { n: total.toLocaleString('en-IN') })}
+                  {s === 'everyday' ? t('v.everydayBtn') : s === 'prefixed' ? t('v.prefixedBtn', { n: prefixedTotal }) : t('v.wholeBtn', { n: total.toLocaleString('en-IN') })}
                 </button>
               ))}
             </div>
+            {scope === 'prefixed' && roots.length > 1 && (
+              <div className="flex flex-col gap-2">
+                <span className="eyebrow text-[11px] opacity-70">{t('v.filterRoot')}</span>
+                <div role="group" aria-label={t('v.filterRoot')} className="flex flex-wrap gap-1.5">
+                  {['', ...roots].map((r) => (
+                    <button type="button" key={r || 'all'} aria-pressed={rootPick === r} onClick={() => setRootPick(r)}
+                      className={cn('pill min-h-10 rounded-full border border-ink/20 px-3.5 text-[15px] font-bold', rootPick === r && 'bg-ink text-stone')}
+                      style={r ? { fontFamily: font } : undefined}>{r ? toScript(r, sc) : t('v.all')}</button>
+                  ))}
+                </div>
+              </div>
+            )}
           </form>
         </div>
 

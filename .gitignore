@@ -72,3 +72,4 @@ fastseed.command
 domains.command
 deploy.command
 *.tgz
+phase0.command

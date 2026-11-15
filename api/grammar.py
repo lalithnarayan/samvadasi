@@ -4,6 +4,7 @@ Actions (JSON body):
   {"action": "generate", "aupadeshika": "ga\\mx~", "gana": 1, "prefixes": []}
   {"action": "verify",   "aupadeshika": ..., "gana": ..., "prefixes": [], "items": [{"lak": "lat", "idx": 0, "pada": "P", "form": "गच्छति"}]}
   {"action": "derive",   "aupadeshika": ..., "gana": ..., "lak": "lat", "idx": 0, "pada": "P"}
+  {"action": "derived",  "aupadeshika": ..., "gana": ..., "prefixes": []}
   {"action": "subanta",  "stem": "vidyAlaya", "linga": "m"}
   {"action": "health"}
 
@@ -35,7 +36,10 @@ def run(body: dict) -> dict:
         return {'ok': True, 'checked': len(res), 'mismatched': len(bad), 'mismatches': bad[:100]}
     if a == 'derive':
         return {'ok': True, 'derivations': S.derivation(body['aupadeshika'], int(body['gana']), body['lak'], int(body['idx']),
-                                                        body.get('pada'), body.get('prefixes') or [])}
+                                                        body.get('pada'), body.get('prefixes') or [],
+                                                        body.get('sanadi'), body.get('prayoga') or 'kartari')}
+    if a == 'derived':  # causative / desiderative / intensive + passive, for roots whose family is not stored
+        return {'ok': True, 'derived': S.derived(body['aupadeshika'], int(body['gana']), body.get('prefixes') or []), 'generatedWith': 'vidyut 0.4.0'}
     if a == 'subanta':
         return {'ok': True, 'forms': S.subanta(body['stem'], body.get('linga', 'm'))}
     return {'ok': False, 'error': f'unknown action {a!r}'}

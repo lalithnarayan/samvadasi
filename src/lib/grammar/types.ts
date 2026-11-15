@@ -37,7 +37,18 @@ export type DhatuLite = {
   forms: FormTable
   participle: Participle
   overrides: Override[]
+  meaning_te?: string | null
+  meaning_kn?: string | null
+  meaning_ta?: string | null
+  commonPrefixed?: boolean | null
+  derived?: Derived | null
 }
+
+/** The verb family (सनादि) and voice (प्रयोग) of one dhātu, from Vidyut. Passive tables are आत्मनेपद: forms[lak]['A']. */
+export type FamilyId = 'mula' | 'nic' | 'san' | 'yan'
+export type VoiceId = 'kartari' | 'karmani'
+export type DerivedEntry = { padas: PadaId[]; forms: FormTable; passive?: FormTable; participle: Participle }
+export type Derived = { mula?: { passive?: FormTable }; nic?: DerivedEntry; san?: DerivedEntry; yan?: DerivedEntry }
 
 export type PhraseLite = {
   id: number | string

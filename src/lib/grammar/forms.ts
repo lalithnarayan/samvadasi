@@ -1,4 +1,4 @@
-import type { DhatuLite, LakaraId, PadaId, WhenId } from './types'
+import type { Derived, DhatuLite, FamilyId, LakaraId, PadaId, VoiceId, WhenId } from './types'
 import type { Subject } from './subjects'
 
 export type Cell = { form: string; stem: string; end: string; also: { form: string; label: string }[]; note?: string }
@@ -11,7 +11,9 @@ export function stemOf(nine: string[]): string {
   let p = nine[0]
   for (const f of nine) while (p && !f.startsWith(p)) p = p.slice(0, -1)
   // Never split inside a conjunct: if any form continues with a virama (जग|्मतुः), drop that consonant too.
-  while (p && (p.endsWith('्') || nine.some((f) => f[p.length] === '्' || f[p.length] === '़'))) p = p.slice(0, -1)
+  // Nor before a vowel sign, anusvara or visarga: an ending must never start with a combining mark (◌ि).
+  const mark = (c?: string) => !!c && /[\u0900-\u0903\u093A-\u094F\u0951-\u0957\u0962\u0963]/.test(c)
+  while (p && (p.endsWith('्') || nine.some((f) => mark(f[p.length])))) p = p.slice(0, -1)
   return [...p].length <= 1 ? '' : p
 }
 
@@ -53,6 +55,25 @@ export function ktaCell(d: DhatuLite, gen: 'm' | 'f', num: number): Cell | null 
   }
   const s = form.startsWith(stem) ? stem : ''
   return { form, stem: s, end: form.slice(s.length), also, note }
+}
+
+/**
+ * The same verb seen as another member of its family or in the passive: a DhatuLite whose tables are the
+ * causative / desiderative / intensive (कर्तरि) or the passive (कर्मणि) ones, so every table helper works unchanged.
+ * null = Vidyut has no such form for this root. Overrides belong to the root form only.
+ */
+export function familyView(d: DhatuLite, fam: FamilyId, voice: VoiceId, derived?: Derived | null): DhatuLite | null {
+  if (fam === 'mula' && voice === 'kartari') return d
+  if (!derived) return null
+  if (fam === 'mula') {
+    const f = derived.mula?.passive
+    return f && Object.keys(f).length ? { ...d, forms: f, padas: ['A'], preferredPada: 'A', participle: null, overrides: [], irregular: false } : null
+  }
+  const e = derived[fam]
+  if (!e) return null
+  if (voice === 'karmani') return e.passive && Object.keys(e.passive).length ? { ...d, forms: e.passive, padas: ['A'], preferredPada: 'A', participle: null, overrides: [], irregular: false } : null
+  const pref = d.preferredPada && e.padas.includes(d.preferredPada) ? d.preferredPada : e.padas[0]
+  return { ...d, forms: e.forms, padas: e.padas, preferredPada: pref, participle: e.participle, overrides: [], irregular: false }
 }
 
 export function cellFor(d: DhatuLite, when: WhenId, subj: Subject): Cell | null {

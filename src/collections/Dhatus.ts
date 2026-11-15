@@ -37,6 +37,14 @@ export const Dhatus: CollectionConfig = {
     {
       type: 'row',
       fields: [
+        { name: 'meaning_te', type: 'text', admin: { width: '33%', description: 'Telugu meaning, e.g. వెళ్ళు (shown when the lipi is Telugu)' } },
+        { name: 'meaning_kn', type: 'text', admin: { width: '33%', description: 'Kannada meaning, e.g. ಹೋಗು' } },
+        { name: 'meaning_ta', type: 'text', admin: { width: '33%', description: 'Tamil meaning, e.g. போ' } },
+      ],
+    },
+    {
+      type: 'row',
+      fields: [
         { name: 'slug', type: 'text', required: true, unique: true, index: true, admin: { width: '20%', description: 'Code + prefixes, e.g. 06.0160-upa' } },
         { name: 'code', type: 'text', required: true, index: true, admin: { width: '20%', description: 'Dhātupāṭha number' } },
         { name: 'aupadeshika', type: 'text', required: true, admin: { width: '20%', description: 'Upadeśa in SLP1 (Vidyut input), e.g. ga\\mx~' } },
@@ -55,9 +63,10 @@ export const Dhatus: CollectionConfig = {
     {
       type: 'row',
       fields: [
-        { name: 'featured', type: 'checkbox', defaultValue: false, admin: { width: '25%', description: 'Conversational set: shown in Verbs, Phrases, Practice' } },
-        { name: 'irregular', type: 'checkbox', defaultValue: false, admin: { width: '25%' } },
-        { name: 'order', type: 'number', admin: { width: '25%' } },
+        { name: 'featured', type: 'checkbox', defaultValue: false, admin: { width: '20%', description: 'Conversational set: shown in Verbs, Phrases, Practice' } },
+        { name: 'commonPrefixed', type: 'checkbox', defaultValue: false, admin: { width: '20%', description: 'Common prefixed verb: listed in the "With prefixes" tab and on its root\'s page' } },
+        { name: 'irregular', type: 'checkbox', defaultValue: false, admin: { width: '20%' } },
+        { name: 'order', type: 'number', admin: { width: '20%' } },
       ],
     },
     {
@@ -69,6 +78,7 @@ export const Dhatus: CollectionConfig = {
             { name: 'vidyutPanel', type: 'ui', admin: { components: { Field: '/components/admin/VidyutPanel#VidyutPanel' } } },
             { name: 'forms', type: 'json', admin: { hidden: true } },
             { name: 'participle', type: 'json', admin: { hidden: true } },
+            { name: 'derived', type: 'json', admin: { hidden: true, description: 'Causative, desiderative, intensive and passive forms (Vidyut)' } },
             { name: 'generatedWith', type: 'text', admin: { readOnly: true, description: 'Vidyut version and date of the last generation' } },
           ],
         },

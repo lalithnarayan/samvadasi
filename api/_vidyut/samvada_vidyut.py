@@ -8,7 +8,7 @@ Single source of truth for grammar. Used by:
 from __future__ import annotations
 from functools import lru_cache
 from vidyut.prakriya import (Vyakarana, Data, Dhatu, Gana, Pada, Prayoga, Lakara, Purusha, Vacana,
-                             DhatuPada, Pratipadika, Krt, Linga, Vibhakti)
+                             DhatuPada, Pratipadika, Krt, Linga, Vibhakti, Sanadi)
 from vidyut.lipi import transliterate, Scheme
 
 LAKARAS = {  # app id -> Vidyut lakāra (लेट् is Vedic and left out)
@@ -97,13 +97,51 @@ def generate(aupadeshika: str, gana: int, prefixes: list[str] | None = None, lak
         part = None
     return {'root': root_of(make_dhatu(aupadeshika, gana)), 'padas': padas, 'forms': forms, 'participle': part}
 
-def derivation(aupadeshika: str, gana: int, lak: str, idx: int, pada: str | None = None, prefixes=None) -> list[dict]:
-    """Sūtra-by-sūtra steps for one form (for 'show me how it is built')."""
-    d = make_dhatu(aupadeshika, gana, prefixes)
+SANADI = {'nic': Sanadi.Ric, 'san': Sanadi.san, 'yan': Sanadi.yaN}
+
+def _tin(d: Dhatu, prayoga, lak: str, idx: int, pada: str | None = None) -> list[str]:
     pur, vac = PERSONS[idx]
     kw = {'dhatu_pada': PADAS[pada]} if pada else {}
+    try:
+        return _clean([x.text for x in _v.derive(Pada.Tinanta(dhatu=d, prayoga=prayoga, lakara=LAKARAS[lak], purusha=pur, vacana=vac, **kw))])
+    except Exception:
+        return []
+
+def _passive(d: Dhatu, lakaras) -> dict:
+    """कर्मणि (or भावे) forms: always आत्मनेपद. Shaped like forms[lak]['A'] so the same table code reads it."""
+    out = {lak: {'A': [_tin(d, Prayoga.Karmani, lak, i) for i in range(9)]} for lak in lakaras}
+    return out if any(any(c) for c in out[lakaras[0]]['A']) else {}
+
+def derived(aupadeshika: str, gana: int, prefixes: list[str] | None = None, lakaras: list[str] | None = None) -> dict:
+    """The verb family of one dhātu for the spoken lakāras:
+    mula.passive · nic/san/yan → {padas, forms (कर्तरि), passive (कर्मणि), participle}."""
+    laks = lakaras or SPOKEN
+    base = make_dhatu(aupadeshika, gana, prefixes)
+    out = {'mula': {'passive': _passive(base, laks)}}
+    for key, san in SANADI.items():
+        d = base.with_sanadi([san])
+        padas = [p for p in ('P', 'A') if _tin(d, Prayoga.Kartari, 'lat', 0, p)]
+        if not padas:
+            continue
+        try:
+            part = participle(d)
+        except Exception:
+            part = None
+        out[key] = {'padas': padas, 'forms': {lak: {p: [_tin(d, Prayoga.Kartari, lak, i, p) for i in range(9)] for p in padas} for lak in laks},
+                    'passive': _passive(d, laks), 'participle': part}
+    return out
+
+def derivation(aupadeshika: str, gana: int, lak: str, idx: int, pada: str | None = None, prefixes=None,
+               sanadi: str | None = None, prayoga: str = 'kartari') -> list[dict]:
+    """Sūtra-by-sūtra steps for one form (for 'show me how it is built'), any form of the verb family."""
+    d = make_dhatu(aupadeshika, gana, prefixes)
+    if sanadi in SANADI:
+        d = d.with_sanadi([SANADI[sanadi]])
+    pur, vac = PERSONS[idx]
+    passive = prayoga == 'karmani'
+    kw = {'dhatu_pada': PADAS[pada]} if pada and not passive else {}
     out = []
-    for pr in _v.derive(Pada.Tinanta(dhatu=d, prayoga=Prayoga.Kartari, lakara=LAKARAS[lak], purusha=pur, vacana=vac, **kw)):
+    for pr in _v.derive(Pada.Tinanta(dhatu=d, prayoga=Prayoga.Karmani if passive else Prayoga.Kartari, lakara=LAKARAS[lak], purusha=pur, vacana=vac, **kw)):
         out.append({'form': dev(pr.text), 'steps': [{'sutra': s.code, 'source': str(s.source), 'result': dev(''.join(s.result))} for s in pr.history]})
     return out
 

@@ -155,6 +155,18 @@ export interface Dhatus {
    */
   meaning_en?: string | null;
   /**
+   * Telugu meaning, e.g. వెళ్ళు (shown when the lipi is Telugu)
+   */
+  meaning_te?: string | null;
+  /**
+   * Kannada meaning, e.g. ಹೋಗು
+   */
+  meaning_kn?: string | null;
+  /**
+   * Tamil meaning, e.g. போ
+   */
+  meaning_ta?: string | null;
+  /**
    * Code + prefixes, e.g. 06.0160-upa
    */
   slug: string;
@@ -184,6 +196,10 @@ export interface Dhatus {
    * Conversational set: shown in Verbs, Phrases, Practice
    */
   featured?: boolean | null;
+  /**
+   * Common prefixed verb: listed in the "With prefixes" tab and on its root's page
+   */
+  commonPrefixed?: boolean | null;
   irregular?: boolean | null;
   order?: number | null;
   forms?:
@@ -196,6 +212,18 @@ export interface Dhatus {
     | boolean
     | null;
   participle?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * Causative, desiderative, intensive and passive forms (Vidyut)
+   */
+  derived?:
     | {
         [k: string]: unknown;
       }
@@ -536,6 +564,9 @@ export interface DhatusSelect<T extends boolean = true> {
   root?: T;
   display?: T;
   meaning_en?: T;
+  meaning_te?: T;
+  meaning_kn?: T;
+  meaning_ta?: T;
   slug?: T;
   code?: T;
   aupadeshika?: T;
@@ -545,10 +576,12 @@ export interface DhatusSelect<T extends boolean = true> {
   padas?: T;
   preferredPada?: T;
   featured?: T;
+  commonPrefixed?: T;
   irregular?: T;
   order?: T;
   forms?: T;
   participle?: T;
+  derived?: T;
   generatedWith?: T;
   overrides?:
     | T

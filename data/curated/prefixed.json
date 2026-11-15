@@ -1,0 +1,4127 @@
+[
+ {
+  "root": "गम्",
+  "display": "अनु + गम्",
+  "code": "01.1137",
+  "aupadeshika": "ga\\mx~",
+  "gana": 1,
+  "prefixes": [
+   "anu"
+  ],
+  "prefixesDev": [
+   "अनु"
+  ],
+  "meaning_en": "to follow",
+  "meanings": {
+   "te": "అనుసరించు",
+   "kn": "ಹಿಂಬಾಲಿಸು",
+   "ta": "பின்தொடர்"
+  },
+  "preferredPada": "P",
+  "order": 1
+ },
+ {
+  "root": "गम्",
+  "display": "सम् + गम्",
+  "code": "01.1137",
+  "aupadeshika": "ga\\mx~",
+  "gana": 1,
+  "prefixes": [
+   "sam"
+  ],
+  "prefixesDev": [
+   "सम्"
+  ],
+  "meaning_en": "to meet, go together",
+  "meanings": {
+   "te": "కలుసుకో",
+   "kn": "ಸೇರು",
+   "ta": "சந்தி"
+  },
+  "preferredPada": "A",
+  "order": 2
+ },
+ {
+  "root": "गम्",
+  "display": "अधि + गम्",
+  "code": "01.1137",
+  "aupadeshika": "ga\\mx~",
+  "gana": 1,
+  "prefixes": [
+   "aDi"
+  ],
+  "prefixesDev": [
+   "अधि"
+  ],
+  "meaning_en": "to attain, learn",
+  "meanings": {
+   "te": "పొందు, నేర్చుకో",
+   "kn": "ಪಡೆ, ಕಲಿ",
+   "ta": "அடை, கற்றுக்கொள்"
+  },
+  "preferredPada": "P",
+  "order": 3
+ },
+ {
+  "root": "गम्",
+  "display": "अव + गम्",
+  "code": "01.1137",
+  "aupadeshika": "ga\\mx~",
+  "gana": 1,
+  "prefixes": [
+   "ava"
+  ],
+  "prefixesDev": [
+   "अव"
+  ],
+  "meaning_en": "to understand",
+  "meanings": {
+   "te": "అర్థం చేసుకో",
+   "kn": "ಅರ್ಥಮಾಡಿಕೊ",
+   "ta": "புரிந்துகொள்"
+  },
+  "preferredPada": "P",
+  "order": 4
+ },
+ {
+  "root": "गम्",
+  "display": "उप + गम्",
+  "code": "01.1137",
+  "aupadeshika": "ga\\mx~",
+  "gana": 1,
+  "prefixes": [
+   "upa"
+  ],
+  "prefixesDev": [
+   "उप"
+  ],
+  "meaning_en": "to approach",
+  "meanings": {
+   "te": "దగ్గరకు వెళ్ళు",
+   "kn": "ಹತ್ತಿರ ಹೋಗು",
+   "ta": "அணுகு"
+  },
+  "preferredPada": "P",
+  "order": 5
+ },
+ {
+  "root": "गम्",
+  "display": "निर् + गम्",
+  "code": "01.1137",
+  "aupadeshika": "ga\\mx~",
+  "gana": 1,
+  "prefixes": [
+   "nis"
+  ],
+  "prefixesDev": [
+   "निर्"
+  ],
+  "meaning_en": "to go out",
+  "meanings": {
+   "te": "బయటకు వెళ్ళు",
+   "kn": "ಹೊರಗೆ ಹೋಗು",
+   "ta": "வெளியே போ"
+  },
+  "preferredPada": "P",
+  "order": 6
+ },
+ {
+  "root": "गम्",
+  "display": "प्रति + गम्",
+  "code": "01.1137",
+  "aupadeshika": "ga\\mx~",
+  "gana": 1,
+  "prefixes": [
+   "prati"
+  ],
+  "prefixesDev": [
+   "प्रति"
+  ],
+  "meaning_en": "to go back, return",
+  "meanings": {
+   "te": "తిరిగి వెళ్ళు",
+   "kn": "ಹಿಂದಿರುಗು",
+   "ta": "திரும்பிப் போ"
+  },
+  "preferredPada": "P",
+  "order": 7
+ },
+ {
+  "root": "गम्",
+  "display": "अभि + गम्",
+  "code": "01.1137",
+  "aupadeshika": "ga\\mx~",
+  "gana": 1,
+  "prefixes": [
+   "aBi"
+  ],
+  "prefixesDev": [
+   "अभि"
+  ],
+  "meaning_en": "to go towards",
+  "meanings": {
+   "te": "వైపు వెళ్ళు",
+   "kn": "ಕಡೆಗೆ ಹೋಗು",
+   "ta": "நோக்கிப் போ"
+  },
+  "preferredPada": "P",
+  "order": 8
+ },
+ {
+  "root": "गम्",
+  "display": "उद् + गम्",
+  "code": "01.1137",
+  "aupadeshika": "ga\\mx~",
+  "gana": 1,
+  "prefixes": [
+   "ud"
+  ],
+  "prefixesDev": [
+   "उद्"
+  ],
+  "meaning_en": "to rise, go up",
+  "meanings": {
+   "te": "పైకి లేచు",
+   "kn": "ಮೇಲೇರು",
+   "ta": "மேலே எழு"
+  },
+  "preferredPada": "P",
+  "order": 9
+ },
+ {
+  "root": "विश्",
+  "display": "नि + विश्",
+  "code": "06.0160",
+  "aupadeshika": "vi\\Sa~",
+  "gana": 6,
+  "prefixes": [
+   "ni"
+  ],
+  "prefixesDev": [
+   "नि"
+  ],
+  "meaning_en": "to settle, enter",
+  "meanings": {
+   "te": "స్థిరపడు",
+   "kn": "ನೆಲೆಸು",
+   "ta": "குடியேறு"
+  },
+  "preferredPada": "A",
+  "order": 10
+ },
+ {
+  "root": "भू",
+  "display": "अनु + भू",
+  "code": "01.0001",
+  "aupadeshika": "BU",
+  "gana": 1,
+  "prefixes": [
+   "anu"
+  ],
+  "prefixesDev": [
+   "अनु"
+  ],
+  "meaning_en": "to experience",
+  "meanings": {
+   "te": "అనుభవించు",
+   "kn": "ಅನುಭವಿಸು",
+   "ta": "அனுபவி"
+  },
+  "preferredPada": "P",
+  "order": 11
+ },
+ {
+  "root": "भू",
+  "display": "प्र + भू",
+  "code": "01.0001",
+  "aupadeshika": "BU",
+  "gana": 1,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to arise, be able",
+  "meanings": {
+   "te": "పుట్టు, సమర్థుడవు",
+   "kn": "ಹುಟ್ಟು, ಸಮರ್ಥನಾಗು",
+   "ta": "தோன்று, இயலு"
+  },
+  "preferredPada": "P",
+  "order": 12
+ },
+ {
+  "root": "भू",
+  "display": "सम् + भू",
+  "code": "01.0001",
+  "aupadeshika": "BU",
+  "gana": 1,
+  "prefixes": [
+   "sam"
+  ],
+  "prefixesDev": [
+   "सम्"
+  ],
+  "meaning_en": "to be possible, happen",
+  "meanings": {
+   "te": "సంభవించు",
+   "kn": "ಸಂಭವಿಸು",
+   "ta": "நிகழ்"
+  },
+  "preferredPada": "P",
+  "order": 13
+ },
+ {
+  "root": "भू",
+  "display": "परा + भू",
+  "code": "01.0001",
+  "aupadeshika": "BU",
+  "gana": 1,
+  "prefixes": [
+   "parA"
+  ],
+  "prefixesDev": [
+   "परा"
+  ],
+  "meaning_en": "to be defeated",
+  "meanings": {
+   "te": "ఓడిపో",
+   "kn": "ಸೋಲು",
+   "ta": "தோல்வியடை"
+  },
+  "preferredPada": "P",
+  "order": 14
+ },
+ {
+  "root": "भू",
+  "display": "उद् + भू",
+  "code": "01.0001",
+  "aupadeshika": "BU",
+  "gana": 1,
+  "prefixes": [
+   "ud"
+  ],
+  "prefixesDev": [
+   "उद्"
+  ],
+  "meaning_en": "to arise, come up",
+  "meanings": {
+   "te": "ఉద్భవించు",
+   "kn": "ಉದ್ಭವಿಸು",
+   "ta": "உருவாகு"
+  },
+  "preferredPada": "P",
+  "order": 15
+ },
+ {
+  "root": "भू",
+  "display": "अभि + भू",
+  "code": "01.0001",
+  "aupadeshika": "BU",
+  "gana": 1,
+  "prefixes": [
+   "aBi"
+  ],
+  "prefixesDev": [
+   "अभि"
+  ],
+  "meaning_en": "to overpower",
+  "meanings": {
+   "te": "లొంగదీసుకో",
+   "kn": "ಸೋಲಿಸು",
+   "ta": "அடக்கு"
+  },
+  "preferredPada": "P",
+  "order": 16
+ },
+ {
+  "root": "हृ",
+  "display": "आ + हृ",
+  "code": "01.1046",
+  "aupadeshika": "hf\\Y",
+  "gana": 1,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to bring, eat",
+  "meanings": {
+   "te": "తీసుకురా, తిను",
+   "kn": "ತರು, ತಿನ್ನು",
+   "ta": "கொண்டுவா, உண்"
+  },
+  "preferredPada": "P",
+  "order": 17
+ },
+ {
+  "root": "हृ",
+  "display": "वि + हृ",
+  "code": "01.1046",
+  "aupadeshika": "hf\\Y",
+  "gana": 1,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to roam, enjoy",
+  "meanings": {
+   "te": "విహరించు",
+   "kn": "ವಿಹರಿಸು",
+   "ta": "உலாவு"
+  },
+  "preferredPada": "P",
+  "order": 18
+ },
+ {
+  "root": "हृ",
+  "display": "उप + हृ",
+  "code": "01.1046",
+  "aupadeshika": "hf\\Y",
+  "gana": 1,
+  "prefixes": [
+   "upa"
+  ],
+  "prefixesDev": [
+   "उप"
+  ],
+  "meaning_en": "to offer",
+  "meanings": {
+   "te": "సమర్పించు",
+   "kn": "ಅರ್ಪಿಸು",
+   "ta": "படை"
+  },
+  "preferredPada": "P",
+  "order": 19
+ },
+ {
+  "root": "हृ",
+  "display": "प्र + हृ",
+  "code": "01.1046",
+  "aupadeshika": "hf\\Y",
+  "gana": 1,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to strike",
+  "meanings": {
+   "te": "కొట్టు",
+   "kn": "ಹೊಡೆ",
+   "ta": "அடி"
+  },
+  "preferredPada": "P",
+  "order": 20
+ },
+ {
+  "root": "हृ",
+  "display": "सम् + हृ",
+  "code": "01.1046",
+  "aupadeshika": "hf\\Y",
+  "gana": 1,
+  "prefixes": [
+   "sam"
+  ],
+  "prefixesDev": [
+   "सम्"
+  ],
+  "meaning_en": "to withdraw, destroy",
+  "meanings": {
+   "te": "ఉపసంహరించు",
+   "kn": "ಸಂಹರಿಸು",
+   "ta": "அழி"
+  },
+  "preferredPada": "P",
+  "order": 21
+ },
+ {
+  "root": "हृ",
+  "display": "अप + हृ",
+  "code": "01.1046",
+  "aupadeshika": "hf\\Y",
+  "gana": 1,
+  "prefixes": [
+   "apa"
+  ],
+  "prefixesDev": [
+   "अप"
+  ],
+  "meaning_en": "to steal, take away",
+  "meanings": {
+   "te": "అపహరించు",
+   "kn": "ಅಪಹರಿಸು",
+   "ta": "கவர்"
+  },
+  "preferredPada": "P",
+  "order": 22
+ },
+ {
+  "root": "हृ",
+  "display": "उद् + हृ",
+  "code": "01.1046",
+  "aupadeshika": "hf\\Y",
+  "gana": 1,
+  "prefixes": [
+   "ud"
+  ],
+  "prefixesDev": [
+   "उद्"
+  ],
+  "meaning_en": "to lift, rescue",
+  "meanings": {
+   "te": "ఉద్ధరించు",
+   "kn": "ಉದ್ಧರಿಸು",
+   "ta": "உயர்த்து"
+  },
+  "preferredPada": "P",
+  "order": 23
+ },
+ {
+  "root": "हृ",
+  "display": "परि + हृ",
+  "code": "01.1046",
+  "aupadeshika": "hf\\Y",
+  "gana": 1,
+  "prefixes": [
+   "pari"
+  ],
+  "prefixesDev": [
+   "परि"
+  ],
+  "meaning_en": "to avoid",
+  "meanings": {
+   "te": "తప్పించు",
+   "kn": "ತಪ್ಪಿಸು",
+   "ta": "தவிர்"
+  },
+  "preferredPada": "P",
+  "order": 24
+ },
+ {
+  "root": "हृ",
+  "display": "वि + आ + हृ",
+  "code": "01.1046",
+  "aupadeshika": "hf\\Y",
+  "gana": 1,
+  "prefixes": [
+   "vi",
+   "A"
+  ],
+  "prefixesDev": [
+   "वि",
+   "आ"
+  ],
+  "meaning_en": "to speak, utter",
+  "meanings": {
+   "te": "పలుకు",
+   "kn": "ನುಡಿ",
+   "ta": "பேசு"
+  },
+  "preferredPada": "P",
+  "order": 25
+ },
+ {
+  "root": "नी",
+  "display": "परि + नी",
+  "code": "01.1049",
+  "aupadeshika": "RI\\Y",
+  "gana": 1,
+  "prefixes": [
+   "pari"
+  ],
+  "prefixesDev": [
+   "परि"
+  ],
+  "meaning_en": "to marry",
+  "meanings": {
+   "te": "పెళ్ళి చేసుకో",
+   "kn": "ಮದುವೆಯಾಗು",
+   "ta": "மணம் செய்"
+  },
+  "preferredPada": "P",
+  "order": 26
+ },
+ {
+  "root": "नी",
+  "display": "वि + नी",
+  "code": "01.1049",
+  "aupadeshika": "RI\\Y",
+  "gana": 1,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to train, discipline",
+  "meanings": {
+   "te": "శిక్షణ ఇవ్వు",
+   "kn": "ತರಬೇತಿ ನೀಡು",
+   "ta": "பயிற்றுவி"
+  },
+  "preferredPada": "P",
+  "order": 27
+ },
+ {
+  "root": "नी",
+  "display": "उप + नी",
+  "code": "01.1049",
+  "aupadeshika": "RI\\Y",
+  "gana": 1,
+  "prefixes": [
+   "upa"
+  ],
+  "prefixesDev": [
+   "उप"
+  ],
+  "meaning_en": "to bring near, initiate",
+  "meanings": {
+   "te": "దగ్గరకు తీసుకెళ్ళు, ఉపనయనం చేయు",
+   "kn": "ಹತ್ತಿರ ಕರೆದೊಯ್ಯು, ಉಪನಯನ ಮಾಡು",
+   "ta": "அருகே அழைத்துச் செல்"
+  },
+  "preferredPada": "P",
+  "order": 28
+ },
+ {
+  "root": "नी",
+  "display": "अप + नी",
+  "code": "01.1049",
+  "aupadeshika": "RI\\Y",
+  "gana": 1,
+  "prefixes": [
+   "apa"
+  ],
+  "prefixesDev": [
+   "अप"
+  ],
+  "meaning_en": "to take away, remove",
+  "meanings": {
+   "te": "తొలగించు",
+   "kn": "ತೆಗೆದುಹಾಕು",
+   "ta": "அகற்று"
+  },
+  "preferredPada": "P",
+  "order": 29
+ },
+ {
+  "root": "नी",
+  "display": "अनु + नी",
+  "code": "01.1049",
+  "aupadeshika": "RI\\Y",
+  "gana": 1,
+  "prefixes": [
+   "anu"
+  ],
+  "prefixesDev": [
+   "अनु"
+  ],
+  "meaning_en": "to persuade, conciliate",
+  "meanings": {
+   "te": "బతిమాలు",
+   "kn": "ಓಲೈಸು",
+   "ta": "சமாதானப்படுத்து"
+  },
+  "preferredPada": "P",
+  "order": 30
+ },
+ {
+  "root": "नी",
+  "display": "प्र + नी",
+  "code": "01.1049",
+  "aupadeshika": "RI\\Y",
+  "gana": 1,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to compose, lead forward",
+  "meanings": {
+   "te": "రచించు",
+   "kn": "ರಚಿಸು",
+   "ta": "இயற்று"
+  },
+  "preferredPada": "P",
+  "order": 31
+ },
+ {
+  "root": "नी",
+  "display": "उद् + नी",
+  "code": "01.1049",
+  "aupadeshika": "RI\\Y",
+  "gana": 1,
+  "prefixes": [
+   "ud"
+  ],
+  "prefixesDev": [
+   "उद्"
+  ],
+  "meaning_en": "to raise, lift up",
+  "meanings": {
+   "te": "పైకెత్తు",
+   "kn": "ಮೇಲೆತ್ತು",
+   "ta": "உயர்த்து"
+  },
+  "preferredPada": "P",
+  "order": 32
+ },
+ {
+  "root": "वद्",
+  "display": "सम् + वद्",
+  "code": "01.1164",
+  "aupadeshika": "vada~",
+  "gana": 1,
+  "prefixes": [
+   "sam"
+  ],
+  "prefixesDev": [
+   "सम्"
+  ],
+  "meaning_en": "to converse",
+  "meanings": {
+   "te": "సంభాషించు",
+   "kn": "ಸಂಭಾಷಿಸು",
+   "ta": "உரையாடு"
+  },
+  "preferredPada": "P",
+  "order": 33
+ },
+ {
+  "root": "वद्",
+  "display": "अनु + वद्",
+  "code": "01.1164",
+  "aupadeshika": "vada~",
+  "gana": 1,
+  "prefixes": [
+   "anu"
+  ],
+  "prefixesDev": [
+   "अनु"
+  ],
+  "meaning_en": "to repeat, translate",
+  "meanings": {
+   "te": "అనువదించు",
+   "kn": "ಅನುವಾದಿಸು",
+   "ta": "மொழிபெயர்"
+  },
+  "preferredPada": "P",
+  "order": 34
+ },
+ {
+  "root": "वद्",
+  "display": "वि + वद्",
+  "code": "01.1164",
+  "aupadeshika": "vada~",
+  "gana": 1,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to dispute, argue",
+  "meanings": {
+   "te": "వాదించు",
+   "kn": "ವಾದಿಸು",
+   "ta": "வாதிடு"
+  },
+  "preferredPada": "A",
+  "order": 35
+ },
+ {
+  "root": "वद्",
+  "display": "अप + वद्",
+  "code": "01.1164",
+  "aupadeshika": "vada~",
+  "gana": 1,
+  "prefixes": [
+   "apa"
+  ],
+  "prefixesDev": [
+   "अप"
+  ],
+  "meaning_en": "to speak ill of",
+  "meanings": {
+   "te": "నిందించు",
+   "kn": "ನಿಂದಿಸು",
+   "ta": "இகழ்"
+  },
+  "preferredPada": "P",
+  "order": 36
+ },
+ {
+  "root": "वद्",
+  "display": "प्रति + वद्",
+  "code": "01.1164",
+  "aupadeshika": "vada~",
+  "gana": 1,
+  "prefixes": [
+   "prati"
+  ],
+  "prefixesDev": [
+   "प्रति"
+  ],
+  "meaning_en": "to reply",
+  "meanings": {
+   "te": "జవాబు చెప్పు",
+   "kn": "ಉತ್ತರಿಸು",
+   "ta": "பதில் சொல்"
+  },
+  "preferredPada": "P",
+  "order": 37
+ },
+ {
+  "root": "वद्",
+  "display": "अभि + वद्",
+  "code": "01.1164",
+  "aupadeshika": "vada~",
+  "gana": 1,
+  "prefixes": [
+   "aBi"
+  ],
+  "prefixesDev": [
+   "अभि"
+  ],
+  "meaning_en": "to greet, salute",
+  "meanings": {
+   "te": "నమస్కరించు",
+   "kn": "ವಂದಿಸು",
+   "ta": "வணங்கு"
+  },
+  "preferredPada": "P",
+  "order": 38
+ },
+ {
+  "root": "कृ",
+  "display": "उप + कृ",
+  "code": "08.0010",
+  "aupadeshika": "qukf\\Y",
+  "gana": 8,
+  "prefixes": [
+   "upa"
+  ],
+  "prefixesDev": [
+   "उप"
+  ],
+  "meaning_en": "to help",
+  "meanings": {
+   "te": "సహాయం చేయు",
+   "kn": "ಸಹಾಯ ಮಾಡು",
+   "ta": "உதவு"
+  },
+  "preferredPada": "P",
+  "order": 39,
+  "avoid": "स्क"
+ },
+ {
+  "root": "कृ",
+  "display": "अनु + कृ",
+  "code": "08.0010",
+  "aupadeshika": "qukf\\Y",
+  "gana": 8,
+  "prefixes": [
+   "anu"
+  ],
+  "prefixesDev": [
+   "अनु"
+  ],
+  "meaning_en": "to imitate",
+  "meanings": {
+   "te": "అనుకరించు",
+   "kn": "ಅನುಕರಿಸು",
+   "ta": "பின்பற்று"
+  },
+  "preferredPada": "P",
+  "order": 40
+ },
+ {
+  "root": "कृ",
+  "display": "प्र + कृ",
+  "code": "08.0010",
+  "aupadeshika": "qukf\\Y",
+  "gana": 8,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to do, begin",
+  "meanings": {
+   "te": "ప్రారంభించు",
+   "kn": "ಪ್ರಾರಂಭಿಸು",
+   "ta": "தொடங்கு"
+  },
+  "preferredPada": "P",
+  "order": 41
+ },
+ {
+  "root": "कृ",
+  "display": "अधि + कृ",
+  "code": "08.0010",
+  "aupadeshika": "qukf\\Y",
+  "gana": 8,
+  "prefixes": [
+   "aDi"
+  ],
+  "prefixesDev": [
+   "अधि"
+  ],
+  "meaning_en": "to appoint, put in charge",
+  "meanings": {
+   "te": "నియమించు",
+   "kn": "ನೇಮಿಸು",
+   "ta": "நியமி"
+  },
+  "preferredPada": "P",
+  "order": 42
+ },
+ {
+  "root": "कृ",
+  "display": "अप + कृ",
+  "code": "08.0010",
+  "aupadeshika": "qukf\\Y",
+  "gana": 8,
+  "prefixes": [
+   "apa"
+  ],
+  "prefixesDev": [
+   "अप"
+  ],
+  "meaning_en": "to harm",
+  "meanings": {
+   "te": "అపకారం చేయు",
+   "kn": "ಕೇಡು ಮಾಡು",
+   "ta": "தீங்கு செய்"
+  },
+  "preferredPada": "P",
+  "order": 43
+ },
+ {
+  "root": "कृ",
+  "display": "प्रति + कृ",
+  "code": "08.0010",
+  "aupadeshika": "qukf\\Y",
+  "gana": 8,
+  "prefixes": [
+   "prati"
+  ],
+  "prefixesDev": [
+   "प्रति"
+  ],
+  "meaning_en": "to remedy, counter",
+  "meanings": {
+   "te": "ప్రతీకారం చేయు, నివారించు",
+   "kn": "ಪ್ರತೀಕಾರ ಮಾಡು, ಪರಿಹರಿಸು",
+   "ta": "எதிர்வினை செய், தீர்"
+  },
+  "preferredPada": "P",
+  "order": 44
+ },
+ {
+  "root": "कृ",
+  "display": "वि + कृ",
+  "code": "08.0010",
+  "aupadeshika": "qukf\\Y",
+  "gana": 8,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to change, transform",
+  "meanings": {
+   "te": "మార్చు",
+   "kn": "ಬದಲಿಸು",
+   "ta": "மாற்று"
+  },
+  "preferredPada": "P",
+  "order": 45
+ },
+ {
+  "root": "चर्",
+  "display": "आ + चर्",
+  "code": "01.0640",
+  "aupadeshika": "cara~",
+  "gana": 1,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to behave, practise",
+  "meanings": {
+   "te": "ఆచరించు",
+   "kn": "ಆಚರಿಸು",
+   "ta": "கடைப்பிடி"
+  },
+  "preferredPada": "P",
+  "order": 46
+ },
+ {
+  "root": "चर्",
+  "display": "वि + चर्",
+  "code": "01.0640",
+  "aupadeshika": "cara~",
+  "gana": 1,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to wander, consider",
+  "meanings": {
+   "te": "సంచరించు, ఆలోచించు",
+   "kn": "ಸಂಚರಿಸು, ಯೋಚಿಸು",
+   "ta": "அலை, ஆராய்"
+  },
+  "preferredPada": "P",
+  "order": 47
+ },
+ {
+  "root": "चर्",
+  "display": "प्र + चर्",
+  "code": "01.0640",
+  "aupadeshika": "cara~",
+  "gana": 1,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to spread, be current",
+  "meanings": {
+   "te": "ప్రచారమవు",
+   "kn": "ಪ್ರಚಾರವಾಗು",
+   "ta": "பரவு"
+  },
+  "preferredPada": "P",
+  "order": 48
+ },
+ {
+  "root": "चर्",
+  "display": "उप + चर्",
+  "code": "01.0640",
+  "aupadeshika": "cara~",
+  "gana": 1,
+  "prefixes": [
+   "upa"
+  ],
+  "prefixesDev": [
+   "उप"
+  ],
+  "meaning_en": "to serve, treat (a patient)",
+  "meanings": {
+   "te": "సేవ చేయు, చికిత్స చేయు",
+   "kn": "ಸೇವೆ ಮಾಡು, ಚಿಕಿತ್ಸೆ ನೀಡು",
+   "ta": "பணிவிடை செய், சிகிச்சை அளி"
+  },
+  "preferredPada": "P",
+  "order": 49
+ },
+ {
+  "root": "चर्",
+  "display": "अनु + चर्",
+  "code": "01.0640",
+  "aupadeshika": "cara~",
+  "gana": 1,
+  "prefixes": [
+   "anu"
+  ],
+  "prefixesDev": [
+   "अनु"
+  ],
+  "meaning_en": "to follow, attend on",
+  "meanings": {
+   "te": "వెంట నడుచు",
+   "kn": "ಹಿಂಬಾಲಿಸು",
+   "ta": "பின்தொடர்"
+  },
+  "preferredPada": "P",
+  "order": 50
+ },
+ {
+  "root": "चर्",
+  "display": "उद् + चर्",
+  "code": "01.0640",
+  "aupadeshika": "cara~",
+  "gana": 1,
+  "prefixes": [
+   "ud"
+  ],
+  "prefixesDev": [
+   "उद्"
+  ],
+  "meaning_en": "to pronounce, utter",
+  "meanings": {
+   "te": "ఉచ్చరించు",
+   "kn": "ಉಚ್ಚರಿಸು",
+   "ta": "உச்சரி"
+  },
+  "preferredPada": "P",
+  "order": 51
+ },
+ {
+  "root": "स्था",
+  "display": "प्र + स्था",
+  "code": "01.1077",
+  "aupadeshika": "zWA\\",
+  "gana": 1,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to set out",
+  "meanings": {
+   "te": "బయలుదేరు",
+   "kn": "ಹೊರಡು",
+   "ta": "புறப்படு"
+  },
+  "preferredPada": "A",
+  "order": 52
+ },
+ {
+  "root": "स्था",
+  "display": "अव + स्था",
+  "code": "01.1077",
+  "aupadeshika": "zWA\\",
+  "gana": 1,
+  "prefixes": [
+   "ava"
+  ],
+  "prefixesDev": [
+   "अव"
+  ],
+  "meaning_en": "to stay, remain",
+  "meanings": {
+   "te": "ఉండు",
+   "kn": "ಇರು",
+   "ta": "தங்கு"
+  },
+  "preferredPada": "A",
+  "order": 53
+ },
+ {
+  "root": "स्था",
+  "display": "उप + स्था",
+  "code": "01.1077",
+  "aupadeshika": "zWA\\",
+  "gana": 1,
+  "prefixes": [
+   "upa"
+  ],
+  "prefixesDev": [
+   "उप"
+  ],
+  "meaning_en": "to approach, worship",
+  "meanings": {
+   "te": "సమీపించు, ఉపాసించు",
+   "kn": "ಸಮೀಪಿಸು, ಉಪಾಸಿಸು",
+   "ta": "அணுகு, வழிபடு"
+  },
+  "preferredPada": "P",
+  "order": 54
+ },
+ {
+  "root": "स्था",
+  "display": "अनु + स्था",
+  "code": "01.1077",
+  "aupadeshika": "zWA\\",
+  "gana": 1,
+  "prefixes": [
+   "anu"
+  ],
+  "prefixesDev": [
+   "अनु"
+  ],
+  "meaning_en": "to carry out, perform",
+  "meanings": {
+   "te": "ఆచరించు",
+   "kn": "ಆಚರಿಸು",
+   "ta": "நிறைவேற்று"
+  },
+  "preferredPada": "P",
+  "order": 55
+ },
+ {
+  "root": "स्था",
+  "display": "अधि + स्था",
+  "code": "01.1077",
+  "aupadeshika": "zWA\\",
+  "gana": 1,
+  "prefixes": [
+   "aDi"
+  ],
+  "prefixesDev": [
+   "अधि"
+  ],
+  "meaning_en": "to occupy, preside over",
+  "meanings": {
+   "te": "అధిష్ఠించు",
+   "kn": "ಅಧಿಷ್ಠಿಸು",
+   "ta": "தலைமை தாங்கு"
+  },
+  "preferredPada": "P",
+  "order": 56
+ },
+ {
+  "root": "पत्",
+  "display": "उद् + पत्",
+  "code": "01.0979",
+  "aupadeshika": "patx~",
+  "gana": 1,
+  "prefixes": [
+   "ud"
+  ],
+  "prefixesDev": [
+   "उद्"
+  ],
+  "meaning_en": "to fly up",
+  "meanings": {
+   "te": "ఎగురు",
+   "kn": "ಹಾರು",
+   "ta": "பற"
+  },
+  "preferredPada": "P",
+  "order": 57
+ },
+ {
+  "root": "पत्",
+  "display": "नि + पत्",
+  "code": "01.0979",
+  "aupadeshika": "patx~",
+  "gana": 1,
+  "prefixes": [
+   "ni"
+  ],
+  "prefixesDev": [
+   "नि"
+  ],
+  "meaning_en": "to fall down",
+  "meanings": {
+   "te": "కింద పడు",
+   "kn": "ಕೆಳಗೆ ಬೀಳು",
+   "ta": "கீழே விழு"
+  },
+  "preferredPada": "P",
+  "order": 58
+ },
+ {
+  "root": "पत्",
+  "display": "आ + पत्",
+  "code": "01.0979",
+  "aupadeshika": "patx~",
+  "gana": 1,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to befall, happen",
+  "meanings": {
+   "te": "సంభవించు",
+   "kn": "ಎದುರಾಗು",
+   "ta": "நேரிடு"
+  },
+  "preferredPada": "P",
+  "order": 59
+ },
+ {
+  "root": "दा",
+  "display": "आ + दा",
+  "code": "03.0010",
+  "aupadeshika": "qudA\\Y",
+  "gana": 3,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to take",
+  "meanings": {
+   "te": "తీసుకో",
+   "kn": "ತೆಗೆದುಕೊ",
+   "ta": "எடுத்துக்கொள்"
+  },
+  "preferredPada": "A",
+  "order": 60
+ },
+ {
+  "root": "दा",
+  "display": "प्र + दा",
+  "code": "03.0010",
+  "aupadeshika": "qudA\\Y",
+  "gana": 3,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to give, hand over",
+  "meanings": {
+   "te": "అందించు",
+   "kn": "ನೀಡು",
+   "ta": "வழங்கு"
+  },
+  "preferredPada": "P",
+  "order": 61
+ },
+ {
+  "root": "दा",
+  "display": "प्रति + दा",
+  "code": "03.0010",
+  "aupadeshika": "qudA\\Y",
+  "gana": 3,
+  "prefixes": [
+   "prati"
+  ],
+  "prefixesDev": [
+   "प्रति"
+  ],
+  "meaning_en": "to give back",
+  "meanings": {
+   "te": "తిరిగి ఇవ్వు",
+   "kn": "ಹಿಂದಿರುಗಿಸು",
+   "ta": "திருப்பிக் கொடு"
+  },
+  "preferredPada": "P",
+  "order": 62
+ },
+ {
+  "root": "धा",
+  "display": "वि + धा",
+  "code": "03.0011",
+  "aupadeshika": "quDA\\Y",
+  "gana": 3,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to arrange, do",
+  "meanings": {
+   "te": "విధించు, చేయు",
+   "kn": "ವಿಧಿಸು, ಮಾಡು",
+   "ta": "ஏற்பாடு செய்"
+  },
+  "preferredPada": "P",
+  "order": 63
+ },
+ {
+  "root": "धा",
+  "display": "नि + धा",
+  "code": "03.0011",
+  "aupadeshika": "quDA\\Y",
+  "gana": 3,
+  "prefixes": [
+   "ni"
+  ],
+  "prefixesDev": [
+   "नि"
+  ],
+  "meaning_en": "to place, deposit",
+  "meanings": {
+   "te": "ఉంచు",
+   "kn": "ಇಡು",
+   "ta": "வை"
+  },
+  "preferredPada": "P",
+  "order": 64
+ },
+ {
+  "root": "धा",
+  "display": "सम् + धा",
+  "code": "03.0011",
+  "aupadeshika": "quDA\\Y",
+  "gana": 3,
+  "prefixes": [
+   "sam"
+  ],
+  "prefixesDev": [
+   "सम्"
+  ],
+  "meaning_en": "to join, aim",
+  "meanings": {
+   "te": "జోడించు",
+   "kn": "ಜೋಡಿಸು",
+   "ta": "இணை"
+  },
+  "preferredPada": "P",
+  "order": 65
+ },
+ {
+  "root": "धा",
+  "display": "अभि + धा",
+  "code": "03.0011",
+  "aupadeshika": "quDA\\Y",
+  "gana": 3,
+  "prefixes": [
+   "aBi"
+  ],
+  "prefixesDev": [
+   "अभि"
+  ],
+  "meaning_en": "to name, say",
+  "meanings": {
+   "te": "పేరు పెట్టు, చెప్పు",
+   "kn": "ಹೆಸರಿಸು, ಹೇಳು",
+   "ta": "பெயரிடு, சொல்"
+  },
+  "preferredPada": "P",
+  "order": 66
+ },
+ {
+  "root": "धा",
+  "display": "अपि + धा",
+  "code": "03.0011",
+  "aupadeshika": "quDA\\Y",
+  "gana": 3,
+  "prefixes": [
+   "api"
+  ],
+  "prefixesDev": [
+   "अपि"
+  ],
+  "meaning_en": "to cover, close",
+  "meanings": {
+   "te": "మూయు",
+   "kn": "ಮುಚ್ಚು",
+   "ta": "மூடு"
+  },
+  "preferredPada": "P",
+  "order": 67
+ },
+ {
+  "root": "धा",
+  "display": "आ + धा",
+  "code": "03.0011",
+  "aupadeshika": "quDA\\Y",
+  "gana": 3,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to place, put on",
+  "meanings": {
+   "te": "పెట్టు",
+   "kn": "ಇಡು",
+   "ta": "வை"
+  },
+  "preferredPada": "P",
+  "order": 68
+ },
+ {
+  "root": "या",
+  "display": "आ + या",
+  "code": "02.0044",
+  "aupadeshika": "yA\\",
+  "gana": 2,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to come",
+  "meanings": {
+   "te": "వచ్చు",
+   "kn": "ಬರು",
+   "ta": "வா"
+  },
+  "preferredPada": "P",
+  "order": 69
+ },
+ {
+  "root": "या",
+  "display": "प्र + या",
+  "code": "02.0044",
+  "aupadeshika": "yA\\",
+  "gana": 2,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to set out",
+  "meanings": {
+   "te": "బయలుదేరు",
+   "kn": "ಹೊರಡು",
+   "ta": "புறப்படு"
+  },
+  "preferredPada": "P",
+  "order": 70
+ },
+ {
+  "root": "या",
+  "display": "उप + या",
+  "code": "02.0044",
+  "aupadeshika": "yA\\",
+  "gana": 2,
+  "prefixes": [
+   "upa"
+  ],
+  "prefixesDev": [
+   "उप"
+  ],
+  "meaning_en": "to approach",
+  "meanings": {
+   "te": "సమీపించు",
+   "kn": "ಸಮೀಪಿಸು",
+   "ta": "அணுகு"
+  },
+  "preferredPada": "P",
+  "order": 71
+ },
+ {
+  "root": "या",
+  "display": "निर् + या",
+  "code": "02.0044",
+  "aupadeshika": "yA\\",
+  "gana": 2,
+  "prefixes": [
+   "nis"
+  ],
+  "prefixesDev": [
+   "निर्"
+  ],
+  "meaning_en": "to go out",
+  "meanings": {
+   "te": "బయటకు వెళ్ళు",
+   "kn": "ಹೊರಗೆ ಹೋಗು",
+   "ta": "வெளியேறு"
+  },
+  "preferredPada": "P",
+  "order": 72
+ },
+ {
+  "root": "इ",
+  "display": "आ + इ",
+  "code": "02.0040",
+  "aupadeshika": "i\\R",
+  "gana": 2,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to come",
+  "meanings": {
+   "te": "వచ్చు",
+   "kn": "ಬರು",
+   "ta": "வா"
+  },
+  "preferredPada": "P",
+  "order": 73
+ },
+ {
+  "root": "इ",
+  "display": "उप + इ",
+  "code": "02.0040",
+  "aupadeshika": "i\\R",
+  "gana": 2,
+  "prefixes": [
+   "upa"
+  ],
+  "prefixesDev": [
+   "उप"
+  ],
+  "meaning_en": "to approach",
+  "meanings": {
+   "te": "సమీపించు",
+   "kn": "ಸಮೀಪಿಸು",
+   "ta": "அணுகு"
+  },
+  "preferredPada": "P",
+  "order": 74
+ },
+ {
+  "root": "इ",
+  "display": "अनु + इ",
+  "code": "02.0040",
+  "aupadeshika": "i\\R",
+  "gana": 2,
+  "prefixes": [
+   "anu"
+  ],
+  "prefixesDev": [
+   "अनु"
+  ],
+  "meaning_en": "to follow",
+  "meanings": {
+   "te": "అనుసరించు",
+   "kn": "ಅನುಸರಿಸು",
+   "ta": "பின்தொடர்"
+  },
+  "preferredPada": "P",
+  "order": 75
+ },
+ {
+  "root": "इ",
+  "display": "अभि + इ",
+  "code": "02.0040",
+  "aupadeshika": "i\\R",
+  "gana": 2,
+  "prefixes": [
+   "aBi"
+  ],
+  "prefixesDev": [
+   "अभि"
+  ],
+  "meaning_en": "to go towards",
+  "meanings": {
+   "te": "వైపు వెళ్ళు",
+   "kn": "ಕಡೆಗೆ ಹೋಗು",
+   "ta": "நோக்கிச் செல்"
+  },
+  "preferredPada": "P",
+  "order": 76
+ },
+ {
+  "root": "इ",
+  "display": "प्र + इ",
+  "code": "02.0040",
+  "aupadeshika": "i\\R",
+  "gana": 2,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to go forth, die",
+  "meanings": {
+   "te": "ముందుకు వెళ్ళు, మరణించు",
+   "kn": "ಮುಂದೆ ಹೋಗು, ಸಾಯು",
+   "ta": "முன்செல், இற"
+  },
+  "preferredPada": "P",
+  "order": 77
+ },
+ {
+  "root": "इ",
+  "display": "वि + इ",
+  "code": "02.0040",
+  "aupadeshika": "i\\R",
+  "gana": 2,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to go apart, disappear",
+  "meanings": {
+   "te": "విడిపో",
+   "kn": "ಅಗಲು",
+   "ta": "பிரி"
+  },
+  "preferredPada": "P",
+  "order": 78
+ },
+ {
+  "root": "इ",
+  "display": "सम् + इ",
+  "code": "02.0040",
+  "aupadeshika": "i\\R",
+  "gana": 2,
+  "prefixes": [
+   "sam"
+  ],
+  "prefixesDev": [
+   "सम्"
+  ],
+  "meaning_en": "to come together",
+  "meanings": {
+   "te": "కలియు",
+   "kn": "ಒಂದಾಗು",
+   "ta": "ஒன்றுசேர்"
+  },
+  "preferredPada": "P",
+  "order": 79
+ },
+ {
+  "root": "इ",
+  "display": "अति + इ",
+  "code": "02.0040",
+  "aupadeshika": "i\\R",
+  "gana": 2,
+  "prefixes": [
+   "ati"
+  ],
+  "prefixesDev": [
+   "अति"
+  ],
+  "meaning_en": "to pass, go beyond",
+  "meanings": {
+   "te": "దాటు",
+   "kn": "ದಾಟು",
+   "ta": "கட"
+  },
+  "preferredPada": "P",
+  "order": 80
+ },
+ {
+  "root": "इ",
+  "display": "उद् + इ",
+  "code": "02.0040",
+  "aupadeshika": "i\\R",
+  "gana": 2,
+  "prefixes": [
+   "ud"
+  ],
+  "prefixesDev": [
+   "उद्"
+  ],
+  "meaning_en": "to rise (sun)",
+  "meanings": {
+   "te": "ఉదయించు",
+   "kn": "ಉದಯಿಸು",
+   "ta": "உதி"
+  },
+  "preferredPada": "P",
+  "order": 81
+ },
+ {
+  "root": "क्रम्",
+  "display": "आ + क्रम्",
+  "code": "01.0545",
+  "aupadeshika": "kramu~",
+  "gana": 1,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to attack, step on",
+  "meanings": {
+   "te": "దాడి చేయు",
+   "kn": "ಆಕ್ರಮಿಸು",
+   "ta": "தாக்கு"
+  },
+  "preferredPada": "P",
+  "order": 82,
+  "avoid": "क्राम्य|क्रम्य"
+ },
+ {
+  "root": "क्रम्",
+  "display": "अति + क्रम्",
+  "code": "01.0545",
+  "aupadeshika": "kramu~",
+  "gana": 1,
+  "prefixes": [
+   "ati"
+  ],
+  "prefixesDev": [
+   "अति"
+  ],
+  "meaning_en": "to cross, transgress",
+  "meanings": {
+   "te": "అతిక్రమించు",
+   "kn": "ಅತಿಕ್ರಮಿಸು",
+   "ta": "மீறு"
+  },
+  "preferredPada": "P",
+  "order": 83,
+  "avoid": "क्राम्य|क्रम्य"
+ },
+ {
+  "root": "क्रम्",
+  "display": "उप + क्रम्",
+  "code": "01.0545",
+  "aupadeshika": "kramu~",
+  "gana": 1,
+  "prefixes": [
+   "upa"
+  ],
+  "prefixesDev": [
+   "उप"
+  ],
+  "meaning_en": "to begin",
+  "meanings": {
+   "te": "మొదలుపెట్టు",
+   "kn": "ಆರಂಭಿಸು",
+   "ta": "தொடங்கு"
+  },
+  "preferredPada": "A",
+  "order": 84,
+  "avoid": "क्राम्य|क्रम्य"
+ },
+ {
+  "root": "क्रम्",
+  "display": "परि + क्रम्",
+  "code": "01.0545",
+  "aupadeshika": "kramu~",
+  "gana": 1,
+  "prefixes": [
+   "pari"
+  ],
+  "prefixesDev": [
+   "परि"
+  ],
+  "meaning_en": "to walk around",
+  "meanings": {
+   "te": "చుట్టూ తిరుగు",
+   "kn": "ಸುತ್ತು ಹಾಕು",
+   "ta": "சுற்றி வா"
+  },
+  "preferredPada": "P",
+  "order": 85,
+  "avoid": "क्राम्य|क्रम्य"
+ },
+ {
+  "root": "क्रम्",
+  "display": "वि + क्रम्",
+  "code": "01.0545",
+  "aupadeshika": "kramu~",
+  "gana": 1,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to stride, show valour",
+  "meanings": {
+   "te": "పరాక్రమించు",
+   "kn": "ಪರಾಕ್ರಮ ತೋರು",
+   "ta": "வீரம் காட்டு"
+  },
+  "preferredPada": "A",
+  "order": 86,
+  "avoid": "क्राम्य|क्रम्य"
+ },
+ {
+  "root": "श्रु",
+  "display": "प्रति + श्रु",
+  "code": "01.1092",
+  "aupadeshika": "Sru\\",
+  "gana": 1,
+  "prefixes": [
+   "prati"
+  ],
+  "prefixesDev": [
+   "प्रति"
+  ],
+  "meaning_en": "to promise",
+  "meanings": {
+   "te": "వాగ్దానం చేయు",
+   "kn": "ಮಾತು ಕೊಡು",
+   "ta": "வாக்குறுதி அளி"
+  },
+  "preferredPada": "P",
+  "order": 87
+ },
+ {
+  "root": "श्रु",
+  "display": "उप + श्रु",
+  "code": "01.1092",
+  "aupadeshika": "Sru\\",
+  "gana": 1,
+  "prefixes": [
+   "upa"
+  ],
+  "prefixesDev": [
+   "उप"
+  ],
+  "meaning_en": "to overhear, hear",
+  "meanings": {
+   "te": "వినిపించుకో",
+   "kn": "ಕೇಳಿಸಿಕೊ",
+   "ta": "கேள்"
+  },
+  "preferredPada": "P",
+  "order": 88
+ },
+ {
+  "root": "ज्ञा",
+  "display": "वि + ज्ञा",
+  "code": "09.0043",
+  "aupadeshika": "jYA\\",
+  "gana": 9,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to understand, know well",
+  "meanings": {
+   "te": "తెలుసుకో",
+   "kn": "ತಿಳಿದುಕೊ",
+   "ta": "அறிந்துகொள்"
+  },
+  "preferredPada": "P",
+  "order": 89
+ },
+ {
+  "root": "ज्ञा",
+  "display": "प्रति + ज्ञा",
+  "code": "09.0043",
+  "aupadeshika": "jYA\\",
+  "gana": 9,
+  "prefixes": [
+   "prati"
+  ],
+  "prefixesDev": [
+   "प्रति"
+  ],
+  "meaning_en": "to promise, vow",
+  "meanings": {
+   "te": "ప్రతిజ్ఞ చేయు",
+   "kn": "ಪ್ರತಿಜ್ಞೆ ಮಾಡು",
+   "ta": "சபதம் செய்"
+  },
+  "preferredPada": "A",
+  "order": 90
+ },
+ {
+  "root": "ज्ञा",
+  "display": "अनु + ज्ञा",
+  "code": "09.0043",
+  "aupadeshika": "jYA\\",
+  "gana": 9,
+  "prefixes": [
+   "anu"
+  ],
+  "prefixesDev": [
+   "अनु"
+  ],
+  "meaning_en": "to permit",
+  "meanings": {
+   "te": "అనుమతించు",
+   "kn": "ಅನುಮತಿಸು",
+   "ta": "அனுமதி"
+  },
+  "preferredPada": "P",
+  "order": 91
+ },
+ {
+  "root": "ज्ञा",
+  "display": "अभि + ज्ञा",
+  "code": "09.0043",
+  "aupadeshika": "jYA\\",
+  "gana": 9,
+  "prefixes": [
+   "aBi"
+  ],
+  "prefixesDev": [
+   "अभि"
+  ],
+  "meaning_en": "to recognise",
+  "meanings": {
+   "te": "గుర్తించు",
+   "kn": "ಗುರುತಿಸು",
+   "ta": "அடையாளம் காண்"
+  },
+  "preferredPada": "P",
+  "order": 92
+ },
+ {
+  "root": "बुध्",
+  "display": "प्र + बुध्",
+  "code": "04.0068",
+  "aupadeshika": "bu\\Da~\\",
+  "gana": 4,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to wake up",
+  "meanings": {
+   "te": "నిద్ర లేచు",
+   "kn": "ಎಚ್ಚರಗೊಳ್ಳು",
+   "ta": "விழித்தெழு"
+  },
+  "preferredPada": "A",
+  "order": 93
+ },
+ {
+  "root": "बुध्",
+  "display": "अव + बुध्",
+  "code": "04.0068",
+  "aupadeshika": "bu\\Da~\\",
+  "gana": 4,
+  "prefixes": [
+   "ava"
+  ],
+  "prefixesDev": [
+   "अव"
+  ],
+  "meaning_en": "to understand",
+  "meanings": {
+   "te": "అర్థం చేసుకో",
+   "kn": "ಅರ್ಥಮಾಡಿಕೊ",
+   "ta": "புரிந்துகொள்"
+  },
+  "preferredPada": "A",
+  "order": 94
+ },
+ {
+  "root": "लभ्",
+  "display": "उप + लभ्",
+  "code": "01.1130",
+  "aupadeshika": "qula\\Ba~\\z",
+  "gana": 1,
+  "prefixes": [
+   "upa"
+  ],
+  "prefixesDev": [
+   "उप"
+  ],
+  "meaning_en": "to obtain, perceive",
+  "meanings": {
+   "te": "పొందు, గ్రహించు",
+   "kn": "ಪಡೆ, ಗ್ರಹಿಸು",
+   "ta": "பெறு, உணர்"
+  },
+  "preferredPada": "A",
+  "order": 95
+ },
+ {
+  "root": "लभ्",
+  "display": "आ + लभ्",
+  "code": "01.1130",
+  "aupadeshika": "qula\\Ba~\\z",
+  "gana": 1,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to touch",
+  "meanings": {
+   "te": "తాకు",
+   "kn": "ಮುಟ್ಟು",
+   "ta": "தொடு"
+  },
+  "preferredPada": "A",
+  "order": 96
+ },
+ {
+  "root": "सृ",
+  "display": "प्र + सृ",
+  "code": "01.1085",
+  "aupadeshika": "sf\\",
+  "gana": 1,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to spread",
+  "meanings": {
+   "te": "వ్యాపించు",
+   "kn": "ಹರಡು",
+   "ta": "பரவு"
+  },
+  "preferredPada": "P",
+  "order": 97
+ },
+ {
+  "root": "सृ",
+  "display": "अनु + सृ",
+  "code": "01.1085",
+  "aupadeshika": "sf\\",
+  "gana": 1,
+  "prefixes": [
+   "anu"
+  ],
+  "prefixesDev": [
+   "अनु"
+  ],
+  "meaning_en": "to follow",
+  "meanings": {
+   "te": "అనుసరించు",
+   "kn": "ಅನುಸರಿಸು",
+   "ta": "பின்பற்று"
+  },
+  "preferredPada": "P",
+  "order": 98
+ },
+ {
+  "root": "सृ",
+  "display": "अप + सृ",
+  "code": "01.1085",
+  "aupadeshika": "sf\\",
+  "gana": 1,
+  "prefixes": [
+   "apa"
+  ],
+  "prefixesDev": [
+   "अप"
+  ],
+  "meaning_en": "to go away, move off",
+  "meanings": {
+   "te": "దూరంగా వెళ్ళు",
+   "kn": "ದೂರ ಸರಿ",
+   "ta": "விலகு"
+  },
+  "preferredPada": "P",
+  "order": 99
+ },
+ {
+  "root": "सृ",
+  "display": "निर् + सृ",
+  "code": "01.1085",
+  "aupadeshika": "sf\\",
+  "gana": 1,
+  "prefixes": [
+   "nis"
+  ],
+  "prefixesDev": [
+   "निर्"
+  ],
+  "meaning_en": "to come out",
+  "meanings": {
+   "te": "బయటకు వచ్చు",
+   "kn": "ಹೊರಬರು",
+   "ta": "வெளிவா"
+  },
+  "preferredPada": "P",
+  "order": 100
+ },
+ {
+  "root": "सृज्",
+  "display": "वि + सृज्",
+  "code": "06.0150",
+  "aupadeshika": "sf\\ja~",
+  "gana": 6,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to dismiss, send forth",
+  "meanings": {
+   "te": "పంపించు, విడిచిపెట్టు",
+   "kn": "ಕಳುಹಿಸು, ಬಿಡು",
+   "ta": "அனுப்பு, விடு"
+  },
+  "preferredPada": "P",
+  "order": 101
+ },
+ {
+  "root": "सृज्",
+  "display": "उद् + सृज्",
+  "code": "06.0150",
+  "aupadeshika": "sf\\ja~",
+  "gana": 6,
+  "prefixes": [
+   "ud"
+  ],
+  "prefixesDev": [
+   "उद्"
+  ],
+  "meaning_en": "to give up, abandon",
+  "meanings": {
+   "te": "వదిలిపెట్టు",
+   "kn": "ತ್ಯಜಿಸು",
+   "ta": "கைவிடு"
+  },
+  "preferredPada": "P",
+  "order": 102
+ },
+ {
+  "root": "दिश्",
+  "display": "उप + दिश्",
+  "code": "06.0003",
+  "aupadeshika": "di\\Sa~^",
+  "gana": 6,
+  "prefixes": [
+   "upa"
+  ],
+  "prefixesDev": [
+   "उप"
+  ],
+  "meaning_en": "to teach, advise",
+  "meanings": {
+   "te": "ఉపదేశించు",
+   "kn": "ಉಪದೇಶಿಸು",
+   "ta": "உபதேசி"
+  },
+  "preferredPada": "P",
+  "order": 103
+ },
+ {
+  "root": "दिश्",
+  "display": "आ + दिश्",
+  "code": "06.0003",
+  "aupadeshika": "di\\Sa~^",
+  "gana": 6,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to command",
+  "meanings": {
+   "te": "ఆజ్ఞాపించు",
+   "kn": "ಆಜ್ಞಾಪಿಸು",
+   "ta": "கட்டளையிடு"
+  },
+  "preferredPada": "P",
+  "order": 104
+ },
+ {
+  "root": "दिश्",
+  "display": "निर् + दिश्",
+  "code": "06.0003",
+  "aupadeshika": "di\\Sa~^",
+  "gana": 6,
+  "prefixes": [
+   "nis"
+  ],
+  "prefixesDev": [
+   "निर्"
+  ],
+  "meaning_en": "to point out, specify",
+  "meanings": {
+   "te": "నిర్దేశించు",
+   "kn": "ನಿರ್ದೇಶಿಸು",
+   "ta": "சுட்டிக்காட்டு"
+  },
+  "preferredPada": "P",
+  "order": 105
+ },
+ {
+  "root": "दिश्",
+  "display": "सम् + दिश्",
+  "code": "06.0003",
+  "aupadeshika": "di\\Sa~^",
+  "gana": 6,
+  "prefixes": [
+   "sam"
+  ],
+  "prefixesDev": [
+   "सम्"
+  ],
+  "meaning_en": "to send a message",
+  "meanings": {
+   "te": "సందేశం పంపు",
+   "kn": "ಸಂದೇಶ ಕಳುಹಿಸು",
+   "ta": "செய்தி அனுப்பு"
+  },
+  "preferredPada": "P",
+  "order": 106
+ },
+ {
+  "root": "वह्",
+  "display": "उद् + वह्",
+  "code": "01.1159",
+  "aupadeshika": "va\\ha~^",
+  "gana": 1,
+  "prefixes": [
+   "ud"
+  ],
+  "prefixesDev": [
+   "उद्"
+  ],
+  "meaning_en": "to marry, carry up",
+  "meanings": {
+   "te": "పెళ్ళాడు",
+   "kn": "ಮದುವೆಯಾಗು",
+   "ta": "மணம் செய்"
+  },
+  "preferredPada": "P",
+  "order": 107
+ },
+ {
+  "root": "वह्",
+  "display": "प्र + वह्",
+  "code": "01.1159",
+  "aupadeshika": "va\\ha~^",
+  "gana": 1,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to flow",
+  "meanings": {
+   "te": "ప్రవహించు",
+   "kn": "ಹರಿ",
+   "ta": "பாய்"
+  },
+  "preferredPada": "P",
+  "order": 108
+ },
+ {
+  "root": "वह्",
+  "display": "निर् + वह्",
+  "code": "01.1159",
+  "aupadeshika": "va\\ha~^",
+  "gana": 1,
+  "prefixes": [
+   "nis"
+  ],
+  "prefixesDev": [
+   "निर्"
+  ],
+  "meaning_en": "to carry out, manage",
+  "meanings": {
+   "te": "నిర్వహించు",
+   "kn": "ನಿರ್ವಹಿಸು",
+   "ta": "நிர்வகி"
+  },
+  "preferredPada": "P",
+  "order": 109
+ },
+ {
+  "root": "वह्",
+  "display": "आ + वह्",
+  "code": "01.1159",
+  "aupadeshika": "va\\ha~^",
+  "gana": 1,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to bring",
+  "meanings": {
+   "te": "తెచ్చు",
+   "kn": "ತರು",
+   "ta": "கொண்டுவா"
+  },
+  "preferredPada": "P",
+  "order": 110
+ },
+ {
+  "root": "युज्",
+  "display": "नि + युज्",
+  "code": "07.0007",
+  "aupadeshika": "yu\\ji~^r",
+  "gana": 7,
+  "prefixes": [
+   "ni"
+  ],
+  "prefixesDev": [
+   "नि"
+  ],
+  "meaning_en": "to appoint, engage",
+  "meanings": {
+   "te": "నియమించు",
+   "kn": "ನೇಮಿಸು",
+   "ta": "நியமி"
+  },
+  "preferredPada": "A",
+  "order": 111
+ },
+ {
+  "root": "युज्",
+  "display": "प्र + युज्",
+  "code": "07.0007",
+  "aupadeshika": "yu\\ji~^r",
+  "gana": 7,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to use, employ",
+  "meanings": {
+   "te": "ఉపయోగించు",
+   "kn": "ಬಳಸು",
+   "ta": "பயன்படுத்து"
+  },
+  "preferredPada": "A",
+  "order": 112
+ },
+ {
+  "root": "युज्",
+  "display": "उप + युज्",
+  "code": "07.0007",
+  "aupadeshika": "yu\\ji~^r",
+  "gana": 7,
+  "prefixes": [
+   "upa"
+  ],
+  "prefixesDev": [
+   "उप"
+  ],
+  "meaning_en": "to use",
+  "meanings": {
+   "te": "వాడు",
+   "kn": "ಉಪಯೋಗಿಸು",
+   "ta": "உபயோகி"
+  },
+  "preferredPada": "A",
+  "order": 113
+ },
+ {
+  "root": "युज्",
+  "display": "सम् + युज्",
+  "code": "07.0007",
+  "aupadeshika": "yu\\ji~^r",
+  "gana": 7,
+  "prefixes": [
+   "sam"
+  ],
+  "prefixesDev": [
+   "सम्"
+  ],
+  "meaning_en": "to join, unite",
+  "meanings": {
+   "te": "కలుపు",
+   "kn": "ಸೇರಿಸು",
+   "ta": "இணை"
+  },
+  "preferredPada": "A",
+  "order": 114
+ },
+ {
+  "root": "युज्",
+  "display": "वि + युज्",
+  "code": "07.0007",
+  "aupadeshika": "yu\\ji~^r",
+  "gana": 7,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to separate",
+  "meanings": {
+   "te": "విడదీయు",
+   "kn": "ಬೇರ್ಪಡಿಸು",
+   "ta": "பிரி"
+  },
+  "preferredPada": "A",
+  "order": 115
+ },
+ {
+  "root": "तॄ",
+  "display": "उद् + तॄ",
+  "code": "01.1124",
+  "aupadeshika": "tF",
+  "gana": 1,
+  "prefixes": [
+   "ud"
+  ],
+  "prefixesDev": [
+   "उद्"
+  ],
+  "meaning_en": "to cross over, come out",
+  "meanings": {
+   "te": "దాటు",
+   "kn": "ದಾಟು",
+   "ta": "கட"
+  },
+  "preferredPada": "P",
+  "order": 116
+ },
+ {
+  "root": "तॄ",
+  "display": "अव + तॄ",
+  "code": "01.1124",
+  "aupadeshika": "tF",
+  "gana": 1,
+  "prefixes": [
+   "ava"
+  ],
+  "prefixesDev": [
+   "अव"
+  ],
+  "meaning_en": "to descend",
+  "meanings": {
+   "te": "దిగు",
+   "kn": "ಇಳಿ",
+   "ta": "இறங்கு"
+  },
+  "preferredPada": "P",
+  "order": 117
+ },
+ {
+  "root": "तॄ",
+  "display": "वि + तॄ",
+  "code": "01.1124",
+  "aupadeshika": "tF",
+  "gana": 1,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to distribute, give",
+  "meanings": {
+   "te": "పంచు",
+   "kn": "ಹಂಚು",
+   "ta": "வழங்கு"
+  },
+  "preferredPada": "P",
+  "order": 118
+ },
+ {
+  "root": "रुह्",
+  "display": "आ + रुह्",
+  "code": "01.0995",
+  "aupadeshika": "ru\\ha~",
+  "gana": 1,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to climb, mount",
+  "meanings": {
+   "te": "ఎక్కు",
+   "kn": "ಹತ್ತು",
+   "ta": "ஏறு"
+  },
+  "preferredPada": "P",
+  "order": 119
+ },
+ {
+  "root": "रुह्",
+  "display": "अव + रुह्",
+  "code": "01.0995",
+  "aupadeshika": "ru\\ha~",
+  "gana": 1,
+  "prefixes": [
+   "ava"
+  ],
+  "prefixesDev": [
+   "अव"
+  ],
+  "meaning_en": "to come down",
+  "meanings": {
+   "te": "దిగు",
+   "kn": "ಇಳಿ",
+   "ta": "இறங்கு"
+  },
+  "preferredPada": "P",
+  "order": 120
+ },
+ {
+  "root": "रुह्",
+  "display": "प्र + रुह्",
+  "code": "01.0995",
+  "aupadeshika": "ru\\ha~",
+  "gana": 1,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to sprout, grow",
+  "meanings": {
+   "te": "మొలకెత్తు",
+   "kn": "ಮೊಳಕೆಯೊಡೆ",
+   "ta": "முளை"
+  },
+  "preferredPada": "P",
+  "order": 121
+ },
+ {
+  "root": "रुह्",
+  "display": "अधि + रुह्",
+  "code": "01.0995",
+  "aupadeshika": "ru\\ha~",
+  "gana": 1,
+  "prefixes": [
+   "aDi"
+  ],
+  "prefixesDev": [
+   "अधि"
+  ],
+  "meaning_en": "to mount, ascend",
+  "meanings": {
+   "te": "అధిరోహించు",
+   "kn": "ಏರು",
+   "ta": "ஏறு"
+  },
+  "preferredPada": "P",
+  "order": 122
+ },
+ {
+  "root": "ग्रह्",
+  "display": "प्रति + ग्रह्",
+  "code": "09.0071",
+  "aupadeshika": "graha~^",
+  "gana": 9,
+  "prefixes": [
+   "prati"
+  ],
+  "prefixesDev": [
+   "प्रति"
+  ],
+  "meaning_en": "to accept, receive",
+  "meanings": {
+   "te": "స్వీకరించు",
+   "kn": "ಸ್ವೀಕರಿಸು",
+   "ta": "ஏற்றுக்கொள்"
+  },
+  "preferredPada": "P",
+  "order": 123
+ },
+ {
+  "root": "ग्रह्",
+  "display": "अनु + ग्रह्",
+  "code": "09.0071",
+  "aupadeshika": "graha~^",
+  "gana": 9,
+  "prefixes": [
+   "anu"
+  ],
+  "prefixesDev": [
+   "अनु"
+  ],
+  "meaning_en": "to favour, bless",
+  "meanings": {
+   "te": "అనుగ్రహించు",
+   "kn": "ಅನುಗ್ರಹಿಸು",
+   "ta": "அருள்"
+  },
+  "preferredPada": "P",
+  "order": 124
+ },
+ {
+  "root": "ग्रह्",
+  "display": "नि + ग्रह्",
+  "code": "09.0071",
+  "aupadeshika": "graha~^",
+  "gana": 9,
+  "prefixes": [
+   "ni"
+  ],
+  "prefixesDev": [
+   "नि"
+  ],
+  "meaning_en": "to restrain, control",
+  "meanings": {
+   "te": "నిగ్రహించు",
+   "kn": "ನಿಗ್ರಹಿಸು",
+   "ta": "அடக்கு"
+  },
+  "preferredPada": "P",
+  "order": 125
+ },
+ {
+  "root": "ग्रह्",
+  "display": "सम् + ग्रह्",
+  "code": "09.0071",
+  "aupadeshika": "graha~^",
+  "gana": 9,
+  "prefixes": [
+   "sam"
+  ],
+  "prefixesDev": [
+   "सम्"
+  ],
+  "meaning_en": "to collect",
+  "meanings": {
+   "te": "సేకరించు",
+   "kn": "ಸಂಗ್ರಹಿಸು",
+   "ta": "சேகரி"
+  },
+  "preferredPada": "P",
+  "order": 126
+ },
+ {
+  "root": "ग्रह्",
+  "display": "परि + ग्रह्",
+  "code": "09.0071",
+  "aupadeshika": "graha~^",
+  "gana": 9,
+  "prefixes": [
+   "pari"
+  ],
+  "prefixesDev": [
+   "परि"
+  ],
+  "meaning_en": "to take, accept",
+  "meanings": {
+   "te": "స్వీకరించు",
+   "kn": "ಪರಿಗ್ರಹಿಸು",
+   "ta": "ஏற்றுக்கொள்"
+  },
+  "preferredPada": "P",
+  "order": 127
+ },
+ {
+  "root": "मुच्",
+  "display": "वि + मुच्",
+  "code": "06.0166",
+  "aupadeshika": "mu\\cx~^",
+  "gana": 6,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to release, free",
+  "meanings": {
+   "te": "విడుదల చేయు",
+   "kn": "ಬಿಡುಗಡೆ ಮಾಡು",
+   "ta": "விடுவி"
+  },
+  "preferredPada": "P",
+  "order": 128
+ },
+ {
+  "root": "क्षिप्",
+  "display": "आ + क्षिप्",
+  "code": "06.0005",
+  "aupadeshika": "kzi\\pa~^",
+  "gana": 6,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to object, throw at",
+  "meanings": {
+   "te": "ఆక్షేపించు",
+   "kn": "ಆಕ್ಷೇಪಿಸು",
+   "ta": "ஆட்சேபி"
+  },
+  "preferredPada": "P",
+  "order": 129
+ },
+ {
+  "root": "क्षिप्",
+  "display": "नि + क्षिप्",
+  "code": "06.0005",
+  "aupadeshika": "kzi\\pa~^",
+  "gana": 6,
+  "prefixes": [
+   "ni"
+  ],
+  "prefixesDev": [
+   "नि"
+  ],
+  "meaning_en": "to deposit, put down",
+  "meanings": {
+   "te": "దాచు, ఉంచు",
+   "kn": "ಇಡು",
+   "ta": "வைப்பு வை"
+  },
+  "preferredPada": "P",
+  "order": 130
+ },
+ {
+  "root": "क्षिप्",
+  "display": "प्र + क्षिप्",
+  "code": "06.0005",
+  "aupadeshika": "kzi\\pa~^",
+  "gana": 6,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to throw in, insert",
+  "meanings": {
+   "te": "లోపల వేయు",
+   "kn": "ಒಳಗೆ ಹಾಕು",
+   "ta": "உள்ளே போடு"
+  },
+  "preferredPada": "P",
+  "order": 131
+ },
+ {
+  "root": "क्षिप्",
+  "display": "उद् + क्षिप्",
+  "code": "06.0005",
+  "aupadeshika": "kzi\\pa~^",
+  "gana": 6,
+  "prefixes": [
+   "ud"
+  ],
+  "prefixesDev": [
+   "उद्"
+  ],
+  "meaning_en": "to throw up",
+  "meanings": {
+   "te": "పైకి విసురు",
+   "kn": "ಮೇಲಕ್ಕೆ ಎಸೆ",
+   "ta": "மேலே எறி"
+  },
+  "preferredPada": "P",
+  "order": 132
+ },
+ {
+  "root": "क्षिप्",
+  "display": "सम् + क्षिप्",
+  "code": "06.0005",
+  "aupadeshika": "kzi\\pa~^",
+  "gana": 6,
+  "prefixes": [
+   "sam"
+  ],
+  "prefixesDev": [
+   "सम्"
+  ],
+  "meaning_en": "to shorten, sum up",
+  "meanings": {
+   "te": "సంక్షిప్తం చేయు",
+   "kn": "ಸಂಕ್ಷೇಪಿಸು",
+   "ta": "சுருக்கு"
+  },
+  "preferredPada": "P",
+  "order": 133
+ },
+ {
+  "root": "क्षिप्",
+  "display": "वि + क्षिप्",
+  "code": "06.0005",
+  "aupadeshika": "kzi\\pa~^",
+  "gana": 6,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to scatter, distract",
+  "meanings": {
+   "te": "చెదరగొట్టు",
+   "kn": "ಚೆದುರಿಸು",
+   "ta": "சிதறடி"
+  },
+  "preferredPada": "P",
+  "order": 134
+ },
+ {
+  "root": "पद्",
+  "display": "उद् + पद्",
+  "code": "04.0065",
+  "aupadeshika": "pa\\da~\\",
+  "gana": 4,
+  "prefixes": [
+   "ud"
+  ],
+  "prefixesDev": [
+   "उद्"
+  ],
+  "meaning_en": "to arise, be born",
+  "meanings": {
+   "te": "పుట్టు",
+   "kn": "ಹುಟ್ಟು",
+   "ta": "பிற"
+  },
+  "preferredPada": "A",
+  "order": 135
+ },
+ {
+  "root": "पद्",
+  "display": "सम् + पद्",
+  "code": "04.0065",
+  "aupadeshika": "pa\\da~\\",
+  "gana": 4,
+  "prefixes": [
+   "sam"
+  ],
+  "prefixesDev": [
+   "सम्"
+  ],
+  "meaning_en": "to succeed, become",
+  "meanings": {
+   "te": "సమకూరు",
+   "kn": "ಸಂಪನ್ನವಾಗು",
+   "ta": "நிறைவேறு"
+  },
+  "preferredPada": "A",
+  "order": 136
+ },
+ {
+  "root": "पद्",
+  "display": "आ + पद्",
+  "code": "04.0065",
+  "aupadeshika": "pa\\da~\\",
+  "gana": 4,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to fall into, befall",
+  "meanings": {
+   "te": "ఆపదలో పడు",
+   "kn": "ಆಪತ್ತಿಗೆ ಸಿಲುಕು",
+   "ta": "ஆபத்தில் சிக்கு"
+  },
+  "preferredPada": "A",
+  "order": 137
+ },
+ {
+  "root": "पद्",
+  "display": "प्रति + पद्",
+  "code": "04.0065",
+  "aupadeshika": "pa\\da~\\",
+  "gana": 4,
+  "prefixes": [
+   "prati"
+  ],
+  "prefixesDev": [
+   "प्रति"
+  ],
+  "meaning_en": "to reach, understand",
+  "meanings": {
+   "te": "పొందు, గ్రహించు",
+   "kn": "ಪಡೆ, ಗ್ರಹಿಸು",
+   "ta": "அடை, புரிந்துகொள்"
+  },
+  "preferredPada": "A",
+  "order": 138
+ },
+ {
+  "root": "पद्",
+  "display": "वि + पद्",
+  "code": "04.0065",
+  "aupadeshika": "pa\\da~\\",
+  "gana": 4,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to perish, fail",
+  "meanings": {
+   "te": "నశించు",
+   "kn": "ನಾಶವಾಗು",
+   "ta": "அழி"
+  },
+  "preferredPada": "A",
+  "order": 139
+ },
+ {
+  "root": "पद्",
+  "display": "उप + पद्",
+  "code": "04.0065",
+  "aupadeshika": "pa\\da~\\",
+  "gana": 4,
+  "prefixes": [
+   "upa"
+  ],
+  "prefixesDev": [
+   "उप"
+  ],
+  "meaning_en": "to be fitting, happen",
+  "meanings": {
+   "te": "తగు, జరుగు",
+   "kn": "ಸರಿಹೊಂದು, ನಡೆ",
+   "ta": "பொருந்து, நிகழ்"
+  },
+  "preferredPada": "A",
+  "order": 140
+ },
+ {
+  "root": "स्मृ",
+  "display": "वि + स्मृ",
+  "code": "01.0919",
+  "aupadeshika": "smf\\",
+  "gana": 1,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to forget",
+  "meanings": {
+   "te": "మరచిపో",
+   "kn": "ಮರೆ",
+   "ta": "மற"
+  },
+  "preferredPada": "P",
+  "order": 141
+ },
+ {
+  "root": "स्मृ",
+  "display": "अनु + स्मृ",
+  "code": "01.0919",
+  "aupadeshika": "smf\\",
+  "gana": 1,
+  "prefixes": [
+   "anu"
+  ],
+  "prefixesDev": [
+   "अनु"
+  ],
+  "meaning_en": "to remember",
+  "meanings": {
+   "te": "స్మరించు",
+   "kn": "ಸ್ಮರಿಸು",
+   "ta": "நினைவுகூர்"
+  },
+  "preferredPada": "P",
+  "order": 142
+ },
+ {
+  "root": "जि",
+  "display": "वि + जि",
+  "code": "01.0642",
+  "aupadeshika": "ji\\",
+  "gana": 1,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to conquer, win",
+  "meanings": {
+   "te": "గెలుచు",
+   "kn": "ಗೆಲ್ಲು",
+   "ta": "வெல்"
+  },
+  "preferredPada": "A",
+  "order": 143
+ },
+ {
+  "root": "जि",
+  "display": "परा + जि",
+  "code": "01.0642",
+  "aupadeshika": "ji\\",
+  "gana": 1,
+  "prefixes": [
+   "parA"
+  ],
+  "prefixesDev": [
+   "परा"
+  ],
+  "meaning_en": "to defeat, lose",
+  "meanings": {
+   "te": "ఓడించు, ఓడిపో",
+   "kn": "ಸೋಲಿಸು, ಸೋಲು",
+   "ta": "தோற்கடி, தோல்"
+  },
+  "preferredPada": "A",
+  "order": 144
+ },
+ {
+  "root": "क्री",
+  "display": "वि + क्री",
+  "code": "09.0001",
+  "aupadeshika": "qukrI\\Y",
+  "gana": 9,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to sell",
+  "meanings": {
+   "te": "అమ్ము",
+   "kn": "ಮಾರು",
+   "ta": "விற்"
+  },
+  "preferredPada": "A",
+  "order": 145
+ },
+ {
+  "root": "क्री",
+  "display": "परि + क्री",
+  "code": "09.0001",
+  "aupadeshika": "qukrI\\Y",
+  "gana": 9,
+  "prefixes": [
+   "pari"
+  ],
+  "prefixesDev": [
+   "परि"
+  ],
+  "meaning_en": "to buy, hire",
+  "meanings": {
+   "te": "కొను",
+   "kn": "ಕೊಳ್ಳು",
+   "ta": "வாங்கு"
+  },
+  "preferredPada": "A",
+  "order": 146
+ },
+ {
+  "root": "नन्द्",
+  "display": "अभि + नन्द्",
+  "code": "01.0070",
+  "aupadeshika": "wunadi~",
+  "gana": 1,
+  "prefixes": [
+   "aBi"
+  ],
+  "prefixesDev": [
+   "अभि"
+  ],
+  "meaning_en": "to congratulate, welcome",
+  "meanings": {
+   "te": "అభినందించు",
+   "kn": "ಅಭಿನಂದಿಸು",
+   "ta": "வாழ்த்து"
+  },
+  "preferredPada": "P",
+  "order": 147
+ },
+ {
+  "root": "ईक्ष्",
+  "display": "प्र + ईक्ष्",
+  "code": "01.0694",
+  "aupadeshika": "Ikza~\\",
+  "gana": 1,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to look at, watch",
+  "meanings": {
+   "te": "చూడు",
+   "kn": "ನೋಡು",
+   "ta": "பார்"
+  },
+  "preferredPada": "A",
+  "order": 148
+ },
+ {
+  "root": "ईक्ष्",
+  "display": "सम् + ईक्ष्",
+  "code": "01.0694",
+  "aupadeshika": "Ikza~\\",
+  "gana": 1,
+  "prefixes": [
+   "sam"
+  ],
+  "prefixesDev": [
+   "सम्"
+  ],
+  "meaning_en": "to review",
+  "meanings": {
+   "te": "సమీక్షించు",
+   "kn": "ಸಮೀಕ್ಷಿಸು",
+   "ta": "மதிப்பாய்வு செய்"
+  },
+  "preferredPada": "A",
+  "order": 149
+ },
+ {
+  "root": "ईक्ष्",
+  "display": "परि + ईक्ष्",
+  "code": "01.0694",
+  "aupadeshika": "Ikza~\\",
+  "gana": 1,
+  "prefixes": [
+   "pari"
+  ],
+  "prefixesDev": [
+   "परि"
+  ],
+  "meaning_en": "to examine, test",
+  "meanings": {
+   "te": "పరీక్షించు",
+   "kn": "ಪರೀಕ್ಷಿಸು",
+   "ta": "சோதி"
+  },
+  "preferredPada": "A",
+  "order": 150
+ },
+ {
+  "root": "ईक्ष्",
+  "display": "उप + ईक्ष्",
+  "code": "01.0694",
+  "aupadeshika": "Ikza~\\",
+  "gana": 1,
+  "prefixes": [
+   "upa"
+  ],
+  "prefixesDev": [
+   "उप"
+  ],
+  "meaning_en": "to ignore, neglect",
+  "meanings": {
+   "te": "ఉపేక్షించు",
+   "kn": "ಉಪೇಕ್ಷಿಸು",
+   "ta": "புறக்கணி"
+  },
+  "preferredPada": "A",
+  "order": 151
+ },
+ {
+  "root": "ईक्ष्",
+  "display": "अप + ईक्ष्",
+  "code": "01.0694",
+  "aupadeshika": "Ikza~\\",
+  "gana": 1,
+  "prefixes": [
+   "apa"
+  ],
+  "prefixesDev": [
+   "अप"
+  ],
+  "meaning_en": "to expect, need",
+  "meanings": {
+   "te": "ఆశించు",
+   "kn": "ನಿರೀಕ್ಷಿಸು",
+   "ta": "எதிர்பார்"
+  },
+  "preferredPada": "A",
+  "order": 152
+ },
+ {
+  "root": "ईक्ष्",
+  "display": "निर् + ईक्ष्",
+  "code": "01.0694",
+  "aupadeshika": "Ikza~\\",
+  "gana": 1,
+  "prefixes": [
+   "nis"
+  ],
+  "prefixesDev": [
+   "निर्"
+  ],
+  "meaning_en": "to observe",
+  "meanings": {
+   "te": "గమనించు",
+   "kn": "ಗಮನಿಸು",
+   "ta": "கவனி"
+  },
+  "preferredPada": "A",
+  "order": 153
+ },
+ {
+  "root": "ईक्ष्",
+  "display": "प्रति + ईक्ष्",
+  "code": "01.0694",
+  "aupadeshika": "Ikza~\\",
+  "gana": 1,
+  "prefixes": [
+   "prati"
+  ],
+  "prefixesDev": [
+   "प्रति"
+  ],
+  "meaning_en": "to wait for",
+  "meanings": {
+   "te": "ఎదురుచూడు",
+   "kn": "ಕಾಯು",
+   "ta": "காத்திரு"
+  },
+  "preferredPada": "A",
+  "order": 154
+ },
+ {
+  "root": "आप्",
+  "display": "प्र + आप्",
+  "code": "05.0016",
+  "aupadeshika": "A\\px~",
+  "gana": 5,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to obtain, reach",
+  "meanings": {
+   "te": "పొందు",
+   "kn": "ಪಡೆ",
+   "ta": "அடை"
+  },
+  "preferredPada": "P",
+  "order": 155
+ },
+ {
+  "root": "आप्",
+  "display": "अव + आप्",
+  "code": "05.0016",
+  "aupadeshika": "A\\px~",
+  "gana": 5,
+  "prefixes": [
+   "ava"
+  ],
+  "prefixesDev": [
+   "अव"
+  ],
+  "meaning_en": "to obtain",
+  "meanings": {
+   "te": "పొందు",
+   "kn": "ಪಡೆ",
+   "ta": "பெறு"
+  },
+  "preferredPada": "P",
+  "order": 156
+ },
+ {
+  "root": "आप्",
+  "display": "सम् + आप्",
+  "code": "05.0016",
+  "aupadeshika": "A\\px~",
+  "gana": 5,
+  "prefixes": [
+   "sam"
+  ],
+  "prefixesDev": [
+   "सम्"
+  ],
+  "meaning_en": "to finish",
+  "meanings": {
+   "te": "ముగించు",
+   "kn": "ಮುಗಿಸು",
+   "ta": "முடி"
+  },
+  "preferredPada": "P",
+  "order": 157
+ },
+ {
+  "root": "आप्",
+  "display": "वि + आप्",
+  "code": "05.0016",
+  "aupadeshika": "A\\px~",
+  "gana": 5,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to pervade, spread over",
+  "meanings": {
+   "te": "వ్యాపించు",
+   "kn": "ವ್ಯಾಪಿಸು",
+   "ta": "பரவியிரு"
+  },
+  "preferredPada": "P",
+  "order": 158
+ },
+ {
+  "root": "अस्",
+  "display": "अभि + अस्",
+  "code": "04.0106",
+  "aupadeshika": "asu~",
+  "gana": 4,
+  "prefixes": [
+   "aBi"
+  ],
+  "prefixesDev": [
+   "अभि"
+  ],
+  "meaning_en": "to practise, study",
+  "meanings": {
+   "te": "అభ్యసించు",
+   "kn": "ಅಭ್ಯಾಸ ಮಾಡು",
+   "ta": "பயிற்சி செய்"
+  },
+  "preferredPada": "P",
+  "order": 159
+ },
+ {
+  "root": "त्यज्",
+  "display": "परि + त्यज्",
+  "code": "01.1141",
+  "aupadeshika": "tya\\ja~",
+  "gana": 1,
+  "prefixes": [
+   "pari"
+  ],
+  "prefixesDev": [
+   "परि"
+  ],
+  "meaning_en": "to abandon",
+  "meanings": {
+   "te": "పరిత్యజించు",
+   "kn": "ತ್ಯಜಿಸು",
+   "ta": "துற"
+  },
+  "preferredPada": "P",
+  "order": 160
+ },
+ {
+  "root": "रम्",
+  "display": "वि + रम्",
+  "code": "01.0989",
+  "aupadeshika": "ra\\mu~\\",
+  "gana": 1,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to stop, cease",
+  "meanings": {
+   "te": "విరమించు",
+   "kn": "ನಿಲ್ಲಿಸು",
+   "ta": "நிறுத்து"
+  },
+  "preferredPada": "P",
+  "order": 161
+ },
+ {
+  "root": "रम्",
+  "display": "उप + रम्",
+  "code": "01.0989",
+  "aupadeshika": "ra\\mu~\\",
+  "gana": 1,
+  "prefixes": [
+   "upa"
+  ],
+  "prefixesDev": [
+   "उप"
+  ],
+  "meaning_en": "to cease, die",
+  "meanings": {
+   "te": "ఆగు",
+   "kn": "ನಿಲ್ಲು",
+   "ta": "ஓய்"
+  },
+  "preferredPada": "A",
+  "order": 162
+ },
+ {
+  "root": "रभ्",
+  "display": "आ + रभ्",
+  "code": "01.1129",
+  "aupadeshika": "ra\\Ba~\\",
+  "gana": 1,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to begin",
+  "meanings": {
+   "te": "మొదలుపెట్టు",
+   "kn": "ಶುರುಮಾಡು",
+   "ta": "ஆரம்பி"
+  },
+  "preferredPada": "A",
+  "order": 163
+ },
+ {
+  "root": "भाष्",
+  "display": "सम् + भाष्",
+  "code": "01.0696",
+  "aupadeshika": "BAza~\\",
+  "gana": 1,
+  "prefixes": [
+   "sam"
+  ],
+  "prefixesDev": [
+   "सम्"
+  ],
+  "meaning_en": "to converse",
+  "meanings": {
+   "te": "మాట్లాడుకో",
+   "kn": "ಮಾತನಾಡು",
+   "ta": "உரையாடு"
+  },
+  "preferredPada": "A",
+  "order": 164
+ },
+ {
+  "root": "भाष्",
+  "display": "अभि + भाष्",
+  "code": "01.0696",
+  "aupadeshika": "BAza~\\",
+  "gana": 1,
+  "prefixes": [
+   "aBi"
+  ],
+  "prefixesDev": [
+   "अभि"
+  ],
+  "meaning_en": "to address, speak to",
+  "meanings": {
+   "te": "సంబోధించు",
+   "kn": "ಉದ್ದೇಶಿಸಿ ಮಾತನಾಡು",
+   "ta": "விளித்துப் பேசு"
+  },
+  "preferredPada": "A",
+  "order": 165
+ },
+ {
+  "root": "वृत्",
+  "display": "प्र + वृत्",
+  "code": "01.0862",
+  "aupadeshika": "vftu~\\",
+  "gana": 1,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to begin, proceed",
+  "meanings": {
+   "te": "ప్రారంభమవు",
+   "kn": "ಪ್ರಾರಂಭವಾಗು",
+   "ta": "தொடங்கு"
+  },
+  "preferredPada": "A",
+  "order": 166
+ },
+ {
+  "root": "वृत्",
+  "display": "नि + वृत्",
+  "code": "01.0862",
+  "aupadeshika": "vftu~\\",
+  "gana": 1,
+  "prefixes": [
+   "ni"
+  ],
+  "prefixesDev": [
+   "नि"
+  ],
+  "meaning_en": "to return, stop",
+  "meanings": {
+   "te": "తిరిగి వచ్చు, ఆగు",
+   "kn": "ಹಿಂದಿರುಗು, ನಿಲ್ಲು",
+   "ta": "திரும்பு, நில்"
+  },
+  "preferredPada": "A",
+  "order": 167
+ },
+ {
+  "root": "वृत्",
+  "display": "परि + वृत्",
+  "code": "01.0862",
+  "aupadeshika": "vftu~\\",
+  "gana": 1,
+  "prefixes": [
+   "pari"
+  ],
+  "prefixesDev": [
+   "परि"
+  ],
+  "meaning_en": "to change, turn round",
+  "meanings": {
+   "te": "మారు",
+   "kn": "ಬದಲಾಗು",
+   "ta": "மாறு"
+  },
+  "preferredPada": "A",
+  "order": 168
+ },
+ {
+  "root": "वृत्",
+  "display": "अनु + वृत्",
+  "code": "01.0862",
+  "aupadeshika": "vftu~\\",
+  "gana": 1,
+  "prefixes": [
+   "anu"
+  ],
+  "prefixesDev": [
+   "अनु"
+  ],
+  "meaning_en": "to follow, obey",
+  "meanings": {
+   "te": "అనుసరించు",
+   "kn": "ಅನುಸರಿಸು",
+   "ta": "பின்பற்று"
+  },
+  "preferredPada": "A",
+  "order": 169
+ },
+ {
+  "root": "चिन्त्",
+  "display": "वि + चिन्त्",
+  "code": "10.0002",
+  "aupadeshika": "citi~",
+  "gana": 10,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to reflect, think over",
+  "meanings": {
+   "te": "ఆలోచించు",
+   "kn": "ಯೋಚಿಸು",
+   "ta": "சிந்தி"
+  },
+  "preferredPada": "P",
+  "order": 170,
+  "avoid": "चिन्त(?!य)"
+ },
+ {
+  "root": "लोक्",
+  "display": "आ + लोक्",
+  "code": "10.0307",
+  "aupadeshika": "lokf~",
+  "gana": 10,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to look at, see",
+  "meanings": {
+   "te": "చూడు",
+   "kn": "ನೋಡು",
+   "ta": "பார்"
+  },
+  "preferredPada": "P",
+  "order": 171
+ },
+ {
+  "root": "लोक्",
+  "display": "अव + लोक्",
+  "code": "10.0307",
+  "aupadeshika": "lokf~",
+  "gana": 10,
+  "prefixes": [
+   "ava"
+  ],
+  "prefixesDev": [
+   "अव"
+  ],
+  "meaning_en": "to look at, behold",
+  "meanings": {
+   "te": "చూడు",
+   "kn": "ನೋಡು",
+   "ta": "நோக்கு"
+  },
+  "preferredPada": "P",
+  "order": 172
+ },
+ {
+  "root": "प्रच्छ्",
+  "display": "आ + प्रच्छ्",
+  "code": "06.0149",
+  "aupadeshika": "pra\\Ca~",
+  "gana": 6,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to take leave",
+  "meanings": {
+   "te": "సెలవు తీసుకో",
+   "kn": "ಬೀಳ್ಕೊಡು",
+   "ta": "விடைபெறு"
+  },
+  "preferredPada": "P",
+  "order": 173
+ },
+ {
+  "root": "श्रि",
+  "display": "आ + श्रि",
+  "code": "01.1044",
+  "aupadeshika": "SriY",
+  "gana": 1,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to take refuge in",
+  "meanings": {
+   "te": "ఆశ్రయించు",
+   "kn": "ಆಶ್ರಯಿಸು",
+   "ta": "அடைக்கலம் புகு"
+  },
+  "preferredPada": "P",
+  "order": 174
+ },
+ {
+  "root": "रक्ष्",
+  "display": "परि + रक्ष्",
+  "code": "01.0746",
+  "aupadeshika": "rakza~",
+  "gana": 1,
+  "prefixes": [
+   "pari"
+  ],
+  "prefixesDev": [
+   "परि"
+  ],
+  "meaning_en": "to protect",
+  "meanings": {
+   "te": "కాపాడు",
+   "kn": "ಕಾಪಾಡು",
+   "ta": "காப்பாற்று"
+  },
+  "preferredPada": "P",
+  "order": 175
+ },
+ {
+  "root": "सद्",
+  "display": "नि + सद्",
+  "code": "01.0990",
+  "aupadeshika": "za\\dx~",
+  "gana": 1,
+  "prefixes": [
+   "ni"
+  ],
+  "prefixesDev": [
+   "नि"
+  ],
+  "meaning_en": "to sit down",
+  "meanings": {
+   "te": "కూర్చో",
+   "kn": "ಕುಳಿತುಕೊ",
+   "ta": "அமர்"
+  },
+  "preferredPada": "P",
+  "order": 176
+ },
+ {
+  "root": "सद्",
+  "display": "प्र + सद्",
+  "code": "01.0990",
+  "aupadeshika": "za\\dx~",
+  "gana": 1,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to be pleased, calm",
+  "meanings": {
+   "te": "ప్రసన్నమవు",
+   "kn": "ಪ್ರಸನ್ನವಾಗು",
+   "ta": "மகிழ்"
+  },
+  "preferredPada": "P",
+  "order": 177
+ },
+ {
+  "root": "सद्",
+  "display": "वि + सद्",
+  "code": "01.0990",
+  "aupadeshika": "za\\dx~",
+  "gana": 1,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to despond, grieve",
+  "meanings": {
+   "te": "విషాదపడు",
+   "kn": "ದುಃಖಿಸು",
+   "ta": "வருந்து"
+  },
+  "preferredPada": "P",
+  "order": 178
+ },
+ {
+  "root": "सद्",
+  "display": "आ + सद्",
+  "code": "01.0990",
+  "aupadeshika": "za\\dx~",
+  "gana": 1,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to approach, reach",
+  "meanings": {
+   "te": "చేరు",
+   "kn": "ತಲುಪು",
+   "ta": "அடை"
+  },
+  "preferredPada": "P",
+  "order": 179
+ },
+ {
+  "root": "नम्",
+  "display": "प्र + नम्",
+  "code": "01.1136",
+  "aupadeshika": "Ra\\ma~",
+  "gana": 1,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to bow down",
+  "meanings": {
+   "te": "ప్రణమిల్లు",
+   "kn": "ನಮಸ್ಕರಿಸು",
+   "ta": "வணங்கு"
+  },
+  "preferredPada": "P",
+  "order": 180
+ },
+ {
+  "root": "मन्",
+  "display": "अनु + मन्",
+  "code": "04.0073",
+  "aupadeshika": "ma\\na~\\",
+  "gana": 4,
+  "prefixes": [
+   "anu"
+  ],
+  "prefixesDev": [
+   "अनु"
+  ],
+  "meaning_en": "to approve, permit",
+  "meanings": {
+   "te": "అంగీకరించు",
+   "kn": "ಒಪ್ಪು",
+   "ta": "ஒப்புக்கொள்"
+  },
+  "preferredPada": "A",
+  "order": 181
+ },
+ {
+  "root": "मन्",
+  "display": "अव + मन्",
+  "code": "04.0073",
+  "aupadeshika": "ma\\na~\\",
+  "gana": 4,
+  "prefixes": [
+   "ava"
+  ],
+  "prefixesDev": [
+   "अव"
+  ],
+  "meaning_en": "to despise, insult",
+  "meanings": {
+   "te": "అవమానించు",
+   "kn": "ಅವಮಾನಿಸು",
+   "ta": "அவமதி"
+  },
+  "preferredPada": "A",
+  "order": 182
+ },
+ {
+  "root": "चि",
+  "display": "सम् + चि",
+  "code": "05.0005",
+  "aupadeshika": "ci\\Y",
+  "gana": 5,
+  "prefixes": [
+   "sam"
+  ],
+  "prefixesDev": [
+   "सम्"
+  ],
+  "meaning_en": "to collect, gather",
+  "meanings": {
+   "te": "కూడబెట్టు",
+   "kn": "ಸಂಗ್ರಹಿಸು",
+   "ta": "சேர்"
+  },
+  "preferredPada": "P",
+  "order": 183
+ },
+ {
+  "root": "चि",
+  "display": "निर् + चि",
+  "code": "05.0005",
+  "aupadeshika": "ci\\Y",
+  "gana": 5,
+  "prefixes": [
+   "nis"
+  ],
+  "prefixesDev": [
+   "निर्"
+  ],
+  "meaning_en": "to decide",
+  "meanings": {
+   "te": "నిర్ణయించు",
+   "kn": "ನಿರ್ಧರಿಸು",
+   "ta": "தீர்மானி"
+  },
+  "preferredPada": "P",
+  "order": 184
+ },
+ {
+  "root": "लिख्",
+  "display": "आ + लिख्",
+  "code": "06.0092",
+  "aupadeshika": "liKa~",
+  "gana": 6,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to draw, paint",
+  "meanings": {
+   "te": "చిత్రించు",
+   "kn": "ಚಿತ್ರಿಸು",
+   "ta": "வரை"
+  },
+  "preferredPada": "P",
+  "order": 185
+ },
+ {
+  "root": "लिख्",
+  "display": "उद् + लिख्",
+  "code": "06.0092",
+  "aupadeshika": "liKa~",
+  "gana": 6,
+  "prefixes": [
+   "ud"
+  ],
+  "prefixesDev": [
+   "उद्"
+  ],
+  "meaning_en": "to mention, scratch",
+  "meanings": {
+   "te": "ఉల్లేఖించు",
+   "kn": "ಉಲ್ಲೇಖಿಸು",
+   "ta": "குறிப்பிடு"
+  },
+  "preferredPada": "P",
+  "order": 186
+ },
+ {
+  "root": "वस्",
+  "display": "नि + वस्",
+  "code": "01.1160",
+  "aupadeshika": "va\\sa~",
+  "gana": 1,
+  "prefixes": [
+   "ni"
+  ],
+  "prefixesDev": [
+   "नि"
+  ],
+  "meaning_en": "to live, dwell",
+  "meanings": {
+   "te": "నివసించు",
+   "kn": "ವಾಸಿಸು",
+   "ta": "வசி"
+  },
+  "preferredPada": "P",
+  "order": 187
+ },
+ {
+  "root": "वस्",
+  "display": "उप + वस्",
+  "code": "01.1160",
+  "aupadeshika": "va\\sa~",
+  "gana": 1,
+  "prefixes": [
+   "upa"
+  ],
+  "prefixesDev": [
+   "उप"
+  ],
+  "meaning_en": "to fast",
+  "meanings": {
+   "te": "ఉపవాసం ఉండు",
+   "kn": "ಉಪವಾಸ ಮಾಡು",
+   "ta": "உண்ணாவிரதம் இரு"
+  },
+  "preferredPada": "P",
+  "order": 188
+ },
+ {
+  "root": "वस्",
+  "display": "प्र + वस्",
+  "code": "01.1160",
+  "aupadeshika": "va\\sa~",
+  "gana": 1,
+  "prefixes": [
+   "pra"
+  ],
+  "prefixesDev": [
+   "प्र"
+  ],
+  "meaning_en": "to go abroad, live away",
+  "meanings": {
+   "te": "పరదేశం వెళ్ళు",
+   "kn": "ಪರದೇಶಕ್ಕೆ ಹೋಗು",
+   "ta": "வெளியூர் செல்"
+  },
+  "preferredPada": "P",
+  "order": 189
+ },
+ {
+  "root": "भुज्",
+  "display": "उप + भुज्",
+  "code": "07.0017",
+  "aupadeshika": "Bu\\ja~",
+  "gana": 7,
+  "prefixes": [
+   "upa"
+  ],
+  "prefixesDev": [
+   "उप"
+  ],
+  "meaning_en": "to enjoy, use",
+  "meanings": {
+   "te": "అనుభవించు",
+   "kn": "ಅನುಭವಿಸು",
+   "ta": "அனுபவி"
+  },
+  "preferredPada": "A",
+  "order": 190
+ },
+ {
+  "root": "इष्",
+  "display": "अनु + इष्",
+  "code": "06.0078",
+  "aupadeshika": "izu~",
+  "gana": 6,
+  "prefixes": [
+   "anu"
+  ],
+  "prefixesDev": [
+   "अनु"
+  ],
+  "meaning_en": "to search for",
+  "meanings": {
+   "te": "వెతుకు",
+   "kn": "ಹುಡುಕು",
+   "ta": "தேடு"
+  },
+  "preferredPada": "P",
+  "order": 191
+ },
+ {
+  "root": "श्वस्",
+  "display": "आ + श्वस्",
+  "code": "02.0064",
+  "aupadeshika": "Svasa~",
+  "gana": 2,
+  "prefixes": [
+   "A"
+  ],
+  "prefixesDev": [
+   "आ"
+  ],
+  "meaning_en": "to take heart, be comforted",
+  "meanings": {
+   "te": "ఊరట చెందు",
+   "kn": "ಸಮಾಧಾನಗೊಳ್ಳು",
+   "ta": "ஆறுதல் அடை"
+  },
+  "preferredPada": "P",
+  "order": 192
+ },
+ {
+  "root": "श्वस्",
+  "display": "वि + श्वस्",
+  "code": "02.0064",
+  "aupadeshika": "Svasa~",
+  "gana": 2,
+  "prefixes": [
+   "vi"
+  ],
+  "prefixesDev": [
+   "वि"
+  ],
+  "meaning_en": "to trust",
+  "meanings": {
+   "te": "నమ్ము",
+   "kn": "ನಂಬು",
+   "ta": "நம்பு"
+  },
+  "preferredPada": "P",
+  "order": 193
+ },
+ {
+  "root": "सिच्",
+  "display": "अभि + सिच्",
+  "code": "06.0170",
+  "aupadeshika": "zi\\ca~^",
+  "gana": 6,
+  "prefixes": [
+   "aBi"
+  ],
+  "prefixesDev": [
+   "अभि"
+  ],
+  "meaning_en": "to anoint, consecrate",
+  "meanings": {
+   "te": "అభిషేకించు",
+   "kn": "ಅಭಿಷೇಕಿಸು",
+   "ta": "அபிஷேகம் செய்"
+  },
+  "preferredPada": "P",
+  "order": 194
+ },
+ {
+  "root": "धाव्",
+  "display": "अनु + धाव्",
+  "code": "01.0685",
+  "aupadeshika": "DAvu~^",
+  "gana": 1,
+  "prefixes": [
+   "anu"
+  ],
+  "prefixesDev": [
+   "अनु"
+  ],
+  "meaning_en": "to run after",
+  "meanings": {
+   "te": "వెంటపడు",
+   "kn": "ಬೆನ್ನಟ್ಟು",
+   "ta": "துரத்து"
+  },
+  "preferredPada": "P",
+  "order": 195
+ },
+ {
+  "root": "सेव्",
+  "display": "नि + सेव्",
+  "code": "01.0574",
+  "aupadeshika": "zevf~\\",
+  "gana": 1,
+  "prefixes": [
+   "ni"
+  ],
+  "prefixesDev": [
+   "नि"
+  ],
+  "meaning_en": "to resort to, practise",
+  "meanings": {
+   "te": "సేవించు",
+   "kn": "ಸೇವಿಸು",
+   "ta": "நாடு"
+  },
+  "preferredPada": "A",
+  "order": 196
+ }
+]

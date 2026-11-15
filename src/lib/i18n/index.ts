@@ -35,10 +35,10 @@ export const situationTitle = (lang: Lang, title: string) => (lang === 'en' ? ti
  * A verb's meaning in the UI language. Everyday verbs have a hand-written meaning;
  * other roots show the Dhātupāṭha's Sanskrit meaning in the lipi, with English beneath.
  */
-export function meaningOf(d: Pick<DhatuLite, 'slug' | 'meaning_en' | 'artha_sa'>, lang: Lang, sc: ScriptId): { main: string; sub?: string; sanskrit?: boolean } {
+export function meaningOf(d: Pick<DhatuLite, 'slug' | 'meaning_en' | 'artha_sa'> & Partial<Pick<DhatuLite, 'meaning_te' | 'meaning_kn' | 'meaning_ta'>>, lang: Lang, sc: ScriptId): { main: string; sub?: string; sanskrit?: boolean } {
   const en = (d.meaning_en || '').replace(/^to /, '')
   if (lang === 'en') return en ? { main: en } : { main: d.artha_sa || '', sanskrit: true }
-  const m = MEANINGS[d.slug]?.[COL[lang] - 1]
+  const m = (lang === 'te' ? d.meaning_te : lang === 'kn' ? d.meaning_kn : d.meaning_ta) || MEANINGS[d.slug]?.[COL[lang] - 1]
   if (m) return { main: m }
   if (d.artha_sa) return { main: toScript(d.artha_sa, sc), sub: en || undefined, sanskrit: true }
   return { main: en }

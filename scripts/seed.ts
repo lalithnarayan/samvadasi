@@ -11,6 +11,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { getPayload, type Where } from 'payload'
+import { sql } from '@payloadcms/db-postgres'
 import config from '../src/payload.config'
 
 const root = process.cwd()
@@ -30,15 +31,21 @@ async function main() {
 
   // ── dhātus ──────────────────────────────────────────────────────────────
   const gen = read('data/generated/dhatus.json')
-  const curated: any[] = read('data/curated/verbs.json')
+  // everyday verbs (featured) + common prefixed verbs (listed in the "With prefixes" tab)
+  const prefixedFile = path.join(root, 'data/curated/prefixed.json')
+  const curated: any[] = [
+    ...read('data/curated/verbs.json').map((c: any) => ({ ...c, _set: 'featured' })),
+    ...(fs.existsSync(prefixedFile) ? read('data/curated/prefixed.json') : []).map((c: any) => ({ ...c, _set: 'prefixed' })),
+  ]
   const curBySlug = new Map(curated.map((c) => [c.code + (c.prefixes?.length ? '-' + c.prefixes.join('-') : ''), c]))
   const glossFile = path.join(root, 'data/generated/glosses.json')
   const glosses: Record<string, { gloss: string; short: string }> = fs.existsSync(glossFile) ? JSON.parse(fs.readFileSync(glossFile, 'utf-8')) : {}
   const shortMeaning = (g?: { gloss: string }) => (g ? g.gloss.split(';')[0].split(',').slice(0, 3).join(',').trim() : undefined)
   const existing = new Map<string, number>()
+  const hasMeanings = new Set<string>()
   for (let page = 1; ; page++) {
-    const r = await payload.find({ collection: 'dhatus', limit: 1000, page, depth: 0, select: { slug: true } as any })
-    r.docs.forEach((d: any) => existing.set(d.slug, d.id as number))
+    const r = await payload.find({ collection: 'dhatus', limit: 1000, page, depth: 0, select: { slug: true, meaning_te: true } as any })
+    r.docs.forEach((d: any) => { existing.set(d.slug, d.id as number); if (d.meaning_te) hasMeanings.add(d.slug) })
     if (!r.hasNextPage) break
   }
   let created = 0, updated = 0
@@ -48,26 +55,34 @@ async function main() {
     const display = c?.display || (d.prefixes?.length ? `${c?.prefixesDev?.join(' + ') || d.prefixes.join(' + ')} + ${d.root}` : d.root)
     const data: Record<string, unknown> = {
       root: d.root, display, slug: d.slug, code: d.code, aupadeshika: d.aupadeshika, gana: d.gana, artha_sa: d.artha_sa,
-      prefixes: d.prefixes || [], padas: d.padas, forms: d.forms, participle: d.participle,
+      prefixes: d.prefixes || [], padas: d.padas, forms: d.forms, participle: d.participle, derived: d.derived || null,
       generatedWith: `vidyut ${gen.vidyut} · ${gen.generated}`,
       gloss: glosses[d.slug]?.gloss,
       meaning_en: shortMeaning(glosses[d.slug]),
     }
-    if (c) Object.assign(data, {
-      meaning_en: c.meaning_en, featured: true, irregular: c.irregular, order: c.order, preferredPada: c.preferredPada,
+    const meanings = c?.meanings ? { meaning_te: c.meanings.te, meaning_kn: c.meanings.kn, meaning_ta: c.meanings.ta } : {}
+    if (c) Object.assign(data, meanings, {
+      meaning_en: c.meaning_en, featured: c._set === 'featured', commonPrefixed: c._set === 'prefixed' || !!c.prefixes?.length,
+      irregular: !!c.irregular, order: c.order, preferredPada: c.preferredPada,
       overrides: (c.overrides || []).map((o: any) => ({ scope: o.scope, form: o.stem || o.form, label: o.label, note: o.note, showFirst: true, lakara: o.lakara, pada: o.pada, index: o.index })),
       status: 'checked',
     })
     const id = existing.get(d.slug)
     if (id) {
       // Re-runs only refresh what Vidyut owns; meanings, overrides and review status stay as editors left them.
-      const generated: any = { root: data.root, code: data.code, aupadeshika: data.aupadeshika, gana: data.gana, artha_sa: data.artha_sa, padas: data.padas, forms: data.forms, participle: data.participle, generatedWith: data.generatedWith }
+      const generated: any = { root: data.root, code: data.code, aupadeshika: data.aupadeshika, gana: data.gana, artha_sa: data.artha_sa, padas: data.padas, forms: data.forms, participle: data.participle, derived: data.derived, generatedWith: data.generatedWith }
+      // meanings in Telugu / Kannada / Tamil: filled once from the curated files, then editors own them
+      if (c?.meanings && !hasMeanings.has(d.slug)) Object.assign(generated, meanings)
+      if (c) generated.commonPrefixed = c._set === 'prefixed' || !!c.prefixes?.length
       await payload.update({ collection: 'dhatus', id, data: generated, ...ctx }); updated++
     }
     else { const doc = await payload.create({ collection: 'dhatus', data: data as any, ...ctx }); existing.set(d.slug, doc.id as number); created++ }
     if ((created + updated) % 250 === 0) log(`${created + updated} / ${gen.dhatus.length} dhatus…`)
   }
   log(`dhatus: ${created} created, ${updated} updated in ${((Date.now() - t0) / 1000).toFixed(0)}s`)
+  // Every seed update writes a version of each dhātu; keep only the latest generated one so the free database stays small.
+  await (payload.db as any).drizzle.execute(sql`DELETE FROM "_dhatus_v" v USING (SELECT parent_id, MAX(id) AS keep FROM "_dhatus_v" GROUP BY parent_id) k WHERE v.parent_id = k.parent_id AND v.id <> k.keep`)
+  log('old dhātu versions pruned')
 
   // ── nouns ───────────────────────────────────────────────────────────────
   for (const n of read('data/generated/nouns.json')) {

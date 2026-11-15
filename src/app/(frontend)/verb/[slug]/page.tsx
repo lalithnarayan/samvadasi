@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { VerbClient } from '@/components/pages/Verb'
-import { getDhatu, getExamples } from '@/lib/data'
+import { getDhatu, getExamples, getRelatives } from '@/lib/data'
 
 export const revalidate = 3600
 
@@ -13,5 +13,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function VerbPage({ params }: { params: Promise<{ slug: string }> }) {
   const d = await getDhatu(decodeURIComponent((await params).slug))
   if (!d) notFound()
-  return <VerbClient d={d} examples={await getExamples(d.id)} />
+  const [examples, relatives] = await Promise.all([getExamples(d.id), getRelatives(d.code, d.slug)])
+  return <VerbClient d={d} examples={examples} relatives={relatives} />
 }
