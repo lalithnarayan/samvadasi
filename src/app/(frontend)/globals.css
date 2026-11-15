@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+:root {
+  --font-instrument: 'Instrument Sans Variable';
+  --font-bricolage: 'Bricolage Grotesque Variable';
+  --font-display: 'Rozha One';
+  --font-sk-deva: 'Noto Serif Devanagari';
+  --font-sk-telu: 'Noto Serif Telugu';
+  --font-sk-knda: 'Noto Serif Kannada';
+  --font-sk-taml: 'Noto Serif Tamil';
+}
+
+/* ── Samvadasi design tokens ─────────────────────────────────────────── */
+@theme {
+  --color-ink: #24211D;
+  --color-stone: #F4F1EB;
+  --color-paper: #FBF9F5;
+  --color-charcoal: #2A2723;
+  --color-chalk: #EEE9E0;
+  --color-u-tint: #E7E6EE;  --color-u-deep: #3F4C7A;   /* उत्तम  I / we        */
+  --color-m-tint: #F1E6DE;  --color-m-deep: #9C5537;   /* मध्यम  you           */
+  --color-p-tint: #E6E9DC;  --color-p-deep: #56652F;   /* प्रथम  he / she / भवान् */
+  --font-sans: var(--font-instrument), system-ui, sans-serif;
+  --font-disp: var(--font-bricolage), var(--font-instrument), sans-serif;
+  --font-sk: var(--font-sk-deva), serif;
+  --font-display-sk: var(--font-display), serif;
+
+  /* shadcn/ui tokens mapped onto the palette */
+  --color-background: #F4F1EB;
+  --color-foreground: #24211D;
+  --color-card: #FBF9F5;
+  --color-card-foreground: #24211D;
+  --color-popover: #FBF9F5;
+  --color-popover-foreground: #24211D;
+  --color-primary: #24211D;
+  --color-primary-foreground: #F4F1EB;
+  --color-secondary: #EAE5DC;
+  --color-secondary-foreground: #24211D;
+  --color-muted: #EAE5DC;
+  --color-muted-foreground: #5F5A52;
+  --color-accent: #EAE5DC;
+  --color-accent-foreground: #24211D;
+  --color-destructive: #9C3A2A;
+  --color-border: rgb(36 33 29 / 0.14);
+  --color-input: rgb(36 33 29 / 0.22);
+  --color-ring: #24211D;
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 18px; --radius-xl: 26px;
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { -webkit-text-size-adjust: 100%; }
+  body { background: var(--color-stone); color: var(--color-ink); font-family: var(--font-sans); overflow-x: hidden; }
+  :focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+}
+
+@layer components {
+  .disp { font-family: var(--font-disp); letter-spacing: -0.03em; }
+  .eyebrow { font-family: var(--font-disp); font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+  .wrap { max-width: 1360px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 56px); }
+  .seg { display: flex; flex: 0 0 auto; gap: 2px; padding: 3px; border: 1px solid rgb(36 33 29 / .22); border-radius: 999px; }
+  .pill { transition: transform 160ms ease, background-color 200ms ease, color 200ms ease; }
+  .pill:hover { transform: translateY(-1px); } .pill:active { transform: translateY(1px); }
+  .lift { transition: transform 260ms cubic-bezier(.2,1,.3,1), border-color 200ms; }
+  .lift:hover { transform: translateY(-4px); border-color: rgb(36 33 29 / .35); }
+  .lift:hover .arr { transform: translateX(6px) rotate(-45deg); }
+  .arr { display: inline-block; transition: transform 260ms cubic-bezier(.2,1,.3,1); }
+  .drow { display: flex; gap: 10px; align-items: center; overflow-x: auto; scrollbar-width: none; }
+  .drow::-webkit-scrollbar { display: none; }
+}
+
+/* ── motion: the ending morph, colour wipe, marquee ─────────────────── */
+.ending { position: relative; animation: pop 460ms cubic-bezier(.2,1.1,.3,1) both; }
+@keyframes pop { from { opacity: 0; top: .55em; } to { opacity: 1; top: 0; } }
+.wipe { position: fixed; inset: 0; animation: wipe 900ms cubic-bezier(.75,0,.2,1) both; }
+@keyframes wipe { from { clip-path: circle(0% at var(--ox) var(--oy)); } to { clip-path: circle(160% at var(--ox) var(--oy)); } }
+.marq { display: flex; width: max-content; animation: marq 60s linear infinite; }
+@keyframes marq { to { transform: translateX(-50%); } }
+.spin { animation: spin 22s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.bar-move { transition: top 700ms cubic-bezier(.7,0,.2,1); }
+.flip { transition: transform 600ms cubic-bezier(.2,.8,.2,1); transform-style: preserve-3d; }
+.face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.tile { transition: transform 220ms ease, background-color 200ms, color 200ms; }
+.tile:hover { transform: translateY(-3px); }
+.tile.c0:hover { background: var(--color-u-tint); color: var(--color-u-deep); }
+.tile.c1:hover { background: var(--color-m-tint); color: var(--color-m-deep); }
+.tile.c2:hover { background: var(--color-p-tint); color: var(--color-p-deep); }
+.rng { -webkit-appearance: none; appearance: none; width: 100%; height: 56px; background: transparent; margin: 0; }
+.rng::-webkit-slider-runnable-track { height: 2px; background: currentColor; }
+.rng::-webkit-slider-thumb { -webkit-appearance: none; width: 36px; height: 36px; border-radius: 50%; background: currentColor; margin-top: -17px; }
+.rng::-moz-range-track { height: 2px; background: currentColor; }
+.rng::-moz-range-thumb { width: 36px; height: 36px; border-radius: 50%; background: currentColor; border: 0; }
+@supports (animation-timeline: view()) {
+  .reveal { animation: reveal linear both; animation-timeline: view(); animation-range: entry 0% cover 25%; }
+  @keyframes reveal { from { opacity: 0; transform: translateY(48px); } to { opacity: 1; transform: none; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ending, .wipe, .reveal { animation: none !important; }
+  .marq, .spin { animation: none; }
+  .bar-move, .flip { transition: none; }
+}

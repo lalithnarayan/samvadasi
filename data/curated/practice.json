@@ -1,0 +1,76 @@
+{
+ "title": "Everyday ten",
+ "isDefault": true,
+ "cards": [
+  {
+   "phrase": "go to school",
+   "person": "p",
+   "number": "0",
+   "gender": "f",
+   "lakara": "kta"
+  },
+  {
+   "phrase": "come home",
+   "person": "r",
+   "number": "0",
+   "gender": "m",
+   "lakara": "lat"
+  },
+  {
+   "phrase": "eat rice",
+   "person": "u",
+   "number": "2",
+   "gender": "m",
+   "lakara": "lrt"
+  },
+  {
+   "phrase": "drink tea",
+   "person": "m",
+   "number": "0",
+   "gender": "m",
+   "lakara": "lot"
+  },
+  {
+   "phrase": "sit here",
+   "person": "r",
+   "number": "0",
+   "gender": "f",
+   "lakara": "lot"
+  },
+  {
+   "phrase": "read a book",
+   "person": "p",
+   "number": "2",
+   "gender": "f",
+   "lakara": "lat"
+  },
+  {
+   "phrase": "write a letter",
+   "person": "u",
+   "number": "0",
+   "gender": "f",
+   "lakara": "kta"
+  },
+  {
+   "phrase": "do the work",
+   "person": "p",
+   "number": "0",
+   "gender": "m",
+   "lakara": "lan"
+  },
+  {
+   "phrase": "speak Sanskrit",
+   "person": "m",
+   "number": "1",
+   "gender": "m",
+   "lakara": "vidhi"
+  },
+  {
+   "phrase": "see the picture",
+   "person": "r",
+   "number": "2",
+   "gender": "m",
+   "lakara": "kta"
+  }
+ ]
+}

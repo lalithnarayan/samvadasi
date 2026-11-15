@@ -1,0 +1,366 @@
+[
+ {
+  "title": "Morning at home",
+  "titleSa": "प्रातः गृहे",
+  "order": 1,
+  "phrases": [
+   {
+    "label": "get up early",
+    "dhatu": "01.1077-ud",
+    "words": [
+     "प्रातः"
+    ],
+    "english": {
+     "base": "get up",
+     "third": "gets up",
+     "past": "got up",
+     "tail": "early"
+    },
+    "order": 1
+   },
+   {
+    "label": "wash the face",
+    "dhatu": "10.0086-pra",
+    "words": [
+     "मुखं"
+    ],
+    "english": {
+     "base": "wash",
+     "third": "washes",
+     "past": "washed",
+     "tail": "the face"
+    },
+    "order": 2
+   },
+   {
+    "label": "drink tea",
+    "dhatu": "01.1074",
+    "words": [
+     "चायं"
+    ],
+    "english": {
+     "base": "drink",
+     "third": "drinks",
+     "past": "drank",
+     "tail": "tea"
+    },
+    "order": 3
+   },
+   {
+    "label": "read the newspaper",
+    "dhatu": "01.0381",
+    "words": [
+     "वार्तापत्रं"
+    ],
+    "english": {
+     "base": "read",
+     "third": "reads",
+     "past": "read",
+     "tail": "the newspaper"
+    },
+    "order": 4
+   }
+  ]
+ },
+ {
+  "title": "Going out",
+  "titleSa": "बहिः",
+  "order": 2,
+  "phrases": [
+   {
+    "label": "go to school",
+    "dhatu": "01.1137",
+    "words": [
+     "विद्यालयं"
+    ],
+    "english": {
+     "base": "go",
+     "third": "goes",
+     "past": "went",
+     "tail": "to school"
+    },
+    "order": 1
+   },
+   {
+    "label": "go to the shop",
+    "dhatu": "01.1137",
+    "words": [
+     "आपणं"
+    ],
+    "english": {
+     "base": "go",
+     "third": "goes",
+     "past": "went",
+     "tail": "to the shop"
+    },
+    "order": 2
+   },
+   {
+    "label": "come home",
+    "dhatu": "01.1137-A",
+    "words": [
+     "गृहं"
+    ],
+    "english": {
+     "base": "come",
+     "third": "comes",
+     "past": "came",
+     "tail": "home"
+    },
+    "order": 3
+   },
+   {
+    "label": "walk in the garden",
+    "dhatu": "01.0924",
+    "words": [
+     "उद्याने"
+    ],
+    "english": {
+     "base": "walk",
+     "third": "walks",
+     "past": "walked",
+     "tail": "in the garden"
+    },
+    "order": 4
+   }
+  ]
+ },
+ {
+  "title": "Food",
+  "titleSa": "भोजनम्",
+  "order": 3,
+  "phrases": [
+   {
+    "label": "eat rice",
+    "dhatu": "01.0051",
+    "words": [
+     "ओदनं"
+    ],
+    "english": {
+     "base": "eat",
+     "third": "eats",
+     "past": "ate",
+     "tail": "rice"
+    },
+    "order": 1
+   },
+   {
+    "label": "cook food",
+    "dhatu": "01.1151",
+    "words": [
+     "भोजनं"
+    ],
+    "english": {
+     "base": "cook",
+     "third": "cooks",
+     "past": "cooked",
+     "tail": "food"
+    },
+    "order": 2
+   },
+   {
+    "label": "bring water",
+    "dhatu": "01.1049-A",
+    "words": [
+     "जलं"
+    ],
+    "english": {
+     "base": "bring",
+     "third": "brings",
+     "past": "brought",
+     "tail": "water"
+    },
+    "order": 3
+   },
+   {
+    "label": "drink milk",
+    "dhatu": "01.1074",
+    "words": [
+     "दुग्धं"
+    ],
+    "english": {
+     "base": "drink",
+     "third": "drinks",
+     "past": "drank",
+     "tail": "milk"
+    },
+    "order": 4
+   }
+  ]
+ },
+ {
+  "title": "Talking",
+  "titleSa": "सम्भाषणम्",
+  "order": 4,
+  "phrases": [
+   {
+    "label": "speak Sanskrit",
+    "dhatu": "01.1164",
+    "words": [
+     "संस्कृतं"
+    ],
+    "english": {
+     "base": "speak",
+     "third": "speaks",
+     "past": "spoke",
+     "tail": "Sanskrit"
+    },
+    "order": 1
+   },
+   {
+    "label": "talk in Sanskrit",
+    "dhatu": "01.0696",
+    "words": [
+     "संस्कृतेन"
+    ],
+    "english": {
+     "base": "talk",
+     "third": "talks",
+     "past": "talked",
+     "tail": "in Sanskrit"
+    },
+    "order": 2
+   },
+   {
+    "label": "ask a question",
+    "dhatu": "06.0149",
+    "words": [
+     "प्रश्नं"
+    ],
+    "english": {
+     "base": "ask",
+     "third": "asks",
+     "past": "asked",
+     "tail": "a question"
+    },
+    "order": 3
+   },
+   {
+    "label": "tell a story",
+    "dhatu": "10.0389",
+    "words": [
+     "कथां"
+    ],
+    "english": {
+     "base": "tell",
+     "third": "tells",
+     "past": "told",
+     "tail": "a story"
+    },
+    "order": 4
+   }
+  ]
+ },
+ {
+  "title": "Work",
+  "titleSa": "कार्यम्",
+  "order": 5,
+  "phrases": [
+   {
+    "label": "do the work",
+    "dhatu": "08.0010",
+    "words": [
+     "कार्यं"
+    ],
+    "english": {
+     "base": "do",
+     "third": "does",
+     "past": "did",
+     "tail": "the work"
+    },
+    "order": 1
+   },
+   {
+    "label": "know the answer",
+    "dhatu": "09.0043",
+    "words": [
+     "उत्तरं"
+    ],
+    "english": {
+     "base": "know",
+     "third": "knows",
+     "past": "knew",
+     "tail": "the answer"
+    },
+    "order": 2
+   },
+   {
+    "label": "write a letter",
+    "dhatu": "06.0092",
+    "words": [
+     "पत्रं"
+    ],
+    "english": {
+     "base": "write",
+     "third": "writes",
+     "past": "wrote",
+     "tail": "a letter"
+    },
+    "order": 3
+   },
+   {
+    "label": "get the salary",
+    "dhatu": "01.1130",
+    "words": [
+     "वेतनं"
+    ],
+    "english": {
+     "base": "get",
+     "third": "gets",
+     "past": "got",
+     "tail": "the salary"
+    },
+    "order": 4
+   }
+  ]
+ },
+ {
+  "title": "More everyday",
+  "titleSa": "अपि च",
+  "order": 6,
+  "phrases": [
+   {
+    "label": "sit here",
+    "dhatu": "06.0160-upa",
+    "words": [
+     "अत्र"
+    ],
+    "english": {
+     "base": "sit",
+     "third": "sits",
+     "past": "sat",
+     "tail": "here"
+    },
+    "order": 1
+   },
+   {
+    "label": "read a book",
+    "dhatu": "01.0381",
+    "words": [
+     "पुस्तकं"
+    ],
+    "english": {
+     "base": "read",
+     "third": "reads",
+     "past": "read",
+     "tail": "a book"
+    },
+    "order": 2
+   },
+   {
+    "label": "see the picture",
+    "dhatu": "01.1143",
+    "words": [
+     "चित्रं"
+    ],
+    "english": {
+     "base": "see",
+     "third": "sees",
+     "past": "saw",
+     "tail": "the picture"
+    },
+    "order": 3
+   }
+  ]
+ }
+]
