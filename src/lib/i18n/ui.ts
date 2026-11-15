@@ -216,7 +216,7 @@ export const UI = {
   'f.va': ['Forms generated and verified with', 'రూపాలన్నీ అంబుడా వాళ్ళ', 'ರೂಪಗಳನ್ನೆಲ್ಲ ಅಂಬುಡಾದವರ', 'எல்லா வடிவங்களும் அம்புடாவின்'],
   'f.vb': ['by Ambuda.', 'తో తయారు చేసి సరిచూశాం.', 'ಬಳಸಿ ಮಾಡಿ, ಸರಿ ನೋಡಿದ್ದೇವೆ.', 'கொண்டு உருவாக்கிச் சரிபார்த்தவை.'],
   'f.fonts': ['Set in Rozha One, Noto Serif, Bricolage Grotesque and Instrument Sans.', 'ఫాంట్లు: Rozha One, Noto Serif, Bricolage Grotesque, Instrument Sans.', 'ಫಾಂಟ್‌ಗಳು: Rozha One, Noto Serif, Bricolage Grotesque, Instrument Sans.', 'எழுத்துருக்கள்: Rozha One, Noto Serif, Bricolage Grotesque, Instrument Sans.'],
-  'f.oss': ['Free and open source · samavada.si', 'ఉచితం, ఓపెన్ సోర్స్ · samavada.si', 'ಉಚಿತ, ಓಪನ್ ಸೋರ್ಸ್ · samavada.si', 'இலவசம், ஓப்பன் சோர்ஸ் · samavada.si'],
+  'f.oss': ['Free and open source · samvada.si', 'ఉచితం, ఓపెన్ సోర్స్ · samvada.si', 'ಉಚಿತ, ಓಪನ್ ಸೋರ್ಸ್ · samvada.si', 'இலவசம், ஓப்பன் சோர்ஸ் · samvada.si'],
 } as const satisfies Record<string, readonly [string, string, string, string]>
 
 export type UIKey = keyof typeof UI

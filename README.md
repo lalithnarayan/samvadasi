@@ -1,4 +1,4 @@
-# संवद.सि · Samvadasi — samavada.si
+# संवद.सि · Samvadasi — samvada.si
 
 > संवदसि (*saṃvadasi*) — “you converse”.
 
@@ -89,16 +89,16 @@ npm run seed                 # import; safe to re-run (refreshes Vidyut forms, n
 
 Schema changes: edit a collection in `src/collections`, then `npm run migrate:create <name>` and `npm run migrate`.
 
-## Deploy (free tier) — samavada.si
+## Deploy (free tier) — samvada.si
 
 1. **Database:** create a free project at [neon.tech](https://neon.tech); copy its connection string.
 2. **Code:** push this folder to GitHub (`samvada` repo).
 3. **Vercel:** import the repo. Environment variables:
-   `DATABASE_URL` (Neon), `PAYLOAD_SECRET` (`openssl rand -hex 32`), `NEXT_PUBLIC_SERVER_URL=https://samavada.si`.
+   `DATABASE_URL` (Neon), `PAYLOAD_SECRET` (`openssl rand -hex 32`), `NEXT_PUBLIC_SERVER_URL=https://samvada.si`.
    Do **not** set `VIDYUT_URL` there — `api/grammar.py` is deployed as a Python function at `/api/grammar`.
    The build runs `npm run ci` (migrations, then `next build`).
 4. **First import:** from your Mac, with `DATABASE_URL` pointing at Neon: `npm run seed`.
-5. **Domain:** in Vercel → Settings → Domains add `samavada.si` and set the DNS records it shows at your `.si` registrar.
+5. **Domain:** in Vercel → Settings → Domains add `samvada.si` and set the DNS records it shows at your `.si` registrar.
 
 Vercel's free (Hobby) plan is for non-commercial projects, which fits a free open-source site. Neon's free
 database sleeps when idle; the first visit after a quiet spell takes a moment longer.

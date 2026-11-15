@@ -18,7 +18,7 @@ import '@fontsource/noto-serif-tamil/tamil-500.css'
 import '@fontsource/noto-serif-tamil/tamil-700.css'
 import './globals.css'
 
-const site = process.env.NEXT_PUBLIC_SERVER_URL || 'https://samavada.si'
+const site = process.env.NEXT_PUBLIC_SERVER_URL || 'https://samvada.si'
 
 export const metadata: Metadata = {
   metadataBase: new URL(site),

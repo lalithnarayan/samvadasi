@@ -2,7 +2,7 @@
 import { toScript } from '@/lib/grammar'
 import { useSamvada } from './state'
 
-/** संवद.सि — "you converse" — in the selected lipi. The सि doubles as the .si of samavada.si. */
+/** संवद.सि — "you converse" — in the selected lipi. The सि doubles as the .si of samvada.si. */
 export function Wordmark({ className }: { className?: string }) {
   const { sc } = useSamvada()
   const font = sc === 'deva' ? 'var(--font-display-sk)' : `var(--font-sk-${sc})`

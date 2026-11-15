@@ -21,7 +21,7 @@ if ! gh auth status >/dev/null 2>&1; then echo "GH: not signed in"; exit 0; fi
 echo "GH user: $(gh api user -q .login)"
 if git remote get-url origin >/dev/null 2>&1; then git push -u origin main
 else gh repo create "$REPO" --public --source=. --remote=origin --push \
-  --description "Speak Sanskrit by changing just the ending — every dhātu, verified with Vidyut. samavada.si" \
-  --homepage "https://samavada.si"; fi
+  --description "Speak Sanskrit by changing just the ending — every dhātu, verified with Vidyut. samvada.si" \
+  --homepage "https://samvada.si"; fi
 echo "REMOTE: $(git remote get-url origin 2>/dev/null)"
 echo "== done"
