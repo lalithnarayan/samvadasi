@@ -63,3 +63,12 @@ __pycache__/
 *.log
 restore-dotfiles.sh
 check.command
+.seeded-prod
+.env.vercel
+.vercel
+.env*
+vercel-production.env.local
+fastseed.command
+domains.command
+deploy.command
+*.tgz

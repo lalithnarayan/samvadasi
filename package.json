@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
     "grammar": "python3 api/grammar.py",
-    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build",
+    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=6144\" next build",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "ci": "payload migrate && npm run build",
     "setup": "npm run migrate && npm run seed",

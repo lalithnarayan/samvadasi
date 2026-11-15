@@ -1,6 +1,7 @@
 'use client'
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { subject, type Gender, type Num, type PersonId, type ScriptId, type Subject, type WhenId } from '@/lib/grammar'
+import { LANG_OF, makeT, type Lang, type T } from '@/lib/i18n'
 
 /**
  * WHO / WHEN state shared by every page. Lives in the layout (so it survives navigation)
@@ -13,6 +14,8 @@ type Ctx = State & {
   wipe: { n: number; ox: string; oy: string; from: 'u' | 'm' | 'p' }
   set: (patch: Partial<State>, origin?: { x: number; y: number }) => void
   query: string
+  lang: Lang // UI language follows the lipi: deva → English, telu → Telugu, knda → Kannada, taml → Tamil
+  t: T
 }
 const DEFAULT: State = { per: 'u', num: 0, gen: 'm', when: 'lat', sc: 'deva', tr: true }
 const C = createContext<Ctx | null>(null)
@@ -71,7 +74,16 @@ export function SamvadaStateProvider({ children }: { children: React.ReactNode }
     })
   }, [])
 
-  const value = useMemo<Ctx>(() => ({ ...st, subj: subject(st.per, st.num, st.gen), morph, wipe, set, query: toQuery(st) }), [st, morph, wipe, set])
+  useEffect(() => {
+    const l = LANG_OF[st.sc]
+    document.documentElement.lang = l
+    document.documentElement.dataset.lang = l
+  }, [st.sc])
+
+  const value = useMemo<Ctx>(() => {
+    const lang = LANG_OF[st.sc]
+    return { ...st, subj: subject(st.per, st.num, st.gen), morph, wipe, set, query: toQuery(st), lang, t: makeT(lang) }
+  }, [st, morph, wipe, set])
   return <C.Provider value={value}>{children}</C.Provider>
 }
 

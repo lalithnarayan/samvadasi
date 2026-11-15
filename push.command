@@ -13,7 +13,7 @@ git add -A
 if [ "$(git rev-list --count HEAD 2>/dev/null)" = "1" ] && ! git ls-remote --exit-code --heads origin main >/dev/null 2>&1; then
   git commit -q --amend --no-edit
 else
-  git commit -q -m "Wordmark संवदसि in the selected lipi
+  git commit -q -m "UI in Telugu, Kannada and Tamil with conjugated phrase translations; deploy scripts
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 Claude-Session: https://claude.ai/code/session_01EgpTnnJ4rUt6iqepPwq4C5" || echo "(nothing to commit)"

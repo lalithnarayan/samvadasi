@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { toScript } from '@/lib/grammar'
 import { useSamvada } from './state'
 
 type Hit = { slug: string; display: string; meaning: string; gana: number; code: string }
@@ -10,7 +11,7 @@ type Hit = { slug: string; display: string; meaning: string; gana: number; code:
 /** Search all ~2,200 dhatus by English, Devanagari, Dhātupāṭha meaning or number. */
 export function VerbPicker({ current }: { current: string }) {
   const router = useRouter()
-  const { query } = useSamvada()
+  const { query, t, sc } = useSamvada()
   const [open, setOpen] = useState(false)
   const [q, setQ] = useState('')
   const [hits, setHits] = useState<Hit[]>([])
@@ -23,7 +24,7 @@ export function VerbPicker({ current }: { current: string }) {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <button className="pill flex min-h-14 w-full items-center justify-between rounded-full border border-ink/25 bg-paper px-5 text-left text-[17px]">
-          <span><span className="font-sk font-bold">{current}</span> <span className="opacity-60">· choose another verb</span></span>
+          <span><span className="font-bold">{current}</span> <span className="opacity-60">· {t('vb.choose')}</span></span>
           <span aria-hidden>⌄</span>
         </button>
       </PopoverTrigger>
@@ -31,11 +32,11 @@ export function VerbPicker({ current }: { current: string }) {
         <Command shouldFilter={false}>
           <CommandInput placeholder="go, eat, गम्, गतौ, 01.1137…" value={q} onValueChange={setQ} />
           <CommandList>
-            <CommandEmpty>No dhatu found.</CommandEmpty>
+            <CommandEmpty>{t('vb.noFound')}</CommandEmpty>
             <CommandGroup>
               {hits.map((h) => (
                 <CommandItem key={h.slug} value={h.slug} onSelect={() => { setOpen(false); router.push(`/verb/${h.slug}${query}`) }} className="flex items-baseline gap-3">
-                  <span className="font-sk text-lg font-bold">{h.display}</span>
+                  <span className="text-lg font-bold" style={{ fontFamily: `var(--font-sk-${sc})` }}>{toScript(h.display, sc)}</span>
                   <span className="flex-1 truncate">{h.meaning}</span>
                   <span className="text-xs opacity-60">{h.code}</span>
                 </CommandItem>

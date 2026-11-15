@@ -20,8 +20,10 @@
   --color-u-tint: #E7E6EE;  --color-u-deep: #3F4C7A;   /* उत्तम  I / we        */
   --color-m-tint: #F1E6DE;  --color-m-deep: #9C5537;   /* मध्यम  you           */
   --color-p-tint: #E6E9DC;  --color-p-deep: #56652F;   /* प्रथम  he / she / भवान् */
-  --font-sans: var(--font-instrument), system-ui, sans-serif;
-  --font-disp: var(--font-bricolage), var(--font-instrument), sans-serif;
+  /* Latin first; Telugu / Kannada / Tamil interface text falls through to the Noto Serif faces */
+  --font-indic: var(--font-sk-telu), var(--font-sk-knda), var(--font-sk-taml);
+  --font-sans: var(--font-instrument), var(--font-indic), system-ui, sans-serif;
+  --font-disp: var(--font-bricolage), var(--font-instrument), var(--font-indic), sans-serif;
   --font-sk: var(--font-sk-deva), serif;
   --font-display-sk: var(--font-display), serif;
 
@@ -57,6 +59,10 @@
 @layer components {
   .disp { font-family: var(--font-disp); letter-spacing: -0.03em; }
   .eyebrow { font-family: var(--font-disp); font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+  /* Indic interface text: no tracking (it pulls conjuncts apart), no uppercase, a little more line height */
+  html:is([data-lang='te'],[data-lang='kn'],[data-lang='ta']) .disp, html:is([data-lang='te'],[data-lang='kn'],[data-lang='ta']) .eyebrow { letter-spacing: 0; }
+  html:is([data-lang='te'],[data-lang='kn'],[data-lang='ta']) .eyebrow { text-transform: none; font-weight: 700; }
+  html:is([data-lang='te'],[data-lang='kn'],[data-lang='ta']) h1.disp, html:is([data-lang='te'],[data-lang='kn'],[data-lang='ta']) h2.disp { line-height: 1.25; }
   .wrap { max-width: 1360px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 56px); }
   .seg { display: flex; flex: 0 0 auto; gap: 2px; padding: 3px; border: 1px solid rgb(36 33 29 / .22); border-radius: 999px; }
   .pill { transition: transform 160ms ease, background-color 200ms ease, color 200ms ease; }
