@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
 import { useMemo, useState } from 'react'
-import { cellFor, iast, joinWords, ktaCell, padaOf, subject, toScript, WHENS, type Gender, type Num, type PersonId, type PhraseLite, type WhenId } from '@/lib/grammar'
+import { cellFor, splitScript, iast, joinWords, ktaCell, padaOf, subject, toScript, WHENS, type Gender, type Num, type PersonId, type PhraseLite, type WhenId } from '@/lib/grammar'
 import { genderWordsIn, sentence, subjectLabel } from '@/lib/i18n'
 import { DEEP, TINT, useSamvada } from '@/components/samvada/state'
 import { SiteNav } from '@/components/samvada/SiteNav'
@@ -76,7 +76,7 @@ export function PracticeClient({ cards }: { cards: Card[] }) {
                   <span className="face absolute inset-0 flex flex-col gap-3 rounded-[30px] border border-ink/14 bg-paper p-[clamp(24px,4vw,40px)] [transform:rotateY(180deg)]">
                     <span className="eyebrow text-xs opacity-60">{t('pr.didYou')}</span>
                     <span lang="sa" className="text-[clamp(32px,4.4vw,50px)] leading-[1.55] font-semibold" style={{ fontFamily: font }}>
-                      {toScript(words.slice(0, -1).join(' ') + ' ' + (cell?.stem || ''), sc)}<span style={{ color: deep }}>{toScript(cell?.end || '', sc)}</span>।
+                      {toScript(words.slice(0, -1).join(' ') + ' ', sc)}{splitScript(cell?.stem || '', cell?.end || '', sc)[0]}<span style={{ color: deep }}>{splitScript(cell?.stem || '', cell?.end || '', sc)[1]}</span>।
                     </span>
                     {tr && <span className="text-base italic opacity-65">{iast(words.join(' '))}</span>}
                     <span className="flex-1" />

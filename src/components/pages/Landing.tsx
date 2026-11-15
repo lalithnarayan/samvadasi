@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link'
-import { useState } from 'react'
-import { cellFor, iast, joinWords, ktaCell, subject, tinCell, toScript, type DhatuLite, type PersonId, type Num } from '@/lib/grammar'
+import { useLayoutEffect, useRef, useState, type DependencyList } from 'react'
+import { cellFor, splitScript, iast, joinWords, ktaCell, subject, tinCell, toScript, type DhatuLite, type PersonId, type Num } from '@/lib/grammar'
 import { genderWordsIn, meaningOf, sentence, type UIKey } from '@/lib/i18n'
 import { DEEP, TINT, useSamvada } from '@/components/samvada/state'
 import { Word } from '@/components/samvada/Word'
@@ -12,6 +12,26 @@ import { cn } from '@/lib/utils'
 
 const GO = { base: 'go', third: 'goes', past: 'went', tail: '' }
 const SLIDE = [[6, 'अहम्', 'I go'], [7, 'आवाम्', 'we two go'], [8, 'वयम्', 'we go'], [3, 'त्वम्', 'you go'], [4, 'युवाम्', 'you two go'], [5, 'यूयम्', 'you all go'], [0, 'सः', 'he goes'], [1, 'तौ', 'they two go'], [2, 'ते', 'they go']] as const
+/** Shrinks a one-line (nowrap) element until it fits its column — glyph widths differ a lot between lipis. */
+function useFit<T extends HTMLElement>(deps: DependencyList) {
+  const ref = useRef<T>(null)
+  useLayoutEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const run = () => {
+      el.style.fontSize = el.dataset.fs || ''
+      const r = el.clientWidth / el.scrollWidth
+      if (r < 1) el.style.fontSize = parseFloat(getComputedStyle(el).fontSize) * r * 0.97 + 'px'
+    }
+    run()
+    const ro = new ResizeObserver(run)
+    if (el.parentElement) ro.observe(el.parentElement)
+    document.fonts?.ready.then(run)
+    return () => ro.disconnect()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps)
+  return ref
+}
 const colorOf = (i: number) => (i >= 6 ? 'u' : i >= 3 ? 'm' : 'p') as 'u' | 'm' | 'p'
 const MANNERS = [
   { id: 'friend', label: 'l.mFriend', pron: 'त्वं', idx: 3, c: 'm' as const, note: '“You go.” Ending for you.', s: ['m', 'm'], end: 'l.endYou' },
@@ -42,7 +62,7 @@ export function LandingClient({ gam, tiles, total, featuredCount }: { gam: Dhatu
 
   const cell = cellFor(gam, when, subj)
   const words = joinWords([subj.sk, cell?.form || ''])
-  const em = Math.max(1.5, [...(cell?.form || '')].reduce((a, c) => a + ('ािीोौः'.includes(c) ? 0.36 : c === '्' ? -0.3 : 'ुूृेैं'.includes(c) ? 0 : 0.72), 0))
+  const emDeva = Math.max(1.5, [...(cell?.form || '')].reduce((a, c) => a + ('ािीोौः'.includes(c) ? 0.36 : c === '्' ? -0.3 : 'ुूृेैं'.includes(c) ? 0 : 0.72), 0))
   const marquee = [0, 3, 6, 2, 5, 8].map((i) => toScript(tinCell(gam, when === 'kta' ? 'lat' : when, i)?.form || '', sc)).join('  ·  ') + '  ·  '
 
   const sl = SLIDE[slide], slc = colorOf(sl[0]), slCell = tinCell(gam, 'lat', sl[0])
@@ -55,6 +75,9 @@ export function LandingClient({ gam, tiles, total, featuredCount }: { gam: Dhatu
   ]
   const slideLabel = en ? sl[2] : line(subject(SLIDE_SUBJ[slide][0], SLIDE_SUBJ[slide][1], 'm'), 'lat')
   const mannerNote = en ? M.note : `“${line(subject(M.s[0], 0, M.s[1]), 'lat')}.” ${t(M.end)}`
+  const heroRef = useFit<HTMLParagraphElement>([cell?.form, sc, emDeva])
+  const slideRef = useFit<HTMLParagraphElement>([slCell?.form, sc])
+  const mannerRef = useFit<HTMLParagraphElement>([mCell?.form, M.pron, sc])
   const ord = order === 'en' ? ['u', 'm', 'p'] : ['p', 'm', 'u']
 
   return (
@@ -68,8 +91,8 @@ export function LandingClient({ gam, tiles, total, featuredCount }: { gam: Dhatu
         </div>
         <div className="wrap relative flex w-full flex-col gap-1.5 pt-6 pb-10">
           <span className="eyebrow" style={{ color: DEEP[subj.color] }}>{t('l.eyebrow')}</span>
-          <h1 className="disp m-0 max-w-[560px] text-[clamp(22px,2.4vw,30px)] leading-tight font-semibold">{t('l.h1')}</h1>
-          {cell && <p aria-live="polite" className="m-0 whitespace-nowrap leading-[1.32]" style={{ fontFamily: sc === 'deva' ? 'var(--font-display)' : `var(--font-sk-${sc})`, fontSize: `min(280px, calc(88vw / ${em.toFixed(2)}))` }}>
+          <h1 className="disp hero-t m-0 max-w-[560px] text-[clamp(22px,2.4vw,30px)] leading-tight font-semibold">{t('l.h1')}</h1>
+          {cell && <p aria-live="polite" className="m-0 whitespace-nowrap leading-[1.32]" style={{ fontFamily: sc === 'deva' ? 'var(--font-display)' : `var(--font-sk-${sc})`, fontSize: `min(280px, calc(88vw / ${emDeva.toFixed(2)}))` }} data-fs={`min(280px, calc(88vw / ${emDeva.toFixed(2)}))`} ref={heroRef}>
             <Word stem={cell.stem} end={cell.end} color={DEEP[subj.color]} />
           </p>}
           <div className="flex flex-wrap items-baseline gap-x-[18px] gap-y-1">
@@ -94,8 +117,8 @@ export function LandingClient({ gam, tiles, total, featuredCount }: { gam: Dhatu
             <p className="m-0 max-w-[460px] text-lg leading-relaxed">{t('l.s1a')} <span style={{ fontFamily: `var(--font-sk-${sc})` }}>{toScript('गच्छ', sc)}</span> {t('l.s1b')}</p>
           </div>
           <div className="reveal flex flex-col gap-2.5" style={{ color: DEEP[slc] }}>
-            <p lang="sa" className="m-0 whitespace-nowrap text-[clamp(76px,10vw,156px)] leading-[1.3] text-ink" style={{ fontFamily: sc === 'deva' ? 'var(--font-display)' : `var(--font-sk-${sc})` }}>
-              {toScript(slCell?.stem || '', sc)}<span key={slideKey} className="ending" style={{ color: DEEP[slc] }}>{toScript(slCell?.end || '', sc)}</span>
+            <p lang="sa" className="m-0 whitespace-nowrap leading-[1.3] text-ink" style={{ fontFamily: sc === 'deva' ? 'var(--font-display)' : `var(--font-sk-${sc})`, fontSize: 'clamp(76px,10vw,156px)' }} data-fs="clamp(76px,10vw,156px)" ref={slideRef}>
+              {splitScript(slCell?.stem || '', slCell?.end || '', sc)[0]}<span key={slideKey} className="ending" style={{ color: DEEP[slc] }}>{splitScript(slCell?.stem || '', slCell?.end || '', sc)[1]}</span>
             </p>
             <span className="disp text-[clamp(22px,2.6vw,34px)] font-semibold text-ink"><span className="font-sk">{toScript(sl[1], sc)}</span> — “{slideLabel}”</span>
             <label htmlFor="scrub" className="sr-only">{t('l.choose')}</label>
@@ -140,8 +163,8 @@ export function LandingClient({ gam, tiles, total, featuredCount }: { gam: Dhatu
             <Seg label={t('l.talking')} value={manner} onPick={setManner} items={MANNERS.map((m) => ({ id: m.id as string, label: t(m.label) }))} />
           </div>
           <div className="reveal flex flex-col gap-2">
-            <p lang="sa" className="m-0 whitespace-nowrap text-[clamp(60px,8.4vw,132px)] leading-[1.3]" style={{ fontFamily: sc === 'deva' ? 'var(--font-display)' : `var(--font-sk-${sc})` }}>
-              {toScript(M.pron, sc)} {toScript(mCell?.stem || '', sc)}<span key={manner} className="ending" style={{ color: DEEP[M.c] }}>{toScript(mCell?.end || '', sc)}</span>
+            <p lang="sa" className="m-0 whitespace-nowrap leading-[1.3]" style={{ fontFamily: sc === 'deva' ? 'var(--font-display)' : `var(--font-sk-${sc})`, fontSize: 'clamp(60px,8.4vw,132px)' }} data-fs="clamp(60px,8.4vw,132px)" ref={mannerRef}>
+              {toScript(M.pron, sc)} {splitScript(mCell?.stem || '', mCell?.end || '', sc)[0]}<span key={manner} className="ending" style={{ color: DEEP[M.c] }}>{splitScript(mCell?.stem || '', mCell?.end || '', sc)[1]}</span>
             </p>
             <span className="disp text-[clamp(20px,2.4vw,30px)] font-semibold">{mannerNote}</span>
           </div>
@@ -158,9 +181,9 @@ export function LandingClient({ gam, tiles, total, featuredCount }: { gam: Dhatu
           </div>
           <div className="reveal flex flex-col gap-1">
             {g4rows.map((r, i) => (
-              <div key={i} className="flex items-baseline justify-between gap-4 border-b border-ink/14 py-1.5">
-                <span lang="sa" className="font-sk text-[clamp(30px,3.6vw,52px)] leading-[1.55] font-semibold" style={{ fontFamily: `var(--font-sk-${sc})` }}>
-                  {toScript(joinWords([r.pron, r.cell?.form || ''])[0], sc)} {toScript(r.cell?.stem || '', sc)}<span key={g4} className="ending" style={{ color: DEEP[r.c] }}>{toScript(r.cell?.end || '', sc)}</span>
+              <div key={i} className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0 border-b border-ink/14 py-1.5">
+                <span lang="sa" className="font-sk leading-[1.55] font-semibold" style={{ fontFamily: `var(--font-sk-${sc})`, fontSize: sc === 'taml' ? 'clamp(24px,3vw,44px)' : 'clamp(30px,3.6vw,52px)' }}>
+                  {toScript(joinWords([r.pron, r.cell?.form || ''])[0], sc)} {splitScript(r.cell?.stem || '', r.cell?.end || '', sc)[0]}<span key={g4} className="ending" style={{ color: DEEP[r.c] }}>{splitScript(r.cell?.stem || '', r.cell?.end || '', sc)[1]}</span>
                 </span>
                 <span className="text-right text-sm font-semibold">{r.en}<br /><span className="font-normal opacity-70">{r.tag}</span></span>
               </div>
@@ -191,7 +214,7 @@ export function LandingClient({ gam, tiles, total, featuredCount }: { gam: Dhatu
             ].map((c) => (
               <Link key={c.href} href={c.href + query} className="lift flex min-h-[240px] flex-col justify-between rounded-[26px] border border-transparent p-[26px] no-underline" style={{ background: c.bg, color: c.fg }}>
                 <span className="eyebrow" style={{ color: c.c }}>{c.n}</span>
-                <span className="flex flex-col gap-2"><span className="disp text-[38px] leading-none font-extrabold">{c.t}</span><span className="text-[15px] leading-snug">{c.d}</span></span>
+                <span className="flex flex-col gap-2"><span className="disp card-t text-[38px] leading-none font-extrabold">{c.t}</span><span className="text-[15px] leading-snug">{c.d}</span></span>
                 <span className="arr self-end text-[30px] [transform:rotate(-45deg)]" aria-hidden>→</span>
               </Link>
             ))}

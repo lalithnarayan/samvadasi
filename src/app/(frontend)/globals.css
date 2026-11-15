@@ -62,7 +62,15 @@
   /* Indic interface text: no tracking (it pulls conjuncts apart), no uppercase, a little more line height */
   html:is([data-lang='te'],[data-lang='kn'],[data-lang='ta']) .disp, html:is([data-lang='te'],[data-lang='kn'],[data-lang='ta']) .eyebrow { letter-spacing: 0; }
   html:is([data-lang='te'],[data-lang='kn'],[data-lang='ta']) .eyebrow { text-transform: none; font-weight: 700; }
-  html:is([data-lang='te'],[data-lang='kn'],[data-lang='ta']) h1.disp, html:is([data-lang='te'],[data-lang='kn'],[data-lang='ta']) h2.disp { line-height: 1.25; }
+  /* Indic glyphs are taller and words longer: smaller display sizes, and long words may wrap */
+  html:is([data-lang='te'],[data-lang='kn'],[data-lang='ta']) :is(h1, h2).disp { line-height: 1.3 !important; overflow-wrap: anywhere; }
+  html:is([data-lang='te'],[data-lang='kn'],[data-lang='ta']) h1.disp:not(.hero-t) { font-size: clamp(32px, 5.2vw, 76px) !important; }
+  html:is([data-lang='te'],[data-lang='kn'],[data-lang='ta']) h2.disp { font-size: clamp(28px, 4.4vw, 64px) !important; }
+  html[data-lang='ta'] h1.disp:not(.hero-t) { font-size: clamp(28px, 4.4vw, 64px) !important; }
+  html[data-lang='ta'] h2.disp { font-size: clamp(24px, 3.8vw, 54px) !important; }
+  html:is([data-lang='te'],[data-lang='kn'],[data-lang='ta']) .card-t { font-size: clamp(24px, 2.4vw, 32px) !important; line-height: 1.25 !important; overflow-wrap: anywhere; }
+  html:is([data-lang='te'],[data-lang='kn'],[data-lang='ta']) :is([class*='leading-none'], [class*='leading-[0.9'], [class*='leading-tight']) { line-height: 1.3 !important; }
+  .reveal { min-width: 0; }
   .wrap { max-width: 1360px; margin-inline: auto; padding-inline: clamp(20px, 4vw, 56px); }
   .seg { display: flex; flex: 0 0 auto; gap: 2px; padding: 3px; border: 1px solid rgb(36 33 29 / .22); border-radius: 999px; }
   .pill { transition: transform 160ms ease, background-color 200ms ease, color 200ms ease; }

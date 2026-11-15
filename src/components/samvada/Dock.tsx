@@ -48,7 +48,7 @@ export function Dock() {
           {!genderMatters && <span className="hidden shrink-0 text-xs italic opacity-75 lg:inline">{t('dock.same')}</span>}
         </div>
         <div className="drow">
-          <span className="eyebrow w-[52px] shrink-0 text-[11px]">{t('dock.when')}</span>
+          <span className="eyebrow min-w-[52px] shrink-0 text-[11px]">{t('dock.when')}</span>
           <div role="group" aria-label={t('dock.when')} className="seg">
             {WHENS.map((x) => (
               <button key={x.id} aria-pressed={x.id === when} onClick={() => set({ when: x.id })} className={cn(btn, x.id === when && 'bg-ink text-stone')}>

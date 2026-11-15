@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { iast, ktaCell, LAKARA_NAMES, padaOf, tinCell, toScript, colorOfIdx, type DhatuLite, type LakaraId, type PadaId } from '@/lib/grammar'
+import { iast, ktaCell, splitScript, LAKARA_NAMES, padaOf, tinCell, toScript, colorOfIdx, type DhatuLite, type LakaraId, type PadaId } from '@/lib/grammar'
 import { meaningOf, type UIKey } from '@/lib/i18n'
 import { DEEP, TINT, useSamvada } from '@/components/samvada/state'
 import { SiteNav } from '@/components/samvada/SiteNav'
@@ -12,7 +12,8 @@ import { cn } from '@/lib/utils'
 type D = DhatuLite & { aupadeshika: string; prefixes: string[] }
 type Ex = { text: string; source?: string | null; url?: string | null; translation?: string | null; form?: string | null; token?: string | null; reviewed?: boolean; licence?: string | null }
 
-const ROWS = [{ sk: 'प्रथम', en: 'vb.rowHe', base: 0 }, { sk: 'मध्यम', en: 'per.m', base: 3 }, { sk: 'उत्तम', en: 'per.u', base: 6 }] as const
+// उत्तम (I / we) first, as learners expect; Vidyut's cell order is unchanged (base index)
+const ROWS = [{ sk: 'उत्तम', en: 'per.u', base: 6 }, { sk: 'मध्यम', en: 'per.m', base: 3 }, { sk: 'प्रथम', en: 'vb.rowHe', base: 0 }] as const
 const SPOKEN: LakaraId[] = ['lat', 'lan', 'lrt', 'lot', 'vidhi']
 const LITERARY: LakaraId[] = ['lit', 'lut', 'lun', 'ashir', 'lrn']
 const COLH = [['num.0', 'एक'], ['num.1', 'द्वि'], ['num.2', 'बहु']] as const
@@ -32,7 +33,7 @@ export function VerbClient({ d, examples }: { d: D; examples: Ex[] }) {
     const L = LAKARA_NAMES[lak], here = lak === when
     if (!d.forms?.[lak]?.[pada]) return null
     return (
-      <section key={lak} className={cn('flex flex-col gap-3.5 rounded-[26px] bg-paper p-[clamp(18px,2vw,28px)]', literary && 'opacity-85')} style={{ border: here ? `1.5px solid ${deep}` : '1px solid rgb(36 33 29 / .12)' }}>
+      <section key={lak} className={cn('flex min-w-0 flex-col gap-3.5 rounded-[26px] bg-paper p-[clamp(18px,2vw,28px)]', literary && 'opacity-85')} style={{ border: here ? `1.5px solid ${deep}` : '1px solid rgb(36 33 29 / .12)' }}>
         <div className="flex flex-wrap items-baseline gap-3">
           <span className="text-[26px] font-bold" style={{ fontFamily: font }}>{toScript(L.name, sc)}</span>
           <span className="disp text-lg font-semibold">{t((L.literary ? `lak.${lak}` : `when.${lak}`) as UIKey)}</span>
@@ -56,7 +57,7 @@ export function VerbClient({ d, examples }: { d: D; examples: Ex[] }) {
                       <td key={n} className="rounded-[10px] px-2.5 py-2 align-top" style={{ background: on ? TINT[subj.color] : undefined }}>
                         {c && <>
                           <span lang="sa" className="block text-xl leading-relaxed font-semibold whitespace-nowrap" style={{ fontFamily: font }}>
-                            {toScript(c.stem, sc)}<span style={{ color: DEEP[colorOfIdx(idx)] }}>{toScript(c.end, sc)}</span>
+                            {splitScript(c.stem, c.end, sc)[0]}<span style={{ color: DEEP[colorOfIdx(idx)] }}>{splitScript(c.stem, c.end, sc)[1]}</span>
                           </span>
                           {c.also.length > 0 && <span className="block text-[11px] opacity-70">{t('v.also')} {c.also.map((a) => toScript(a.form, sc)).join(', ')}</span>}
                           <Derivation form={c.form} req={req(lak, idx)} />
@@ -117,13 +118,13 @@ export function VerbClient({ d, examples }: { d: D; examples: Ex[] }) {
 
         <div className="grid gap-5 lg:grid-cols-2">
           {d.participle && (
-            <section className="flex flex-col gap-3.5 rounded-[26px] bg-paper p-[clamp(18px,2vw,28px)]" style={{ border: when === 'kta' ? `1.5px solid ${deep}` : '1px solid rgb(36 33 29 / .12)' }}>
+            <section className="flex min-w-0 flex-col gap-3.5 rounded-[26px] bg-paper p-[clamp(18px,2vw,28px)]" style={{ border: when === 'kta' ? `1.5px solid ${deep}` : '1px solid rgb(36 33 29 / .12)' }}>
               <div className="flex flex-wrap items-baseline gap-3">
                 <span className="text-[26px] font-bold" style={{ fontFamily: font }}>{toScript('क्तवतु', sc)}</span><span className="disp text-lg font-semibold">{t('when.kta')}</span>
                 <span className="flex-1" />
                 {when === 'kta' && <span className="rounded-full px-2.5 py-0.5 text-xs font-bold" style={{ background: TINT[subj.color], color: deep }}>{t('vb.inBar')}</span>}
               </div>
-              <table className="w-full border-collapse">
+              <div className="overflow-x-auto"><table className="w-full min-w-[440px] border-collapse">
                 <thead><tr><th className="w-24" />{colh.map((h) => <th key={h} className="px-2.5 py-1 text-left text-xs font-semibold opacity-70">{h}</th>)}</tr></thead>
                 <tbody>
                   {(['m', 'f'] as const).map((g) => (
@@ -133,7 +134,7 @@ export function VerbClient({ d, examples }: { d: D; examples: Ex[] }) {
                         const c = ktaCell(d, g, n), on = when === 'kta' && gen === g && num === n
                         return (
                           <td key={n} className="rounded-[10px] px-2.5 py-2 align-top" style={{ background: on ? TINT[subj.color] : undefined }}>
-                            {c && <><span lang="sa" className="block text-xl leading-relaxed font-semibold whitespace-nowrap" style={{ fontFamily: font }}>{toScript(c.stem, sc)}<span style={{ color: deep }}>{toScript(c.end, sc)}</span></span>
+                            {c && <><span lang="sa" className="block text-xl leading-relaxed font-semibold whitespace-nowrap" style={{ fontFamily: font }}>{splitScript(c.stem, c.end, sc)[0]}<span style={{ color: deep }}>{splitScript(c.stem, c.end, sc)[1]}</span></span>
                               {c.also.length > 0 && <span className="block text-[11px] opacity-70">{c.also.map((a) => `${t(`lbl.${a.label}` as UIKey)}: ${toScript(a.form, sc)}`).join(', ')}</span>}</>}
                           </td>
                         )
@@ -141,7 +142,7 @@ export function VerbClient({ d, examples }: { d: D; examples: Ex[] }) {
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </table></div>
               {ktaCell(d, 'm', 0)?.note && <p className="m-0 text-sm italic opacity-80">{ktaCell(d, 'm', 0)?.note}</p>}
             </section>
           )}
