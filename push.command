@@ -13,7 +13,7 @@ git add -A
 if [ "$(git rev-list --count HEAD 2>/dev/null)" = "1" ] && ! git ls-remote --exit-code --heads origin main >/dev/null 2>&1; then
   git commit -q --amend --no-edit
 else
-  git commit -q -m "Keep grammatical terms for tense and gender (వర్తమానం, భవిష్యత్తు, పుంలింగం, ಭೂತ · ಆಡುಮಾತು)
+  git commit -q -m "Telugu: భూతకాలం for the classical past
 
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 Claude-Session: https://claude.ai/code/session_01EgpTnnJ4rUt6iqepPwq4C5" || echo "(nothing to commit)"
