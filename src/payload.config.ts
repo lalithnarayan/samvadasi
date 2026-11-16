@@ -6,6 +6,10 @@ import { fileURLToPath } from 'url'
 
 import { Users } from './collections/Users'
 import { Dhatus } from './collections/Dhatus'
+import { Avyayas } from './collections/Avyayas'
+import { Packs } from './collections/Packs'
+import { Greetings } from './collections/Greetings'
+import { Audio } from './collections/Audio'
 import { Nouns } from './collections/Nouns'
 import { Situations } from './collections/Situations'
 import { Phrases } from './collections/Phrases'
@@ -24,7 +28,7 @@ export default buildConfig({
     meta: { titleSuffix: ' — Samvadasi CMS' },
     importMap: { baseDir: path.resolve(dirname) },
   },
-  collections: [Dhatus, Nouns, Situations, Phrases, PracticeDecks, Examples, Users],
+  collections: [Dhatus, Nouns, Avyayas, Situations, Phrases, Packs, Greetings, Audio, PracticeDecks, Examples, Users],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },

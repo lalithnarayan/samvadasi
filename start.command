@@ -29,5 +29,7 @@ if [ ! -f .seeded ]; then npm run setup >>$LOG 2>&1 && touch .seeded || { say "F
 say "6/6 Grammar service + web app"
 lsof -ti tcp:5328 | xargs kill 2>/dev/null
 nohup .venv/bin/python api/grammar.py >grammar.log 2>&1 &
+lsof -ti tcp:5329 | xargs kill 2>/dev/null
+nohup .venv/bin/python api/card.py >card.log 2>&1 &
 ( for i in $(seq 1 120); do curl -s -o /dev/null http://localhost:3000 && { open http://localhost:3000; say "READY http://localhost:3000"; break; }; sleep 2; done ) &
 npm run dev 2>&1 | tee -a $LOG

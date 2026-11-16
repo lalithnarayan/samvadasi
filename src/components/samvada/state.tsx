@@ -1,23 +1,24 @@
 'use client'
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { subject, type Gender, type Num, type PersonId, type ScriptId, type Subject, type WhenId } from '@/lib/grammar'
-import { LANG_OF, makeT, type Lang, type T } from '@/lib/i18n'
+import { LANG_OF, makeT, type Lang, type Style, type T } from '@/lib/i18n'
 
 /**
  * WHO / WHEN state shared by every page. Lives in the layout (so it survives navigation)
  * and is mirrored into the URL (?who=r&num=0&gen=f&when=kta&sc=deva) so links reopen the same view.
  */
-type State = { per: PersonId; num: Num; gen: Gender; when: WhenId; sc: ScriptId; tr: boolean }
+type State = { per: PersonId; num: Num; gen: Gender; when: WhenId; sc: ScriptId; tr: boolean; talk: 'w' | 's' }
 type Ctx = State & {
   subj: Subject
   morph: number // bumps on every change → endings replay their animation
   wipe: { n: number; ox: string; oy: string; from: 'u' | 'm' | 'p' }
   set: (patch: Partial<State>, origin?: { x: number; y: number }) => void
   query: string
+  style: Style // translations: written or everyday spoken Telugu / Kannada / Tamil
   lang: Lang // UI language follows the lipi: deva → English, telu → Telugu, knda → Kannada, taml → Tamil
   t: T
 }
-const DEFAULT: State = { per: 'u', num: 0, gen: 'm', when: 'lat', sc: 'deva', tr: true }
+const DEFAULT: State = { per: 'u', num: 0, gen: 'm', when: 'lat', sc: 'deva', tr: true, talk: 'w' }
 const C = createContext<Ctx | null>(null)
 
 const PERS = ['u', 'm', 'r', 'p'], WH = ['kta', 'lat', 'lan', 'lrt', 'lot', 'vidhi'], SC = ['deva', 'telu', 'knda', 'taml']
@@ -32,6 +33,7 @@ function fromUrl(): Partial<State> {
   if (when && WH.includes(when)) o.when = when as WhenId
   if (sc && SC.includes(sc)) o.sc = sc as ScriptId
   if (tr === '0') o.tr = false
+  if (q.get('talk') === 's') o.talk = 's'
   return o
 }
 const toQuery = (s: State) => {
@@ -42,6 +44,7 @@ const toQuery = (s: State) => {
   if (s.when !== DEFAULT.when) q.set('when', s.when)
   if (s.sc !== DEFAULT.sc) q.set('sc', s.sc)
   if (!s.tr) q.set('tr', '0')
+  if (s.talk === 's') q.set('talk', 's')
   const str = q.toString()
   return str ? '?' + str : ''
 }
@@ -82,7 +85,7 @@ export function SamvadaStateProvider({ children }: { children: React.ReactNode }
 
   const value = useMemo<Ctx>(() => {
     const lang = LANG_OF[st.sc]
-    return { ...st, subj: subject(st.per, st.num, st.gen), morph, wipe, set, query: toQuery(st), lang, t: makeT(lang) }
+    return { ...st, subj: subject(st.per, st.num, st.gen), morph, wipe, set, query: toQuery(st), lang, t: makeT(lang), style: st.talk === 's' ? 'spoken' : 'written' }
   }, [st, morph, wipe, set])
   return <C.Provider value={value}>{children}</C.Provider>
 }

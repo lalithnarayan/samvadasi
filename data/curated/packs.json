@@ -1,0 +1,1940 @@
+[
+ {
+  "slug": "numbers",
+  "title": "Numbers",
+  "titleSa": "सङ्ख्याः",
+  "title_te": "అంకెలు",
+  "title_kn": "ಸಂಖ್ಯೆಗಳು",
+  "title_ta": "எண்கள்",
+  "words": [
+   {
+    "sa": "एकम्",
+    "en": "one",
+    "te": "ఒకటి",
+    "kn": "ಒಂದು",
+    "ta": "ஒன்று"
+   },
+   {
+    "sa": "द्वे",
+    "en": "two",
+    "te": "రెండు",
+    "kn": "ಎರಡು",
+    "ta": "இரண்டு"
+   },
+   {
+    "sa": "त्रीणि",
+    "en": "three",
+    "te": "మూడు",
+    "kn": "ಮೂರು",
+    "ta": "மூன்று"
+   },
+   {
+    "sa": "चत्वारि",
+    "en": "four",
+    "te": "నాలుగు",
+    "kn": "ನಾಲ್ಕು",
+    "ta": "நான்கு"
+   },
+   {
+    "sa": "पञ्च",
+    "en": "five",
+    "te": "ఐదు",
+    "kn": "ಐದು",
+    "ta": "ஐந்து"
+   },
+   {
+    "sa": "षट्",
+    "en": "six",
+    "te": "ఆరు",
+    "kn": "ಆರು",
+    "ta": "ஆறு"
+   },
+   {
+    "sa": "सप्त",
+    "en": "seven",
+    "te": "ఏడు",
+    "kn": "ಏಳು",
+    "ta": "ஏழு"
+   },
+   {
+    "sa": "अष्ट",
+    "en": "eight",
+    "te": "ఎనిమిది",
+    "kn": "ಎಂಟು",
+    "ta": "எட்டு"
+   },
+   {
+    "sa": "नव",
+    "en": "nine",
+    "te": "తొమ్మిది",
+    "kn": "ಒಂಬತ್ತು",
+    "ta": "ஒன்பது"
+   },
+   {
+    "sa": "दश",
+    "en": "ten",
+    "te": "పది",
+    "kn": "ಹತ್ತು",
+    "ta": "பத்து"
+   },
+   {
+    "sa": "विंशतिः",
+    "en": "twenty",
+    "te": "ఇరవై",
+    "kn": "ಇಪ್ಪತ್ತು",
+    "ta": "இருபது"
+   },
+   {
+    "sa": "शतम्",
+    "en": "hundred",
+    "te": "వంద",
+    "kn": "ನೂರು",
+    "ta": "நூறு"
+   },
+   {
+    "sa": "सहस्रम्",
+    "en": "thousand",
+    "te": "వెయ్యి",
+    "kn": "ಸಾವಿರ",
+    "ta": "ஆயிரம்"
+   }
+  ],
+  "phrases": [
+   {
+    "dhatu": "01.1049-A",
+    "words": [
+     "पञ्च",
+     "फलानि"
+    ],
+    "english": {
+     "base": "bring",
+     "third": "brings",
+     "past": "brought",
+     "tail": "five fruits"
+    },
+    "local": {
+     "te": [
+      "bring",
+      "ఐదు పండ్లు"
+     ],
+     "kn": [
+      "bring",
+      "ಐದು ಹಣ್ಣು"
+     ],
+     "ta": [
+      "bring",
+      "ஐந்து பழங்கள்"
+     ]
+    },
+    "order": 1,
+    "label": "pack numbers: bring five fruits"
+   },
+   {
+    "dhatu": "01.0381",
+    "words": [
+     "द्वे",
+     "पुस्तके"
+    ],
+    "english": {
+     "base": "read",
+     "third": "reads",
+     "past": "read",
+     "tail": "two books"
+    },
+    "local": {
+     "te": [
+      "read",
+      "రెండు పుస్తకాలు"
+     ],
+     "kn": [
+      "read",
+      "ಎರಡು ಪುಸ್ತಕ"
+     ],
+     "ta": [
+      "read",
+      "இரண்டு புத்தகங்கள்"
+     ]
+    },
+    "order": 2,
+    "label": "pack numbers: read two books"
+   },
+   {
+    "dhatu": "01.1130",
+    "words": [
+     "दश",
+     "रूप्यकाणि"
+    ],
+    "english": {
+     "base": "get",
+     "third": "gets",
+     "past": "got",
+     "tail": "ten rupees"
+    },
+    "local": {
+     "te": [
+      "get",
+      "పది రూపాయలు"
+     ],
+     "kn": [
+      "get",
+      "ಹತ್ತು ರೂಪಾಯಿ"
+     ],
+     "ta": [
+      "get",
+      "பத்து ரூபாய்"
+     ]
+    },
+    "order": 3,
+    "label": "pack numbers: get ten rupees"
+   },
+   {
+    "dhatu": "06.0092",
+    "words": [
+     "चत्वारि",
+     "वाक्यानि"
+    ],
+    "english": {
+     "base": "write",
+     "third": "writes",
+     "past": "wrote",
+     "tail": "four sentences"
+    },
+    "local": {
+     "te": [
+      "write",
+      "నాలుగు వాక్యాలు"
+     ],
+     "kn": [
+      "write",
+      "ನಾಲ್ಕು ವಾಕ್ಯ"
+     ],
+     "ta": [
+      "write",
+      "நான்கு வாக்கியங்கள்"
+     ]
+    },
+    "order": 4,
+    "label": "pack numbers: write four sentences"
+   }
+  ],
+  "order": 1
+ },
+ {
+  "slug": "time",
+  "title": "Time and days",
+  "titleSa": "समयः वासराः च",
+  "title_te": "సమయం, వారాలు",
+  "title_kn": "ಸಮಯ, ವಾರಗಳು",
+  "title_ta": "நேரம், கிழமைகள்",
+  "words": [
+   {
+    "sa": "अद्य",
+    "en": "today",
+    "te": "ఈరోజు",
+    "kn": "ಇವತ್ತು",
+    "ta": "இன்று"
+   },
+   {
+    "sa": "श्वः",
+    "en": "tomorrow",
+    "te": "రేపు",
+    "kn": "ನಾಳೆ",
+    "ta": "நாளை"
+   },
+   {
+    "sa": "ह्यः",
+    "en": "yesterday",
+    "te": "నిన్న",
+    "kn": "ನಿನ್ನೆ",
+    "ta": "நேற்று"
+   },
+   {
+    "sa": "प्रातः",
+    "en": "in the morning",
+    "te": "పొద్దున",
+    "kn": "ಬೆಳಿಗ್ಗೆ",
+    "ta": "காலையில்"
+   },
+   {
+    "sa": "सायम्",
+    "en": "in the evening",
+    "te": "సాయంత్రం",
+    "kn": "ಸಂಜೆ",
+    "ta": "மாலையில்"
+   },
+   {
+    "sa": "रात्रौ",
+    "en": "at night",
+    "te": "రాత్రి",
+    "kn": "ರಾತ್ರಿ",
+    "ta": "இரவில்"
+   },
+   {
+    "sa": "भानुवासरः",
+    "en": "Sunday",
+    "te": "ఆదివారం",
+    "kn": "ಭಾನುವಾರ",
+    "ta": "ஞாயிறு"
+   },
+   {
+    "sa": "इन्दुवासरः",
+    "en": "Monday",
+    "te": "సోమవారం",
+    "kn": "ಸೋಮವಾರ",
+    "ta": "திங்கள்"
+   },
+   {
+    "sa": "भौमवासरः",
+    "en": "Tuesday",
+    "te": "మంగళవారం",
+    "kn": "ಮಂಗಳವಾರ",
+    "ta": "செவ்வாய்"
+   },
+   {
+    "sa": "बुधवासरः",
+    "en": "Wednesday",
+    "te": "బుధవారం",
+    "kn": "ಬುಧವಾರ",
+    "ta": "புதன்"
+   },
+   {
+    "sa": "गुरुवासरः",
+    "en": "Thursday",
+    "te": "గురువారం",
+    "kn": "ಗುರುವಾರ",
+    "ta": "வியாழன்"
+   },
+   {
+    "sa": "शुक्रवासरः",
+    "en": "Friday",
+    "te": "శుక్రవారం",
+    "kn": "ಶುಕ್ರವಾರ",
+    "ta": "வெள்ளி"
+   },
+   {
+    "sa": "शनिवासरः",
+    "en": "Saturday",
+    "te": "శనివారం",
+    "kn": "ಶನಿವಾರ",
+    "ta": "சனி"
+   },
+   {
+    "sa": "होरा",
+    "en": "hour",
+    "te": "గంట",
+    "kn": "ಗಂಟೆ",
+    "ta": "மணி நேரம்",
+    "noun": "horA-f"
+   },
+   {
+    "sa": "निमेषः",
+    "en": "minute",
+    "te": "నిమిషం",
+    "kn": "ನಿಮಿಷ",
+    "ta": "நிமிடம்",
+    "noun": "nimeza-m"
+   }
+  ],
+  "phrases": [
+   {
+    "dhatu": "01.1137",
+    "words": [
+     "श्वः",
+     "विद्यालयं"
+    ],
+    "english": {
+     "base": "go",
+     "third": "goes",
+     "past": "went",
+     "tail": "to school tomorrow"
+    },
+    "local": {
+     "te": [
+      "go",
+      "రేపు బడికి"
+     ],
+     "kn": [
+      "go",
+      "ನಾಳೆ ಶಾಲೆಗೆ"
+     ],
+     "ta": [
+      "go",
+      "நாளை பள்ளிக்குப்"
+     ]
+    },
+    "order": 1,
+    "label": "pack time: go to school tomorrow"
+   },
+   {
+    "dhatu": "01.0924",
+    "words": [
+     "सायम्",
+     "उद्याने"
+    ],
+    "english": {
+     "base": "walk",
+     "third": "walks",
+     "past": "walked",
+     "tail": "in the garden in the evening"
+    },
+    "local": {
+     "te": [
+      "walk",
+      "సాయంత్రం తోటలో"
+     ],
+     "kn": [
+      "walk",
+      "ಸಂಜೆ ಉದ್ಯಾನದಲ್ಲಿ"
+     ],
+     "ta": [
+      "walk",
+      "மாலையில் தோட்டத்தில்"
+     ]
+    },
+    "order": 2,
+    "label": "pack time: walk in the garden in the evening"
+   },
+   {
+    "dhatu": "01.1074",
+    "words": [
+     "रात्रौ",
+     "दुग्धं"
+    ],
+    "english": {
+     "base": "drink",
+     "third": "drinks",
+     "past": "drank",
+     "tail": "milk at night"
+    },
+    "local": {
+     "te": [
+      "drink",
+      "రాత్రి పాలు"
+     ],
+     "kn": [
+      "drink",
+      "ರಾತ್ರಿ ಹಾಲು"
+     ],
+     "ta": [
+      "drink",
+      "இரவில் பால்"
+     ]
+    },
+    "order": 3,
+    "label": "pack time: drink milk at night"
+   },
+   {
+    "dhatu": "06.0160-upa",
+    "words": [
+     "भानुवासरे",
+     "गृहे"
+    ],
+    "english": {
+     "base": "sit",
+     "third": "sits",
+     "past": "sat",
+     "tail": "at home on Sunday"
+    },
+    "local": {
+     "te": [
+      "sit",
+      "ఆదివారం ఇంట్లో"
+     ],
+     "kn": [
+      "sit",
+      "ಭಾನುವಾರ ಮನೆಯಲ್ಲಿ"
+     ],
+     "ta": [
+      "sit",
+      "ஞாயிறன்று வீட்டில்"
+     ]
+    },
+    "order": 4,
+    "label": "pack time: sit at home on Sunday"
+   }
+  ],
+  "order": 2
+ },
+ {
+  "slug": "family",
+  "title": "Family",
+  "titleSa": "कुटुम्बम्",
+  "title_te": "కుటుంబం",
+  "title_kn": "ಕುಟುಂಬ",
+  "title_ta": "குடும்பம்",
+  "words": [
+   {
+    "sa": "माता",
+    "en": "mother",
+    "te": "అమ్మ",
+    "kn": "ಅಮ್ಮ",
+    "ta": "அம்மா",
+    "noun": "mAtf-f"
+   },
+   {
+    "sa": "पिता",
+    "en": "father",
+    "te": "నాన్న",
+    "kn": "ಅಪ್ಪ",
+    "ta": "அப்பா",
+    "noun": "pitf-m"
+   },
+   {
+    "sa": "भ्राता",
+    "en": "brother",
+    "te": "అన్నయ్య / తమ్ముడు",
+    "kn": "ಅಣ್ಣ / ತಮ್ಮ",
+    "ta": "அண்ணன் / தம்பி",
+    "noun": "BrAtf-m"
+   },
+   {
+    "sa": "भगिनी",
+    "en": "sister",
+    "te": "అక్క / చెల్లి",
+    "kn": "ಅಕ್ಕ / ತಂಗಿ",
+    "ta": "அக்கா / தங்கை",
+    "noun": "BaginI-f"
+   },
+   {
+    "sa": "पुत्रः",
+    "en": "son",
+    "te": "కొడుకు",
+    "kn": "ಮಗ",
+    "ta": "மகன்",
+    "noun": "putra-m"
+   },
+   {
+    "sa": "पुत्री",
+    "en": "daughter",
+    "te": "కూతురు",
+    "kn": "ಮಗಳು",
+    "ta": "மகள்",
+    "noun": "putrI-f"
+   },
+   {
+    "sa": "पतिः",
+    "en": "husband",
+    "te": "భర్త",
+    "kn": "ಗಂಡ",
+    "ta": "கணவர்",
+    "noun": "pati-m"
+   },
+   {
+    "sa": "पत्नी",
+    "en": "wife",
+    "te": "భార్య",
+    "kn": "ಹೆಂಡತಿ",
+    "ta": "மனைவி",
+    "noun": "patnI-f"
+   },
+   {
+    "sa": "पितामहः",
+    "en": "grandfather",
+    "te": "తాతయ్య",
+    "kn": "ಅಜ್ಜ",
+    "ta": "தாத்தா",
+    "noun": "pitAmaha-m"
+   },
+   {
+    "sa": "पितामही",
+    "en": "grandmother",
+    "te": "నానమ్మ",
+    "kn": "ಅಜ್ಜಿ",
+    "ta": "பாட்டி",
+    "noun": "pitAmahI-f"
+   },
+   {
+    "sa": "मित्रम्",
+    "en": "friend",
+    "te": "స్నేహితుడు",
+    "kn": "ಗೆಳೆಯ",
+    "ta": "நண்பர்",
+    "noun": "mitra-n"
+   },
+   {
+    "sa": "बालकः",
+    "en": "boy",
+    "te": "అబ్బాయి",
+    "kn": "ಹುಡುಗ",
+    "ta": "பையன்",
+    "noun": "bAlaka-m"
+   },
+   {
+    "sa": "बालिका",
+    "en": "girl",
+    "te": "అమ్మాయి",
+    "kn": "ಹುಡುಗಿ",
+    "ta": "சிறுமி",
+    "noun": "bAlikA-f"
+   }
+  ],
+  "phrases": [
+   {
+    "dhatu": "01.1164",
+    "words": [
+     "मात्रा",
+     "सह"
+    ],
+    "english": {
+     "base": "speak",
+     "third": "speaks",
+     "past": "spoke",
+     "tail": "with mother"
+    },
+    "local": {
+     "te": [
+      "speak",
+      "అమ్మతో"
+     ],
+     "kn": [
+      "speak",
+      "ಅಮ್ಮನ ಜೊತೆ"
+     ],
+     "ta": [
+      "speak",
+      "அம்மாவுடன்"
+     ]
+    },
+    "order": 1,
+    "label": "pack family: speak with mother"
+   },
+   {
+    "dhatu": "10.0389",
+    "words": [
+     "पितामह्यै",
+     "कथां"
+    ],
+    "english": {
+     "base": "tell",
+     "third": "tells",
+     "past": "told",
+     "tail": "a story to grandmother"
+    },
+    "local": {
+     "te": [
+      "tell",
+      "నానమ్మకు ఒక కథ"
+     ],
+     "kn": [
+      "tell",
+      "ಅಜ್ಜಿಗೆ ಒಂದು ಕಥೆ"
+     ],
+     "ta": [
+      "tell",
+      "பாட்டிக்கு ஒரு கதை"
+     ]
+    },
+    "order": 2,
+    "label": "pack family: tell a story to grandmother"
+   },
+   {
+    "dhatu": "01.1137",
+    "words": [
+     "मित्रेण",
+     "सह",
+     "उद्यानं"
+    ],
+    "english": {
+     "base": "go",
+     "third": "goes",
+     "past": "went",
+     "tail": "to the park with a friend"
+    },
+    "local": {
+     "te": [
+      "go",
+      "స్నేహితుడితో పార్కుకి"
+     ],
+     "kn": [
+      "go",
+      "ಗೆಳೆಯನ ಜೊತೆ ಉದ್ಯಾನಕ್ಕೆ"
+     ],
+     "ta": [
+      "go",
+      "நண்பருடன் பூங்காவுக்குப்"
+     ]
+    },
+    "order": 3,
+    "label": "pack family: go to the park with a friend"
+   },
+   {
+    "dhatu": "01.1137-A",
+    "words": [
+     "भ्रातुः",
+     "गृहं"
+    ],
+    "english": {
+     "base": "come",
+     "third": "comes",
+     "past": "came",
+     "tail": "to my brother's house"
+    },
+    "local": {
+     "te": [
+      "come",
+      "అన్నయ్య ఇంటికి"
+     ],
+     "kn": [
+      "come",
+      "ಅಣ್ಣನ ಮನೆಗೆ"
+     ],
+     "ta": [
+      "come",
+      "அண்ணன் வீட்டுக்கு"
+     ]
+    },
+    "order": 4,
+    "label": "pack family: come to my brother's house"
+   },
+   {
+    "dhatu": "01.1143",
+    "words": [
+     "पुत्र्याः",
+     "चित्रं"
+    ],
+    "english": {
+     "base": "see",
+     "third": "sees",
+     "past": "saw",
+     "tail": "my daughter's picture"
+    },
+    "local": {
+     "te": [
+      "see",
+      "కూతురి ఫోటో"
+     ],
+     "kn": [
+      "see",
+      "ಮಗಳ ಚಿತ್ರ"
+     ],
+     "ta": [
+      "see",
+      "மகளின் படத்தைப்"
+     ]
+    },
+    "order": 5,
+    "label": "pack family: see my daughter's picture"
+   }
+  ],
+  "order": 3
+ },
+ {
+  "slug": "food",
+  "title": "Food",
+  "titleSa": "भोजनम्",
+  "title_te": "తిండి",
+  "title_kn": "ಊಟ-ತಿಂಡಿ",
+  "title_ta": "உணவு",
+  "words": [
+   {
+    "sa": "ओदनः",
+    "en": "rice (cooked)",
+    "te": "అన్నం",
+    "kn": "ಅನ್ನ",
+    "ta": "சோறு",
+    "noun": "odana-m"
+   },
+   {
+    "sa": "रोटिका",
+    "en": "chapati",
+    "te": "చపాతీ",
+    "kn": "ಚಪಾತಿ",
+    "ta": "சப்பாத்தி",
+    "noun": "rowikA-f"
+   },
+   {
+    "sa": "सूपः",
+    "en": "dal",
+    "te": "పప్పు",
+    "kn": "ಬೇಳೆ ಸಾರು",
+    "ta": "பருப்பு",
+    "noun": "sUpa-m"
+   },
+   {
+    "sa": "शाकः",
+    "en": "vegetable",
+    "te": "కూరగాయ",
+    "kn": "ತರಕಾರಿ",
+    "ta": "காய்கறி",
+    "noun": "SAka-m"
+   },
+   {
+    "sa": "दधि",
+    "en": "curd",
+    "te": "పెరుగు",
+    "kn": "ಮೊಸರು",
+    "ta": "தயிர்",
+    "noun": "daDi-n"
+   },
+   {
+    "sa": "घृतम्",
+    "en": "ghee",
+    "te": "నెయ్యి",
+    "kn": "ತುಪ್ಪ",
+    "ta": "நெய்",
+    "noun": "Gfta-n"
+   },
+   {
+    "sa": "लवणम्",
+    "en": "salt",
+    "te": "ఉప్పు",
+    "kn": "ಉಪ್ಪು",
+    "ta": "உப்பு",
+    "noun": "lavaRa-n"
+   },
+   {
+    "sa": "शर्करा",
+    "en": "sugar",
+    "te": "చక్కెర",
+    "kn": "ಸಕ್ಕರೆ",
+    "ta": "சர்க்கரை",
+    "noun": "SarkarA-f"
+   },
+   {
+    "sa": "फलम्",
+    "en": "fruit",
+    "te": "పండు",
+    "kn": "ಹಣ್ಣು",
+    "ta": "பழம்",
+    "noun": "Pala-n"
+   },
+   {
+    "sa": "आम्रः",
+    "en": "mango",
+    "te": "మామిడిపండు",
+    "kn": "ಮಾವಿನಹಣ್ಣು",
+    "ta": "மாம்பழம்",
+    "noun": "Amra-m"
+   },
+   {
+    "sa": "दुग्धम्",
+    "en": "milk",
+    "te": "పాలు",
+    "kn": "ಹಾಲು",
+    "ta": "பால்",
+    "noun": "dugDa-n"
+   },
+   {
+    "sa": "जलम्",
+    "en": "water",
+    "te": "నీళ్ళు",
+    "kn": "ನೀರು",
+    "ta": "தண்ணீர்",
+    "noun": "jala-n"
+   },
+   {
+    "sa": "चायम्",
+    "en": "tea",
+    "te": "టీ",
+    "kn": "ಚಹಾ",
+    "ta": "டீ",
+    "noun": "cAya-m"
+   },
+   {
+    "sa": "मोदकः",
+    "en": "sweet, laddu",
+    "te": "లడ్డు",
+    "kn": "ಲಡ್ಡು",
+    "ta": "லட்டு",
+    "noun": "modaka-m"
+   }
+  ],
+  "phrases": [
+   {
+    "dhatu": "01.0051",
+    "words": [
+     "रोटिकां"
+    ],
+    "english": {
+     "base": "eat",
+     "third": "eats",
+     "past": "ate",
+     "tail": "a chapati"
+    },
+    "local": {
+     "te": [
+      "eat",
+      "చపాతీ"
+     ],
+     "kn": [
+      "eat",
+      "ಚಪಾತಿ"
+     ],
+     "ta": [
+      "eat",
+      "சப்பாத்தி"
+     ]
+    },
+    "order": 1,
+    "label": "pack food: eat a chapati"
+   },
+   {
+    "dhatu": "01.0051",
+    "words": [
+     "दध्योदनं"
+    ],
+    "english": {
+     "base": "eat",
+     "third": "eats",
+     "past": "ate",
+     "tail": "curd rice"
+    },
+    "local": {
+     "te": [
+      "eat",
+      "పెరుగన్నం"
+     ],
+     "kn": [
+      "eat",
+      "ಮೊಸರನ್ನ"
+     ],
+     "ta": [
+      "eat",
+      "தயிர் சாதம்"
+     ]
+    },
+    "order": 2,
+    "label": "pack food: eat curd rice"
+   },
+   {
+    "dhatu": "01.1074",
+    "words": [
+     "फलरसं"
+    ],
+    "english": {
+     "base": "drink",
+     "third": "drinks",
+     "past": "drank",
+     "tail": "fruit juice"
+    },
+    "local": {
+     "te": [
+      "drink",
+      "పండ్ల రసం"
+     ],
+     "kn": [
+      "drink",
+      "ಹಣ್ಣಿನ ರಸ"
+     ],
+     "ta": [
+      "drink",
+      "பழச்சாறு"
+     ]
+    },
+    "order": 3,
+    "label": "pack food: drink fruit juice"
+   },
+   {
+    "dhatu": "01.1049-A",
+    "words": [
+     "आपणात्",
+     "शाकं"
+    ],
+    "english": {
+     "base": "bring",
+     "third": "brings",
+     "past": "brought",
+     "tail": "vegetables from the shop"
+    },
+    "local": {
+     "te": [
+      "bring",
+      "అంగడి నుంచి కూరగాయలు"
+     ],
+     "kn": [
+      "bring",
+      "ಅಂಗಡಿಯಿಂದ ತರಕಾರಿ"
+     ],
+     "ta": [
+      "bring",
+      "கடையிலிருந்து காய்கறி"
+     ]
+    },
+    "order": 4,
+    "label": "pack food: bring vegetables from the shop"
+   },
+   {
+    "dhatu": "01.1074",
+    "words": [
+     "शर्करां",
+     "विना",
+     "चायं"
+    ],
+    "english": {
+     "base": "drink",
+     "third": "drinks",
+     "past": "drank",
+     "tail": "tea without sugar"
+    },
+    "local": {
+     "te": [
+      "drink",
+      "చక్కెర లేకుండా టీ"
+     ],
+     "kn": [
+      "drink",
+      "ಸಕ್ಕರೆ ಇಲ್ಲದೆ ಚಹಾ"
+     ],
+     "ta": [
+      "drink",
+      "சர்க்கரை இல்லாமல் டீ"
+     ]
+    },
+    "order": 5,
+    "label": "pack food: drink tea without sugar"
+   }
+  ],
+  "order": 4
+ },
+ {
+  "slug": "body",
+  "title": "Body",
+  "titleSa": "शरीरम्",
+  "title_te": "శరీరం",
+  "title_kn": "ದೇಹ",
+  "title_ta": "உடல்",
+  "words": [
+   {
+    "sa": "शिरः",
+    "en": "head",
+    "te": "తల",
+    "kn": "ತಲೆ",
+    "ta": "தலை",
+    "noun": "Siras-n"
+   },
+   {
+    "sa": "नेत्रम्",
+    "en": "eye",
+    "te": "కన్ను",
+    "kn": "ಕಣ್ಣು",
+    "ta": "கண்",
+    "noun": "netra-n"
+   },
+   {
+    "sa": "कर्णः",
+    "en": "ear",
+    "te": "చెవి",
+    "kn": "ಕಿವಿ",
+    "ta": "காது",
+    "noun": "karRa-m"
+   },
+   {
+    "sa": "नासिका",
+    "en": "nose",
+    "te": "ముక్కు",
+    "kn": "ಮೂಗು",
+    "ta": "மூக்கு",
+    "noun": "nAsikA-f"
+   },
+   {
+    "sa": "मुखम्",
+    "en": "face, mouth",
+    "te": "ముఖం",
+    "kn": "ಮುಖ",
+    "ta": "முகம்",
+    "noun": "muKa-n"
+   },
+   {
+    "sa": "दन्तः",
+    "en": "tooth",
+    "te": "పన్ను",
+    "kn": "ಹಲ್ಲು",
+    "ta": "பல்",
+    "noun": "danta-m"
+   },
+   {
+    "sa": "जिह्वा",
+    "en": "tongue",
+    "te": "నాలుక",
+    "kn": "ನಾಲಿಗೆ",
+    "ta": "நாக்கு",
+    "noun": "jihvA-f"
+   },
+   {
+    "sa": "हस्तः",
+    "en": "hand",
+    "te": "చేయి",
+    "kn": "ಕೈ",
+    "ta": "கை",
+    "noun": "hasta-m"
+   },
+   {
+    "sa": "अङ्गुली",
+    "en": "finger",
+    "te": "వేలు",
+    "kn": "ಬೆರಳು",
+    "ta": "விரல்",
+    "noun": "aNgulI-f"
+   },
+   {
+    "sa": "पादः",
+    "en": "foot, leg",
+    "te": "కాలు",
+    "kn": "ಕಾಲು",
+    "ta": "கால்",
+    "noun": "pAda-m"
+   },
+   {
+    "sa": "उदरम्",
+    "en": "stomach",
+    "te": "కడుపు",
+    "kn": "ಹೊಟ್ಟೆ",
+    "ta": "வயிறு",
+    "noun": "udara-n"
+   },
+   {
+    "sa": "हृदयम्",
+    "en": "heart",
+    "te": "గుండె",
+    "kn": "ಹೃದಯ",
+    "ta": "இதயம்",
+    "noun": "hfdaya-n"
+   },
+   {
+    "sa": "केशः",
+    "en": "hair",
+    "te": "జుట్టు",
+    "kn": "ಕೂದಲು",
+    "ta": "முடி",
+    "noun": "keSa-m"
+   }
+  ],
+  "phrases": [
+   {
+    "dhatu": "10.0086-pra",
+    "words": [
+     "हस्तौ"
+    ],
+    "english": {
+     "base": "wash",
+     "third": "washes",
+     "past": "washed",
+     "tail": "the hands"
+    },
+    "local": {
+     "te": [
+      "wash",
+      "చేతులు"
+     ],
+     "kn": [
+      "wash",
+      "ಕೈ"
+     ],
+     "ta": [
+      "wash",
+      "கைகளைக்"
+     ]
+    },
+    "order": 1,
+    "label": "pack body: wash the hands"
+   },
+   {
+    "dhatu": "10.0086-pra",
+    "words": [
+     "पादौ"
+    ],
+    "english": {
+     "base": "wash",
+     "third": "washes",
+     "past": "washed",
+     "tail": "the feet"
+    },
+    "local": {
+     "te": [
+      "wash",
+      "కాళ్ళు"
+     ],
+     "kn": [
+      "wash",
+      "ಕಾಲು"
+     ],
+     "ta": [
+      "wash",
+      "கால்களைக்"
+     ]
+    },
+    "order": 2,
+    "label": "pack body: wash the feet"
+   },
+   {
+    "dhatu": "10.0086-pra",
+    "words": [
+     "केशान्"
+    ],
+    "english": {
+     "base": "wash",
+     "third": "washes",
+     "past": "washed",
+     "tail": "the hair"
+    },
+    "local": {
+     "te": [
+      "wash",
+      "తల"
+     ],
+     "kn": [
+      "wash",
+      "ತಲೆ"
+     ],
+     "ta": [
+      "wash",
+      "தலைமுடியைக்"
+     ]
+    },
+    "order": 3,
+    "label": "pack body: wash the hair"
+   },
+   {
+    "dhatu": "01.1143",
+    "words": [
+     "नेत्राभ्याम्"
+    ],
+    "english": {
+     "base": "see",
+     "third": "sees",
+     "past": "saw",
+     "tail": "with the eyes"
+    },
+    "local": {
+     "te": [
+      "see",
+      "కళ్ళతో"
+     ],
+     "kn": [
+      "see",
+      "ಕಣ್ಣಿನಿಂದ"
+     ],
+     "ta": [
+      "see",
+      "கண்களால்"
+     ]
+    },
+    "order": 4,
+    "label": "pack body: see with the eyes"
+   }
+  ],
+  "order": 5
+ },
+ {
+  "slug": "directions",
+  "title": "Directions",
+  "titleSa": "दिशाः",
+  "title_te": "దిక్కులు",
+  "title_kn": "ದಿಕ್ಕುಗಳು",
+  "title_ta": "திசைகள்",
+  "words": [
+   {
+    "sa": "वामतः",
+    "en": "on the left",
+    "te": "ఎడమ వైపు",
+    "kn": "ಎಡಕ್ಕೆ",
+    "ta": "இடது பக்கம்"
+   },
+   {
+    "sa": "दक्षिणतः",
+    "en": "on the right",
+    "te": "కుడి వైపు",
+    "kn": "ಬಲಕ್ಕೆ",
+    "ta": "வலது பக்கம்"
+   },
+   {
+    "sa": "पुरतः",
+    "en": "in front, ahead",
+    "te": "ముందు",
+    "kn": "ಮುಂದೆ",
+    "ta": "முன்னால்"
+   },
+   {
+    "sa": "पृष्ठतः",
+    "en": "behind",
+    "te": "వెనక",
+    "kn": "ಹಿಂದೆ",
+    "ta": "பின்னால்"
+   },
+   {
+    "sa": "उपरि",
+    "en": "above, upstairs",
+    "te": "పైన",
+    "kn": "ಮೇಲೆ",
+    "ta": "மேலே"
+   },
+   {
+    "sa": "अधः",
+    "en": "below, downstairs",
+    "te": "కింద",
+    "kn": "ಕೆಳಗೆ",
+    "ta": "கீழே"
+   },
+   {
+    "sa": "समीपे",
+    "en": "near",
+    "te": "దగ్గర",
+    "kn": "ಹತ್ತಿರ",
+    "ta": "அருகில்"
+   },
+   {
+    "sa": "दूरे",
+    "en": "far",
+    "te": "దూరం",
+    "kn": "ದೂರ",
+    "ta": "தூரம்"
+   },
+   {
+    "sa": "अत्र",
+    "en": "here",
+    "te": "ఇక్కడ",
+    "kn": "ಇಲ್ಲಿ",
+    "ta": "இங்கே"
+   },
+   {
+    "sa": "तत्र",
+    "en": "there",
+    "te": "అక్కడ",
+    "kn": "ಅಲ್ಲಿ",
+    "ta": "அங்கே"
+   },
+   {
+    "sa": "पूर्वदिशा",
+    "en": "east",
+    "te": "తూర్పు",
+    "kn": "ಪೂರ್ವ",
+    "ta": "கிழக்கு"
+   },
+   {
+    "sa": "पश्चिमदिशा",
+    "en": "west",
+    "te": "పడమర",
+    "kn": "ಪಶ್ಚಿಮ",
+    "ta": "மேற்கு"
+   },
+   {
+    "sa": "उत्तरदिशा",
+    "en": "north",
+    "te": "ఉత్తరం",
+    "kn": "ಉತ್ತರ",
+    "ta": "வடக்கு"
+   },
+   {
+    "sa": "दक्षिणदिशा",
+    "en": "south",
+    "te": "దక్షిణం",
+    "kn": "ದಕ್ಷಿಣ",
+    "ta": "தெற்கு"
+   }
+  ],
+  "phrases": [
+   {
+    "dhatu": "01.1137",
+    "words": [
+     "वामतः"
+    ],
+    "english": {
+     "base": "go",
+     "third": "goes",
+     "past": "went",
+     "tail": "left"
+    },
+    "local": {
+     "te": [
+      "go",
+      "ఎడమ వైపు"
+     ],
+     "kn": [
+      "go",
+      "ಎಡಕ್ಕೆ"
+     ],
+     "ta": [
+      "go",
+      "இடது பக்கம்"
+     ]
+    },
+    "order": 1,
+    "label": "pack directions: go left"
+   },
+   {
+    "dhatu": "01.1137",
+    "words": [
+     "दक्षिणतः"
+    ],
+    "english": {
+     "base": "go",
+     "third": "goes",
+     "past": "went",
+     "tail": "right"
+    },
+    "local": {
+     "te": [
+      "go",
+      "కుడి వైపు"
+     ],
+     "kn": [
+      "go",
+      "ಬಲಕ್ಕೆ"
+     ],
+     "ta": [
+      "go",
+      "வலது பக்கம்"
+     ]
+    },
+    "order": 2,
+    "label": "pack directions: go right"
+   },
+   {
+    "dhatu": "01.0924",
+    "words": [
+     "पुरतः"
+    ],
+    "english": {
+     "base": "walk",
+     "third": "walks",
+     "past": "walked",
+     "tail": "straight ahead"
+    },
+    "local": {
+     "te": [
+      "walk",
+      "ముందుకు"
+     ],
+     "kn": [
+      "walk",
+      "ಮುಂದಕ್ಕೆ"
+     ],
+     "ta": [
+      "walk",
+      "நேராக"
+     ]
+    },
+    "order": 3,
+    "label": "pack directions: walk straight ahead"
+   },
+   {
+    "dhatu": "06.0160-upa",
+    "words": [
+     "तत्र"
+    ],
+    "english": {
+     "base": "sit",
+     "third": "sits",
+     "past": "sat",
+     "tail": "there"
+    },
+    "local": {
+     "te": [
+      "sit",
+      "అక్కడ"
+     ],
+     "kn": [
+      "sit",
+      "ಅಲ್ಲಿ"
+     ],
+     "ta": [
+      "sit",
+      "அங்கே"
+     ]
+    },
+    "order": 4,
+    "label": "pack directions: sit there"
+   },
+   {
+    "dhatu": "06.0149",
+    "words": [
+     "मार्गं"
+    ],
+    "english": {
+     "base": "ask",
+     "third": "asks",
+     "past": "asked",
+     "tail": "the way"
+    },
+    "local": {
+     "te": [
+      "ask",
+      "దారి"
+     ],
+     "kn": [
+      "ask",
+      "ದಾರಿ"
+     ],
+     "ta": [
+      "ask",
+      "வழி"
+     ]
+    },
+    "order": 5,
+    "label": "pack directions: ask the way"
+   }
+  ],
+  "order": 6
+ },
+ {
+  "slug": "shopping",
+  "title": "Shopping",
+  "titleSa": "क्रयणम्",
+  "title_te": "షాపింగ్",
+  "title_kn": "ಖರೀದಿ",
+  "title_ta": "கடைக்குப் போவது",
+  "words": [
+   {
+    "sa": "आपणः",
+    "en": "shop",
+    "te": "కొట్టు",
+    "kn": "ಅಂಗಡಿ",
+    "ta": "கடை",
+    "noun": "ApaRa-m"
+   },
+   {
+    "sa": "विपणिः",
+    "en": "market",
+    "te": "సంత",
+    "kn": "ಮಾರುಕಟ್ಟೆ",
+    "ta": "சந்தை",
+    "noun": "vipaRi-f"
+   },
+   {
+    "sa": "मूल्यम्",
+    "en": "price",
+    "te": "ధర",
+    "kn": "ಬೆಲೆ",
+    "ta": "விலை",
+    "noun": "mUlya-n"
+   },
+   {
+    "sa": "रूप्यकम्",
+    "en": "rupee",
+    "te": "రూపాయి",
+    "kn": "ರೂಪಾಯಿ",
+    "ta": "ரூபாய்",
+    "noun": "rUpyaka-n"
+   },
+   {
+    "sa": "धनम्",
+    "en": "money",
+    "te": "డబ్బు",
+    "kn": "ದುಡ್ಡು",
+    "ta": "பணம்",
+    "noun": "Dana-n"
+   },
+   {
+    "sa": "स्यूतः",
+    "en": "bag",
+    "te": "సంచి",
+    "kn": "ಚೀಲ",
+    "ta": "பை",
+    "noun": "syUta-m"
+   },
+   {
+    "sa": "आपणिकः",
+    "en": "shopkeeper",
+    "te": "కొట్టువాడు",
+    "kn": "ಅಂಗಡಿಯವನು",
+    "ta": "கடைக்காரர்",
+    "noun": "ApaRika-m"
+   },
+   {
+    "sa": "अधिकम्",
+    "en": "more",
+    "te": "ఎక్కువ",
+    "kn": "ಹೆಚ್ಚು",
+    "ta": "அதிகம்"
+   },
+   {
+    "sa": "न्यूनम्",
+    "en": "less",
+    "te": "తక్కువ",
+    "kn": "ಕಡಿಮೆ",
+    "ta": "குறைவு"
+   },
+   {
+    "sa": "कियत्?",
+    "en": "how much?",
+    "te": "ఎంత?",
+    "kn": "ಎಷ್ಟು?",
+    "ta": "எவ்வளவு?"
+   }
+  ],
+  "phrases": [
+   {
+    "dhatu": "06.0149",
+    "words": [
+     "मूल्यं"
+    ],
+    "english": {
+     "base": "ask",
+     "third": "asks",
+     "past": "asked",
+     "tail": "the price"
+    },
+    "local": {
+     "te": [
+      "ask",
+      "ధర"
+     ],
+     "kn": [
+      "ask",
+      "ಬೆಲೆ"
+     ],
+     "ta": [
+      "ask",
+      "விலையைக்"
+     ]
+    },
+    "order": 1,
+    "label": "pack shopping: ask the price"
+   },
+   {
+    "dhatu": "01.1049-A",
+    "words": [
+     "स्यूतं"
+    ],
+    "english": {
+     "base": "bring",
+     "third": "brings",
+     "past": "brought",
+     "tail": "a bag"
+    },
+    "local": {
+     "te": [
+      "bring",
+      "సంచి"
+     ],
+     "kn": [
+      "bring",
+      "ಚೀಲ"
+     ],
+     "ta": [
+      "bring",
+      "பை"
+     ]
+    },
+    "order": 2,
+    "label": "pack shopping: bring a bag"
+   },
+   {
+    "dhatu": "01.1049-A",
+    "words": [
+     "आपणात्",
+     "दुग्धं"
+    ],
+    "english": {
+     "base": "bring",
+     "third": "brings",
+     "past": "brought",
+     "tail": "milk from the shop"
+    },
+    "local": {
+     "te": [
+      "bring",
+      "అంగడి నుంచి పాలు"
+     ],
+     "kn": [
+      "bring",
+      "ಅಂಗಡಿಯಿಂದ ಹಾಲು"
+     ],
+     "ta": [
+      "bring",
+      "கடையிலிருந்து பால்"
+     ]
+    },
+    "order": 3,
+    "label": "pack shopping: bring milk from the shop"
+   },
+   {
+    "dhatu": "01.1137",
+    "words": [
+     "विपणिं"
+    ],
+    "english": {
+     "base": "go",
+     "third": "goes",
+     "past": "went",
+     "tail": "to the market"
+    },
+    "local": {
+     "te": [
+      "go",
+      "సంతకి"
+     ],
+     "kn": [
+      "go",
+      "ಮಾರುಕಟ್ಟೆಗೆ"
+     ],
+     "ta": [
+      "go",
+      "சந்தைக்குப்"
+     ]
+    },
+    "order": 4,
+    "label": "pack shopping: go to the market"
+   },
+   {
+    "dhatu": "01.1130",
+    "words": [
+     "धनं"
+    ],
+    "english": {
+     "base": "get",
+     "third": "gets",
+     "past": "got",
+     "tail": "the money"
+    },
+    "local": {
+     "te": [
+      "get",
+      "డబ్బు"
+     ],
+     "kn": [
+      "get",
+      "ದುಡ್ಡು"
+     ],
+     "ta": [
+      "get",
+      "பணம்"
+     ]
+    },
+    "order": 5,
+    "label": "pack shopping: get the money"
+   }
+  ],
+  "order": 7
+ },
+ {
+  "slug": "travel",
+  "title": "Travel",
+  "titleSa": "यात्रा",
+  "title_te": "ప్రయాణం",
+  "title_kn": "ಪ್ರಯಾಣ",
+  "title_ta": "பயணம்",
+  "words": [
+   {
+    "sa": "लोकयानम्",
+    "en": "bus",
+    "te": "బస్సు",
+    "kn": "ಬಸ್ಸು",
+    "ta": "பேருந்து",
+    "noun": "lokayAna-n"
+   },
+   {
+    "sa": "रेलयानम्",
+    "en": "train",
+    "te": "రైలు",
+    "kn": "ರೈಲು",
+    "ta": "ரயில்",
+    "noun": "relayAna-n"
+   },
+   {
+    "sa": "विमानम्",
+    "en": "aeroplane",
+    "te": "విమానం",
+    "kn": "ವಿಮಾನ",
+    "ta": "விமானம்",
+    "noun": "vimAna-n"
+   },
+   {
+    "sa": "द्विचक्रिका",
+    "en": "bicycle",
+    "te": "సైకిలు",
+    "kn": "ಸೈಕಲ್",
+    "ta": "மிதிவண்டி",
+    "noun": "dvicakrikA-f"
+   },
+   {
+    "sa": "यानम्",
+    "en": "vehicle",
+    "te": "బండి",
+    "kn": "ಗಾಡಿ",
+    "ta": "வண்டி",
+    "noun": "yAna-n"
+   },
+   {
+    "sa": "स्थानकम्",
+    "en": "station, stop",
+    "te": "స్టేషను",
+    "kn": "ನಿಲ್ದಾಣ",
+    "ta": "நிலையம்",
+    "noun": "sTAnaka-n"
+   },
+   {
+    "sa": "चीटिका",
+    "en": "ticket",
+    "te": "టికెట్టు",
+    "kn": "ಟಿಕೆಟ್",
+    "ta": "டிக்கெட்"
+   },
+   {
+    "sa": "मार्गः",
+    "en": "road, way",
+    "te": "దారి",
+    "kn": "ದಾರಿ",
+    "ta": "வழி",
+    "noun": "mArga-m"
+   },
+   {
+    "sa": "नगरम्",
+    "en": "city",
+    "te": "నగరం",
+    "kn": "ನಗರ",
+    "ta": "நகரம்",
+    "noun": "nagara-n"
+   },
+   {
+    "sa": "ग्रामः",
+    "en": "village",
+    "te": "ఊరు",
+    "kn": "ಹಳ್ಳಿ",
+    "ta": "கிராமம்",
+    "noun": "grAma-m"
+   },
+   {
+    "sa": "यात्रा",
+    "en": "journey",
+    "te": "ప్రయాణం",
+    "kn": "ಪ್ರಯಾಣ",
+    "ta": "பயணம்",
+    "noun": "yAtrA-f"
+   }
+  ],
+  "phrases": [
+   {
+    "dhatu": "01.1137",
+    "words": [
+     "लोकयानेन"
+    ],
+    "english": {
+     "base": "go",
+     "third": "goes",
+     "past": "went",
+     "tail": "by bus"
+    },
+    "local": {
+     "te": [
+      "go",
+      "బస్సులో"
+     ],
+     "kn": [
+      "go",
+      "ಬಸ್ಸಿನಲ್ಲಿ"
+     ],
+     "ta": [
+      "go",
+      "பேருந்தில்"
+     ]
+    },
+    "order": 1,
+    "label": "pack travel: go by bus"
+   },
+   {
+    "dhatu": "01.1137",
+    "words": [
+     "स्थानकं"
+    ],
+    "english": {
+     "base": "go",
+     "third": "goes",
+     "past": "went",
+     "tail": "to the station"
+    },
+    "local": {
+     "te": [
+      "go",
+      "స్టేషనుకి"
+     ],
+     "kn": [
+      "go",
+      "ನಿಲ್ದಾಣಕ್ಕೆ"
+     ],
+     "ta": [
+      "go",
+      "நிலையத்துக்குப்"
+     ]
+    },
+    "order": 2,
+    "label": "pack travel: go to the station"
+   },
+   {
+    "dhatu": "01.1130",
+    "words": [
+     "चीटिकां"
+    ],
+    "english": {
+     "base": "get",
+     "third": "gets",
+     "past": "got",
+     "tail": "the ticket"
+    },
+    "local": {
+     "te": [
+      "get",
+      "టికెట్టు"
+     ],
+     "kn": [
+      "get",
+      "ಟಿಕೆಟ್"
+     ],
+     "ta": [
+      "get",
+      "டிக்கெட்"
+     ]
+    },
+    "order": 3,
+    "label": "pack travel: get the ticket"
+   },
+   {
+    "dhatu": "01.1137-A",
+    "words": [
+     "ग्रामात्"
+    ],
+    "english": {
+     "base": "come",
+     "third": "comes",
+     "past": "came",
+     "tail": "from the village"
+    },
+    "local": {
+     "te": [
+      "come",
+      "ఊరి నుంచి"
+     ],
+     "kn": [
+      "come",
+      "ಊರಿನಿಂದ"
+     ],
+     "ta": [
+      "come",
+      "கிராமத்திலிருந்து"
+     ]
+    },
+    "order": 4,
+    "label": "pack travel: come from the village"
+   },
+   {
+    "dhatu": "01.1143",
+    "words": [
+     "विमानं"
+    ],
+    "english": {
+     "base": "see",
+     "third": "sees",
+     "past": "saw",
+     "tail": "the aeroplane"
+    },
+    "local": {
+     "te": [
+      "see",
+      "విమానం"
+     ],
+     "kn": [
+      "see",
+      "ವಿಮಾನ"
+     ],
+     "ta": [
+      "see",
+      "விமானத்தைப்"
+     ]
+    },
+    "order": 5,
+    "label": "pack travel: see the aeroplane"
+   }
+  ],
+  "order": 8
+ }
+]

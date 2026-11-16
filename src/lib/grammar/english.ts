@@ -14,3 +14,20 @@ export function englishLine(s: Subject, when: WhenId, e: { base: string; third: 
   if (s.per === 'u') return (s.num === 0 ? 'Let me ' : s.num === 1 ? 'Let us two ' : "Let's ") + b + tail + '.'
   return `Let ${s.num === 0 ? (s.gen === 'm' ? 'him' : 'her') : 'them'} ${b}${tail}.`
 }
+
+/** "to go, move" → "go" (the first plain verb of an English meaning). */
+export function baseVerb(meaning?: string | null): string {
+  const m = (meaning || '').replace(/^to /, '').split(/[,;(]| or /)[0].trim()
+  return m.split(' ').length <= 3 ? m : ''
+}
+
+/** go → going, make → making, sit → sitting, lie → lying. Only the first word is changed. */
+export function ingForm(base: string): string {
+  const [w, ...rest] = base.split(' ')
+  let g: string
+  if (/ie$/.test(w)) g = w.slice(0, -2) + 'ying'
+  else if (/[^e]e$/.test(w) && w !== 'be' && w !== 'see') g = w.slice(0, -1) + 'ing'
+  else if (/^[^aeiou]*[aeiou][bdgmnprt]$/.test(w) && w.length <= 4) g = w + w.slice(-1) + 'ing'
+  else g = w + 'ing'
+  return [g, ...rest].join(' ')
+}

@@ -83,6 +83,7 @@ export function LandingClient({ gam, tiles, total, featuredCount }: { gam: Dhatu
   return (
     <>
       <SiteNav />
+      <main id="main" tabIndex={-1} className="outline-none">
       <section aria-label={t('l.eyebrow')} className="relative flex min-h-[calc(100vh-220px)] flex-col justify-center overflow-hidden">
         <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[8%] opacity-[0.08]">
           <div className="marq">
@@ -185,7 +186,7 @@ export function LandingClient({ gam, tiles, total, featuredCount }: { gam: Dhatu
                 <span lang="sa" className="font-sk leading-[1.55] font-semibold" style={{ fontFamily: `var(--font-sk-${sc})`, fontSize: sc === 'taml' ? 'clamp(24px,3vw,44px)' : 'clamp(30px,3.6vw,52px)' }}>
                   {toScript(joinWords([r.pron, r.cell?.form || ''])[0], sc)} {splitScript(r.cell?.stem || '', r.cell?.end || '', sc)[0]}<span key={g4} className="ending" style={{ color: DEEP[r.c] }}>{splitScript(r.cell?.stem || '', r.cell?.end || '', sc)[1]}</span>
                 </span>
-                <span className="text-right text-sm font-semibold">{r.en}<br /><span className="font-normal opacity-70">{r.tag}</span></span>
+                <span className="text-right text-sm font-semibold">{r.en}<br /><span className="font-normal opacity-80">{r.tag}</span></span>
               </div>
             ))}
           </div>
@@ -205,12 +206,16 @@ export function LandingClient({ gam, tiles, total, featuredCount }: { gam: Dhatu
               </Link>
             ))}
           </div>
-          <nav aria-label={t('nav.main')} className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <nav aria-labelledby="s5" className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
               { href: '/phrases', n: '01', t: t('nav.phrases'), d: t('c.phrases'), bg: 'var(--color-u-tint)', c: 'var(--color-u-deep)', fg: 'var(--color-ink)' },
               { href: '/verbs', n: '02', t: t('nav.verbs'), d: t('c.verbs'), bg: 'var(--color-m-tint)', c: 'var(--color-m-deep)', fg: 'var(--color-ink)' },
               { href: '/verb/01.1137', n: '03', t: t('nav.oneVerb'), d: t('c.one'), bg: 'var(--color-p-tint)', c: 'var(--color-p-deep)', fg: 'var(--color-ink)' },
               { href: '/practice', n: '04', t: t('nav.practice'), d: t('c.practice'), bg: '#3A3631', c: 'var(--color-chalk)', fg: 'var(--color-chalk)' },
+              { href: '/nouns', n: '05', t: t('nav.nouns'), d: t('c.nouns'), bg: 'var(--color-m-tint)', c: 'var(--color-m-deep)', fg: 'var(--color-ink)' },
+              { href: '/build', n: '06', t: t('nav.build'), d: t('c.build'), bg: 'var(--color-p-tint)', c: 'var(--color-p-deep)', fg: 'var(--color-ink)' },
+              { href: '/packs', n: '07', t: t('nav.packs'), d: t('c.packs'), bg: 'var(--color-u-tint)', c: 'var(--color-u-deep)', fg: 'var(--color-ink)' },
+              { href: '/greetings', n: '08', t: t('nav.greetings'), d: t('c.greet'), bg: '#3A3631', c: 'var(--color-chalk)', fg: 'var(--color-chalk)' },
             ].map((c) => (
               <Link key={c.href} href={c.href + query} className="lift flex min-h-[240px] flex-col justify-between rounded-[26px] border border-transparent p-[26px] no-underline" style={{ background: c.bg, color: c.fg }}>
                 <span className="eyebrow" style={{ color: c.c }}>{c.n}</span>
@@ -221,6 +226,7 @@ export function LandingClient({ gam, tiles, total, featuredCount }: { gam: Dhatu
           </nav>
         </div>
       </section>
+      </main>
       <Footer />
       <Dock />
     </>

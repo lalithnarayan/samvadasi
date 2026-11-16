@@ -5,11 +5,14 @@ import { SCRIPTS } from '@/lib/grammar'
 import { cn } from '@/lib/utils'
 import { useSamvada } from './state'
 import { Wordmark } from './Wordmark'
+import { A11yMenu } from './A11y'
 
 const LINKS = [
   { href: '/phrases', label: 'nav.phrases' },
-  { href: '/verbs', label: 'nav.verbs' },
-  { href: '/verb/01.1137', label: 'nav.oneVerb', match: '/verb/' },
+  { href: '/verbs', label: 'nav.verbs', match: '/verb/' },
+  { href: '/nouns', label: 'nav.nouns', match: '/noun/' },
+  { href: '/build', label: 'nav.build' },
+  { href: '/packs', label: 'nav.packs', match: '/packs/' },
   { href: '/practice', label: 'nav.practice' },
 ] as const
 
@@ -35,15 +38,16 @@ export function SiteNav() {
       <span className="flex-1" />
       <div role="group" aria-label={t('nav.script')} className="seg">
         {SCRIPTS.map((x) => (
-          <button key={x.id} onClick={() => set({ sc: x.id })} aria-pressed={sc === x.id} aria-label={x.name}
+          <button key={x.id} onClick={() => set({ sc: x.id })} aria-pressed={sc === x.id}
             className={cn('pill min-h-10 min-w-10 rounded-full text-[15px]', sc === x.id ? 'bg-ink text-stone' : '')} style={{ fontFamily: x.font }}>
-            {x.short}
+            {x.short}<span className="sr-only"> {x.name}</span>
           </button>
         ))}
       </div>
       <button onClick={() => set({ tr: !tr })} aria-pressed={tr} className="pill min-h-[46px] rounded-full border border-ink/20 px-3.5 text-[13px] font-semibold">
         {tr ? t('nav.iastOn') : t('nav.iastOff')}
       </button>
+      <A11yMenu />
     </header>
   )
 }

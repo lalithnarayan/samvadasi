@@ -12,9 +12,10 @@ export const Phrases: CollectionConfig = {
   fields: [
     { name: 'label', type: 'text', required: true, admin: { description: 'Internal name, e.g. "go to school"' } },
     { type: 'row', fields: [
-      { name: 'situation', type: 'relationship', relationTo: 'situations', required: true, admin: { width: '40%' } },
-      { name: 'dhatu', type: 'relationship', relationTo: 'dhatus', required: true, admin: { width: '40%' } },
-      { name: 'order', type: 'number', admin: { width: '20%' } },
+      { name: 'situation', type: 'relationship', relationTo: 'situations', admin: { width: '30%', description: 'For the Phrases page' } },
+      { name: 'pack', type: 'relationship', relationTo: 'packs', admin: { width: '25%', description: 'Or for a vocabulary pack' } },
+      { name: 'dhatu', type: 'relationship', relationTo: 'dhatus', required: true, admin: { width: '30%' } },
+      { name: 'order', type: 'number', admin: { width: '15%' } },
     ] },
     { name: 'words', type: 'array', admin: { description: 'Words between the subject and the verb, already in the right case (विद्यालयं, उद्याने).' }, fields: [{ name: 'text', type: 'text', required: true }] },
     { name: 'english', type: 'group', fields: [
@@ -25,6 +26,7 @@ export const Phrases: CollectionConfig = {
         { name: 'tail', type: 'text', admin: { width: '25%', description: 'to school' } },
       ] },
     ] },
+    { name: 'local', type: 'json', admin: { description: 'Telugu / Kannada / Tamil wording: {"te": ["go", "బడికి"], "kn": [...], "ta": [...]} — the verb key from the translation engine and the words before it' } },
     { name: 'note', type: 'textarea' },
   ],
 }

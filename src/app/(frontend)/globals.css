@@ -114,3 +114,18 @@
   .marq, .spin { animation: none; }
   .bar-move, .flip { transition: none; }
 }
+
+/* ── Display preferences (Aa menu) ───────────────────────────────────── */
+html[data-size='l'] body { zoom: 1.15; }
+html[data-size='xl'] body { zoom: 1.3; }
+html[data-contrast='more'] {
+  --color-ink: #000; --color-stone: #fff; --color-paper: #fff; --color-chalk: #fff; --color-charcoal: #000;
+  --color-u-deep: #1C2A5E; --color-m-deep: #702C10; --color-p-deep: #2F4108;
+  --color-u-tint: #DCDCEC; --color-m-tint: #F2DCCD; --color-p-tint: #DCE4C6;
+  --color-border: rgb(0 0 0 / .55);
+}
+html[data-contrast='more'] [class*='opacity-'] { opacity: 1 !important; }
+html[data-contrast='more'] * { border-color: rgb(0 0 0 / .55); }
+html[data-contrast='more'] :focus-visible { outline-width: 3px; }
+html[data-motion='less'] *, html[data-motion='less'] *::before, html[data-motion='less'] *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+footer .text-m-deep { color: #E09A78; }

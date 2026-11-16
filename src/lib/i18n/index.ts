@@ -4,7 +4,8 @@ import type { DhatuLite, Gender, Num, WhenId } from '../grammar/types'
 import { genderWords, type Subject } from '../grammar/subjects'
 import { englishLine } from '../grammar/english'
 import { UI, type UIKey } from './ui'
-import { GENDER_WORDS, localLine, MEANINGS, pronounLabel, SITUATIONS, type LocalLang } from './local'
+import { GENDER_WORDS, localLine, MEANINGS, pronounLabel, SITUATIONS, type LocalLang, type Style } from './local'
+export type { Style }
 
 export type Lang = 'en' | LocalLang
 export type { UIKey }
@@ -22,8 +23,8 @@ export function makeT(lang: Lang): T {
 }
 
 /** The phrase in the UI language, conjugated for WHO and WHEN. Falls back to English. */
-export function sentence(lang: Lang, s: Subject, when: WhenId, e: { base: string; third: string; past: string; tail?: string | null }): string {
-  if (lang !== 'en') { const l = localLine(lang, s, when, e); if (l) return l }
+export function sentence(lang: Lang, s: Subject, when: WhenId, e: { base: string; third: string; past: string; tail?: string | null; local?: Partial<Record<LocalLang, [string, string]>> | null }, style: Style = 'written'): string {
+  if (lang !== 'en') { const l = localLine(lang, s, when, e, style); if (l) return l }
   return englishLine(s, when, e)
 }
 
@@ -43,3 +44,9 @@ export function meaningOf(d: Pick<DhatuLite, 'slug' | 'meaning_en' | 'artha_sa'>
   if (d.artha_sa) return { main: toScript(d.artha_sa, sc), sub: en || undefined, sanskrit: true }
   return { main: en }
 }
+
+/** Pick the UI-language entry of [en, te, kn, ta], falling back to English. */
+export const pick = (lang: Lang, xs: (string | null | undefined)[]) => xs[COL[lang]] || xs[0] || ''
+/** A noun's meaning in the UI language. */
+export const nounMeaning = (lang: Lang, n: { meaning_en?: string | null; meaning_te?: string | null; meaning_kn?: string | null; meaning_ta?: string | null }) =>
+  pick(lang, [n.meaning_en, n.meaning_te, n.meaning_kn, n.meaning_ta])

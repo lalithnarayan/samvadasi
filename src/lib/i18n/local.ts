@@ -91,13 +91,17 @@ const TE: Record<string, TeV> = {
 const TE_END: Record<Exclude<Slot, '3f'>, string> = { '1s': 'ను', '1p': 'ము', '2s': 'వు', '2p': 'రు', '3m': 'డు', '3p': 'రు' }
 const TE_OBJ: Record<string, string> = { u0: 'నన్ను', pm0: 'అతన్ని', pf0: 'ఆమెను', p1: 'వాళ్ళిద్దర్నీ', p2: 'వాళ్ళని' }
 
-function teVerb(v: TeV, slot: Slot, when: WhenId): string {
+// Spoken Telugu drops the final syllable of the person ending: వెళ్తున్నా, వెళ్తున్నాం, వెళ్తున్నావ్.
+const TE_END_SP: Record<Exclude<Slot, '3f'>, string> = { '1s': '', '1p': 'ం', '2s': 'వ్', '2p': 'రు', '3m': 'డు', '3p': 'రు' }
+function teVerb(v: TeV, slot: Slot, when: WhenId, sp = false): string {
   const prog = v.hab.slice(0, -1) + 'ున్నా', progF = v.habF.replace(/ుంది$/, 'ోంది')
   const [stem, fem] = when === 'lat' ? [prog, progF] : when === 'lrt' ? [v.hab, v.habF] : [v.past, v.pastF]
-  return slot === '3f' ? fem : stem + TE_END[slot]
+  return slot === '3f' ? fem : stem + (sp ? TE_END_SP : TE_END)[slot]
 }
-function teLine(v: TeV, s: Subject, when: WhenId, tail: string): string {
-  const subj = PRON.te[s.per][s.gen][s.num], slot = slotOf(s)
+function teLine(v: TeV, s: Subject, when: WhenId, tail: string, sp = false): string {
+  const slot = slotOf(s)
+  let subj = PRON.te[s.per][s.gen][s.num]
+  if (sp) subj = subj.replace(/^మేము$/, 'మేం').replace(/^మీరు$/, 'మీరు')
   if (when === 'vidhi') return join([subj, tail, v.should]) + '.'
   if (when === 'lot') {
     if (s.per === 'm') return join([s.num ? subj : '', tail, s.num ? v.impPl : v.imp]) + '!'
@@ -105,7 +109,7 @@ function teLine(v: TeV, s: Subject, when: WhenId, tail: string): string {
     if (s.per === 'u') return s.num ? join([s.num === 1 ? 'మనిద్దరం' : 'మనం', tail, v.hort]) + '.' : join([TE_OBJ.u0, tail, v.let + 'నివ్వు']) + '.'
     return join([TE_OBJ[s.num ? 'p' + s.num : 'p' + s.gen + '0'], tail, v.let + 'నివ్వు']) + '.'
   }
-  return join([subj, tail, teVerb(v, slot, when)]) + '.'
+  return join([subj, tail, teVerb(v, slot, when, sp)]) + '.'
 }
 
 // ── Kannada ──────────────────────────────────────────────────────────────
@@ -132,11 +136,20 @@ const KN: Record<string, KnV> = {
   sit: { pr: 'ಕುಳಿತುಕೊಳ್ಳುತ್ತ', past: 'ಕುಳಿತುಕೊಂಡ', base: 'ಕುಳಿತುಕೊಳ್ಳ', imp: 'ಕುಳಿತುಕೊ', impPl: 'ಕುಳಿತುಕೊಳ್ಳಿ' },
   see: { pr: 'ನೋಡುತ್ತ', past: 'ನೋಡಿದ', base: 'ನೋಡ', imp: 'ನೋಡು', impPl: 'ನೋಡಿ' },
 }
+// Spoken (Bengaluru) Kannada: ಹೋಗ್ತಿದ್ದೀನಿ, ಹೋಗ್ತೀನಿ, ಹೋದ್ವಿ — a short stem per verb and the spoken endings.
+const KN_SP: Record<string, string> = {
+  getup: 'ಏಳ್ತ', wash: 'ತೊಳಿತ', drink: 'ಕುಡಿತ', read: 'ಓದ್ತ', go: 'ಹೋಗ್ತ', come: 'ಬರ್ತ', walk: 'ನಡಿತ', eat: 'ತಿನ್ತ', bring: 'ತರ್ತ',
+  speak: 'ಮಾತಾಡ್ತ', ask: 'ಕೇಳ್ತ', tell: 'ಹೇಳ್ತ', do: 'ಮಾಡ್ತ', know: 'ತಿಳ್ಕೊಳ್ತ', write: 'ಬರಿತ', get: 'ಪಡಿತ', sit: 'ಕೂತ್ಕೊಳ್ತ', see: 'ನೋಡ್ತ',
+}
+const KN_PR_SP: Record<Slot, string> = { '1s': 'ೀನಿ', '1p': 'ೀವಿ', '2s': 'ೀಯ', '2p': 'ೀರ', '3m': 'ಾನೆ', '3f': 'ಾಳೆ', '3p': 'ಾರೆ' }
+const KN_PROG_SP: Record<Slot, string> = { '1s': 'ಿದ್ದೀನಿ', '1p': 'ಿದ್ದೀವಿ', '2s': 'ಿದ್ದೀಯ', '2p': 'ಿದ್ದೀರ', '3m': 'ಿದ್ದಾನೆ', '3f': 'ಿದ್ದಾಳೆ', '3p': 'ಿದ್ದಾರೆ' }
+const KN_PAST_SP: Record<Slot, string> = { '1s': 'ೆ', '1p': '್ವಿ', '2s': 'ೆ', '2p': '್ರಿ', '3m': '', '3f': '್ಳು', '3p': '್ರು' }
 const KN_PR: Record<Slot, string> = { '1s': 'ೇನೆ', '1p': 'ೇವೆ', '2s': 'ೀಯ', '2p': 'ೀರಿ', '3m': 'ಾನೆ', '3f': 'ಾಳೆ', '3p': 'ಾರೆ' }
 const KN_PAST: Record<Slot, string> = { '1s': 'ೆ', '1p': 'ೆವು', '2s': 'ೆ', '2p': 'ಿರಿ', '3m': 'ನು', '3f': 'ಳು', '3p': 'ರು' }
 
-function knLine(v: KnV, s: Subject, when: WhenId, tail: string): string {
+function knLine(v: KnV, s: Subject, when: WhenId, tail: string, sp = false, key = ''): string {
   const subj = PRON.kn[s.per][s.gen][s.num], slot = slotOf(s)
+  const spStem = sp ? KN_SP[key] : undefined
   if (when === 'vidhi') return join([subj, tail, v.base + 'ಬೇಕು']) + '.'
   if (when === 'lot') {
     if (s.per === 'm') return join([s.num ? subj : '', tail, s.num ? v.impPl : v.imp]) + '!'
@@ -144,7 +157,9 @@ function knLine(v: KnV, s: Subject, when: WhenId, tail: string): string {
     if (s.per === 'u' && s.num) return join([s.num === 1 ? 'ನಾವಿಬ್ಬರೂ' : 'ನಾವು', tail, v.base + 'ೋಣ']) + '.'
     return join([subj, tail, v.base + 'ಲಿ']) + '.'
   }
-  const verb = when === 'lat' ? v.pr + 'ಿದ್ದ' + KN_PR[slot] : when === 'lrt' ? v.pr + KN_PR[slot] : v.past + KN_PAST[slot]
+  const verb = spStem
+    ? (when === 'lat' ? spStem + KN_PROG_SP[slot] : when === 'lrt' ? spStem + KN_PR_SP[slot] : v.past + KN_PAST_SP[slot])
+    : (when === 'lat' ? v.pr + 'ಿದ್ದ' + KN_PR[slot] : when === 'lrt' ? v.pr + KN_PR[slot] : v.past + KN_PAST[slot])
   return join([subj, tail, verb]) + '.'
 }
 
@@ -172,16 +187,34 @@ const TA: Record<string, TaV> = {
   sit: { pres: 'உட்கார்கிற', fut: 'உட்காருவ', past: 'உட்கார்ந்த', base: 'உட்கார', imp: 'உட்கார்', impPl: 'உட்காருங்கள்' },
   see: { pres: 'பார்க்கிற', fut: 'பார்ப்ப', past: 'பார்த்த', base: 'பார்க்க', imp: 'பார்', impPl: 'பாருங்கள்' },
 }
+// Spoken (Chennai) Tamil: போறேன், போறீங்க, போனாங்க; நீங்க, அவங்க; போகணும்.
+const TA_SP: Record<string, { pres: string; past?: string }> = {
+  getup: { pres: 'எழுந்திருக்கற' }, wash: { pres: 'கழுவற' }, drink: { pres: 'குடிக்கற', past: 'குடிச்ச' }, read: { pres: 'படிக்கற', past: 'படிச்ச' },
+  go: { pres: 'போற' }, come: { pres: 'வர்ற' }, walk: { pres: 'நடக்கற' }, eat: { pres: 'சாப்பிடற' }, bring: { pres: 'கொண்டுவர்ற' },
+  speak: { pres: 'பேசற' }, ask: { pres: 'கேக்கற' }, tell: { pres: 'சொல்ற' }, do: { pres: 'செய்ற' }, know: { pres: 'தெரிஞ்சுக்கற', past: 'தெரிஞ்சுக்கிட்ட' },
+  write: { pres: 'எழுதற' }, get: { pres: 'வாங்கற', past: 'வாங்கின' }, sit: { pres: 'உக்கார்ற', past: 'உக்காந்த' }, see: { pres: 'பாக்கற', past: 'பாத்த' },
+}
+const TA_END_SP: Record<Slot, string> = { '1s': 'ேன்', '1p': 'ோம்', '2s': 'ே', '2p': 'ீங்க', '3m': 'ான்', '3f': 'ா', '3p': 'ாங்க' }
+const TA_PRON_SP: Record<string, string> = { 'நாங்கள்': 'நாங்க', 'நாங்கள் இருவரும்': 'நாங்க ரெண்டு பேரும்', 'நீங்கள்': 'நீங்க', 'நீங்கள் இருவரும்': 'நீங்க ரெண்டு பேரும்', 'நீங்கள் அனைவரும்': 'நீங்க எல்லாரும்', 'அவர்கள்': 'அவங்க', 'அவர்கள் இருவரும்': 'அவங்க ரெண்டு பேரும்' }
 const TA_END: Record<Slot, string> = { '1s': 'ேன்', '1p': 'ோம்', '2s': 'ாய்', '2p': 'ீர்கள்', '3m': 'ான்', '3f': 'ாள்', '3p': 'ார்கள்' }
 
-function taLine(v: TaV, s: Subject, when: WhenId, tail: string): string {
-  const subj = PRON.ta[s.per][s.gen][s.num], slot = slotOf(s)
-  if (when === 'vidhi') return join([subj, tail, v.base, 'வேண்டும்']) + '.'
+function taLine(v: TaV, s: Subject, when: WhenId, tail: string, sp = false, key = ''): string {
+  const slot = slotOf(s)
+  let subj = PRON.ta[s.per][s.gen][s.num]
+  if (sp) subj = TA_PRON_SP[subj] || subj
+  if (when === 'vidhi') return sp ? join([subj, tail, v.base + 'ணும்']) + '.' : join([subj, tail, v.base, 'வேண்டும்']) + '.'
   if (when === 'lot') {
-    if (s.per === 'm') return join([s.num ? subj : '', tail, s.num ? v.impPl : v.imp]) + '!'
+    const impPl = sp ? v.impPl.replace(/ங்கள்$/, 'ங்க') : v.impPl
+    if (s.per === 'm') return join([s.num ? subj : '', tail, s.num ? impPl : v.imp]) + '!'
+    if (s.per === 'r' && sp) return join([tail, impPl]) + '.'
     if (s.per === 'r') return join(['தயவுசெய்து', tail, v.impPl]) + '.'
     if (s.per === 'u' && s.num) return join([s.num === 1 ? 'நாம் இருவரும்' : 'நாம்', tail, v.base + 'லாம்']) + '.'
     return join([subj, tail, v.base + 'ட்டும்']) + '.'
+  }
+  if (sp) {
+    const x = TA_SP[key]
+    const stem = when === 'lat' ? x?.pres || v.pres : when === 'lrt' ? v.fut : x?.past || v.past
+    return join([subj, tail, stem + TA_END_SP[slot]]) + '.'
   }
   const stem = when === 'lat' ? v.pres : when === 'lrt' ? v.fut : v.past
   return join([subj, tail, stem + TA_END[slot]]) + '.'
@@ -220,13 +253,15 @@ export const PHRASES: Record<string, P> = {
 }
 
 /** The sentence in Telugu / Kannada / Tamil, or null when the phrase has no translation yet. */
-export function localLine(lang: LocalLang, s: Subject, when: WhenId, e: { base: string; tail?: string | null }): string | null {
-  const p = PHRASES[`${e.base}|${e.tail || ''}`]?.[lang]
+export type Style = 'written' | 'spoken'
+/** The sentence in Telugu / Kannada / Tamil (written or everyday spoken style), or null when the phrase has no translation yet. */
+export function localLine(lang: LocalLang, s: Subject, when: WhenId, e: { base: string; tail?: string | null; local?: Partial<Record<LocalLang, [string, string]>> | null }, style: Style = 'written'): string | null {
+  const p = e.local?.[lang] || PHRASES[`${e.base}|${e.tail || ''}`]?.[lang]
   if (!p) return null
-  const [verb, tail] = p
-  if (lang === 'te') return TE[verb] ? teLine(TE[verb], s, when, tail) : null
-  if (lang === 'kn') return KN[verb] ? knLine(KN[verb], s, when, tail) : null
-  return TA[verb] ? taLine(TA[verb], s, when, tail) : null
+  const [verb, tail] = p, sp = style === 'spoken'
+  if (lang === 'te') return TE[verb] ? teLine(TE[verb], s, when, tail, sp) : null
+  if (lang === 'kn') return KN[verb] ? knLine(KN[verb], s, when, tail, sp, verb) : null
+  return TA[verb] ? taLine(TA[verb], s, when, tail, sp, verb) : null
 }
 
 // ── verb meanings (everyday verbs) ───────────────────────────────────────

@@ -38,7 +38,7 @@ export function Dock() {
               </button>
             ))}
           </div>
-          <div role="group" aria-label={t('dock.gender')} className="seg" style={{ opacity: genderMatters ? 1 : 0.55 }}>
+          <div role="group" aria-label={t('dock.gender')} className="seg" style={{ opacity: genderMatters ? 1 : 0.8, borderStyle: genderMatters ? undefined : 'dashed' }}>
             {GENDERS.map((g) => (
               <button key={g.id} aria-pressed={g.id === gen} onClick={() => set({ gen: g.id })} className={cn(btn, g.id === gen && 'bg-ink text-stone')}>
                 <span className="text-sm font-semibold">{t(`gen.${g.id}`)}</span><span className="text-[11px]" style={{ fontFamily: skf }}>{toScript(g.sk, sc)}</span>

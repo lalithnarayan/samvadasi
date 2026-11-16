@@ -86,6 +86,23 @@ def participle(d: Dhatu) -> dict:
             out[key].append(_clean([x.text for x in _v.derive(Pada.Subanta(ktavatu, lg, Vibhakti.Prathama, n))]))
     return out
 
+KRDANTA = {  # app id -> (Vidyut krt, linga of the quoted form). ktvā becomes lyap (-य) by itself after a prefix.
+    'ktva': (Krt.ktvA, Linga.Pum), 'tumun': (Krt.tumun, Linga.Pum), 'shatr': (Krt.Satf, Linga.Pum),
+    'shanac': (Krt.SAnac, Linga.Pum), 'tavya': (Krt.tavya, Linga.Napumsaka), 'aniya': (Krt.anIyar, Linga.Napumsaka),
+}
+
+def krdanta(d: Dhatu) -> dict:
+    """Non-finite forms: गत्वा / आगत्य, गन्तुम्, गच्छन्, (शानच्), गन्तव्यम्, गमनीयम्. Missing ones are left out."""
+    out = {}
+    for key, (k, lg) in KRDANTA.items():
+        try:
+            f = _clean([x.text for x in _v.derive(Pada.Subanta(Pratipadika.krdanta(d, k), lg, Vibhakti.Prathama, Vacana.Eka))])
+        except Exception:
+            f = []
+        if f:
+            out[key] = f
+    return out
+
 def generate(aupadeshika: str, gana: int, prefixes: list[str] | None = None, lakaras: list[str] | None = None) -> dict:
     """Every form of one dhātu: forms[lakara][pada] = 9 lists of variants; plus participles."""
     d = make_dhatu(aupadeshika, gana, prefixes)
@@ -95,7 +112,7 @@ def generate(aupadeshika: str, gana: int, prefixes: list[str] | None = None, lak
         part = participle(d)
     except Exception:  # a few roots have no क्त in Vidyut yet
         part = None
-    return {'root': root_of(make_dhatu(aupadeshika, gana)), 'padas': padas, 'forms': forms, 'participle': part}
+    return {'root': root_of(make_dhatu(aupadeshika, gana)), 'padas': padas, 'forms': forms, 'participle': part, 'krdanta': krdanta(d)}
 
 SANADI = {'nic': Sanadi.Ric, 'san': Sanadi.san, 'yan': Sanadi.yaN}
 

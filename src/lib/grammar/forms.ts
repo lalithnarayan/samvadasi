@@ -92,3 +92,13 @@ export function joinWords(ws: string[]): string[] {
   }
   return out
 }
+
+const MATRA_VOWEL: Record<string, string> = { 'ा': 'आ', 'ि': 'इ', 'ी': 'ई', 'ु': 'उ', 'ू': 'ऊ', 'ृ': 'ऋ', 'े': 'ए', 'ै': 'ऐ', 'ो': 'ओ', 'ौ': 'औ' }
+/** "अकारान्त पुंलिङ्ग", "इकारान्त स्त्रीलिङ्ग", "तकारान्त नपुंसकलिङ्ग" — the pattern a noun follows. */
+export function nounPattern(display: string, gender: 'm' | 'f' | 'n', kind = 'noun'): string {
+  if (kind === 'pronoun') return 'सर्वनाम'
+  const last = display.slice(-1), prev = display.slice(-2, -1)
+  const v = last === '्' ? prev : MATRA_VOWEL[last] || (/[क-ह]/.test(last) ? 'अ' : last)
+  return `${v}कारान्त ${{ m: 'पुंलिङ्ग', f: 'स्त्रीलिङ्ग', n: 'नपुंसकलिङ्ग' }[gender]}`
+}
+export const VIBHAKTI = ['प्रथमा', 'द्वितीया', 'तृतीया', 'चतुर्थी', 'पञ्चमी', 'षष्ठी', 'सप्तमी', 'सम्बोधन']

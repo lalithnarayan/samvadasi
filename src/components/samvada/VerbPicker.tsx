@@ -24,13 +24,13 @@ export function VerbPicker({ current }: { current: string }) {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <button className="pill flex min-h-14 w-full items-center justify-between rounded-full border border-ink/25 bg-paper px-5 text-left text-[17px]">
-          <span><span className="font-bold">{current}</span> <span className="opacity-60">· {t('vb.choose')}</span></span>
+          <span><span className="font-bold">{current}</span> <span className="opacity-75">· {t('vb.choose')}</span></span>
           <span aria-hidden>⌄</span>
         </button>
       </PopoverTrigger>
       <PopoverContent className="w-[min(560px,92vw)] p-0" align="start">
         <Command shouldFilter={false}>
-          <CommandInput placeholder="go, eat, गम्, गतौ, 01.1137…" value={q} onValueChange={setQ} />
+          <CommandInput placeholder={t('v.searchPh')} value={q} onValueChange={setQ} />
           <CommandList>
             <CommandEmpty>{t('vb.noFound')}</CommandEmpty>
             <CommandGroup>
@@ -38,7 +38,7 @@ export function VerbPicker({ current }: { current: string }) {
                 <CommandItem key={h.slug} value={h.slug} onSelect={() => { setOpen(false); router.push(`/verb/${h.slug}${query}`) }} className="flex items-baseline gap-3">
                   <span className="text-lg font-bold" style={{ fontFamily: `var(--font-sk-${sc})` }}>{toScript(h.display, sc)}</span>
                   <span className="flex-1 truncate">{h.meaning}</span>
-                  <span className="text-xs opacity-60">{h.code}</span>
+                  <span className="text-xs opacity-75">{h.code}</span>
                 </CommandItem>
               ))}
             </CommandGroup>

@@ -8,6 +8,7 @@ import { DEEP, TINT, useSamvada } from '@/components/samvada/state'
 import { Word } from '@/components/samvada/Word'
 import { SiteNav } from '@/components/samvada/SiteNav'
 import { Dock } from '@/components/samvada/Dock'
+import { Footer } from '@/components/samvada/Footer'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 
@@ -39,20 +40,21 @@ export function VerbsClient({ rows: allRows, q, scope, page, pages, found, total
   return (
     <>
       <SiteNav />
-      <main className="wrap flex flex-col gap-7 pt-[clamp(24px,4vw,56px)] pb-[72px]">
+      <main id="main" tabIndex={-1} className="wrap outline-none flex flex-col gap-7 pt-[clamp(24px,4vw,56px)] pb-[72px]">
         <div className="grid items-end gap-6 lg:grid-cols-2 lg:gap-16">
-          <div className="flex flex-col gap-3.5">
+          <div className="flex min-w-0 flex-col gap-3.5">
             <span className="eyebrow" style={{ color: DEEP[subj.color] }}>{t('nav.verbs')}</span>
             <h1 className="disp m-0 text-[clamp(44px,6.4vw,96px)] leading-[0.95] font-extrabold">{scope === 'everyday' ? t('v.everyday', { n: found }) : scope === 'prefixed' ? t('v.prefixedH', { n: found }) : t('v.dhatus', { n: total.toLocaleString('en-IN') })}</h1>
             <p className="m-0 max-w-[520px] text-lg leading-relaxed">{t('v.showing', { when: `${toScript(w.name, sc)} ${t(`when.${w.id}`)}`, count: t(`v.c${num}`) })}</p>
           </div>
-          <form className="flex flex-col gap-3" onSubmit={(e) => { e.preventDefault(); go({ q: text, scope: text ? 'all' : scope, page: '' }) }}>
-            <label htmlFor="vq" className="eyebrow text-[11px] opacity-70">{t('v.find')}</label>
+          <form className="flex min-w-0 flex-col gap-3" onSubmit={(e) => { e.preventDefault(); go({ q: text, scope: text ? 'all' : scope, page: '' }) }}>
+            <label htmlFor="vq" className="eyebrow text-[11px] opacity-80">{t('v.find')}</label>
             <div className="flex gap-2">
-              <Input id="vq" type="search" value={text} onChange={(e) => setText(e.target.value)} placeholder="go, eat, गम्, 01.1137…" className="h-14 rounded-full bg-paper px-5 text-[17px]" />
+              <Input id="vq" type="search" value={text} onChange={(e) => setText(e.target.value)} placeholder={t('v.searchPh')} aria-describedby="vq-hint" className="h-14 min-w-0 rounded-full bg-paper px-5 text-[17px]" />
               <button className="pill h-14 shrink-0 rounded-full bg-ink px-6 text-[15px] font-semibold text-stone">{t('v.search')}</button>
             </div>
-            <div role="group" aria-label={t('v.which')} className="seg self-start">
+            <p id="vq-hint" className="m-0 text-[13px] opacity-75">{t('v.searchHint')}</p>
+            <div role="group" aria-label={t('v.which')} className="seg flex-wrap self-start rounded-[26px]">
               {(['everyday', 'prefixed', 'all'] as const).map((s) => (
                 <button type="button" key={s} aria-pressed={scope === s} onClick={() => { setText(''); setRootPick(''); go({ scope: s === 'everyday' ? '' : s, q: '', page: '' }) }}
                   className={cn('pill min-h-11 rounded-full px-4 text-sm font-semibold', scope === s && 'bg-ink text-stone')}>
@@ -62,7 +64,7 @@ export function VerbsClient({ rows: allRows, q, scope, page, pages, found, total
             </div>
             {scope === 'prefixed' && roots.length > 1 && (
               <div className="flex flex-col gap-2">
-                <span className="eyebrow text-[11px] opacity-70">{t('v.filterRoot')}</span>
+                <span className="eyebrow text-[11px] opacity-80">{t('v.filterRoot')}</span>
                 <div role="group" aria-label={t('v.filterRoot')} className="flex flex-wrap gap-1.5">
                   {['', ...roots].map((r) => (
                     <button type="button" key={r || 'all'} aria-pressed={rootPick === r} onClick={() => setRootPick(r)}
@@ -80,7 +82,7 @@ export function VerbsClient({ rows: allRows, q, scope, page, pages, found, total
             <table className="w-full min-w-[760px] border-collapse text-left">
               <thead>
                 <tr className="border-b border-ink/20">
-                  <th scope="col" className="sticky left-0 z-[2] bg-paper py-4 pr-4 pl-6"><span className="eyebrow text-[11px] opacity-70">{t('v.dhatu')}</span></th>
+                  <th scope="col" className="sticky left-0 z-[2] bg-paper py-4 pr-4 pl-6"><span className="eyebrow text-[11px] opacity-80">{t('v.dhatu')}</span></th>
                   {cols.map((c: any) => {
                     const color = kta ? subj.color : c.c
                     const on = kta ? c.g === gen : c.c === subj.color
@@ -99,7 +101,7 @@ export function VerbsClient({ rows: allRows, q, scope, page, pages, found, total
                     <th scope="row" className="sticky left-0 z-[1] bg-paper py-3 pr-4 pl-6 font-normal">
                       <Link href={`/verb/${d.slug}${query}`} className="flex flex-col gap-0.5 no-underline hover:underline">
                         <span className="text-[22px] leading-normal font-bold" style={{ fontFamily: font }}>{toScript(d.display, sc)}</span>
-                        {(() => { const m = meaningOf(d, lang, sc); return <span className="text-[13px] opacity-75">{m.main}{m.sub && <span className="opacity-70"> · {m.sub}</span>} <span className="ml-1 rounded-full border border-ink/30 px-1.5 text-[10px] font-bold tracking-wider uppercase">{d.irregular ? t('v.irregular') : toScript(padaOf(d) === 'A' ? 'आत्मने' : 'परस्मै', sc)} · {d.gana}</span></span> })()}
+                        {(() => { const m = meaningOf(d, lang, sc); return <span className="text-[13px] opacity-75">{m.main}{m.sub && <span className="opacity-80"> · {m.sub}</span>} <span className="ml-1 rounded-full border border-ink/30 px-1.5 text-[10px] font-bold tracking-wider uppercase">{d.irregular ? t('v.irregular') : toScript(padaOf(d) === 'A' ? 'आत्मने' : 'परस्मै', sc)} · {d.gana}</span></span> })()}
                       </Link>
                     </th>
                     {cols.map((c: any) => {
@@ -110,9 +112,9 @@ export function VerbsClient({ rows: allRows, q, scope, page, pages, found, total
                         <td key={c.sk} className="px-4 py-3 align-middle" style={{ background: on ? 'rgb(36 33 29 / .035)' : undefined }}>
                           {cell ? <>
                             <Word stem={cell.stem} end={cell.end} color={DEEP[color as 'u']} delay={Math.min(ri * 18, 300)} className="block text-[22px] leading-relaxed font-semibold whitespace-nowrap" style={{ fontFamily: font }} />
-                            {tr && <span className="text-xs italic opacity-60">{iast(cell.form)}</span>}
-                            {cell.also.length > 0 && <span className="block text-xs opacity-70">{t('v.also')} {cell.also.map((a) => `${toScript(a.form, sc)} (${t(`lbl.${a.label}` as UIKey)})`).join(', ')}</span>}
-                          </> : <span className="text-sm opacity-50">—</span>}
+                            {tr && <span className="text-xs italic opacity-75">{iast(cell.form)}</span>}
+                            {cell.also.length > 0 && <span className="block text-xs opacity-80">{t('v.also')} {cell.also.map((a) => `${toScript(a.form, sc)} (${t(`lbl.${a.label}` as UIKey)})`).join(', ')}</span>}
+                          </> : <span className="text-sm opacity-75">—</span>}
                         </td>
                       )
                     })}
@@ -139,6 +141,7 @@ export function VerbsClient({ rows: allRows, q, scope, page, pages, found, total
           {kta ? t('v.footKta') : t('v.footLat')}
         </p>
       </main>
+      <Footer />
       <Dock />
     </>
   )

@@ -1,30 +1,2434 @@
 [
- {"display":"तद्","stemSlp1":"tad","gender":"m","kind":"pronoun","meaning_en":"he, that"},
- {"display":"तद्","stemSlp1":"tad","gender":"f","kind":"pronoun","meaning_en":"she, that"},
- {"display":"अस्मद्","stemSlp1":"asmad","gender":"m","kind":"pronoun","meaning_en":"I, we"},
- {"display":"युष्मद्","stemSlp1":"yuzmad","gender":"m","kind":"pronoun","meaning_en":"you"},
- {"display":"भवती","stemSlp1":"BavatI","gender":"f","kind":"pronoun","meaning_en":"you (respectful, to a woman)"},
- {"display":"भवत्","stemSlp1":"Bavat","gender":"m","kind":"pronoun","meaning_en":"you (respectful, to a man)","manual":[[["भवान्"],["भवन्तौ"],["भवन्तः"]],[["भवन्तम्"],["भवन्तौ"],["भवतः"]],[["भवता"],["भवद्भ्याम्"],["भवद्भिः"]],[["भवते"],["भवद्भ्याम्"],["भवद्भ्यः"]],[["भवतः"],["भवद्भ्याम्"],["भवद्भ्यः"]],[["भवतः"],["भवतोः"],["भवताम्"]],[["भवति"],["भवतोः"],["भवत्सु"]],[["भवन्"],["भवन्तौ"],["भवन्तः"]]],"note":"Vidyut does not yet derive the pronoun भवत्; this standard table is hand-checked."},
- {"display":"विद्यालय","stemSlp1":"vidyAlaya","gender":"m","meaning_en":"school"},
- {"display":"आपण","stemSlp1":"ApaRa","gender":"m","meaning_en":"shop, market"},
- {"display":"गृह","stemSlp1":"gfha","gender":"n","meaning_en":"house, home"},
- {"display":"उद्यान","stemSlp1":"udyAna","gender":"n","meaning_en":"garden"},
- {"display":"मुख","stemSlp1":"muKa","gender":"n","meaning_en":"face, mouth"},
- {"display":"चाय","stemSlp1":"cAya","gender":"m","meaning_en":"tea (modern word)"},
- {"display":"वार्तापत्र","stemSlp1":"vArtApatra","gender":"n","meaning_en":"newspaper"},
- {"display":"ओदन","stemSlp1":"odana","gender":"m","meaning_en":"cooked rice"},
- {"display":"भोजन","stemSlp1":"Bojana","gender":"n","meaning_en":"food, meal"},
- {"display":"जल","stemSlp1":"jala","gender":"n","meaning_en":"water"},
- {"display":"दुग्ध","stemSlp1":"dugDa","gender":"n","meaning_en":"milk"},
- {"display":"संस्कृत","stemSlp1":"saMskfta","gender":"n","meaning_en":"Sanskrit"},
- {"display":"प्रश्न","stemSlp1":"praSna","gender":"m","meaning_en":"question"},
- {"display":"कथा","stemSlp1":"kaTA","gender":"f","meaning_en":"story"},
- {"display":"कार्य","stemSlp1":"kArya","gender":"n","meaning_en":"work, task"},
- {"display":"उत्तर","stemSlp1":"uttara","gender":"n","meaning_en":"answer"},
- {"display":"पत्र","stemSlp1":"patra","gender":"n","meaning_en":"letter, leaf"},
- {"display":"वेतन","stemSlp1":"vetana","gender":"n","meaning_en":"salary"},
- {"display":"पुस्तक","stemSlp1":"pustaka","gender":"n","meaning_en":"book"},
- {"display":"फल","stemSlp1":"Pala","gender":"n","meaning_en":"fruit"},
- {"display":"चित्र","stemSlp1":"citra","gender":"n","meaning_en":"picture"},
- {"display":"मातृ","stemSlp1":"mAtf","gender":"f","meaning_en":"mother"}
+ {
+  "display": "तद्",
+  "stemSlp1": "tad",
+  "gender": "m",
+  "kind": "pronoun",
+  "meaning_en": "he, that",
+  "cat": "pronoun",
+  "meanings": {
+   "te": "వాడు, అతను",
+   "kn": "ಅವನು",
+   "ta": "அவன்"
+  },
+  "order": 1
+ },
+ {
+  "display": "तद्",
+  "stemSlp1": "tad",
+  "gender": "f",
+  "kind": "pronoun",
+  "meaning_en": "she, that",
+  "cat": "pronoun",
+  "meanings": {
+   "te": "ఆమె",
+   "kn": "ಅವಳು",
+   "ta": "அவள்"
+  },
+  "order": 2
+ },
+ {
+  "display": "अस्मद्",
+  "stemSlp1": "asmad",
+  "gender": "m",
+  "kind": "pronoun",
+  "meaning_en": "I, we",
+  "cat": "pronoun",
+  "meanings": {
+   "te": "నేను, మేము",
+   "kn": "ನಾನು, ನಾವು",
+   "ta": "நான், நாங்கள்"
+  },
+  "order": 3
+ },
+ {
+  "display": "युष्मद्",
+  "stemSlp1": "yuzmad",
+  "gender": "m",
+  "kind": "pronoun",
+  "meaning_en": "you",
+  "cat": "pronoun",
+  "meanings": {
+   "te": "నువ్వు, మీరు",
+   "kn": "ನೀನು, ನೀವು",
+   "ta": "நீ, நீங்கள்"
+  },
+  "order": 4
+ },
+ {
+  "display": "भवती",
+  "stemSlp1": "BavatI",
+  "gender": "f",
+  "kind": "pronoun",
+  "meaning_en": "you (respectful, to a woman)",
+  "cat": "pronoun",
+  "meanings": {
+   "te": "మీరు (ఆమెతో)",
+   "kn": "ನೀವು (ಹೆಂಗಸಿಗೆ)",
+   "ta": "நீங்கள் (பெண்ணிடம்)"
+  },
+  "order": 5
+ },
+ {
+  "display": "भवत्",
+  "stemSlp1": "Bavat",
+  "gender": "m",
+  "kind": "pronoun",
+  "meaning_en": "you (respectful, to a man)",
+  "manual": [
+   [
+    [
+     "भवान्"
+    ],
+    [
+     "भवन्तौ"
+    ],
+    [
+     "भवन्तः"
+    ]
+   ],
+   [
+    [
+     "भवन्तम्"
+    ],
+    [
+     "भवन्तौ"
+    ],
+    [
+     "भवतः"
+    ]
+   ],
+   [
+    [
+     "भवता"
+    ],
+    [
+     "भवद्भ्याम्"
+    ],
+    [
+     "भवद्भिः"
+    ]
+   ],
+   [
+    [
+     "भवते"
+    ],
+    [
+     "भवद्भ्याम्"
+    ],
+    [
+     "भवद्भ्यः"
+    ]
+   ],
+   [
+    [
+     "भवतः"
+    ],
+    [
+     "भवद्भ्याम्"
+    ],
+    [
+     "भवद्भ्यः"
+    ]
+   ],
+   [
+    [
+     "भवतः"
+    ],
+    [
+     "भवतोः"
+    ],
+    [
+     "भवताम्"
+    ]
+   ],
+   [
+    [
+     "भवति"
+    ],
+    [
+     "भवतोः"
+    ],
+    [
+     "भवत्सु"
+    ]
+   ],
+   [
+    [
+     "भवन्"
+    ],
+    [
+     "भवन्तौ"
+    ],
+    [
+     "भवन्तः"
+    ]
+   ]
+  ],
+  "note": "Vidyut does not yet derive the pronoun भवत्; this standard table is hand-checked.",
+  "cat": "pronoun",
+  "meanings": {
+   "te": "మీరు (అతనితో)",
+   "kn": "ನೀವು (ಗಂಡಸಿಗೆ)",
+   "ta": "நீங்கள் (ஆணிடம்)"
+  },
+  "order": 6
+ },
+ {
+  "display": "विद्यालय",
+  "stemSlp1": "vidyAlaya",
+  "gender": "m",
+  "meaning_en": "school",
+  "cat": "place",
+  "meanings": {
+   "te": "బడి",
+   "kn": "ಶಾಲೆ",
+   "ta": "பள்ளி"
+  },
+  "order": 7
+ },
+ {
+  "display": "आपण",
+  "stemSlp1": "ApaRa",
+  "gender": "m",
+  "meaning_en": "shop, market",
+  "cat": "place",
+  "meanings": {
+   "te": "కొట్టు, షాపు",
+   "kn": "ಅಂಗಡಿ",
+   "ta": "கடை"
+  },
+  "order": 8
+ },
+ {
+  "display": "गृह",
+  "stemSlp1": "gfha",
+  "gender": "n",
+  "meaning_en": "house, home",
+  "cat": "home",
+  "meanings": {
+   "te": "ఇల్లు",
+   "kn": "ಮನೆ",
+   "ta": "வீடு"
+  },
+  "order": 9
+ },
+ {
+  "display": "उद्यान",
+  "stemSlp1": "udyAna",
+  "gender": "n",
+  "meaning_en": "garden",
+  "cat": "place",
+  "meanings": {
+   "te": "తోట, పార్కు",
+   "kn": "ಉದ್ಯಾನ",
+   "ta": "பூங்கா"
+  },
+  "order": 10
+ },
+ {
+  "display": "मुख",
+  "stemSlp1": "muKa",
+  "gender": "n",
+  "meaning_en": "face, mouth",
+  "cat": "body",
+  "meanings": {
+   "te": "ముఖం",
+   "kn": "ಮುಖ",
+   "ta": "முகம்"
+  },
+  "order": 11
+ },
+ {
+  "display": "चाय",
+  "stemSlp1": "cAya",
+  "gender": "m",
+  "meaning_en": "tea (modern word)",
+  "cat": "food",
+  "meanings": {
+   "te": "టీ",
+   "kn": "ಚಹಾ",
+   "ta": "டீ"
+  },
+  "order": 12
+ },
+ {
+  "display": "वार्तापत्र",
+  "stemSlp1": "vArtApatra",
+  "gender": "n",
+  "meaning_en": "newspaper",
+  "cat": "study",
+  "meanings": {
+   "te": "పేపరు",
+   "kn": "ಪತ್ರಿಕೆ",
+   "ta": "செய்தித்தாள்"
+  },
+  "order": 13
+ },
+ {
+  "display": "ओदन",
+  "stemSlp1": "odana",
+  "gender": "m",
+  "meaning_en": "cooked rice",
+  "cat": "food",
+  "meanings": {
+   "te": "అన్నం",
+   "kn": "ಅನ್ನ",
+   "ta": "சோறு"
+  },
+  "order": 14
+ },
+ {
+  "display": "भोजन",
+  "stemSlp1": "Bojana",
+  "gender": "n",
+  "meaning_en": "food, meal",
+  "cat": "food",
+  "meanings": {
+   "te": "భోజనం",
+   "kn": "ಊಟ",
+   "ta": "சாப்பாடு"
+  },
+  "order": 15
+ },
+ {
+  "display": "जल",
+  "stemSlp1": "jala",
+  "gender": "n",
+  "meaning_en": "water",
+  "cat": "food",
+  "meanings": {
+   "te": "నీళ్ళు",
+   "kn": "ನೀರು",
+   "ta": "தண்ணீர்"
+  },
+  "order": 16
+ },
+ {
+  "display": "दुग्ध",
+  "stemSlp1": "dugDa",
+  "gender": "n",
+  "meaning_en": "milk",
+  "cat": "food",
+  "meanings": {
+   "te": "పాలు",
+   "kn": "ಹಾಲು",
+   "ta": "பால்"
+  },
+  "order": 17
+ },
+ {
+  "display": "संस्कृत",
+  "stemSlp1": "saMskfta",
+  "gender": "n",
+  "meaning_en": "Sanskrit",
+  "cat": "study",
+  "meanings": {
+   "te": "సంస్కృతం",
+   "kn": "ಸಂಸ್ಕೃತ",
+   "ta": "சம்ஸ்கிருதம்"
+  },
+  "order": 18
+ },
+ {
+  "display": "प्रश्न",
+  "stemSlp1": "praSna",
+  "gender": "m",
+  "meaning_en": "question",
+  "cat": "study",
+  "meanings": {
+   "te": "ప్రశ్న",
+   "kn": "ಪ್ರಶ್ನೆ",
+   "ta": "கேள்வி"
+  },
+  "order": 19
+ },
+ {
+  "display": "कथा",
+  "stemSlp1": "kaTA",
+  "gender": "f",
+  "meaning_en": "story",
+  "cat": "study",
+  "meanings": {
+   "te": "కథ",
+   "kn": "ಕಥೆ",
+   "ta": "கதை"
+  },
+  "order": 20
+ },
+ {
+  "display": "कार्य",
+  "stemSlp1": "kArya",
+  "gender": "n",
+  "meaning_en": "work, task",
+  "cat": "life",
+  "meanings": {
+   "te": "పని",
+   "kn": "ಕೆಲಸ",
+   "ta": "வேலை"
+  },
+  "order": 21
+ },
+ {
+  "display": "उत्तर",
+  "stemSlp1": "uttara",
+  "gender": "n",
+  "meaning_en": "answer",
+  "cat": "study",
+  "meanings": {
+   "te": "జవాబు",
+   "kn": "ಉತ್ತರ",
+   "ta": "பதில்"
+  },
+  "order": 22
+ },
+ {
+  "display": "पत्र",
+  "stemSlp1": "patra",
+  "gender": "n",
+  "meaning_en": "letter, leaf",
+  "cat": "study",
+  "meanings": {
+   "te": "ఉత్తరం",
+   "kn": "ಪತ್ರ",
+   "ta": "கடிதம்"
+  },
+  "order": 23
+ },
+ {
+  "display": "वेतन",
+  "stemSlp1": "vetana",
+  "gender": "n",
+  "meaning_en": "salary",
+  "cat": "life",
+  "meanings": {
+   "te": "జీతం",
+   "kn": "ಸಂಬಳ",
+   "ta": "சம்பளம்"
+  },
+  "order": 24
+ },
+ {
+  "display": "पुस्तक",
+  "stemSlp1": "pustaka",
+  "gender": "n",
+  "meaning_en": "book",
+  "cat": "study",
+  "meanings": {
+   "te": "పుస్తకం",
+   "kn": "ಪುಸ್ತಕ",
+   "ta": "புத்தகம்"
+  },
+  "order": 25
+ },
+ {
+  "display": "फल",
+  "stemSlp1": "Pala",
+  "gender": "n",
+  "meaning_en": "fruit",
+  "cat": "food",
+  "meanings": {
+   "te": "పండు",
+   "kn": "ಹಣ್ಣು",
+   "ta": "பழம்"
+  },
+  "order": 26
+ },
+ {
+  "display": "चित्र",
+  "stemSlp1": "citra",
+  "gender": "n",
+  "meaning_en": "picture",
+  "cat": "home",
+  "meanings": {
+   "te": "బొమ్మ, ఫోటో",
+   "kn": "ಚಿತ್ರ",
+   "ta": "படம்"
+  },
+  "order": 27
+ },
+ {
+  "display": "मातृ",
+  "stemSlp1": "mAtf",
+  "gender": "f",
+  "meaning_en": "mother",
+  "cat": "family",
+  "meanings": {
+   "te": "అమ్మ",
+   "kn": "ಅಮ್ಮ",
+   "ta": "அம்மா"
+  },
+  "order": 28
+ },
+ {
+  "display": "पितृ",
+  "stemSlp1": "pitf",
+  "gender": "m",
+  "meaning_en": "father",
+  "cat": "family",
+  "meanings": {
+   "te": "నాన్న",
+   "kn": "ಅಪ್ಪ",
+   "ta": "அப்பா"
+  },
+  "order": 29
+ },
+ {
+  "display": "भ्रातृ",
+  "stemSlp1": "BrAtf",
+  "gender": "m",
+  "meaning_en": "brother",
+  "cat": "family",
+  "meanings": {
+   "te": "అన్నయ్య / తమ్ముడు",
+   "kn": "ಅಣ್ಣ / ತಮ್ಮ",
+   "ta": "அண்ணன் / தம்பி"
+  },
+  "order": 30
+ },
+ {
+  "display": "भगिनी",
+  "stemSlp1": "BaginI",
+  "gender": "f",
+  "meaning_en": "sister",
+  "cat": "family",
+  "meanings": {
+   "te": "అక్క / చెల్లి",
+   "kn": "ಅಕ್ಕ / ತಂಗಿ",
+   "ta": "அக்கா / தங்கை"
+  },
+  "order": 31
+ },
+ {
+  "display": "पुत्र",
+  "stemSlp1": "putra",
+  "gender": "m",
+  "meaning_en": "son",
+  "cat": "family",
+  "meanings": {
+   "te": "కొడుకు",
+   "kn": "ಮಗ",
+   "ta": "மகன்"
+  },
+  "order": 32
+ },
+ {
+  "display": "पुत्री",
+  "stemSlp1": "putrI",
+  "gender": "f",
+  "meaning_en": "daughter",
+  "cat": "family",
+  "meanings": {
+   "te": "కూతురు",
+   "kn": "ಮಗಳು",
+   "ta": "மகள்"
+  },
+  "order": 33
+ },
+ {
+  "display": "पति",
+  "stemSlp1": "pati",
+  "gender": "m",
+  "meaning_en": "husband",
+  "cat": "family",
+  "meanings": {
+   "te": "భర్త",
+   "kn": "ಗಂಡ",
+   "ta": "கணவர்"
+  },
+  "order": 34
+ },
+ {
+  "display": "पत्नी",
+  "stemSlp1": "patnI",
+  "gender": "f",
+  "meaning_en": "wife",
+  "cat": "family",
+  "meanings": {
+   "te": "భార్య",
+   "kn": "ಹೆಂಡತಿ",
+   "ta": "மனைவி"
+  },
+  "order": 35
+ },
+ {
+  "display": "पितामह",
+  "stemSlp1": "pitAmaha",
+  "gender": "m",
+  "meaning_en": "grandfather",
+  "cat": "family",
+  "meanings": {
+   "te": "తాతయ్య",
+   "kn": "ಅಜ್ಜ",
+   "ta": "தாத்தா"
+  },
+  "order": 36
+ },
+ {
+  "display": "पितामही",
+  "stemSlp1": "pitAmahI",
+  "gender": "f",
+  "meaning_en": "grandmother",
+  "cat": "family",
+  "meanings": {
+   "te": "నానమ్మ",
+   "kn": "ಅಜ್ಜಿ",
+   "ta": "பாட்டி"
+  },
+  "order": 37
+ },
+ {
+  "display": "मित्र",
+  "stemSlp1": "mitra",
+  "gender": "n",
+  "meaning_en": "friend",
+  "cat": "family",
+  "meanings": {
+   "te": "స్నేహితుడు",
+   "kn": "ಗೆಳೆಯ",
+   "ta": "நண்பர்"
+  },
+  "order": 38
+ },
+ {
+  "display": "बालक",
+  "stemSlp1": "bAlaka",
+  "gender": "m",
+  "meaning_en": "boy",
+  "cat": "family",
+  "meanings": {
+   "te": "అబ్బాయి",
+   "kn": "ಹುಡುಗ",
+   "ta": "பையன்"
+  },
+  "order": 39
+ },
+ {
+  "display": "बालिका",
+  "stemSlp1": "bAlikA",
+  "gender": "f",
+  "meaning_en": "girl",
+  "cat": "family",
+  "meanings": {
+   "te": "అమ్మాయి",
+   "kn": "ಹುಡುಗಿ",
+   "ta": "சிறுமி"
+  },
+  "order": 40
+ },
+ {
+  "display": "शिशु",
+  "stemSlp1": "SiSu",
+  "gender": "m",
+  "meaning_en": "baby",
+  "cat": "family",
+  "meanings": {
+   "te": "పాపాయి",
+   "kn": "ಮಗು",
+   "ta": "குழந்தை"
+  },
+  "order": 41
+ },
+ {
+  "display": "गुरु",
+  "stemSlp1": "guru",
+  "gender": "m",
+  "meaning_en": "teacher, guru",
+  "cat": "family",
+  "meanings": {
+   "te": "గురువు",
+   "kn": "ಗುರು",
+   "ta": "குரு"
+  },
+  "order": 42
+ },
+ {
+  "display": "अतिथि",
+  "stemSlp1": "atiTi",
+  "gender": "m",
+  "meaning_en": "guest",
+  "cat": "family",
+  "meanings": {
+   "te": "అతిథి",
+   "kn": "ಅತಿಥಿ",
+   "ta": "விருந்தினர்"
+  },
+  "order": 43
+ },
+ {
+  "display": "जन",
+  "stemSlp1": "jana",
+  "gender": "m",
+  "meaning_en": "person, people",
+  "cat": "family",
+  "meanings": {
+   "te": "మనిషి, జనం",
+   "kn": "ಜನ",
+   "ta": "மக்கள்"
+  },
+  "order": 44
+ },
+ {
+  "display": "आम्र",
+  "stemSlp1": "Amra",
+  "gender": "m",
+  "meaning_en": "mango",
+  "cat": "food",
+  "meanings": {
+   "te": "మామిడిపండు",
+   "kn": "ಮಾವಿನಹಣ್ಣು",
+   "ta": "மாம்பழம்"
+  },
+  "order": 45
+ },
+ {
+  "display": "कदलीफल",
+  "stemSlp1": "kadalIPala",
+  "gender": "n",
+  "meaning_en": "banana",
+  "cat": "food",
+  "meanings": {
+   "te": "అరటిపండు",
+   "kn": "ಬಾಳೆಹಣ್ಣು",
+   "ta": "வாழைப்பழம்"
+  },
+  "order": 46
+ },
+ {
+  "display": "शाक",
+  "stemSlp1": "SAka",
+  "gender": "m",
+  "meaning_en": "vegetable",
+  "cat": "food",
+  "meanings": {
+   "te": "కూరగాయ",
+   "kn": "ತರಕಾರಿ",
+   "ta": "காய்கறி"
+  },
+  "order": 47
+ },
+ {
+  "display": "रोटिका",
+  "stemSlp1": "rowikA",
+  "gender": "f",
+  "meaning_en": "roti, chapati",
+  "cat": "food",
+  "meanings": {
+   "te": "చపాతీ",
+   "kn": "ಚಪಾತಿ",
+   "ta": "சப்பாத்தி"
+  },
+  "order": 48
+ },
+ {
+  "display": "दधि",
+  "stemSlp1": "daDi",
+  "gender": "n",
+  "meaning_en": "curd",
+  "cat": "food",
+  "meanings": {
+   "te": "పెరుగు",
+   "kn": "ಮೊಸರು",
+   "ta": "தயிர்"
+  },
+  "order": 49
+ },
+ {
+  "display": "घृत",
+  "stemSlp1": "Gfta",
+  "gender": "n",
+  "meaning_en": "ghee",
+  "cat": "food",
+  "meanings": {
+   "te": "నెయ్యి",
+   "kn": "ತುಪ್ಪ",
+   "ta": "நெய்"
+  },
+  "order": 50
+ },
+ {
+  "display": "लवण",
+  "stemSlp1": "lavaRa",
+  "gender": "n",
+  "meaning_en": "salt",
+  "cat": "food",
+  "meanings": {
+   "te": "ఉప్పు",
+   "kn": "ಉಪ್ಪು",
+   "ta": "உப்பு"
+  },
+  "order": 51
+ },
+ {
+  "display": "शर्करा",
+  "stemSlp1": "SarkarA",
+  "gender": "f",
+  "meaning_en": "sugar",
+  "cat": "food",
+  "meanings": {
+   "te": "చక్కెర",
+   "kn": "ಸಕ್ಕರೆ",
+   "ta": "சர்க்கரை"
+  },
+  "order": 52
+ },
+ {
+  "display": "सूप",
+  "stemSlp1": "sUpa",
+  "gender": "m",
+  "meaning_en": "dal",
+  "cat": "food",
+  "meanings": {
+   "te": "పప్పు",
+   "kn": "ಬೇಳೆ ಸಾರು",
+   "ta": "பருப்பு"
+  },
+  "order": 53
+ },
+ {
+  "display": "तण्डुल",
+  "stemSlp1": "taRqula",
+  "gender": "m",
+  "meaning_en": "rice (grain)",
+  "cat": "food",
+  "meanings": {
+   "te": "బియ్యం",
+   "kn": "ಅಕ್ಕಿ",
+   "ta": "அரிசி"
+  },
+  "order": 54
+ },
+ {
+  "display": "अन्न",
+  "stemSlp1": "anna",
+  "gender": "n",
+  "meaning_en": "food, cooked rice",
+  "cat": "food",
+  "meanings": {
+   "te": "అన్నం",
+   "kn": "ಅನ್ನ",
+   "ta": "உணவு"
+  },
+  "order": 55
+ },
+ {
+  "display": "मोदक",
+  "stemSlp1": "modaka",
+  "gender": "m",
+  "meaning_en": "sweet, laddu",
+  "cat": "food",
+  "meanings": {
+   "te": "లడ్డు",
+   "kn": "ಲಡ್ಡು",
+   "ta": "லட்டு"
+  },
+  "order": 56
+ },
+ {
+  "display": "फलरस",
+  "stemSlp1": "Palarasa",
+  "gender": "m",
+  "meaning_en": "fruit juice",
+  "cat": "food",
+  "meanings": {
+   "te": "పండ్ల రసం",
+   "kn": "ಹಣ್ಣಿನ ರಸ",
+   "ta": "பழச்சாறு"
+  },
+  "order": 57
+ },
+ {
+  "display": "नारिकेल",
+  "stemSlp1": "nArikela",
+  "gender": "m",
+  "meaning_en": "coconut",
+  "cat": "food",
+  "meanings": {
+   "te": "కొబ్బరికాయ",
+   "kn": "ತೆಂಗಿನಕಾಯಿ",
+   "ta": "தேங்காய்"
+  },
+  "order": 58
+ },
+ {
+  "display": "पानीय",
+  "stemSlp1": "pAnIya",
+  "gender": "n",
+  "meaning_en": "drinking water",
+  "cat": "food",
+  "meanings": {
+   "te": "తాగే నీళ్ళు",
+   "kn": "ಕುಡಿಯುವ ನೀರು",
+   "ta": "குடிநீர்"
+  },
+  "order": 59
+ },
+ {
+  "display": "हस्त",
+  "stemSlp1": "hasta",
+  "gender": "m",
+  "meaning_en": "hand",
+  "cat": "body",
+  "meanings": {
+   "te": "చేయి",
+   "kn": "ಕೈ",
+   "ta": "கை"
+  },
+  "order": 60
+ },
+ {
+  "display": "पाद",
+  "stemSlp1": "pAda",
+  "gender": "m",
+  "meaning_en": "foot, leg",
+  "cat": "body",
+  "meanings": {
+   "te": "కాలు",
+   "kn": "ಕಾಲು",
+   "ta": "கால்"
+  },
+  "order": 61
+ },
+ {
+  "display": "नेत्र",
+  "stemSlp1": "netra",
+  "gender": "n",
+  "meaning_en": "eye",
+  "cat": "body",
+  "meanings": {
+   "te": "కన్ను",
+   "kn": "ಕಣ್ಣು",
+   "ta": "கண்"
+  },
+  "order": 62
+ },
+ {
+  "display": "कर्ण",
+  "stemSlp1": "karRa",
+  "gender": "m",
+  "meaning_en": "ear",
+  "cat": "body",
+  "meanings": {
+   "te": "చెవి",
+   "kn": "ಕಿವಿ",
+   "ta": "காது"
+  },
+  "order": 63
+ },
+ {
+  "display": "नासिका",
+  "stemSlp1": "nAsikA",
+  "gender": "f",
+  "meaning_en": "nose",
+  "cat": "body",
+  "meanings": {
+   "te": "ముక్కు",
+   "kn": "ಮೂಗು",
+   "ta": "மூக்கு"
+  },
+  "order": 64
+ },
+ {
+  "display": "शिरस्",
+  "stemSlp1": "Siras",
+  "gender": "n",
+  "meaning_en": "head",
+  "cat": "body",
+  "meanings": {
+   "te": "తల",
+   "kn": "ತಲೆ",
+   "ta": "தலை"
+  },
+  "order": 65
+ },
+ {
+  "display": "केश",
+  "stemSlp1": "keSa",
+  "gender": "m",
+  "meaning_en": "hair",
+  "cat": "body",
+  "meanings": {
+   "te": "జుట్టు",
+   "kn": "ಕೂದಲು",
+   "ta": "முடி"
+  },
+  "order": 66
+ },
+ {
+  "display": "दन्त",
+  "stemSlp1": "danta",
+  "gender": "m",
+  "meaning_en": "tooth",
+  "cat": "body",
+  "meanings": {
+   "te": "పన్ను",
+   "kn": "ಹಲ್ಲು",
+   "ta": "பல்"
+  },
+  "order": 67
+ },
+ {
+  "display": "उदर",
+  "stemSlp1": "udara",
+  "gender": "n",
+  "meaning_en": "stomach",
+  "cat": "body",
+  "meanings": {
+   "te": "కడుపు",
+   "kn": "ಹೊಟ್ಟೆ",
+   "ta": "வயிறு"
+  },
+  "order": 68
+ },
+ {
+  "display": "हृदय",
+  "stemSlp1": "hfdaya",
+  "gender": "n",
+  "meaning_en": "heart",
+  "cat": "body",
+  "meanings": {
+   "te": "గుండె",
+   "kn": "ಹೃದಯ",
+   "ta": "இதயம்"
+  },
+  "order": 69
+ },
+ {
+  "display": "शरीर",
+  "stemSlp1": "SarIra",
+  "gender": "n",
+  "meaning_en": "body",
+  "cat": "body",
+  "meanings": {
+   "te": "ఒళ్ళు, శరీరం",
+   "kn": "ದೇಹ",
+   "ta": "உடல்"
+  },
+  "order": 70
+ },
+ {
+  "display": "अङ्गुली",
+  "stemSlp1": "aNgulI",
+  "gender": "f",
+  "meaning_en": "finger",
+  "cat": "body",
+  "meanings": {
+   "te": "వేలు",
+   "kn": "ಬೆರಳು",
+   "ta": "விரல்"
+  },
+  "order": 71
+ },
+ {
+  "display": "जिह्वा",
+  "stemSlp1": "jihvA",
+  "gender": "f",
+  "meaning_en": "tongue",
+  "cat": "body",
+  "meanings": {
+   "te": "నాలుక",
+   "kn": "ನಾಲಿಗೆ",
+   "ta": "நாக்கு"
+  },
+  "order": 72
+ },
+ {
+  "display": "द्वार",
+  "stemSlp1": "dvAra",
+  "gender": "n",
+  "meaning_en": "door",
+  "cat": "home",
+  "meanings": {
+   "te": "తలుపు",
+   "kn": "ಬಾಗಿಲು",
+   "ta": "கதவு"
+  },
+  "order": 73
+ },
+ {
+  "display": "गवाक्ष",
+  "stemSlp1": "gavAkza",
+  "gender": "m",
+  "meaning_en": "window",
+  "cat": "home",
+  "meanings": {
+   "te": "కిటికీ",
+   "kn": "ಕಿಟಕಿ",
+   "ta": "ஜன்னல்"
+  },
+  "order": 74
+ },
+ {
+  "display": "आसन",
+  "stemSlp1": "Asana",
+  "gender": "n",
+  "meaning_en": "seat, chair",
+  "cat": "home",
+  "meanings": {
+   "te": "కుర్చీ",
+   "kn": "ಕುರ್ಚಿ",
+   "ta": "நாற்காலி"
+  },
+  "order": 75
+ },
+ {
+  "display": "उत्पीठिका",
+  "stemSlp1": "utpIWikA",
+  "gender": "f",
+  "meaning_en": "table",
+  "cat": "home",
+  "meanings": {
+   "te": "బల్ల",
+   "kn": "ಮೇಜು",
+   "ta": "மேசை"
+  },
+  "order": 76
+ },
+ {
+  "display": "शय्या",
+  "stemSlp1": "SayyA",
+  "gender": "f",
+  "meaning_en": "bed",
+  "cat": "home",
+  "meanings": {
+   "te": "మంచం",
+   "kn": "ಹಾಸಿಗೆ",
+   "ta": "படுக்கை"
+  },
+  "order": 77
+ },
+ {
+  "display": "दीप",
+  "stemSlp1": "dIpa",
+  "gender": "m",
+  "meaning_en": "lamp, light",
+  "cat": "home",
+  "meanings": {
+   "te": "దీపం",
+   "kn": "ದೀಪ",
+   "ta": "விளக்கு"
+  },
+  "order": 78
+ },
+ {
+  "display": "व्यजन",
+  "stemSlp1": "vyajana",
+  "gender": "n",
+  "meaning_en": "fan",
+  "cat": "home",
+  "meanings": {
+   "te": "ఫ్యాను",
+   "kn": "ಫ್ಯಾನು",
+   "ta": "மின்விசிறி"
+  },
+  "order": 79
+ },
+ {
+  "display": "दूरवाणी",
+  "stemSlp1": "dUravARI",
+  "gender": "f",
+  "meaning_en": "phone",
+  "cat": "home",
+  "meanings": {
+   "te": "ఫోను",
+   "kn": "ಫೋನು",
+   "ta": "தொலைபேசி"
+  },
+  "order": 80
+ },
+ {
+  "display": "सङ्गणक",
+  "stemSlp1": "saNgaRaka",
+  "gender": "m",
+  "meaning_en": "computer",
+  "cat": "home",
+  "meanings": {
+   "te": "కంప్యూటర్",
+   "kn": "ಕಂಪ್ಯೂಟರ್",
+   "ta": "கணினி"
+  },
+  "order": 81
+ },
+ {
+  "display": "घटी",
+  "stemSlp1": "GawI",
+  "gender": "f",
+  "meaning_en": "clock, watch",
+  "cat": "home",
+  "meanings": {
+   "te": "గడియారం",
+   "kn": "ಗಡಿಯಾರ",
+   "ta": "கடிகாரம்"
+  },
+  "order": 82
+ },
+ {
+  "display": "लेखनी",
+  "stemSlp1": "leKanI",
+  "gender": "f",
+  "meaning_en": "pen",
+  "cat": "home",
+  "meanings": {
+   "te": "పెన్ను",
+   "kn": "ಪೆನ್ನು",
+   "ta": "பேனா"
+  },
+  "order": 83
+ },
+ {
+  "display": "कुञ्चिका",
+  "stemSlp1": "kuYcikA",
+  "gender": "f",
+  "meaning_en": "key",
+  "cat": "home",
+  "meanings": {
+   "te": "తాళంచెవి",
+   "kn": "ಬೀಗದ ಕೈ",
+   "ta": "சாவி"
+  },
+  "order": 84
+ },
+ {
+  "display": "वस्त्र",
+  "stemSlp1": "vastra",
+  "gender": "n",
+  "meaning_en": "cloth, clothes",
+  "cat": "home",
+  "meanings": {
+   "te": "బట్టలు",
+   "kn": "ಬಟ್ಟೆ",
+   "ta": "துணி"
+  },
+  "order": 85
+ },
+ {
+  "display": "पात्र",
+  "stemSlp1": "pAtra",
+  "gender": "n",
+  "meaning_en": "vessel, plate",
+  "cat": "home",
+  "meanings": {
+   "te": "గిన్నె",
+   "kn": "ಪಾತ್ರೆ",
+   "ta": "பாத்திரம்"
+  },
+  "order": 86
+ },
+ {
+  "display": "चषक",
+  "stemSlp1": "cazaka",
+  "gender": "m",
+  "meaning_en": "cup, glass",
+  "cat": "home",
+  "meanings": {
+   "te": "గ్లాసు",
+   "kn": "ಲೋಟ",
+   "ta": "டம்ளர்"
+  },
+  "order": 87
+ },
+ {
+  "display": "स्यूत",
+  "stemSlp1": "syUta",
+  "gender": "m",
+  "meaning_en": "bag",
+  "cat": "home",
+  "meanings": {
+   "te": "సంచి",
+   "kn": "ಚೀಲ",
+   "ta": "பை"
+  },
+  "order": 88
+ },
+ {
+  "display": "छत्र",
+  "stemSlp1": "Catra",
+  "gender": "n",
+  "meaning_en": "umbrella",
+  "cat": "home",
+  "meanings": {
+   "te": "గొడుగు",
+   "kn": "ಛತ್ರಿ",
+   "ta": "குடை"
+  },
+  "order": 89
+ },
+ {
+  "display": "उपनेत्र",
+  "stemSlp1": "upanetra",
+  "gender": "n",
+  "meaning_en": "spectacles",
+  "cat": "home",
+  "meanings": {
+   "te": "కళ్ళజోడు",
+   "kn": "ಕನ್ನಡಕ",
+   "ta": "மூக்குக்கண்ணாடி"
+  },
+  "order": 90
+ },
+ {
+  "display": "ग्राम",
+  "stemSlp1": "grAma",
+  "gender": "m",
+  "meaning_en": "village",
+  "cat": "place",
+  "meanings": {
+   "te": "ఊరు",
+   "kn": "ಹಳ್ಳಿ",
+   "ta": "கிராமம்"
+  },
+  "order": 91
+ },
+ {
+  "display": "नगर",
+  "stemSlp1": "nagara",
+  "gender": "n",
+  "meaning_en": "city",
+  "cat": "place",
+  "meanings": {
+   "te": "నగరం",
+   "kn": "ನಗರ",
+   "ta": "நகரம்"
+  },
+  "order": 92
+ },
+ {
+  "display": "मार्ग",
+  "stemSlp1": "mArga",
+  "gender": "m",
+  "meaning_en": "road, way",
+  "cat": "place",
+  "meanings": {
+   "te": "దారి",
+   "kn": "ದಾರಿ",
+   "ta": "வழி"
+  },
+  "order": 93
+ },
+ {
+  "display": "मन्दिर",
+  "stemSlp1": "mandira",
+  "gender": "n",
+  "meaning_en": "temple",
+  "cat": "place",
+  "meanings": {
+   "te": "గుడి",
+   "kn": "ದೇವಸ್ಥಾನ",
+   "ta": "கோயில்"
+  },
+  "order": 94
+ },
+ {
+  "display": "चिकित्सालय",
+  "stemSlp1": "cikitsAlaya",
+  "gender": "m",
+  "meaning_en": "hospital",
+  "cat": "place",
+  "meanings": {
+   "te": "ఆసుపత్రి",
+   "kn": "ಆಸ್ಪತ್ರೆ",
+   "ta": "மருத்துவமனை"
+  },
+  "order": 95
+ },
+ {
+  "display": "कार्यालय",
+  "stemSlp1": "kAryAlaya",
+  "gender": "m",
+  "meaning_en": "office",
+  "cat": "place",
+  "meanings": {
+   "te": "ఆఫీసు",
+   "kn": "ಕಚೇರಿ",
+   "ta": "அலுவலகம்"
+  },
+  "order": 96
+ },
+ {
+  "display": "ग्रन्थालय",
+  "stemSlp1": "granTAlaya",
+  "gender": "m",
+  "meaning_en": "library",
+  "cat": "place",
+  "meanings": {
+   "te": "గ్రంథాలయం",
+   "kn": "ಗ್ರಂಥಾಲಯ",
+   "ta": "நூலகம்"
+  },
+  "order": 97
+ },
+ {
+  "display": "भोजनालय",
+  "stemSlp1": "BojanAlaya",
+  "gender": "m",
+  "meaning_en": "restaurant",
+  "cat": "place",
+  "meanings": {
+   "te": "హోటల్",
+   "kn": "ಹೋಟೆಲ್",
+   "ta": "உணவகம்"
+  },
+  "order": 98
+ },
+ {
+  "display": "महाविद्यालय",
+  "stemSlp1": "mahAvidyAlaya",
+  "gender": "m",
+  "meaning_en": "college",
+  "cat": "place",
+  "meanings": {
+   "te": "కాలేజీ",
+   "kn": "ಕಾಲೇಜು",
+   "ta": "கல்லூரி"
+  },
+  "order": 99
+ },
+ {
+  "display": "नदी",
+  "stemSlp1": "nadI",
+  "gender": "f",
+  "meaning_en": "river",
+  "cat": "place",
+  "meanings": {
+   "te": "నది",
+   "kn": "ನದಿ",
+   "ta": "ஆறு"
+  },
+  "order": 100
+ },
+ {
+  "display": "समुद्र",
+  "stemSlp1": "samudra",
+  "gender": "m",
+  "meaning_en": "sea",
+  "cat": "place",
+  "meanings": {
+   "te": "సముద్రం",
+   "kn": "ಸಮುದ್ರ",
+   "ta": "கடல்"
+  },
+  "order": 101
+ },
+ {
+  "display": "पर्वत",
+  "stemSlp1": "parvata",
+  "gender": "m",
+  "meaning_en": "mountain, hill",
+  "cat": "place",
+  "meanings": {
+   "te": "కొండ",
+   "kn": "ಬೆಟ್ಟ",
+   "ta": "மலை"
+  },
+  "order": 102
+ },
+ {
+  "display": "वन",
+  "stemSlp1": "vana",
+  "gender": "n",
+  "meaning_en": "forest",
+  "cat": "place",
+  "meanings": {
+   "te": "అడవి",
+   "kn": "ಕಾಡು",
+   "ta": "காடு"
+  },
+  "order": 103
+ },
+ {
+  "display": "देश",
+  "stemSlp1": "deSa",
+  "gender": "m",
+  "meaning_en": "country",
+  "cat": "place",
+  "meanings": {
+   "te": "దేశం",
+   "kn": "ದೇಶ",
+   "ta": "நாடு"
+  },
+  "order": 104
+ },
+ {
+  "display": "पाकशाला",
+  "stemSlp1": "pAkaSAlA",
+  "gender": "f",
+  "meaning_en": "kitchen",
+  "cat": "place",
+  "meanings": {
+   "te": "వంటగది",
+   "kn": "ಅಡುಗೆಮನೆ",
+   "ta": "சமையலறை"
+  },
+  "order": 105
+ },
+ {
+  "display": "प्रकोष्ठ",
+  "stemSlp1": "prakozWa",
+  "gender": "m",
+  "meaning_en": "room",
+  "cat": "place",
+  "meanings": {
+   "te": "గది",
+   "kn": "ಕೋಣೆ",
+   "ta": "அறை"
+  },
+  "order": 106
+ },
+ {
+  "display": "सूर्य",
+  "stemSlp1": "sUrya",
+  "gender": "m",
+  "meaning_en": "sun",
+  "cat": "nature",
+  "meanings": {
+   "te": "సూర్యుడు",
+   "kn": "ಸೂರ್ಯ",
+   "ta": "சூரியன்"
+  },
+  "order": 107
+ },
+ {
+  "display": "चन्द्र",
+  "stemSlp1": "candra",
+  "gender": "m",
+  "meaning_en": "moon",
+  "cat": "nature",
+  "meanings": {
+   "te": "చంద్రుడు",
+   "kn": "ಚಂದ್ರ",
+   "ta": "நிலா"
+  },
+  "order": 108
+ },
+ {
+  "display": "आकाश",
+  "stemSlp1": "AkASa",
+  "gender": "m",
+  "meaning_en": "sky",
+  "cat": "nature",
+  "meanings": {
+   "te": "ఆకాశం",
+   "kn": "ಆಕಾಶ",
+   "ta": "வானம்"
+  },
+  "order": 109
+ },
+ {
+  "display": "वृक्ष",
+  "stemSlp1": "vfkza",
+  "gender": "m",
+  "meaning_en": "tree",
+  "cat": "nature",
+  "meanings": {
+   "te": "చెట్టు",
+   "kn": "ಮರ",
+   "ta": "மரம்"
+  },
+  "order": 110
+ },
+ {
+  "display": "पुष्प",
+  "stemSlp1": "puzpa",
+  "gender": "n",
+  "meaning_en": "flower",
+  "cat": "nature",
+  "meanings": {
+   "te": "పువ్వు",
+   "kn": "ಹೂವು",
+   "ta": "பூ"
+  },
+  "order": 111
+ },
+ {
+  "display": "वर्षा",
+  "stemSlp1": "varzA",
+  "gender": "f",
+  "meaning_en": "rain",
+  "cat": "nature",
+  "meanings": {
+   "te": "వాన",
+   "kn": "ಮಳೆ",
+   "ta": "மழை"
+  },
+  "order": 112
+ },
+ {
+  "display": "वायु",
+  "stemSlp1": "vAyu",
+  "gender": "m",
+  "meaning_en": "wind, air",
+  "cat": "nature",
+  "meanings": {
+   "te": "గాలి",
+   "kn": "ಗಾಳಿ",
+   "ta": "காற்று"
+  },
+  "order": 113
+ },
+ {
+  "display": "अग्नि",
+  "stemSlp1": "agni",
+  "gender": "m",
+  "meaning_en": "fire",
+  "cat": "nature",
+  "meanings": {
+   "te": "నిప్పు",
+   "kn": "ಬೆಂಕಿ",
+   "ta": "நெருப்பு"
+  },
+  "order": 114
+ },
+ {
+  "display": "भूमि",
+  "stemSlp1": "BUmi",
+  "gender": "f",
+  "meaning_en": "earth, ground",
+  "cat": "nature",
+  "meanings": {
+   "te": "నేల",
+   "kn": "ನೆಲ",
+   "ta": "நிலம்"
+  },
+  "order": 115
+ },
+ {
+  "display": "धेनु",
+  "stemSlp1": "Denu",
+  "gender": "f",
+  "meaning_en": "cow",
+  "cat": "nature",
+  "meanings": {
+   "te": "ఆవు",
+   "kn": "ಹಸು",
+   "ta": "பசு"
+  },
+  "order": 116
+ },
+ {
+  "display": "कुक्कुर",
+  "stemSlp1": "kukkura",
+  "gender": "m",
+  "meaning_en": "dog",
+  "cat": "nature",
+  "meanings": {
+   "te": "కుక్క",
+   "kn": "ನಾಯಿ",
+   "ta": "நாய்"
+  },
+  "order": 117
+ },
+ {
+  "display": "मार्जार",
+  "stemSlp1": "mArjAra",
+  "gender": "m",
+  "meaning_en": "cat",
+  "cat": "nature",
+  "meanings": {
+   "te": "పిల్లి",
+   "kn": "ಬೆಕ್ಕು",
+   "ta": "பூனை"
+  },
+  "order": 118
+ },
+ {
+  "display": "पक्षिन्",
+  "stemSlp1": "pakzin",
+  "gender": "m",
+  "meaning_en": "bird",
+  "cat": "nature",
+  "meanings": {
+   "te": "పక్షి",
+   "kn": "ಹಕ್ಕಿ",
+   "ta": "பறவை"
+  },
+  "order": 119
+ },
+ {
+  "display": "अश्व",
+  "stemSlp1": "aSva",
+  "gender": "m",
+  "meaning_en": "horse",
+  "cat": "nature",
+  "meanings": {
+   "te": "గుర్రం",
+   "kn": "ಕುದುರೆ",
+   "ta": "குதிரை"
+  },
+  "order": 120
+ },
+ {
+  "display": "दिन",
+  "stemSlp1": "dina",
+  "gender": "n",
+  "meaning_en": "day",
+  "cat": "time",
+  "meanings": {
+   "te": "రోజు",
+   "kn": "ದಿನ",
+   "ta": "நாள்"
+  },
+  "order": 121
+ },
+ {
+  "display": "रात्रि",
+  "stemSlp1": "rAtri",
+  "gender": "f",
+  "meaning_en": "night",
+  "cat": "time",
+  "meanings": {
+   "te": "రాత్రి",
+   "kn": "ರಾತ್ರಿ",
+   "ta": "இரவு"
+  },
+  "order": 122
+ },
+ {
+  "display": "प्रातःकाल",
+  "stemSlp1": "prAtaHkAla",
+  "gender": "m",
+  "meaning_en": "morning",
+  "cat": "time",
+  "meanings": {
+   "te": "పొద్దున",
+   "kn": "ಬೆಳಿಗ್ಗೆ",
+   "ta": "காலை"
+  },
+  "order": 123
+ },
+ {
+  "display": "सायङ्काल",
+  "stemSlp1": "sAyaNkAla",
+  "gender": "m",
+  "meaning_en": "evening",
+  "cat": "time",
+  "meanings": {
+   "te": "సాయంత్రం",
+   "kn": "ಸಂಜೆ",
+   "ta": "மாலை"
+  },
+  "order": 124
+ },
+ {
+  "display": "समय",
+  "stemSlp1": "samaya",
+  "gender": "m",
+  "meaning_en": "time",
+  "cat": "time",
+  "meanings": {
+   "te": "టైము, సమయం",
+   "kn": "ಸಮಯ",
+   "ta": "நேரம்"
+  },
+  "order": 125
+ },
+ {
+  "display": "मास",
+  "stemSlp1": "mAsa",
+  "gender": "m",
+  "meaning_en": "month",
+  "cat": "time",
+  "meanings": {
+   "te": "నెల",
+   "kn": "ತಿಂಗಳು",
+   "ta": "மாதம்"
+  },
+  "order": 126
+ },
+ {
+  "display": "वर्ष",
+  "stemSlp1": "varza",
+  "gender": "n",
+  "meaning_en": "year",
+  "cat": "time",
+  "meanings": {
+   "te": "సంవత్సరం",
+   "kn": "ವರ್ಷ",
+   "ta": "ஆண்டு"
+  },
+  "order": 127
+ },
+ {
+  "display": "सप्ताह",
+  "stemSlp1": "saptAha",
+  "gender": "m",
+  "meaning_en": "week",
+  "cat": "time",
+  "meanings": {
+   "te": "వారం",
+   "kn": "ವಾರ",
+   "ta": "வாரம்"
+  },
+  "order": 128
+ },
+ {
+  "display": "होरा",
+  "stemSlp1": "horA",
+  "gender": "f",
+  "meaning_en": "hour",
+  "cat": "time",
+  "meanings": {
+   "te": "గంట",
+   "kn": "ಗಂಟೆ",
+   "ta": "மணி நேரம்"
+  },
+  "order": 129
+ },
+ {
+  "display": "निमेष",
+  "stemSlp1": "nimeza",
+  "gender": "m",
+  "meaning_en": "minute, moment",
+  "cat": "time",
+  "meanings": {
+   "te": "నిమిషం",
+   "kn": "ನಿಮಿಷ",
+   "ta": "நிமிடம்"
+  },
+  "order": 130
+ },
+ {
+  "display": "छात्र",
+  "stemSlp1": "CAtra",
+  "gender": "m",
+  "meaning_en": "student",
+  "cat": "people",
+  "meanings": {
+   "te": "విద్యార్థి",
+   "kn": "ವಿದ್ಯಾರ್ಥಿ",
+   "ta": "மாணவன்"
+  },
+  "order": 131
+ },
+ {
+  "display": "छात्रा",
+  "stemSlp1": "CAtrA",
+  "gender": "f",
+  "meaning_en": "student (girl)",
+  "cat": "people",
+  "meanings": {
+   "te": "విద్యార్థిని",
+   "kn": "ವಿದ್ಯಾರ್ಥಿನಿ",
+   "ta": "மாணவி"
+  },
+  "order": 132
+ },
+ {
+  "display": "अध्यापक",
+  "stemSlp1": "aDyApaka",
+  "gender": "m",
+  "meaning_en": "teacher (man)",
+  "cat": "people",
+  "meanings": {
+   "te": "మాస్టారు",
+   "kn": "ಮೇಷ್ಟ್ರು",
+   "ta": "ஆசிரியர்"
+  },
+  "order": 133
+ },
+ {
+  "display": "अध्यापिका",
+  "stemSlp1": "aDyApikA",
+  "gender": "f",
+  "meaning_en": "teacher (woman)",
+  "cat": "people",
+  "meanings": {
+   "te": "టీచరమ్మ",
+   "kn": "ಟೀಚರ್",
+   "ta": "ஆசிரியை"
+  },
+  "order": 134
+ },
+ {
+  "display": "वैद्य",
+  "stemSlp1": "vEdya",
+  "gender": "m",
+  "meaning_en": "doctor",
+  "cat": "people",
+  "meanings": {
+   "te": "డాక్టరు",
+   "kn": "ಡಾಕ್ಟರ್",
+   "ta": "மருத்துவர்"
+  },
+  "order": 135
+ },
+ {
+  "display": "आरक्षक",
+  "stemSlp1": "Arakzaka",
+  "gender": "m",
+  "meaning_en": "police officer",
+  "cat": "people",
+  "meanings": {
+   "te": "పోలీసు",
+   "kn": "ಪೊಲೀಸ್",
+   "ta": "காவலர்"
+  },
+  "order": 136
+ },
+ {
+  "display": "कृषक",
+  "stemSlp1": "kfzaka",
+  "gender": "m",
+  "meaning_en": "farmer",
+  "cat": "people",
+  "meanings": {
+   "te": "రైతు",
+   "kn": "ರೈತ",
+   "ta": "விவசாயி"
+  },
+  "order": 137
+ },
+ {
+  "display": "आपणिक",
+  "stemSlp1": "ApaRika",
+  "gender": "m",
+  "meaning_en": "shopkeeper",
+  "cat": "people",
+  "meanings": {
+   "te": "కొట్టువాడు",
+   "kn": "ಅಂಗಡಿಯವನು",
+   "ta": "கடைக்காரர்"
+  },
+  "order": 138
+ },
+ {
+  "display": "चालक",
+  "stemSlp1": "cAlaka",
+  "gender": "m",
+  "meaning_en": "driver",
+  "cat": "people",
+  "meanings": {
+   "te": "డ్రైవరు",
+   "kn": "ಚಾಲಕ",
+   "ta": "ஓட்டுநர்"
+  },
+  "order": 139
+ },
+ {
+  "display": "नृप",
+  "stemSlp1": "nfpa",
+  "gender": "m",
+  "meaning_en": "king",
+  "cat": "people",
+  "meanings": {
+   "te": "రాజు",
+   "kn": "ರಾಜ",
+   "ta": "அரசன்"
+  },
+  "order": 140
+ },
+ {
+  "display": "देव",
+  "stemSlp1": "deva",
+  "gender": "m",
+  "meaning_en": "god",
+  "cat": "people",
+  "meanings": {
+   "te": "దేవుడు",
+   "kn": "ದೇವರು",
+   "ta": "கடவுள்"
+  },
+  "order": 141
+ },
+ {
+  "display": "पाठ",
+  "stemSlp1": "pAWa",
+  "gender": "m",
+  "meaning_en": "lesson",
+  "cat": "study",
+  "meanings": {
+   "te": "పాఠం",
+   "kn": "ಪಾಠ",
+   "ta": "பாடம்"
+  },
+  "order": 142
+ },
+ {
+  "display": "भाषा",
+  "stemSlp1": "BAzA",
+  "gender": "f",
+  "meaning_en": "language",
+  "cat": "study",
+  "meanings": {
+   "te": "భాష",
+   "kn": "ಭಾಷೆ",
+   "ta": "மொழி"
+  },
+  "order": 143
+ },
+ {
+  "display": "शब्द",
+  "stemSlp1": "Sabda",
+  "gender": "m",
+  "meaning_en": "word, sound",
+  "cat": "study",
+  "meanings": {
+   "te": "మాట",
+   "kn": "ಪದ",
+   "ta": "சொல்"
+  },
+  "order": 144
+ },
+ {
+  "display": "वाक्य",
+  "stemSlp1": "vAkya",
+  "gender": "n",
+  "meaning_en": "sentence",
+  "cat": "study",
+  "meanings": {
+   "te": "వాక్యం",
+   "kn": "ವಾಕ್ಯ",
+   "ta": "வாக்கியம்"
+  },
+  "order": 145
+ },
+ {
+  "display": "अक्षर",
+  "stemSlp1": "akzara",
+  "gender": "n",
+  "meaning_en": "letter (of the alphabet)",
+  "cat": "study",
+  "meanings": {
+   "te": "అక్షరం",
+   "kn": "ಅಕ್ಷರ",
+   "ta": "எழுத்து"
+  },
+  "order": 146
+ },
+ {
+  "display": "विद्या",
+  "stemSlp1": "vidyA",
+  "gender": "f",
+  "meaning_en": "learning, knowledge",
+  "cat": "study",
+  "meanings": {
+   "te": "చదువు",
+   "kn": "ವಿದ್ಯೆ",
+   "ta": "கல்வி"
+  },
+  "order": 147
+ },
+ {
+  "display": "परीक्षा",
+  "stemSlp1": "parIkzA",
+  "gender": "f",
+  "meaning_en": "exam",
+  "cat": "study",
+  "meanings": {
+   "te": "పరీక్ష",
+   "kn": "ಪರೀಕ್ಷೆ",
+   "ta": "தேர்வு"
+  },
+  "order": 148
+ },
+ {
+  "display": "गृहकार्य",
+  "stemSlp1": "gfhakArya",
+  "gender": "n",
+  "meaning_en": "homework",
+  "cat": "study",
+  "meanings": {
+   "te": "హోంవర్కు",
+   "kn": "ಹೋಂವರ್ಕ್",
+   "ta": "வீட்டுப்பாடம்"
+  },
+  "order": 149
+ },
+ {
+  "display": "कक्ष्या",
+  "stemSlp1": "kakzyA",
+  "gender": "f",
+  "meaning_en": "class",
+  "cat": "study",
+  "meanings": {
+   "te": "క్లాసు",
+   "kn": "ತರಗತಿ",
+   "ta": "வகுப்பு"
+  },
+  "order": 150
+ },
+ {
+  "display": "सङ्गीत",
+  "stemSlp1": "saNgIta",
+  "gender": "n",
+  "meaning_en": "music",
+  "cat": "study",
+  "meanings": {
+   "te": "సంగీతం",
+   "kn": "ಸಂಗೀತ",
+   "ta": "இசை"
+  },
+  "order": 151
+ },
+ {
+  "display": "नामन्",
+  "stemSlp1": "nAman",
+  "gender": "n",
+  "meaning_en": "name",
+  "cat": "study",
+  "meanings": {
+   "te": "పేరు",
+   "kn": "ಹೆಸರು",
+   "ta": "பெயர்"
+  },
+  "order": 152
+ },
+ {
+  "display": "यान",
+  "stemSlp1": "yAna",
+  "gender": "n",
+  "meaning_en": "vehicle",
+  "cat": "travel",
+  "meanings": {
+   "te": "బండి",
+   "kn": "ಗಾಡಿ",
+   "ta": "வண்டி"
+  },
+  "order": 153
+ },
+ {
+  "display": "लोकयान",
+  "stemSlp1": "lokayAna",
+  "gender": "n",
+  "meaning_en": "bus",
+  "cat": "travel",
+  "meanings": {
+   "te": "బస్సు",
+   "kn": "ಬಸ್ಸು",
+   "ta": "பேருந்து"
+  },
+  "order": 154
+ },
+ {
+  "display": "रेलयान",
+  "stemSlp1": "relayAna",
+  "gender": "n",
+  "meaning_en": "train",
+  "cat": "travel",
+  "meanings": {
+   "te": "రైలు",
+   "kn": "ರೈಲು",
+   "ta": "ரயில்"
+  },
+  "order": 155
+ },
+ {
+  "display": "विमान",
+  "stemSlp1": "vimAna",
+  "gender": "n",
+  "meaning_en": "aeroplane",
+  "cat": "travel",
+  "meanings": {
+   "te": "విమానం",
+   "kn": "ವಿಮಾನ",
+   "ta": "விமானம்"
+  },
+  "order": 156
+ },
+ {
+  "display": "द्विचक्रिका",
+  "stemSlp1": "dvicakrikA",
+  "gender": "f",
+  "meaning_en": "bicycle",
+  "cat": "travel",
+  "meanings": {
+   "te": "సైకిలు",
+   "kn": "ಸೈಕಲ್",
+   "ta": "மிதிவண்டி"
+  },
+  "order": 157
+ },
+ {
+  "display": "यात्रा",
+  "stemSlp1": "yAtrA",
+  "gender": "f",
+  "meaning_en": "journey, trip",
+  "cat": "travel",
+  "meanings": {
+   "te": "ప్రయాణం",
+   "kn": "ಪ್ರಯಾಣ",
+   "ta": "பயணம்"
+  },
+  "order": 158
+ },
+ {
+  "display": "स्थानक",
+  "stemSlp1": "sTAnaka",
+  "gender": "n",
+  "meaning_en": "station, stop",
+  "cat": "travel",
+  "meanings": {
+   "te": "స్టేషను",
+   "kn": "ನಿಲ್ದಾಣ",
+   "ta": "நிலையம்"
+  },
+  "order": 159
+ },
+ {
+  "display": "धन",
+  "stemSlp1": "Dana",
+  "gender": "n",
+  "meaning_en": "money",
+  "cat": "shop",
+  "meanings": {
+   "te": "డబ్బు",
+   "kn": "ದುಡ್ಡು",
+   "ta": "பணம்"
+  },
+  "order": 160
+ },
+ {
+  "display": "रूप्यक",
+  "stemSlp1": "rUpyaka",
+  "gender": "n",
+  "meaning_en": "rupee",
+  "cat": "shop",
+  "meanings": {
+   "te": "రూపాయి",
+   "kn": "ರೂಪಾಯಿ",
+   "ta": "ரூபாய்"
+  },
+  "order": 161
+ },
+ {
+  "display": "मूल्य",
+  "stemSlp1": "mUlya",
+  "gender": "n",
+  "meaning_en": "price",
+  "cat": "shop",
+  "meanings": {
+   "te": "ధర",
+   "kn": "ಬೆಲೆ",
+   "ta": "விலை"
+  },
+  "order": 162
+ },
+ {
+  "display": "विपणि",
+  "stemSlp1": "vipaRi",
+  "gender": "f",
+  "meaning_en": "market",
+  "cat": "shop",
+  "meanings": {
+   "te": "సంత, మార్కెట్టు",
+   "kn": "ಮಾರುಕಟ್ಟೆ",
+   "ta": "சந்தை"
+  },
+  "order": 163
+ },
+ {
+  "display": "सुख",
+  "stemSlp1": "suKa",
+  "gender": "n",
+  "meaning_en": "happiness, ease",
+  "cat": "life",
+  "meanings": {
+   "te": "సంతోషం",
+   "kn": "ಸಂತೋಷ",
+   "ta": "மகிழ்ச்சி"
+  },
+  "order": 164
+ },
+ {
+  "display": "दुःख",
+  "stemSlp1": "duHKa",
+  "gender": "n",
+  "meaning_en": "sorrow, pain",
+  "cat": "life",
+  "meanings": {
+   "te": "బాధ",
+   "kn": "ದುಃಖ",
+   "ta": "துக்கம்"
+  },
+  "order": 165
+ },
+ {
+  "display": "आरोग्य",
+  "stemSlp1": "Arogya",
+  "gender": "n",
+  "meaning_en": "health",
+  "cat": "life",
+  "meanings": {
+   "te": "ఆరోగ్యం",
+   "kn": "ಆರೋಗ್ಯ",
+   "ta": "ஆரோக்கியம்"
+  },
+  "order": 166
+ },
+ {
+  "display": "क्रीडा",
+  "stemSlp1": "krIqA",
+  "gender": "f",
+  "meaning_en": "game, play",
+  "cat": "life",
+  "meanings": {
+   "te": "ఆట",
+   "kn": "ಆಟ",
+   "ta": "விளையாட்டு"
+  },
+  "order": 167
+ },
+ {
+  "display": "उत्सव",
+  "stemSlp1": "utsava",
+  "gender": "m",
+  "meaning_en": "festival",
+  "cat": "life",
+  "meanings": {
+   "te": "పండగ",
+   "kn": "ಹಬ್ಬ",
+   "ta": "திருவிழா"
+  },
+  "order": 168
+ },
+ {
+  "display": "विषय",
+  "stemSlp1": "vizaya",
+  "gender": "m",
+  "meaning_en": "matter, topic",
+  "cat": "life",
+  "meanings": {
+   "te": "విషయం",
+   "kn": "ವಿಷಯ",
+   "ta": "விஷயம்"
+  },
+  "order": 169
+ },
+ {
+  "display": "साहाय्य",
+  "stemSlp1": "sAhAyya",
+  "gender": "n",
+  "meaning_en": "help",
+  "cat": "life",
+  "meanings": {
+   "te": "సాయం",
+   "kn": "ಸಹಾಯ",
+   "ta": "உதவி"
+  },
+  "order": 170
+ },
+ {
+  "display": "सत्य",
+  "stemSlp1": "satya",
+  "gender": "n",
+  "meaning_en": "truth",
+  "cat": "life",
+  "meanings": {
+   "te": "నిజం",
+   "kn": "ಸತ್ಯ",
+   "ta": "உண்மை"
+  },
+  "order": 171
+ },
+ {
+  "display": "एतद्",
+  "stemSlp1": "etad",
+  "gender": "m",
+  "kind": "pronoun",
+  "meaning_en": "this (man, thing)",
+  "cat": "pronoun",
+  "meanings": {
+   "te": "ఇతను, ఇది",
+   "kn": "ಇವನು, ಇದು",
+   "ta": "இவன், இது"
+  },
+  "order": 172
+ },
+ {
+  "display": "एतद्",
+  "stemSlp1": "etad",
+  "gender": "f",
+  "kind": "pronoun",
+  "meaning_en": "this (woman)",
+  "cat": "pronoun",
+  "meanings": {
+   "te": "ఈమె",
+   "kn": "ಇವಳು",
+   "ta": "இவள்"
+  },
+  "order": 173
+ },
+ {
+  "display": "तद्",
+  "stemSlp1": "tad",
+  "gender": "n",
+  "kind": "pronoun",
+  "meaning_en": "that, it",
+  "cat": "pronoun",
+  "meanings": {
+   "te": "అది",
+   "kn": "ಅದು",
+   "ta": "அது"
+  },
+  "order": 174
+ },
+ {
+  "display": "किम्",
+  "stemSlp1": "kim",
+  "gender": "m",
+  "kind": "pronoun",
+  "meaning_en": "who (man), which",
+  "cat": "pronoun",
+  "meanings": {
+   "te": "ఎవరు (మగ)",
+   "kn": "ಯಾರು (ಗಂಡು)",
+   "ta": "யார் (ஆண்)"
+  },
+  "order": 175
+ },
+ {
+  "display": "किम्",
+  "stemSlp1": "kim",
+  "gender": "f",
+  "kind": "pronoun",
+  "meaning_en": "who (woman), which",
+  "cat": "pronoun",
+  "meanings": {
+   "te": "ఎవరు (ఆడ)",
+   "kn": "ಯಾರು (ಹೆಣ್ಣು)",
+   "ta": "யார் (பெண்)"
+  },
+  "order": 176
+ },
+ {
+  "display": "किम्",
+  "stemSlp1": "kim",
+  "gender": "n",
+  "kind": "pronoun",
+  "meaning_en": "what",
+  "cat": "pronoun",
+  "meanings": {
+   "te": "ఏమిటి",
+   "kn": "ಏನು",
+   "ta": "என்ன"
+  },
+  "order": 177
+ },
+ {
+  "display": "सर्व",
+  "stemSlp1": "sarva",
+  "gender": "m",
+  "kind": "pronoun",
+  "meaning_en": "all, everyone",
+  "cat": "pronoun",
+  "meanings": {
+   "te": "అందరూ",
+   "kn": "ಎಲ್ಲರೂ",
+   "ta": "எல்லோரும்"
+  },
+  "order": 178
+ },
+ {
+  "display": "इदम्",
+  "stemSlp1": "idam",
+  "gender": "m",
+  "kind": "pronoun",
+  "meaning_en": "this (here)",
+  "cat": "pronoun",
+  "meanings": {
+   "te": "ఇతను, ఇది",
+   "kn": "ಇವನು, ಇದು",
+   "ta": "இவன், இது"
+  },
+  "order": 179
+ }
 ]

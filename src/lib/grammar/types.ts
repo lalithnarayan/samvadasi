@@ -42,6 +42,7 @@ export type DhatuLite = {
   meaning_ta?: string | null
   commonPrefixed?: boolean | null
   derived?: Derived | null
+  krdanta?: Krdanta | null
 }
 
 /** The verb family (सनादि) and voice (प्रयोग) of one dhātu, from Vidyut. Passive tables are आत्मनेपद: forms[lak]['A']. */
@@ -50,10 +51,17 @@ export type VoiceId = 'kartari' | 'karmani'
 export type DerivedEntry = { padas: PadaId[]; forms: FormTable; passive?: FormTable; participle: Participle }
 export type Derived = { mula?: { passive?: FormTable }; nic?: DerivedEntry; san?: DerivedEntry; yan?: DerivedEntry }
 
+/** Kṛdanta forms from Vidyut: गत्वा / आगत्य, गन्तुम्, गच्छन्, (शानच्), गन्तव्यम्, गमनीयम्. */
+export type KrdantaId = 'ktva' | 'tumun' | 'shatr' | 'shanac' | 'tavya' | 'aniya'
+export type Krdanta = Partial<Record<KrdantaId, string[]>>
+
+/** Telugu / Kannada / Tamil wording for a phrase: [verb key of the translation engine, words before the verb]. */
+export type LocalWording = Partial<Record<'te' | 'kn' | 'ta', [string, string]>>
+
 export type PhraseLite = {
   id: number | string
   dhatu: DhatuLite
   words: string[]
-  english: { base: string; third: string; past: string; tail?: string | null }
+  english: { base: string; third: string; past: string; tail?: string | null; local?: LocalWording | null }
   note?: string | null
 }

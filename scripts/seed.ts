@@ -55,7 +55,7 @@ async function main() {
     const display = c?.display || (d.prefixes?.length ? `${c?.prefixesDev?.join(' + ') || d.prefixes.join(' + ')} + ${d.root}` : d.root)
     const data: Record<string, unknown> = {
       root: d.root, display, slug: d.slug, code: d.code, aupadeshika: d.aupadeshika, gana: d.gana, artha_sa: d.artha_sa,
-      prefixes: d.prefixes || [], padas: d.padas, forms: d.forms, participle: d.participle, derived: d.derived || null,
+      prefixes: d.prefixes || [], padas: d.padas, forms: d.forms, participle: d.participle, derived: d.derived || null, krdanta: d.krdanta || null,
       generatedWith: `vidyut ${gen.vidyut} · ${gen.generated}`,
       gloss: glosses[d.slug]?.gloss,
       meaning_en: shortMeaning(glosses[d.slug]),
@@ -70,7 +70,7 @@ async function main() {
     const id = existing.get(d.slug)
     if (id) {
       // Re-runs only refresh what Vidyut owns; meanings, overrides and review status stay as editors left them.
-      const generated: any = { root: data.root, code: data.code, aupadeshika: data.aupadeshika, gana: data.gana, artha_sa: data.artha_sa, padas: data.padas, forms: data.forms, participle: data.participle, derived: data.derived, generatedWith: data.generatedWith }
+      const generated: any = { root: data.root, code: data.code, aupadeshika: data.aupadeshika, gana: data.gana, artha_sa: data.artha_sa, padas: data.padas, forms: data.forms, participle: data.participle, derived: data.derived, krdanta: data.krdanta, generatedWith: data.generatedWith }
       // meanings in Telugu / Kannada / Tamil: filled once from the curated files, then editors own them
       if (c?.meanings && !hasMeanings.has(d.slug)) Object.assign(generated, meanings)
       if (c) generated.commonPrefixed = c._set === 'prefixed' || !!c.prefixes?.length
@@ -85,13 +85,36 @@ async function main() {
   log('old dhātu versions pruned')
 
   // ── nouns ───────────────────────────────────────────────────────────────
+  const nounIds = new Map<string, number>()
   for (const n of read('data/generated/nouns.json')) {
+    const slug = `${n.stemSlp1}-${n.gender}`
     const where: Where = { and: [{ stemSlp1: { equals: n.stemSlp1 } }, { gender: { equals: n.gender } }] }
     const f = await payload.find({ collection: 'nouns', where, limit: 1 })
-    const data = { display: n.display, stemSlp1: n.stemSlp1, gender: n.gender, kind: n.kind || 'noun', meaning_en: n.meaning_en, forms: n.forms, gloss: n.note }
-    f.docs.length ? await payload.update({ collection: 'nouns', id: f.docs[0].id, data, ...ctx }) : await payload.create({ collection: 'nouns', data, ...ctx })
+    const data: any = { display: n.display, stemSlp1: n.stemSlp1, gender: n.gender, kind: n.kind || 'noun', forms: n.forms, slug, cat: n.cat, order: n.order }
+    // meanings and notes: filled once, then editors own them
+    const editable = { meaning_en: n.meaning_en, meaning_te: n.meanings?.te, meaning_kn: n.meanings?.kn, meaning_ta: n.meanings?.ta, gloss: n.note }
+    const old: any = f.docs[0]
+    const doc = old ? await payload.update({ collection: 'nouns', id: old.id, data: { ...data, ...(old.meaning_te ? {} : editable) }, ...ctx })
+      : await payload.create({ collection: 'nouns', data: { ...data, ...editable }, ...ctx })
+    nounIds.set(slug, (doc as any).id)
   }
-  log('nouns & pronouns imported')
+  log(`${nounIds.size} nouns & pronouns imported`)
+
+  // ── avyayas (question words, place / time words, joining words) ─────────
+  for (const a of read('data/curated/avyayas.json')) {
+    const f = await payload.find({ collection: 'avyayas', where: { word: { equals: a.word } }, limit: 1 })
+    if (f.docs[0]) await payload.update({ collection: 'avyayas', id: f.docs[0].id, data: { category: a.category, order: a.order }, ...ctx })
+    else await payload.create({ collection: 'avyayas', data: a, ...ctx })
+  }
+  log('avyayas imported')
+
+  // ── greetings and names ─────────────────────────────────────────────────
+  for (const g of read('data/curated/greetings.json')) {
+    const f = await payload.find({ collection: 'greetings', where: { text: { equals: g.text } }, limit: 1 })
+    if (f.docs[0]) await payload.update({ collection: 'greetings', id: f.docs[0].id, data: { kind: g.kind, order: g.order }, ...ctx })
+    else await payload.create({ collection: 'greetings', data: g, ...ctx })
+  }
+  log('greetings imported')
 
   // ── situations & phrases ────────────────────────────────────────────────
   const phraseIds = new Map<string, number>()
@@ -109,6 +132,23 @@ async function main() {
     }
   }
   log(`${phraseIds.size} phrases imported`)
+
+  // ── vocabulary packs and their phrases ──────────────────────────────────
+  let packPhrases = 0
+  for (const pk of read('data/curated/packs.json')) {
+    const words = pk.words.map((w: any) => ({ sa: w.sa, en: w.en, te: w.te, kn: w.kn, ta: w.ta, noun: w.noun ? nounIds.get(w.noun) : undefined }))
+    const pdata = { slug: pk.slug, title: pk.title, titleSa: pk.titleSa, title_te: pk.title_te, title_kn: pk.title_kn, title_ta: pk.title_ta, order: pk.order, words }
+    const f = await payload.find({ collection: 'packs', where: { slug: { equals: pk.slug } }, limit: 1 })
+    const pack = f.docs[0] ? (f.docs[0] as any) : await payload.create({ collection: 'packs', data: pdata, ...ctx })
+    for (const p of pk.phrases) {
+      const dhatu = existing.get(p.dhatu)
+      if (!dhatu) { console.warn('missing dhatu', p.dhatu); continue }
+      const data = { label: p.label, pack: pack.id, dhatu, order: p.order, words: p.words.map((text: string) => ({ text })), english: p.english, local: p.local }
+      const ex = await payload.find({ collection: 'phrases', where: { label: { equals: p.label } }, limit: 1 })
+      if (!ex.docs[0]) { await payload.create({ collection: 'phrases', data, ...ctx }); packPhrases++ }
+    }
+  }
+  log(`packs imported (${packPhrases} new phrases)`)
 
   // ── practice deck ───────────────────────────────────────────────────────
   const deck = read('data/curated/practice.json')

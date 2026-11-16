@@ -38,6 +38,8 @@ for i, d in enumerate(gen):
     g = S.generate(d['aupadeshika'], d['gana'], d.get('prefixes') or [])
     if canon(g['forms']) != canon(d['forms']) or g['padas'] != d['padas']:
         problems.append(f"{d['slug']} {d['root']}: generated forms are out of date — run npm run vidyut:generate")
+    if canon(g.get('krdanta') or {}) != canon(d.get('krdanta') or {}):
+        problems.append(f"{d['slug']} {d['root']}: kṛdanta forms are out of date — run npm run vidyut:generate")
     if d.get('derived'):
         if canon(S.derived(d['aupadeshika'], d['gana'], d.get('prefixes') or [])) != canon(d['derived']):
             problems.append(f"{d['slug']} {d['root']}: derived forms are out of date — run npm run vidyut:generate")
@@ -69,6 +71,16 @@ if a.cms:
                 problems.append(f"CMS {d['slug']}: override without label or reason")
         cms_checked += len(items)
 
+# 4. Nouns: every stored table is what Vidyut produces today (hand-checked tables are marked "manual").
+nouns_checked = 0
+if os.path.exists('data/generated/nouns.json'):
+    for n in json.load(open('data/generated/nouns.json', encoding='utf-8')):
+        if n.get('source') == 'manual':
+            continue
+        if canon(S.subanta(n['stemSlp1'], n['gender'])) != canon(n['forms']):
+            problems.append(f"noun {n['display']} ({n['gender']}): forms are out of date — run npm run vidyut:generate")
+        nouns_checked += 1
+print(f'Nouns: {nouns_checked} declension tables regenerated.')
 print(f'Vidyut check: {checked} dhatus regenerated ({derived_checked} with their verb family), {len(cur)} curated verbs, {cms_checked} CMS forms verified.')
 if problems:
     print(f'\n✗ {len(problems)} problem(s):')

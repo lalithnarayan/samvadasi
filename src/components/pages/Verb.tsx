@@ -6,6 +6,9 @@ import { meaningOf, type UIKey } from '@/lib/i18n'
 import { DEEP, TINT, useSamvada } from '@/components/samvada/state'
 import { SiteNav } from '@/components/samvada/SiteNav'
 import { Dock } from '@/components/samvada/Dock'
+import { Footer } from '@/components/samvada/Footer'
+import { KrdantaCard } from '@/components/samvada/Krdanta'
+import { Speak } from '@/components/samvada/Speak'
 import { VerbPicker } from '@/components/samvada/VerbPicker'
 import { Derivation } from '@/components/samvada/Derivation'
 import { cn } from '@/lib/utils'
@@ -57,7 +60,7 @@ export function VerbClient({ d: base, examples, relatives = [] }: { d: D; exampl
     const L = LAKARA_NAMES[lak], here = lak === when
     if (!d.forms?.[lak]?.[pada]) return null
     return (
-      <section key={lak} className={cn('flex min-w-0 flex-col gap-3.5 rounded-[26px] bg-paper p-[clamp(18px,2vw,28px)]', literary && 'opacity-85')} style={{ border: here ? `1.5px solid ${deep}` : '1px solid rgb(36 33 29 / .12)' }}>
+      <section key={lak} className={cn('flex min-w-0 flex-col gap-3.5 rounded-[26px] bg-paper p-[clamp(18px,2vw,28px)]', literary && 'border-dashed')} style={{ border: here ? `1.5px solid ${deep}` : `1px ${literary ? 'dashed' : 'solid'} rgb(36 33 29 / .2)` }}>
         <div className="flex flex-wrap items-baseline gap-3">
           <span className="text-[26px] font-bold" style={{ fontFamily: font }}>{toScript(L.name, sc)}</span>
           <span className="disp text-lg font-semibold">{t((L.literary ? `lak.${lak}` : `when.${lak}`) as UIKey)}</span>
@@ -67,7 +70,7 @@ export function VerbClient({ d: base, examples, relatives = [] }: { d: D; exampl
         </div>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[440px] border-collapse">
-            <thead><tr><th className="w-24" />{colh.map((h) => <th key={h} scope="col" className="px-2.5 py-1 text-left text-xs font-semibold opacity-70">{h}</th>)}</tr></thead>
+            <thead><tr><th className="w-24"><span className="sr-only">{t('dock.who')}</span></th>{colh.map((h) => <th key={h} scope="col" className="px-2.5 py-1 text-left text-xs font-semibold opacity-80">{h}</th>)}</tr></thead>
             <tbody>
               {ROWS.map((r) => (
                 <tr key={r.sk} className="border-t border-ink/10">
@@ -83,7 +86,7 @@ export function VerbClient({ d: base, examples, relatives = [] }: { d: D; exampl
                           <span lang="sa" className="block text-xl leading-relaxed font-semibold whitespace-nowrap" style={{ fontFamily: font }}>
                             {splitScript(c.stem, c.end, sc)[0]}<span style={{ color: DEEP[colorOfIdx(idx)] }}>{splitScript(c.stem, c.end, sc)[1]}</span>
                           </span>
-                          {c.also.length > 0 && <span className="block text-[11px] opacity-70">{t('v.also')} {c.also.map((a) => toScript(a.form, sc)).join(', ')}</span>}
+                          {c.also.length > 0 && <span className="block text-[11px] opacity-80">{t('v.also')} {c.also.map((a) => toScript(a.form, sc)).join(', ')}</span>}
                           <Derivation form={c.form} req={req(lak, idx)} />
                         </>}
                       </td>
@@ -101,15 +104,15 @@ export function VerbClient({ d: base, examples, relatives = [] }: { d: D; exampl
   return (
     <>
       <SiteNav />
-      <main className="wrap flex flex-col gap-7 pt-[clamp(24px,4vw,56px)] pb-[72px]">
+      <main id="main" tabIndex={-1} className="wrap outline-none flex flex-col gap-7 pt-[clamp(24px,4vw,56px)] pb-[72px]">
         <div className="grid items-end gap-6 lg:grid-cols-2 lg:gap-16">
           <div className="flex flex-col gap-1.5">
             <span className="eyebrow" style={{ color: deep }}>{t('vb.eyebrow', { code: d.code })}</span>
             {rootRel && <Link href={`/verb/${rootRel.slug}${query}`} className="self-start text-sm font-semibold underline-offset-2 hover:underline">{t('pre.root')}: <span style={{ fontFamily: font }}>{toScript(rootRel.display, sc)}</span> · {meaningOf(rootRel, lang, sc).main} ↗</Link>}
             <p lang="sa" className={cn('m-0 leading-[1.25]', d.display.includes('+') ? 'text-[clamp(56px,8vw,128px)]' : 'text-[clamp(96px,13vw,200px)]')} style={{ fontFamily: sc === 'deva' ? 'var(--font-display)' : font }}>{toScript(d.display, sc)}</p>
             <p className="disp m-0 text-[clamp(26px,3vw,40px)] font-extrabold">
-              <span style={mean.sanskrit ? { fontFamily: font } : undefined}>{mean.main}</span>{mean.sub && <span className="font-sans text-lg font-normal opacity-70"> · {mean.sub}</span>}
-              {tr && <span className="font-sans text-lg font-normal italic opacity-65"> · {iast(d.root)}</span>}
+              <span style={mean.sanskrit ? { fontFamily: font } : undefined}>{mean.main}</span>{mean.sub && <span className="font-sans text-lg font-normal opacity-80"> · {mean.sub}</span>}
+              {tr && <span className="font-sans text-lg font-normal italic opacity-75"> · {iast(d.root)}</span>}
             </p>
             {!mean.sanskrit && d.artha_sa && <p className="m-0 text-[15px] opacity-75">{t('vb.dp')}: <span style={{ fontFamily: font }}>{toScript(d.artha_sa, sc)}</span>{d.gloss ? ` · ${d.gloss}` : ''}</p>}
           </div>
@@ -133,8 +136,8 @@ export function VerbClient({ d: base, examples, relatives = [] }: { d: D; exampl
                 { label: t('vb.pp'), val: kta0 ? kta0.stem + '-' : '—' },
               ].map((s) => (
                 <div key={s.label} className="flex flex-col gap-0.5 rounded-2xl border border-ink/12 bg-paper px-3.5 py-2.5">
-                  <span className="text-xs font-semibold opacity-70">{s.label}</span>
-                  <span className="text-[22px] leading-normal font-bold" style={{ fontFamily: font }}>{toScript(s.val || '—', sc)}</span>
+                  <span className="text-xs font-semibold opacity-80">{s.label}</span>
+                  <span className="flex items-center justify-between gap-1"><span className="text-[22px] leading-normal font-bold" style={{ fontFamily: font }}>{toScript(s.val || '—', sc)}</span>{s.val && !s.val.endsWith('-') && <Speak text={s.val} className="size-8" />}</span>
                 </div>
               ))}
             </div>
@@ -202,7 +205,7 @@ export function VerbClient({ d: base, examples, relatives = [] }: { d: D; exampl
                 {when === 'kta' && <span className="rounded-full px-2.5 py-0.5 text-xs font-bold" style={{ background: TINT[subj.color], color: deep }}>{t('vb.inBar')}</span>}
               </div>
               <div className="overflow-x-auto"><table className="w-full min-w-[440px] border-collapse">
-                <thead><tr><th className="w-24" />{colh.map((h) => <th key={h} className="px-2.5 py-1 text-left text-xs font-semibold opacity-70">{h}</th>)}</tr></thead>
+                <thead><tr><th className="w-24"><span className="sr-only">{t('dock.who')}</span></th>{colh.map((h) => <th key={h} className="px-2.5 py-1 text-left text-xs font-semibold opacity-80">{h}</th>)}</tr></thead>
                 <tbody>
                   {(['m', 'f'] as const).map((g) => (
                     <tr key={g} className="border-t border-ink/10">
@@ -212,7 +215,7 @@ export function VerbClient({ d: base, examples, relatives = [] }: { d: D; exampl
                         return (
                           <td key={n} className="rounded-[10px] px-2.5 py-2 align-top" style={{ background: on ? TINT[subj.color] : undefined }}>
                             {c && <><span lang="sa" className="block text-xl leading-relaxed font-semibold whitespace-nowrap" style={{ fontFamily: font }}>{splitScript(c.stem, c.end, sc)[0]}<span style={{ color: deep }}>{splitScript(c.stem, c.end, sc)[1]}</span></span>
-                              {c.also.length > 0 && <span className="block text-[11px] opacity-70">{c.also.map((a) => `${t(`lbl.${a.label}` as UIKey)}: ${toScript(a.form, sc)}`).join(', ')}</span>}</>}
+                              {c.also.length > 0 && <span className="block text-[11px] opacity-80">{c.also.map((a) => `${t(`lbl.${a.label}` as UIKey)}: ${toScript(a.form, sc)}`).join(', ')}</span>}</>}
                           </td>
                         )
                       })}
@@ -225,6 +228,8 @@ export function VerbClient({ d: base, examples, relatives = [] }: { d: D; exampl
           )}
           {SPOKEN.map((l) => grid(l))}
         </div>}
+
+        {fam === 'mula' && <KrdantaCard d={d} />}
 
         <div className="mt-4 flex flex-col gap-1.5 border-t border-ink/25 pt-4">
           <span className="disp text-2xl font-extrabold">{t('vb.litH')}</span>
@@ -253,6 +258,7 @@ export function VerbClient({ d: base, examples, relatives = [] }: { d: D; exampl
           </section>
         )}
       </main>
+      <Footer />
       <Dock />
     </>
   )

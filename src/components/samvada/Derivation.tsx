@@ -20,7 +20,7 @@ export function Derivation({ form, req }: { form: string; req: Record<string, un
   return (
     <Dialog onOpenChange={(o) => o && load()}>
       <DialogTrigger asChild>
-        <button className="text-[11px] font-semibold underline decoration-dotted underline-offset-2 opacity-60 hover:opacity-100" aria-label={`How is ${form} built?`}>{t('vb.how')}</button>
+        <button className="text-[11px] font-semibold underline decoration-dotted underline-offset-2 opacity-75 hover:opacity-100" aria-label={`${t('vb.how')} ${form}`}>{t('vb.how')}</button>
       </DialogTrigger>
       <DialogContent className="max-h-[80vh] overflow-y-auto bg-paper sm:max-w-lg">
         <DialogHeader>
@@ -28,12 +28,12 @@ export function Derivation({ form, req }: { form: string; req: Record<string, un
           <DialogDescription>{t('vb.howDesc')}</DialogDescription>
         </DialogHeader>
         {err && <p className="text-sm">{err}</p>}
-        {!steps && !err && <p className="text-sm opacity-70">{t('vb.deriving')}</p>}
+        {!steps && !err && <p className="text-sm opacity-80">{t('vb.deriving')}</p>}
         {steps && (
           <ol className="flex flex-col gap-1.5">
             {steps.map((s, i) => (
               <li key={i} className="flex items-baseline gap-3 border-b border-ink/10 pb-1.5">
-                <span className="w-16 shrink-0 font-mono text-xs opacity-70">{s.sutra}</span>
+                <span className="w-16 shrink-0 font-mono text-xs opacity-80">{s.sutra}</span>
                 <span className="font-sk text-lg">{s.result}</span>
               </li>
             ))}

@@ -2,6 +2,13 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run ci",
   "functions": {
-    "api/grammar.py": { "maxDuration": 30, "excludeFiles": "{node_modules,data,src,.next,public,scripts,vidyut-data}/**" }
+    "api/grammar.py": {
+      "maxDuration": 30,
+      "excludeFiles": "{node_modules,data,src,.next,public,scripts,vidyut-data}/**"
+    },
+    "api/card.py": {
+      "maxDuration": 10,
+      "excludeFiles": "{node_modules,data,src,.next,public,scripts,vidyut-data}/**"
+    }
   }
 }

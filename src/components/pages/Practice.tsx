@@ -4,13 +4,15 @@ import { useMemo, useState } from 'react'
 import { cellFor, splitScript, iast, joinWords, ktaCell, padaOf, subject, toScript, WHENS, type Gender, type Num, type PersonId, type PhraseLite, type WhenId } from '@/lib/grammar'
 import { genderWordsIn, sentence, subjectLabel } from '@/lib/i18n'
 import { DEEP, TINT, useSamvada } from '@/components/samvada/state'
+import { Footer } from '@/components/samvada/Footer'
+import { Speak } from '@/components/samvada/Speak'
 import { SiteNav } from '@/components/samvada/SiteNav'
 
 type Card = { person: PersonId; number: number; gender: Gender; lakara: WhenId; phrase: PhraseLite }
 const PNAME = { u: ['उत्तम', 'per.u'], m: ['मध्यम', 'per.m'], p: ['प्रथम', 'per.p'] } as const
 
 export function PracticeClient({ cards }: { cards: Card[] }) {
-  const { sc, tr, query, t, lang } = useSamvada()
+  const { sc, tr, query, t, lang, style } = useSamvada()
   const [deck, setDeck] = useState(() => cards.map((c, i) => ({ ...c, key: i })))
   const [pos, setPos] = useState(0)
   const [flipped, setFlipped] = useState(false)
@@ -45,7 +47,7 @@ export function PracticeClient({ cards }: { cards: Card[] }) {
   return (
     <div className="min-h-screen transition-colors duration-700" style={{ background: TINT[s.color] }}>
       <SiteNav />
-      <main className="wrap pt-[clamp(20px,3vw,40px)] pb-[72px]">
+      <main id="main" tabIndex={-1} className="wrap outline-none pt-[clamp(20px,3vw,40px)] pb-[72px]">
         <div className="mx-auto flex max-w-[720px] flex-col gap-[22px]">
           {!done ? <>
             <div className="flex flex-col gap-3">
@@ -60,25 +62,26 @@ export function PracticeClient({ cards }: { cards: Card[] }) {
             <div className="relative h-[clamp(420px,52vh,500px)] [perspective:1600px]">
               <span aria-hidden className="absolute inset-x-6 top-[22px] -bottom-3.5 rounded-[30px] border border-ink/8 bg-paper/50" />
               <span aria-hidden className="absolute inset-x-3 top-[11px] -bottom-[7px] rounded-[30px] border border-ink/10 bg-paper/75" />
-              <button onClick={() => setFlipped((f) => !f)} aria-label={flipped ? t('pr.turnBack') : t('pr.turnOver')} className="absolute inset-0 text-left">
+              <button onClick={() => setFlipped((f) => !f)} className="absolute inset-0 text-left">
+                <span className="sr-only">{flipped ? t('pr.turnBack') : t('pr.turnOver')}. </span>
                 <span className="flip absolute inset-0 block" style={{ transform: flipped ? 'rotateY(180deg)' : 'none' }}>
                   <span className="face absolute inset-0 flex flex-col gap-4 rounded-[30px] border border-ink/14 bg-paper p-[clamp(24px,4vw,40px)]">
-                    <span className="eyebrow text-xs opacity-60">{t('pr.sayAloud')}</span>
-                    <span className="disp text-[clamp(30px,4.4vw,52px)] leading-[1.08] font-extrabold">{sentence(lang, s, it.lakara, it.phrase.english)}</span>
+                    <span className="eyebrow text-xs opacity-75">{t('pr.sayAloud')}</span>
+                    <span className="disp text-[clamp(30px,4.4vw,52px)] leading-[1.08] font-extrabold">{sentence(lang, s, it.lakara, it.phrase.english, style)}</span>
                     <span className="flex-1" />
                     <span className="flex flex-wrap gap-2 text-[13px]">
                       <span className="rounded-full px-3 py-1.5 font-bold" style={{ background: TINT[s.color], color: deep }}>{t('pr.who')} · {who}</span>
                       <span className="rounded-full border border-ink/20 px-3 py-1.5">{t('pr.when')} · <span className="font-bold" style={{ fontFamily: font }}>{toScript(W.name, sc)}</span> {t(`when.${W.id}`)}</span>
                       <span className="rounded-full border border-ink/20 px-3 py-1.5">{t('pr.verb')} · <span className="font-bold" style={{ fontFamily: font }}>{toScript(it.phrase.dhatu.display, sc)}</span></span>
                     </span>
-                    <span className="text-[13px] opacity-60">{t('pr.tap')}</span>
+                    <span className="text-[13px] opacity-75">{t('pr.tap')}</span>
                   </span>
                   <span className="face absolute inset-0 flex flex-col gap-3 rounded-[30px] border border-ink/14 bg-paper p-[clamp(24px,4vw,40px)] [transform:rotateY(180deg)]">
-                    <span className="eyebrow text-xs opacity-60">{t('pr.didYou')}</span>
+                    <span className="eyebrow text-xs opacity-75">{t('pr.didYou')}</span>
                     <span lang="sa" className="text-[clamp(32px,4.4vw,50px)] leading-[1.55] font-semibold" style={{ fontFamily: font }}>
                       {toScript(words.slice(0, -1).join(' ') + ' ', sc)}{splitScript(cell?.stem || '', cell?.end || '', sc)[0]}<span style={{ color: deep }}>{splitScript(cell?.stem || '', cell?.end || '', sc)[1]}</span>।
                     </span>
-                    {tr && <span className="text-base italic opacity-65">{iast(words.join(' '))}</span>}
+                    {tr && <span className="text-base italic opacity-75">{iast(words.join(' '))}</span>}
                     <span className="flex-1" />
                     <span className="rounded-[18px] px-4 py-3.5 text-[15px] leading-normal" style={{ background: TINT[s.color] }}>{why}</span>
                   </span>
@@ -89,7 +92,8 @@ export function PracticeClient({ cards }: { cards: Card[] }) {
               <button onClick={() => next(false)} className="pill min-h-[58px] rounded-full border border-ink text-base font-semibold">{t('pr.notYet')}</button>
               <button onClick={() => next(true)} className="pill min-h-[58px] rounded-full border border-ink bg-ink text-base font-semibold text-stone">{t('pr.gotIt')}</button>
             </div>
-            <p className="m-0 text-center text-sm opacity-70">{t('pr.notYetHint')}</p>
+            {flipped && <div className="mt-1 flex items-center justify-center gap-2 text-sm"><Speak text={words.join(' ')} /> <span className="opacity-80">{t('au.play')}</span></div>}
+            <p className="m-0 text-center text-sm opacity-80">{t('pr.notYetHint')}</p>
           </> : (
             <section className="flex flex-col gap-4 pt-[clamp(24px,6vw,80px)]">
               <span className="eyebrow" style={{ color: deep }}>{t('pr.end')}</span>
@@ -103,6 +107,7 @@ export function PracticeClient({ cards }: { cards: Card[] }) {
           )}
         </div>
       </main>
+      <Footer />
     </div>
   )
 }

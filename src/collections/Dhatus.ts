@@ -79,6 +79,7 @@ export const Dhatus: CollectionConfig = {
             { name: 'forms', type: 'json', admin: { hidden: true } },
             { name: 'participle', type: 'json', admin: { hidden: true } },
             { name: 'derived', type: 'json', admin: { hidden: true, description: 'Causative, desiderative, intensive and passive forms (Vidyut)' } },
+            { name: 'krdanta', type: 'json', admin: { hidden: true, description: 'Kṛdanta forms: ktvā/lyap, tumun, śatṛ, śānac, tavya, anīyar (Vidyut)' } },
             { name: 'generatedWith', type: 'text', admin: { readOnly: true, description: 'Vidyut version and date of the last generation' } },
           ],
         },
