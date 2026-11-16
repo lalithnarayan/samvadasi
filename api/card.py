@@ -106,7 +106,23 @@ def card(t: str, s: str, k: str, c: str, fmt: str) -> bytes:
         top += 54
     room_bottom = H - pad - (110 if s else 20)
     big = 260 if fmt == 'sq' else 210
-    size, lines = fit(t[:120] or 'संवदसि', maxw, big, 56, 4 if fmt == 'sq' else 2, maxh=room_bottom - top)
+    if '\n' in t:  # a verse: keep its own half-verse lines, shrink until the widest fits
+        lines = [l.strip() for l in t.split('\n') if l.strip()][:4]
+        if fmt == 'sq' and len(lines) <= 2:  # square: one quarter-verse (pāda) per line
+            split = []
+            for l in lines:
+                sp = [i for i, c in enumerate(l) if c == ' ']
+                if sp:
+                    m = min(sp, key=lambda i: abs(i - len(l) / 2))
+                    split += [l[:m], l[m + 1:]]
+                else:
+                    split.append(l)
+            lines = split
+        size = big
+        while size > 28 and (max(width(l, size) for l in lines) > maxw or len(lines) * size * 1.45 > room_bottom - top):
+            size -= 4
+    else:
+        size, lines = fit(t[:120] or 'संवदसि', maxw, big, 56, 4 if fmt == 'sq' else 2, maxh=room_bottom - top)
     lh = int(size * 1.45)
     block = lh * len(lines)
     y = top + max(0, (room_bottom - top - block) // 2) - int(size * 0.18)
@@ -128,7 +144,7 @@ class handler(BaseHTTPRequestHandler):  # Vercel looks for a class named `handle
         q = {k: v[0] for k, v in parse_qs(urlparse(self.path).query).items()}
         clean = lambda x, n: re.sub(r'[\x00-\x1f]', '', (x or ''))[:n]
         try:
-            png = card(clean(q.get('t'), 120), clean(q.get('s'), 140), clean(q.get('k'), 80), q.get('c', 'p')[:1], q.get('f', 'og')[:2])
+            png = card(re.sub(r'[\x00-\x09\x0b-\x1f]', '', q.get('t') or '')[:240], clean(q.get('s'), 140), clean(q.get('k'), 80), q.get('c', 'p')[:1], q.get('f', 'og')[:2])
         except Exception as e:  # never break a preview: fall back to the plain card
             print('card error', e, file=sys.stderr)
             png = card('संवदसि', 'Speak Sanskrit by changing just the ending', '', 'p', 'og')

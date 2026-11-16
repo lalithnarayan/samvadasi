@@ -10,6 +10,7 @@ import { Avyayas } from './collections/Avyayas'
 import { Packs } from './collections/Packs'
 import { Greetings } from './collections/Greetings'
 import { Audio } from './collections/Audio'
+import { Subhashitas } from './collections/Subhashitas'
 import { Nouns } from './collections/Nouns'
 import { Situations } from './collections/Situations'
 import { Phrases } from './collections/Phrases'
@@ -28,7 +29,7 @@ export default buildConfig({
     meta: { titleSuffix: ' — Samvadasi CMS' },
     importMap: { baseDir: path.resolve(dirname) },
   },
-  collections: [Dhatus, Nouns, Avyayas, Situations, Phrases, Packs, Greetings, Audio, PracticeDecks, Examples, Users],
+  collections: [Dhatus, Nouns, Avyayas, Situations, Phrases, Packs, Greetings, Subhashitas, Audio, PracticeDecks, Examples, Users],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: { outputFile: path.resolve(dirname, 'payload-types.ts') },

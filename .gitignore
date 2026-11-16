@@ -74,3 +74,4 @@ deploy.command
 *.tgz
 phase0.command
 phases.command
+subh.command

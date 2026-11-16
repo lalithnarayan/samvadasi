@@ -250,7 +250,8 @@
    "kn": "ಚಹಾ",
    "ta": "டீ"
   },
-  "order": 12
+  "order": 12,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "वार्तापत्र",
@@ -263,7 +264,8 @@
    "kn": "ಪತ್ರಿಕೆ",
    "ta": "செய்தித்தாள்"
   },
-  "order": 13
+  "order": 13,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "ओदन",
@@ -692,7 +694,8 @@
    "kn": "ಬಾಳೆಹಣ್ಣು",
    "ta": "வாழைப்பழம்"
   },
-  "order": 46
+  "order": 46,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "शाक",
@@ -773,19 +776,6 @@
   "order": 52
  },
  {
-  "display": "सूप",
-  "stemSlp1": "sUpa",
-  "gender": "m",
-  "meaning_en": "dal",
-  "cat": "food",
-  "meanings": {
-   "te": "పప్పు",
-   "kn": "ಬೇಳೆ ಸಾರು",
-   "ta": "பருப்பு"
-  },
-  "order": 53
- },
- {
   "display": "तण्डुल",
   "stemSlp1": "taRqula",
   "gender": "m",
@@ -835,7 +825,8 @@
    "kn": "ಹಣ್ಣಿನ ರಸ",
    "ta": "பழச்சாறு"
   },
-  "order": 57
+  "order": 57,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "नारिकेल",
@@ -1082,7 +1073,8 @@
    "kn": "ಮೇಜು",
    "ta": "மேசை"
   },
-  "order": 76
+  "order": 76,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "शय्या",
@@ -1134,7 +1126,8 @@
    "kn": "ಫೋನು",
    "ta": "தொலைபேசி"
   },
-  "order": 80
+  "order": 80,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "सङ्गणक",
@@ -1147,7 +1140,8 @@
    "kn": "ಕಂಪ್ಯೂಟರ್",
    "ta": "கணினி"
   },
-  "order": 81
+  "order": 81,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "घटी",
@@ -1264,7 +1258,8 @@
    "kn": "ಕನ್ನಡಕ",
    "ta": "மூக்குக்கண்ணாடி"
   },
-  "order": 90
+  "order": 90,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "ग्राम",
@@ -1329,7 +1324,8 @@
    "kn": "ಆಸ್ಪತ್ರೆ",
    "ta": "மருத்துவமனை"
   },
-  "order": 95
+  "order": 95,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "कार्यालय",
@@ -1342,7 +1338,8 @@
    "kn": "ಕಚೇರಿ",
    "ta": "அலுவலகம்"
   },
-  "order": 96
+  "order": 96,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "ग्रन्थालय",
@@ -1355,7 +1352,8 @@
    "kn": "ಗ್ರಂಥಾಲಯ",
    "ta": "நூலகம்"
   },
-  "order": 97
+  "order": 97,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "भोजनालय",
@@ -1368,7 +1366,8 @@
    "kn": "ಹೋಟೆಲ್",
    "ta": "உணவகம்"
   },
-  "order": 98
+  "order": 98,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "महाविद्यालय",
@@ -1381,7 +1380,8 @@
    "kn": "ಕಾಲೇಜು",
    "ta": "கல்லூரி"
   },
-  "order": 99
+  "order": 99,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "नदी",
@@ -1472,7 +1472,8 @@
    "kn": "ಕೋಣೆ",
    "ta": "அறை"
   },
-  "order": 106
+  "order": 106,
+  "note": "Classically a court or room near the gate; used for “room” in spoken Sanskrit."
  },
  {
   "display": "सूर्य",
@@ -1862,7 +1863,8 @@
    "kn": "ಪೊಲೀಸ್",
    "ta": "காவலர்"
   },
-  "order": 136
+  "order": 136,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "कृषक",
@@ -1901,7 +1903,8 @@
    "kn": "ಚಾಲಕ",
    "ta": "ஓட்டுநர்"
   },
-  "order": 139
+  "order": 139,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "नृप",
@@ -2031,7 +2034,8 @@
    "kn": "ಹೋಂವರ್ಕ್",
    "ta": "வீட்டுப்பாடம்"
   },
-  "order": 149
+  "order": 149,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "कक्ष्या",
@@ -2044,7 +2048,8 @@
    "kn": "ತರಗತಿ",
    "ta": "வகுப்பு"
   },
-  "order": 150
+  "order": 150,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "सङ्गीत",
@@ -2096,7 +2101,8 @@
    "kn": "ಬಸ್ಸು",
    "ta": "பேருந்து"
   },
-  "order": 154
+  "order": 154,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "रेलयान",
@@ -2109,7 +2115,8 @@
    "kn": "ರೈಲು",
    "ta": "ரயில்"
   },
-  "order": 155
+  "order": 155,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "विमान",
@@ -2135,7 +2142,8 @@
    "kn": "ಸೈಕಲ್",
    "ta": "மிதிவண்டி"
   },
-  "order": 157
+  "order": 157,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "यात्रा",
@@ -2161,7 +2169,8 @@
    "kn": "ನಿಲ್ದಾಣ",
    "ta": "நிலையம்"
   },
-  "order": 159
+  "order": 159,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "धन",
@@ -2187,7 +2196,8 @@
    "kn": "ರೂಪಾಯಿ",
    "ta": "ரூபாய்"
   },
-  "order": 161
+  "order": 161,
+  "note": "A modern word, used in spoken Sanskrit today (not in the classical dictionaries)."
  },
  {
   "display": "मूल्य",

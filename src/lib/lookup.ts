@@ -59,3 +59,9 @@ export function lookupSlugs(q: string, max = 40): string[] {
   }
   return [...ids].slice(0, max).map((i) => data.slugs[i])
 }
+
+/** Exact Devanagari form → verb slugs (no loose matching), for linking words in verses. */
+export function exactSlugs(form: string): string[] {
+  if (!byForm) build()
+  return (byForm!.get(form) || []).map((i) => data.slugs[i])
+}

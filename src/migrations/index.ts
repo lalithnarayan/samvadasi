@@ -3,6 +3,7 @@ import * as migration_20261115_143536_examples_review from './20261115_143536_ex
 import * as migration_20261115_143947_example_token from './20261115_143947_example_token';
 import * as migration_20261115_172232_derived_prefixed from './20261115_172232_derived_prefixed';
 import * as migration_20261116_011902_phases_1_4 from './20261116_011902_phases_1_4';
+import * as migration_20261116_040429_subhashitas from './20261116_040429_subhashitas';
 
 export const migrations = [
   {
@@ -28,6 +29,11 @@ export const migrations = [
   {
     up: migration_20261116_011902_phases_1_4.up,
     down: migration_20261116_011902_phases_1_4.down,
-    name: '20261116_011902_phases_1_4'
+    name: '20261116_011902_phases_1_4',
+  },
+  {
+    up: migration_20261116_040429_subhashitas.up,
+    down: migration_20261116_040429_subhashitas.down,
+    name: '20261116_040429_subhashitas'
   },
 ];

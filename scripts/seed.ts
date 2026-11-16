@@ -94,9 +94,15 @@ async function main() {
     // meanings and notes: filled once, then editors own them
     const editable = { meaning_en: n.meaning_en, meaning_te: n.meanings?.te, meaning_kn: n.meanings?.kn, meaning_ta: n.meanings?.ta, gloss: n.note }
     const old: any = f.docs[0]
-    const doc = old ? await payload.update({ collection: 'nouns', id: old.id, data: { ...data, ...(old.meaning_te ? {} : editable) }, ...ctx })
+    const doc = old ? await payload.update({ collection: 'nouns', id: old.id, data: { ...data, ...(old.meaning_te ? {} : editable), ...(!old.gloss && n.note ? { gloss: n.note } : {}) }, ...ctx })
       : await payload.create({ collection: 'nouns', data: { ...data, ...editable }, ...ctx })
+    // one-off corrections from the dictionary check (applied only if the old value is still there)
     nounIds.set(slug, (doc as any).id)
+  }
+  // words taken out after review
+  for (const slug of ['sUpa-m']) {
+    const f = await payload.find({ collection: 'nouns', where: { slug: { equals: slug } }, limit: 1 })
+    if (f.docs[0]) await payload.delete({ collection: 'nouns', id: f.docs[0].id, ...ctx })
   }
   log(`${nounIds.size} nouns & pronouns imported`)
 
@@ -107,6 +113,14 @@ async function main() {
     else await payload.create({ collection: 'avyayas', data: a, ...ctx })
   }
   log('avyayas imported')
+
+  // ── subhāṣitas ──────────────────────────────────────────────────────────
+  for (const v of read('data/curated/subhashitas.json')) {
+    const f = await payload.find({ collection: 'subhashitas', where: { slug: { equals: v.slug } }, limit: 1 })
+    if (f.docs[0]) await payload.update({ collection: 'subhashitas', id: f.docs[0].id, data: { theme: v.theme, order: v.order }, ...ctx })
+    else await payload.create({ collection: 'subhashitas', data: v, ...ctx })
+  }
+  log('subhāṣitas imported')
 
   // ── greetings and names ─────────────────────────────────────────────────
   for (const g of read('data/curated/greetings.json')) {
@@ -139,7 +153,7 @@ async function main() {
     const words = pk.words.map((w: any) => ({ sa: w.sa, en: w.en, te: w.te, kn: w.kn, ta: w.ta, noun: w.noun ? nounIds.get(w.noun) : undefined }))
     const pdata = { slug: pk.slug, title: pk.title, titleSa: pk.titleSa, title_te: pk.title_te, title_kn: pk.title_kn, title_ta: pk.title_ta, order: pk.order, words }
     const f = await payload.find({ collection: 'packs', where: { slug: { equals: pk.slug } }, limit: 1 })
-    const pack = f.docs[0] ? (f.docs[0] as any) : await payload.create({ collection: 'packs', data: pdata, ...ctx })
+    const pack = f.docs[0] ? await payload.update({ collection: 'packs', id: f.docs[0].id, data: pdata, ...ctx }) as any : await payload.create({ collection: 'packs', data: pdata, ...ctx })
     for (const p of pk.phrases) {
       const dhatu = existing.get(p.dhatu)
       if (!dhatu) { console.warn('missing dhatu', p.dhatu); continue }

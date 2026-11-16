@@ -74,6 +74,7 @@ export interface Config {
     phrases: Phrase;
     packs: Pack;
     greetings: Greeting;
+    subhashitas: Subhashita;
     audio: Audio;
     'practice-decks': PracticeDeck;
     examples: Example;
@@ -102,6 +103,7 @@ export interface Config {
     phrases: PhrasesSelect<false> | PhrasesSelect<true>;
     packs: PacksSelect<false> | PacksSelect<true>;
     greetings: GreetingsSelect<false> | GreetingsSelect<true>;
+    subhashitas: SubhashitasSelect<false> | SubhashitasSelect<true>;
     audio: AudioSelect<false> | AudioSelect<true>;
     'practice-decks': PracticeDecksSelect<false> | PracticeDecksSelect<true>;
     examples: ExamplesSelect<false> | ExamplesSelect<true>;
@@ -612,6 +614,38 @@ export interface Greeting {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subhashitas".
+ */
+export interface Subhashita {
+  id: number;
+  slug: string;
+  theme: 'learning' | 'effort' | 'speech' | 'kindness' | 'friendship' | 'life' | 'world';
+  /**
+   * e.g. Hitopadeśa, Bhagavad Gītā 2.47
+   */
+  source?: string | null;
+  order?: number | null;
+  /**
+   * The verse in Devanagari, one half-verse per line, with । and ॥
+   */
+  text: string;
+  /**
+   * Word split (पदच्छेद): every word separated, sandhi undone
+   */
+  padaccheda?: string | null;
+  meaning_en: string;
+  meaning_te?: string | null;
+  meaning_kn?: string | null;
+  meaning_ta?: string | null;
+  /**
+   * A teacher has checked the text and the meanings
+   */
+  reviewed?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "audio".
  */
 export interface Audio {
@@ -701,6 +735,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'greetings';
         value: number | Greeting;
+      } | null)
+    | ({
+        relationTo: 'subhashitas';
+        value: number | Subhashita;
       } | null)
     | ({
         relationTo: 'audio';
@@ -934,6 +972,25 @@ export interface GreetingsSelect<T extends boolean = true> {
   when_te?: T;
   when_kn?: T;
   when_ta?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subhashitas_select".
+ */
+export interface SubhashitasSelect<T extends boolean = true> {
+  slug?: T;
+  theme?: T;
+  source?: T;
+  order?: T;
+  text?: T;
+  padaccheda?: T;
+  meaning_en?: T;
+  meaning_te?: T;
+  meaning_kn?: T;
+  meaning_ta?: T;
+  reviewed?: T;
   updatedAt?: T;
   createdAt?: T;
 }

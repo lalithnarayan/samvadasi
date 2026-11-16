@@ -8,6 +8,9 @@ import { Word } from '@/components/samvada/Word'
 import { SiteNav } from '@/components/samvada/SiteNav'
 import { Dock } from '@/components/samvada/Dock'
 import { Footer } from '@/components/samvada/Footer'
+import { Speak } from '@/components/samvada/Speak'
+import type { SubhLite } from '@/lib/data'
+import { pick } from '@/lib/i18n'
 import { cn } from '@/lib/utils'
 
 const GO = { base: 'go', third: 'goes', past: 'went', tail: '' }
@@ -51,7 +54,7 @@ function Seg<T extends string>({ items, value, onPick, label }: { items: { id: T
   )
 }
 
-export function LandingClient({ gam, tiles, total, featuredCount }: { gam: DhatuLite; tiles: { root: string; meaning_en: string; artha_sa: string; slug: string }[]; total: number; featuredCount: number }) {
+export function LandingClient({ gam, tiles, total, featuredCount, verse }: { gam: DhatuLite; tiles: { root: string; meaning_en: string; artha_sa: string; slug: string }[]; total: number; featuredCount: number; verse?: SubhLite }) {
   const { subj, when, sc, tr, query, t, lang } = useSamvada()
   const line = (s: ReturnType<typeof subject>, w: Parameters<typeof sentence>[2]) => sentence(lang, s, w, GO).replace(/[.!]$/, '')
   const [slide, setSlide] = useState(0)
@@ -193,6 +196,20 @@ export function LandingClient({ gam, tiles, total, featuredCount }: { gam: Dhatu
         </div>
       </section>
 
+      {verse && (
+        <section aria-labelledby="sv" className="border-t border-ink/12 bg-stone py-[clamp(56px,8vw,110px)]">
+          <div className="wrap flex flex-col gap-3">
+            <span id="sv" className="eyebrow" style={{ color: DEEP[subj.color] }}>{t('sb.today')}</span>
+            <p lang="sa" className="m-0 text-[clamp(19px,3.6vw,52px)] leading-[1.6] font-semibold whitespace-pre-line [overflow-wrap:anywhere]" style={{ fontFamily: `var(--font-sk-${sc})` }}>{toScript(verse.text, sc)}</p>
+            <p className="disp m-0 max-w-[860px] text-[clamp(18px,1.7vw,24px)] font-semibold">{pick(lang, verse.meaning)}</p>
+            <div className="flex flex-wrap items-center gap-3">
+              <Speak text={verse.text} />
+              <Link href={`/subhashita/${verse.slug}${query}`} className="pill rounded-full bg-ink px-5 py-2.5 text-[14px] font-semibold text-stone no-underline">{t('sb.read')} →</Link>
+              <Link href={'/subhashitas' + query} className="text-[14px] font-semibold underline-offset-4 hover:underline">{t('sb.all')}</Link>
+            </div>
+          </div>
+        </section>
+      )}
       <section aria-labelledby="s5" className="bg-charcoal pt-[clamp(72px,10vw,140px)] pb-[clamp(48px,6vw,80px)] text-chalk">
         <div className="wrap flex flex-col gap-9">
           <div className="reveal flex flex-wrap items-end justify-between gap-4">

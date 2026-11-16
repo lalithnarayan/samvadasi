@@ -13,6 +13,7 @@ export const FOOT_LINKS: { href: string; label: UIKey }[] = [
   { href: '/build', label: 'nav.build' },
   { href: '/packs', label: 'nav.packs' },
   { href: '/greetings', label: 'nav.greetings' },
+  { href: '/subhashitas', label: 'nav.subh' },
   { href: '/practice', label: 'nav.practice' },
   { href: '/support', label: 'nav.support' },
 ]

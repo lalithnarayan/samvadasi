@@ -185,3 +185,49 @@ export async function getBuilderData() {
     verbs: verbs.docs.map((d: Doc) => ({ ...lite(d, SPOKEN), derived: d.derived?.mula?.passive ? { mula: { passive: d.derived.mula.passive } } : null })),
   }
 }
+
+// ── subhāṣitas ──────────────────────────────────────────────────────────
+export type SubhLite = { slug: string; theme: string; source?: string | null; text: string; padaccheda?: string | null; meaning: string[]; reviewed: boolean }
+const subhLite = (s: Doc): SubhLite => ({ slug: s.slug, theme: s.theme, source: s.source, text: s.text, padaccheda: s.padaccheda, meaning: [s.meaning_en, s.meaning_te, s.meaning_kn, s.meaning_ta], reviewed: !!s.reviewed })
+
+export async function getSubhashitas() {
+  const p = await payload()
+  const r = await p.find({ collection: 'subhashitas', sort: 'order', limit: 1000, depth: 0, pagination: false })
+  return r.docs.map(subhLite)
+}
+
+/** Same verse every day for everyone (changes at midnight IST). */
+export function verseOfDay<T>(list: T[], now = new Date()): T | undefined {
+  if (!list.length) return undefined
+  const day = Math.floor((now.getTime() + 5.5 * 3600e3) / 86400e3)
+  return list[day % list.length]
+}
+
+export type WordLink = { w: string; verb?: { slug: string; display: string; meaning?: string | null }; noun?: { slug: string; display: string; meaning?: string | null } }
+/** A verse with each word of its पदच्छेद linked to the verb or noun page that has that exact form. */
+export async function getSubhashita(slug: string) {
+  const p = await payload()
+  const r = await p.find({ collection: 'subhashitas', where: { slug: { equals: slug } }, limit: 1, depth: 0 })
+  if (!r.docs[0]) return null
+  const s = subhLite(r.docs[0])
+  const words = (s.padaccheda || '').split(/\s+/).map((w) => w.replace(/[।॥|,]/g, '')).filter(Boolean)
+  const { exactSlugs } = await import('./lookup')
+  // indeclinables (हि, न, च, तु, एव …) look like rare verb forms; never link them
+  const av = await p.find({ collection: 'avyayas', limit: 500, depth: 0, pagination: false, select: { word: true } })
+  const skip = new Set(['हि', 'न', 'च', 'तु', 'वा', 'एव', 'अपि', 'इति', 'मा', 'इव', 'चेत्', 'ततः', 'यथा', 'तथा', 'एवम्', 'कदाचन', 'सह', 'विना', 'इह', ...av.docs.map((a: Doc) => a.word)])
+  const linkable = (w: string) => !skip.has(w) && [...w].length > 2
+  const verbSlugs = new Map(words.map((w) => [w, linkable(w) ? exactSlugs(w)[0] : undefined]))
+  const want = [...new Set([...verbSlugs.values()].filter(Boolean))] as string[]
+  const dh = want.length ? await p.find({ collection: 'dhatus', where: { slug: { in: want } }, limit: 100, depth: 0, pagination: false, select: { slug: true, display: true, meaning_en: true } }) : { docs: [] }
+  const dmap = new Map(dh.docs.map((d: Doc) => [d.slug, d]))
+  const nouns = await p.find({ collection: 'nouns', limit: 1000, depth: 0, pagination: false, select: { slug: true, display: true, meaning_en: true, forms: true } })
+  const nmap = new Map<string, Doc>()
+  for (const n of nouns.docs as Doc[]) for (const row of n.forms || []) for (const cell of row) for (const f of cell) if (!nmap.has(f)) nmap.set(f, n)
+  const links: WordLink[] = words.map((w) => {
+    const v = verbSlugs.get(w), d = v ? dmap.get(v) : undefined, n = linkable(w) ? nmap.get(w) : undefined
+    return { w, verb: d ? { slug: d.slug, display: d.display, meaning: d.meaning_en } : undefined, noun: !d && n ? { slug: n.slug, display: n.display, meaning: n.meaning_en } : undefined }
+  })
+  const all = await getSubhashitas()
+  const i = all.findIndex((x) => x.slug === slug)
+  return { s, links, prev: all[(i - 1 + all.length) % all.length], next: all[(i + 1) % all.length] }
+}
