@@ -35,10 +35,10 @@ export function Combo({ id, value, onChange, options, placeholder, none, empty, 
           <span aria-hidden className="shrink-0 opacity-70">⌄</span>
         </button>
       </PopoverTrigger>
-      <PopoverContent className="w-[min(420px,92vw)] p-0" align="start">
+      <PopoverContent className="w-[min(420px,92vw)] p-0" align="start" collisionPadding={{ top: 12, bottom: 130 }}>
         <Command shouldFilter={false}>
           <CommandInput placeholder={placeholder} value={q} onValueChange={setQ} />
-          <CommandList className="max-h-[320px]">
+          <CommandList className="max-h-[min(320px,calc(var(--radix-popover-content-available-height,400px)-56px))] overscroll-contain">
             <CommandEmpty>{empty}</CommandEmpty>
             {none && !q && <CommandGroup><CommandItem value="__none" onSelect={() => pick('')} className="opacity-80">{none}</CommandItem></CommandGroup>}
             {groups.map(([gname, list]) => (

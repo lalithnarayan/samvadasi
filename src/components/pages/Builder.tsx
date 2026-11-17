@@ -126,10 +126,19 @@ export function BuilderClient({ nouns, verbs, pronouns }: { nouns: NounLite[]; v
     const people = nouns.filter((n) => ['family', 'people'].includes(n.cat)).map((n) => n.slug)
     const ob = maybe(ok(f.object), 0.9)
     setObjNum(ob && countable(ob) && Math.random() > 0.7 ? (Math.random() < 0.5 ? 1 : 2) : 0)
-    setPick({ object: ob, place: maybe(ok(framePlace(f)), 0.45), with: f.with ? maybe(people, 0.25) : '', for: maybe(ok(f.for), 0.3), from: maybe(ok(f.from), 0.25) })
+    const needMore = !ob
+    setPick({ object: ob, place: maybe(ok(framePlace(f)), needMore ? 0.85 : 0.45), with: f.with ? maybe(people, 0.25) : '', for: maybe(ok(f.for), 0.3), from: maybe(ok(f.from), 0.25) })
 
     setTime(Math.random() < 0.35 ? r(TIMES.filter((x) => !x.tense)).w : '')
   }
+  const wordOf = (role: string) => result?.parts.filter((x) => x.role === role).map((x) => x.text).join(' ')
+  const slotCard = (role: string, label: UIKey, caseName: string, el: React.ReactNode, isVerb = false) => (
+    <li className="flex min-w-0 flex-col gap-1.5 rounded-[20px] border bg-paper p-3" style={{ borderColor: isVerb ? deep : 'rgb(36 33 29 / .12)' }}>
+      <label htmlFor={`b-${role}`} className="text-[12px] font-semibold"><span style={{ fontFamily: font, color: deep }}>{toScript(caseName, sc)}</span> · {t(label)}</label>
+      {el}
+      {wordOf(role) && <span lang="sa" className="text-[15px] opacity-80" style={{ fontFamily: font }}>→ {toScript(wordOf(role)!, sc)}</span>}
+    </li>
+  )
   const field = (id: string, label: string, el: React.ReactNode) => (
     <div className="flex min-w-0 flex-col gap-1.5">
       <label htmlFor={id} className="text-[13px] font-semibold">{label}</label>{el}
@@ -180,41 +189,55 @@ export function BuilderClient({ nouns, verbs, pronouns }: { nouns: NounLite[]; v
           )}
         </section>
 
-        <p className="m-0 -mb-4 text-[14px] opacity-80">{t('b.fit')}</p>
-        <section aria-label={t('b.verb')} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {field('b-verb', t('b.verb'), (
-            <Combo id="b-verb" value={verb || ''} onChange={(x) => x && setVerb(x)} placeholder={t('b.search')} empty={t('b.noMatch')} font={font}
-              options={verbs.map((x) => ({ value: x.slug, label: toScript(x.display, sc), sub: meaningOf(x, lang, sc).main, search: `${x.display} ${iast(x.root)} ${x.meaning_en || ''}` }))} />
-          ))}
-          {allowed.object.length > 0 && field('b-object', t('b.object'), nounSelect('object'))}
-          {pick.object && countable(pick.object) && <div className="flex min-w-0 flex-col gap-1.5">
-            <span id="b-objnum" className="text-[13px] font-semibold">{t('b.objNum')}</span>
-            <div role="group" aria-labelledby="b-objnum" className="seg self-start">
-              {([0, 1, 2] as Num[]).map((n) => <button key={n} type="button" aria-pressed={objNum === n} onClick={() => setObjNum(n)} className={cn('pill min-h-10 rounded-full px-4 text-[14px] font-semibold', objNum === n && 'bg-ink text-stone')}>{t(`n.${['sg', 'du', 'pl'][n]}` as UIKey)}</button>)}
+        <section aria-labelledby="b-strip" className="flex flex-col gap-3">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div className="flex flex-col gap-1">
+              <h2 id="b-strip" className="disp m-0 text-[clamp(22px,2.4vw,30px)] font-extrabold">{t('b.strip')}</h2>
+              <p className="m-0 text-[14px] opacity-80">{t('b.fit')}</p>
             </div>
-          </div>}
-          <div className="flex min-w-0 flex-col gap-1.5">
-            <span id="b-voice" className="text-[13px] font-semibold">{t('b.voice')}</span>
-            {!frame.object && <span className="text-[12px] italic opacity-80">{t('b.noObj')}</span>}
-            <div role="group" aria-labelledby="b-voice" className="flex flex-col gap-1">
-              {(['kartari', 'karmani'] as const).map((k) => (
-                <button key={k} type="button" aria-pressed={voice === k} disabled={k === 'karmani' && !frame.object} onClick={() => setVoice(k)} className={cn('pill min-h-10 rounded-2xl border border-ink/20 px-3 text-left text-[13px] font-semibold disabled:opacity-50', voice === k && 'bg-ink text-stone')}>
-                  <span style={{ fontFamily: font }}>{toScript(k === 'kartari' ? 'कर्तरि' : 'कर्मणि', sc)}</span> · {t(k === 'kartari' ? 'b.active' : 'b.passive')}
-                </button>
-              ))}
+            <div className="flex flex-wrap items-center gap-2">
+              <div role="group" aria-label={t('b.voice')} className="seg">
+                {(['kartari', 'karmani'] as const).map((k) => (
+                  <button key={k} type="button" aria-pressed={voice === k} disabled={k === 'karmani' && !frame.object} onClick={() => setVoice(k)} title={t(k === 'kartari' ? 'b.activeHint' : 'b.passiveHint')}
+                    className={cn('pill min-h-10 rounded-full px-4 text-[14px] font-semibold disabled:opacity-40', voice === k && 'bg-ink text-stone')}>
+                    <span style={{ fontFamily: font }}>{toScript(k === 'kartari' ? 'कर्तरि' : 'कर्मणि', sc)}</span> · {t(k === 'kartari' ? 'b.activeS' : 'b.passiveS')}
+                  </button>
+                ))}
+              </div>
+              <button type="button" onClick={() => { setPick({ object: allowed.object[0] || '', place: '', with: '', for: '', from: '' }); setTime(''); setVoice('kartari'); setObjNum(0) }} className="pill min-h-10 rounded-full border border-ink/25 px-4 text-[14px] font-semibold">{t('b.reset')}</button>
             </div>
           </div>
-          {allowed.place.length > 0 && field('b-place', t('b.place'), nounSelect('place'))}
-          {allowed.with.length > 0 && field('b-with', t('b.with'), nounSelect('with'))}
-          {allowed.for.length > 0 && field('b-for', t('b.for'), nounSelect('for'))}
-          {allowed.from.length > 0 && field('b-from', t('b.from'), nounSelect('from'))}
-          {field('b-time', t('b.time'), (
-            <Combo id="b-time" value={time} onChange={setTime} placeholder={t('b.search')} none={t('b.none')} empty={t('b.noMatch')} font={font}
-              options={TIMES.map((x) => ({ value: x.w, label: toScript(x.w, sc), sub: x.en, search: iast(x.w) }))} />
-          ))}
-          <div className="flex items-end">
-            <button type="button" onClick={() => { setPick({ object: '', place: '', with: '', for: '', from: '' }); setTime(''); setVoice('kartari'); setObjNum(0) }} className="pill min-h-12 rounded-full border border-ink/25 px-5 text-[14px] font-semibold">{t('b.reset')}</button>
-          </div>
+          {!frame.object && <p className="m-0 text-[13px] italic opacity-80">{t('b.noObj')}</p>}
+          <ol className="m-0 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-4">
+            {/* same order as the words of the sentence */}
+            <li className="flex min-w-0 flex-col gap-1.5 rounded-[20px] border border-ink/12 bg-paper p-3">
+              <span className="text-[12px] font-semibold"><span style={{ fontFamily: font, color: deep }}>{toScript(voice === 'karmani' ? 'तृतीया' : 'प्रथमा', sc)}</span> · {t('b.doer')}</span>
+              <span lang="sa" className="text-[22px] font-bold" style={{ fontFamily: font, color: deep }}>{toScript(result?.parts[0]?.text || subj.sk, sc)}</span>
+              <span className="text-[12px] opacity-80">{t('b.doerHint')}</span>
+            </li>
+            {slotCard('time', 'b.time', 'अव्ययम्', (
+              <Combo id="b-time" value={time} onChange={setTime} placeholder={t('b.search')} none={t('b.none')} empty={t('b.noMatch')} font={font}
+                options={TIMES.map((x) => ({ value: x.w, label: toScript(x.w, sc), sub: x.en, search: iast(x.w) }))} />
+            ))}
+            {allowed.from.length > 0 && slotCard('from', 'b.from', 'पञ्चमी', nounSelect('from'))}
+            {allowed.place.length > 0 && slotCard('place', 'b.place', 'सप्तमी', nounSelect('place'))}
+            {allowed.with.length > 0 && slotCard('with', 'b.with', 'तृतीया + सह', nounSelect('with'))}
+            {allowed.for.length > 0 && slotCard('for', 'b.for', 'चतुर्थी', nounSelect('for'))}
+            {allowed.object.length > 0 && slotCard('object', 'b.object', voice === 'karmani' ? 'प्रथमा' : 'द्वितीया', (
+              <>
+                {nounSelect('object')}
+                {pick.object && countable(pick.object) && (
+                  <div role="group" aria-label={t('b.objNum')} className="seg self-start">
+                    {([0, 1, 2] as Num[]).map((n) => <button key={n} type="button" aria-pressed={objNum === n} onClick={() => setObjNum(n)} className={cn('pill min-h-9 rounded-full px-3 text-[13px] font-semibold', objNum === n && 'bg-ink text-stone')}>{t(`n.${['sg', 'du', 'pl'][n]}` as UIKey)}</button>)}
+                  </div>
+                )}
+              </>
+            ))}
+            {slotCard('verb', 'b.verb', 'क्रियापदम्', (
+              <Combo id="b-verb" value={verb || ''} onChange={(x) => x && setVerb(x)} placeholder={t('b.search')} empty={t('b.noMatch')} font={font}
+                options={verbs.map((x) => ({ value: x.slug, label: toScript(x.display, sc), sub: meaningOf(x, lang, sc).main, search: `${x.display} ${iast(x.root)} ${x.meaning_en || ''}` }))} />
+            ), true)}
+          </ol>
         </section>
       </main>
       <Footer />
