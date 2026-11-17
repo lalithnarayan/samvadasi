@@ -13,6 +13,7 @@ export function SupportClient({ upi, upiLink, qr, url }: { upi: string; upiLink:
     { t: t('sup.fix'), href: `${GH}/issues/new` },
     { t: t('sup.star'), href: GH },
     { t: t('sup.teach'), href: `${GH}/discussions` },
+    { t: t('sup.record'), href: '/record' },
   ]
   return (
     <>
@@ -45,7 +46,7 @@ export function SupportClient({ upi, upiLink, qr, url }: { upi: string; upiLink:
             <ul className="m-0 flex list-none flex-col gap-2 p-0">
               {ways.map((w) => (
                 <li key={w.t} className="rounded-2xl border border-ink/12 px-4 py-3 text-[15px] leading-relaxed">
-                  {w.href ? <a href={w.href} target="_blank" rel="noreferrer" className="underline-offset-4 hover:underline">{w.t} ↗</a> : w.t}
+                  {w.href ? <a href={w.href} {...(w.href.startsWith('/') ? {} : { target: '_blank', rel: 'noreferrer' })} className="underline-offset-4 hover:underline">{w.t} ↗</a> : w.t}
                 </li>
               ))}
             </ul>

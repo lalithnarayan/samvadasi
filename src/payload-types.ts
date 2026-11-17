@@ -655,9 +655,11 @@ export interface Audio {
    */
   text: string;
   /**
-   * Public URL of the .mp3 / .m4a / .ogg file
+   * Public URL of an .mp3 / .m4a / .ogg file — or leave empty and record on the /record page
    */
-  url: string;
+  url?: string | null;
+  file?: string | null;
+  mime?: string | null;
   speaker?: string | null;
   source?: ('recorded' | 'machine') | null;
   updatedAt: string;
@@ -1001,6 +1003,8 @@ export interface SubhashitasSelect<T extends boolean = true> {
 export interface AudioSelect<T extends boolean = true> {
   text?: T;
   url?: T;
+  file?: T;
+  mime?: T;
   speaker?: T;
   source?: T;
   updatedAt?: T;

@@ -15,7 +15,9 @@ export const Audio: CollectionConfig = {
   access: { read: anyone, create: editors, update: editors, delete: editors },
   fields: [
     { name: 'text', type: 'text', required: true, unique: true, index: true, admin: { description: 'Exactly as shown on the site, in Devanagari: गच्छति, अहं विद्यालयं गच्छामि' } },
-    { name: 'url', type: 'text', required: true, admin: { description: 'Public URL of the .mp3 / .m4a / .ogg file' } },
+    { name: 'url', type: 'text', admin: { description: 'Public URL of an .mp3 / .m4a / .ogg file — or leave empty and record on the /record page' } },
+    { name: 'file', type: 'textarea', admin: { hidden: true } },
+    { name: 'mime', type: 'text', admin: { hidden: true } },
     { type: 'row', fields: [
       { name: 'speaker', type: 'text', admin: { width: '50%' } },
       { name: 'source', type: 'select', defaultValue: 'recorded', options: [{ label: 'Recorded', value: 'recorded' }, { label: 'Machine', value: 'machine' }], admin: { width: '50%' } },

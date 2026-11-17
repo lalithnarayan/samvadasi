@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { cn } from '@/lib/utils'
 import { useSamvada } from './state'
 
-type Rec = Record<string, { url: string; speaker?: string }>
+type Rec = Record<string, { url: string; kind: 'rec' | 'ai'; speaker?: string }>
 let recs: Promise<Rec> | null = null
 const recordings = (): Promise<Rec> => (recs ??= fetch('/audio-index').then((r) => (r.ok ? r.json() : {})).catch(() => ({})) as Promise<Rec>)
 
@@ -17,7 +17,7 @@ function pickVoice(): SpeechSynthesisVoice | null {
 }
 
 let current: HTMLAudioElement | null = null
-const clean = (s: string) => s.replace(/[।॥|]/g, ' ').replace(/\s+/g, ' ').trim()
+const clean = (s: string) => s.replace(/[।॥|?]/g, ' ').replace(/\s+/g, ' ').trim()
 
 /**
  * Play button for Sanskrit text (Devanagari). Uses a teacher's recording when the Audio collection has
@@ -27,7 +27,7 @@ export function Speak({ text, className, label }: { text: string; className?: st
   const { t } = useSamvada()
   const [can, setCan] = useState(false)
   const [state, setState] = useState<'idle' | 'play'>('idle')
-  const [kind, setKind] = useState<'rec' | 'tts' | null>(null)
+  const [kind, setKind] = useState<'rec' | 'ai' | 'tts' | null>(null)
   useEffect(() => { setCan(typeof window !== 'undefined' && ('speechSynthesis' in window || 'Audio' in window)) }, [])
   if (!can || !text) return null
   const key = text.trim()
@@ -35,10 +35,11 @@ export function Speak({ text, className, label }: { text: string; className?: st
   async function play(e: React.MouseEvent) {
     e.preventDefault(); e.stopPropagation()
     if (state === 'play') { current?.pause(); speechSynthesis?.cancel(); setState('idle'); return }
-    const rec = (await recordings())[key] || (await recordings())[clean(key)]
+    const all = await recordings()
+    const rec = all[clean(key)] || all[key]
     current?.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel()
     if (rec) {
-      const a = new Audio(rec.url); current = a; setKind('rec'); setState('play')
+      const a = new Audio(rec.url); current = a; setKind(rec.kind); setState('play')
       a.onended = a.onerror = () => setState('idle')
       a.play().catch(() => setState('idle'))
       return
@@ -52,7 +53,7 @@ export function Speak({ text, className, label }: { text: string; className?: st
     setKind('tts'); setState('play')
     speechSynthesis.speak(u)
   }
-  const name = `${label || t('au.play')}${kind === 'rec' ? '' : ` (${t('au.machine')})`}`
+  const name = `${label || t('au.play')}${kind === 'rec' ? '' : kind === 'ai' ? ` (${t('au.ai')})` : kind === 'tts' ? ` (${t('au.machine')})` : ''}`
   return (
     <button type="button" onClick={play} aria-label={name} title={name}
       className={cn('pill inline-flex size-9 shrink-0 items-center justify-center rounded-full border border-ink/25 bg-paper/70 align-middle', state === 'play' && 'bg-ink text-stone', className)}>
