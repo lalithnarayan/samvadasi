@@ -1,9 +1,11 @@
 'use client'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { cellFor, familyView, iast, joinWords, splitScript, subject, toScript, WHENS, type DhatuLite, type Num, type WhenId } from '@/lib/grammar'
 import { meaningOf, nounMeaning, subjectLabel, type UIKey } from '@/lib/i18n'
 import type { NounLite } from '@/lib/data'
 import { cn } from '@/lib/utils'
+import { countable, englishSentence, FRAMES, framePlace, nounEn, nounPhrase, POSSESSED, type Frame } from '@/lib/builder'
+import { Combo, type ComboOption } from '@/components/samvada/Combo'
 import { DEEP, TINT, useSamvada } from '@/components/samvada/state'
 import { SiteNav } from '@/components/samvada/SiteNav'
 import { Footer } from '@/components/samvada/Footer'
@@ -13,6 +15,8 @@ import { ShareButton } from '@/components/samvada/Share'
 
 type Slot = 'object' | 'place' | 'with' | 'for' | 'from'
 const CASE: Record<Slot, number> = { object: 1, place: 6, with: 2, for: 3, from: 4 }
+const FALLBACK: Frame = { en: { base: 'do', third: 'does', past: 'did', pp: 'done', ing: 'doing' }, place: true, with: true }
+const POSS: Record<string, string[]> = { u: ['my', 'our', 'our'], m: ['your', 'your', 'your'], r: ['your', 'your', 'your'], pm: ['his', 'their', 'their'], pf: ['her', 'their', 'their'] }
 const TIMES: { w: string; en: string; tense?: 'past' | 'future' }[] = [
   { w: 'अद्य', en: 'today' }, { w: 'इदानीम्', en: 'now' }, { w: 'प्रातः', en: 'in the morning' }, { w: 'सायम्', en: 'in the evening' },
   { w: 'सदा', en: 'always' }, { w: 'श्वः', en: 'tomorrow', tense: 'future' }, { w: 'ह्यः', en: 'yesterday', tense: 'past' },
@@ -34,6 +38,25 @@ export function BuilderClient({ nouns, verbs, pronouns }: { nouns: NounLite[]; v
   const byslug = useMemo(() => new Map(nouns.map((n) => [n.slug, n])), [nouns])
   const v = verbs.find((x) => x.slug === verb)
   const W = WHENS.find((x) => x.id === when)!
+  const frame: Frame = (verb && FRAMES[verb]) || FALLBACK
+  const allowed = useMemo(() => ({
+    object: (frame.object || []).filter((x) => byslug.has(x)),
+    place: framePlace(frame).filter((x) => byslug.has(x)),
+    with: frame.with ? nouns.filter((n) => ['family', 'people'].includes(n.cat)).map((n) => n.slug) : [],
+    for: (frame.for || []).filter((x) => byslug.has(x)),
+    from: (frame.from || []).filter((x) => byslug.has(x)),
+  }) as Record<Slot, string[]>, [frame, byslug, nouns])
+  // drop picks that do not fit the chosen verb
+  useEffect(() => {
+    setPick((p) => {
+      const n = { ...p }
+      for (const k of Object.keys(n) as Slot[]) if (n[k] && !allowed[k].includes(n[k])) n[k] = ''
+      if (!n.object && allowed.object.length) n.object = allowed.object[0]
+      return n
+    })
+    if (!frame.object) setVoice('kartari')
+  }, [allowed, frame])
+  useEffect(() => { if (pick.object && !countable(pick.object)) setObjNum(0) }, [pick.object])
 
   const result = useMemo(() => {
     if (!v) return null
@@ -70,8 +93,15 @@ export function BuilderClient({ nouns, verbs, pronouns }: { nouns: NounLite[]; v
     const joined = joinWords(parts.map((p) => p.text))
     joined.forEach((j, i) => { if (parts[i].role !== 'verb') parts[i] = { ...parts[i], text: j } })
     const clash = t0?.tense === 'past' && !PAST.includes(when) ? 'past' : t0?.tense === 'future' && !FUTURE.includes(when) ? 'future' : null
-    return { parts, missing: false as const, clash }
-  }, [v, voice, pick, objNum, time, subj, when, byslug, pronouns, t, lang, sc, W])
+    const poss = POSS[subj.per === 'p' ? 'p' + subj.gen : subj.per][subj.num]
+    const np = (slug: string, num: Num = 0) => { const n = byslug.get(slug); return n ? nounPhrase(n.meaning_en || '', num, POSSESSED.has(slug) ? poss : 'the') : '' }
+    const english = englishSentence(frame, subj, when, {
+      obj: obj ? np(obj.slug, objNum) : undefined, objNum,
+      place: pick.place ? np(pick.place) : undefined, with: pick.with ? np(pick.with) : undefined,
+      for: pick.for ? np(pick.for) : undefined, from: pick.from ? np(pick.from) : undefined, time: t0?.en,
+    }, passive)
+    return { parts, missing: false as const, clash, english }
+  }, [v, voice, pick, objNum, time, subj, when, byslug, pronouns, t, lang, sc, W, frame])
 
   const sentenceText = result ? result.parts.map((p) => p.text).join(' ') + '।' : ''
   const groups = useMemo(() => {
@@ -79,22 +109,26 @@ export function BuilderClient({ nouns, verbs, pronouns }: { nouns: NounLite[]; v
     return cats.map((c) => ({ c, list: nouns.filter((n) => n.cat === c) }))
   }, [nouns])
   const sel = 'h-12 w-full min-w-0 rounded-2xl border border-ink/25 bg-paper px-3 text-[16px]'
+  const nounOpts = (s: Slot): ComboOption[] => allowed[s].map((slug) => byslug.get(slug)!).filter(Boolean).map((n) => ({
+    value: n.slug, label: toScript(n.forms?.[CASE[s]]?.[0]?.[0] || n.nom, sc), sub: nounMeaning(lang, n), group: t(`cat.${n.cat}` as UIKey),
+    search: `${n.display} ${iast(n.display)} ${n.meaning_en || ''} ${nounEn(n.meaning_en)}`,
+  }))
   const nounSelect = (s: Slot) => (
-    <select id={`b-${s}`} value={pick[s]} onChange={(e) => setPick((p) => ({ ...p, [s]: e.target.value }))} className={sel} style={{ fontFamily: `var(--font-sans), ${font}` }}>
-      <option value="">{t('b.none')}</option>
-      {groups.map((g) => (
-        <optgroup key={g.c} label={t(`cat.${g.c}` as UIKey)}>
-          {g.list.map((n) => <option key={n.slug} value={n.slug}>{toScript(n.forms?.[CASE[s]]?.[0]?.[0] || n.nom, sc)} · {nounMeaning(lang, n)}</option>)}
-        </optgroup>
-      ))}
-    </select>
+    <Combo id={`b-${s}`} value={pick[s]} onChange={(v) => setPick((p) => ({ ...p, [s]: v }))} options={nounOpts(s)} placeholder={t('b.search')} none={t('b.none')} empty={t('b.noMatch')} font={font} />
   )
   function surprise() {
     const r = <T,>(xs: T[]) => xs[Math.floor(Math.random() * xs.length)]
-    setVerb(r(verbs).slug)
-    const places = nouns.filter((n) => n.cat === 'place' || n.cat === 'home')
-    setPick({ object: r(nouns.filter((n) => ['food', 'study', 'home'].includes(n.cat))).slug, place: Math.random() < 0.6 ? r(places).slug : '', with: Math.random() < 0.3 ? r(nouns.filter((n) => n.cat === 'family')).slug : '', for: '', from: '' })
-    setTime(Math.random() < 0.4 ? r(TIMES.filter((x) => !x.tense)).w : '')
+    const vv = r(verbs.filter((x) => FRAMES[x.slug] && !['04.0044', '04.0091'].includes(x.slug)))
+    const f = FRAMES[vv.slug]
+    const ok = (xs: string[] = []) => xs.filter((x) => byslug.has(x))
+    const maybe = (xs: string[], p: number) => (xs.length && Math.random() < p ? r(xs) : '')
+    setVerb(vv.slug)
+    const people = nouns.filter((n) => ['family', 'people'].includes(n.cat)).map((n) => n.slug)
+    const ob = maybe(ok(f.object), 0.9)
+    setObjNum(ob && countable(ob) && Math.random() > 0.7 ? (Math.random() < 0.5 ? 1 : 2) : 0)
+    setPick({ object: ob, place: maybe(ok(framePlace(f)), 0.45), with: f.with ? maybe(people, 0.25) : '', for: maybe(ok(f.for), 0.3), from: maybe(ok(f.from), 0.25) })
+
+    setTime(Math.random() < 0.35 ? r(TIMES.filter((x) => !x.tense)).w : '')
   }
   const field = (id: string, label: string, el: React.ReactNode) => (
     <div className="flex min-w-0 flex-col gap-1.5">
@@ -122,6 +156,7 @@ export function BuilderClient({ nouns, verbs, pronouns }: { nouns: NounLite[]; v
                 })}
               </p>
               {tr && <p className="m-0 text-[16px] italic opacity-80">{iast(sentenceText)}</p>}
+              {!result.missing && result.english && <p className="disp m-0 text-[clamp(18px,1.8vw,24px)] font-semibold"><span className="sr-only">{t('b.english')}: </span>{result.english}</p>}
               <div className="flex flex-wrap items-center gap-2">
                 <Speak text={sentenceText} />
                 <ShareButton t={sentenceText} s={v ? meaningOf(v, 'en', 'deva').main : ''} k={`${W.name} · ${t(`when.${W.id}`)}`} />
@@ -145,38 +180,37 @@ export function BuilderClient({ nouns, verbs, pronouns }: { nouns: NounLite[]; v
           )}
         </section>
 
+        <p className="m-0 -mb-4 text-[14px] opacity-80">{t('b.fit')}</p>
         <section aria-label={t('b.verb')} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {field('b-verb', t('b.verb'), (
-            <select id="b-verb" value={verb} onChange={(e) => setVerb(e.target.value)} className={sel} style={{ fontFamily: `var(--font-sans), ${font}` }}>
-              {verbs.map((x) => <option key={x.slug} value={x.slug}>{toScript(x.display, sc)} · {meaningOf(x, lang, sc).main}</option>)}
-            </select>
+            <Combo id="b-verb" value={verb || ''} onChange={(x) => x && setVerb(x)} placeholder={t('b.search')} empty={t('b.noMatch')} font={font}
+              options={verbs.map((x) => ({ value: x.slug, label: toScript(x.display, sc), sub: meaningOf(x, lang, sc).main, search: `${x.display} ${iast(x.root)} ${x.meaning_en || ''}` }))} />
           ))}
-          {field('b-object', t('b.object'), nounSelect('object'))}
-          <div className="flex min-w-0 flex-col gap-1.5">
+          {allowed.object.length > 0 && field('b-object', t('b.object'), nounSelect('object'))}
+          {pick.object && countable(pick.object) && <div className="flex min-w-0 flex-col gap-1.5">
             <span id="b-objnum" className="text-[13px] font-semibold">{t('b.objNum')}</span>
             <div role="group" aria-labelledby="b-objnum" className="seg self-start">
               {([0, 1, 2] as Num[]).map((n) => <button key={n} type="button" aria-pressed={objNum === n} onClick={() => setObjNum(n)} className={cn('pill min-h-10 rounded-full px-4 text-[14px] font-semibold', objNum === n && 'bg-ink text-stone')}>{t(`n.${['sg', 'du', 'pl'][n]}` as UIKey)}</button>)}
             </div>
-          </div>
+          </div>}
           <div className="flex min-w-0 flex-col gap-1.5">
             <span id="b-voice" className="text-[13px] font-semibold">{t('b.voice')}</span>
+            {!frame.object && <span className="text-[12px] italic opacity-80">{t('b.noObj')}</span>}
             <div role="group" aria-labelledby="b-voice" className="flex flex-col gap-1">
               {(['kartari', 'karmani'] as const).map((k) => (
-                <button key={k} type="button" aria-pressed={voice === k} onClick={() => setVoice(k)} className={cn('pill min-h-10 rounded-2xl border border-ink/20 px-3 text-left text-[13px] font-semibold', voice === k && 'bg-ink text-stone')}>
+                <button key={k} type="button" aria-pressed={voice === k} disabled={k === 'karmani' && !frame.object} onClick={() => setVoice(k)} className={cn('pill min-h-10 rounded-2xl border border-ink/20 px-3 text-left text-[13px] font-semibold disabled:opacity-50', voice === k && 'bg-ink text-stone')}>
                   <span style={{ fontFamily: font }}>{toScript(k === 'kartari' ? 'कर्तरि' : 'कर्मणि', sc)}</span> · {t(k === 'kartari' ? 'b.active' : 'b.passive')}
                 </button>
               ))}
             </div>
           </div>
-          {field('b-place', t('b.place'), nounSelect('place'))}
-          {field('b-with', t('b.with'), nounSelect('with'))}
-          {field('b-for', t('b.for'), nounSelect('for'))}
-          {field('b-from', t('b.from'), nounSelect('from'))}
+          {allowed.place.length > 0 && field('b-place', t('b.place'), nounSelect('place'))}
+          {allowed.with.length > 0 && field('b-with', t('b.with'), nounSelect('with'))}
+          {allowed.for.length > 0 && field('b-for', t('b.for'), nounSelect('for'))}
+          {allowed.from.length > 0 && field('b-from', t('b.from'), nounSelect('from'))}
           {field('b-time', t('b.time'), (
-            <select id="b-time" value={time} onChange={(e) => setTime(e.target.value)} className={sel} style={{ fontFamily: `var(--font-sans), ${font}` }}>
-              <option value="">{t('b.none')}</option>
-              {TIMES.map((x) => <option key={x.w} value={x.w}>{toScript(x.w, sc)} · {x.en}</option>)}
-            </select>
+            <Combo id="b-time" value={time} onChange={setTime} placeholder={t('b.search')} none={t('b.none')} empty={t('b.noMatch')} font={font}
+              options={TIMES.map((x) => ({ value: x.w, label: toScript(x.w, sc), sub: x.en, search: iast(x.w) }))} />
           ))}
           <div className="flex items-end">
             <button type="button" onClick={() => { setPick({ object: '', place: '', with: '', for: '', from: '' }); setTime(''); setVoice('kartari'); setObjNum(0) }} className="pill min-h-12 rounded-full border border-ink/25 px-5 text-[14px] font-semibold">{t('b.reset')}</button>
