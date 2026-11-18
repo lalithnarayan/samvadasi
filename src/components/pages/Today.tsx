@@ -16,89 +16,27 @@ const COL = { en: 0, te: 1, kn: 2, ta: 3 } as const
 const clean = (s: string) => s.replace(/[।॥|?]/g, ' ').replace(/\s+/g, ' ').trim()
 
 export function TodayClient({ pool }: { pool: TodayPool }) {
-  const { t, lang, base, query, subj } = useSamvada()
+  const { t, lang, subj } = useSamvada()
   const col = COL[lang]
   const [store, setStore] = useState<Store | null>(null)
-  const [audio, setAudio] = useState<Set<string> | null>(null)
+  const audio = useAudioSet()
   const [session, setSession] = useState<Ex[] | null>(null)
-  const [step, setStep] = useState(0)
-  const [score, setScore] = useState(0)
-  const [result, setResult] = useState<{ froze: boolean } | null>(null)
-
-  useEffect(() => {
-    const s = load(); setStore(s)
-    // day-2 return: came back the day after the first session
-    if (s.first && today() === s.first + 1 && !s.returned) { track('day2_return'); const n = { ...s, returned: true }; save(n); setStore(n) }
-    let done = false
-    const stop = setTimeout(() => { if (!done) setAudio(new Set()) }, 2500)
-    fetch('/audio-index').then((r) => (r.ok ? r.json() : {})).catch(() => ({})).then((x: Record<string, unknown>) => { done = true; clearTimeout(stop); setAudio(new Set(Object.keys(x))) })
-    return () => clearTimeout(stop)
-  }, [])
+  const [result, setResult] = useState<Result | null>(null)
+  useEffect(() => { setStore(openStore()) }, [])
 
   const start = () => {
     if (!store || !audio) return
     const ex = buildSession(pool, store, col, Date.now() % 1e9, (sa) => audio.has(clean(sa)))
     if (!store.last && !store.days.length) track('first_practice')
-    setSession(ex); setStep(0); setScore(0); setResult(null)
-  }
-
-  const answer = (ids: string[], right: boolean) => {
-    if (!store) return
-    let s = store
-    for (const id of ids) s = grade(s, id, right)
-    setStore(s); save(s)
-    if (right) setScore((n) => n + 1)
-  }
-  const next = () => {
-    if (!session || !store) return
-    if (step + 1 < session.length) { setStep(step + 1); return }
-    const { store: s, froze } = finishDay(store)
-    setStore(s); save(s); setResult({ froze })
-    track('session_done', { streak: s.streak, right: score, of: session.length })
-    if (s.streak === 7) track('streak_7')
+    setSession(ex); setResult(null)
   }
 
   if (!store) return <Shell><p className="opacity-70">…</p></Shell>
-  const streak = liveStreak(store), d = today()
-
-  // ── summary ──
-  if (session && result) {
-    const learned = learnedCount(store)
-    return (
-      <Shell>
-        <div className="flex flex-col gap-5 rounded-[28px] bg-paper p-[clamp(22px,4vw,40px)]">
-          <span className="eyebrow" style={{ color: DEEP[subj.color] }}>{t('td.doneToday')}</span>
-          <p className="disp m-0 text-[clamp(44px,8vw,88px)] leading-none font-extrabold">{t('td.streak', { n: store.streak })}</p>
-          <p className="m-0 text-lg">{t('td.summary', { r: score, n: session.length })} · {t('td.learned', { n: learned })}{result.froze ? ` · ${t('td.froze')}` : ''}</p>
-          <p className="m-0 opacity-80">{t('td.comeBack')}</p>
-          <div className="flex flex-wrap gap-3">
-            <ShareButton t={`${store.streak} दिनानि`} s={t('td.shareLine', { n: store.streak, w: learned })} k="samvada.si/today" />
-            <button onClick={start} className="pill min-h-12 rounded-full border border-ink/30 px-6 font-semibold">{t('td.again')}</button>
-            <Link href={base + '/subhashitas' + query} className="pill flex min-h-12 items-center rounded-full border border-ink/30 px-6 font-semibold no-underline">{t('nav.subh')}</Link>
-          </div>
-        </div>
-      </Shell>
-    )
-  }
-
-  // ── a step ──
-  if (session) {
-    const ex = session[step]
-    return (
-      <Shell>
-        <div className="flex items-center gap-3">
-          <button onClick={() => setSession(null)} className="pill min-h-10 rounded-full border border-ink/25 px-4 text-sm font-semibold">{t('td.quit')}</button>
-          <div aria-hidden className="grid flex-1 gap-1" style={{ gridTemplateColumns: `repeat(${session.length}, minmax(0,1fr))` }}>
-            {session.map((_, i) => <span key={i} className="h-1.5 rounded-sm" style={{ background: i < step ? 'var(--color-ink)' : i === step ? DEEP[subj.color] : 'rgb(36 33 29 / .15)' }} />)}
-          </div>
-          <span className="text-sm font-semibold whitespace-nowrap">{t('td.progress', { i: step + 1, n: session.length })}</span>
-        </div>
-        <Step key={step} ex={ex} col={col} onAnswer={answer} onNext={next} />
-      </Shell>
-    )
-  }
+  if (session && result) return <Shell><Summary store={store} result={result} onAgain={start} /></Shell>
+  if (session) return <Shell><Runner session={session} store={store} setStore={setStore} onDone={setResult} onQuit={() => setSession(null)} /></Shell>
 
   // ── home ──
+  const streak = liveStreak(store), d = today()
   const monday = d - ((d + 3) % 7)
   const due = dueCount(store), doneToday = store.last === d
   return (
@@ -128,7 +66,84 @@ export function TodayClient({ pool }: { pool: TodayPool }) {
   )
 }
 
-function Shell({ children }: { children: React.ReactNode }) {
+export type Result = { froze: boolean; score: number; of: number }
+
+/** Load the store and report a day-2 return once. */
+export function openStore(): Store {
+  const s = load()
+  if (s.first && today() === s.first + 1 && !s.returned) { track('day2_return'); const n = { ...s, returned: true }; save(n); return n }
+  return s
+}
+
+/** The set of texts that have a voice clip (for listen-and-choose). null while loading. */
+export function useAudioSet() {
+  const [audio, setAudio] = useState<Set<string> | null>(null)
+  useEffect(() => {
+    let done = false
+    const stop = setTimeout(() => { if (!done) setAudio(new Set()) }, 2500)
+    fetch('/audio-index').then((r) => (r.ok ? r.json() : {})).catch(() => ({})).then((x: Record<string, unknown>) => { done = true; clearTimeout(stop); setAudio(new Set(Object.keys(x))) })
+    return () => clearTimeout(stop)
+  }, [])
+  return audio
+}
+export const audioTest = (audio: Set<string>) => (sa: string) => audio.has(clean(sa))
+
+/** Steps through a session, grading as it goes; finishing counts the day for the streak. */
+export function Runner({ session, store, setStore, onDone, onQuit, unit }: { session: Ex[]; store: Store; setStore: (s: Store) => void; onDone: (r: Result) => void; onQuit: () => void; unit?: number }) {
+  const { t, lang, subj } = useSamvada()
+  const [step, setStep] = useState(0)
+  const [score, setScore] = useState(0)
+  const [cur, setCur] = useState(store)
+  const answer = (ids: string[], right: boolean) => {
+    let s = cur
+    for (const id of ids) s = grade(s, id, right)
+    setCur(s); setStore(s); save(s)
+    if (right) setScore((n) => n + 1)
+  }
+  const next = () => {
+    if (step + 1 < session.length) { setStep(step + 1); return }
+    const { store: s, froze } = finishDay(cur)
+    setStore(s); save(s)
+    track('session_done', { streak: s.streak, right: score, of: session.length, ...(unit ? { unit } : {}) })
+    if (s.streak === 7) track('streak_7')
+    onDone({ froze, score, of: session.length })
+  }
+  if (!session.length) return <p className="m-0 text-lg">{t('pa.empty')}</p>
+  const ex = session[step]
+  return (
+    <>
+      <div className="flex items-center gap-3">
+        <button onClick={onQuit} className="pill min-h-10 rounded-full border border-ink/25 px-4 text-sm font-semibold">{t('td.quit')}</button>
+        <div aria-hidden className="grid flex-1 gap-1" style={{ gridTemplateColumns: `repeat(${session.length}, minmax(0,1fr))` }}>
+          {session.map((_, i) => <span key={i} className="h-1.5 rounded-sm" style={{ background: i < step ? 'var(--color-ink)' : i === step ? DEEP[subj.color] : 'rgb(36 33 29 / .15)' }} />)}
+        </div>
+        <span className="text-sm font-semibold whitespace-nowrap">{t('td.progress', { i: step + 1, n: session.length })}</span>
+      </div>
+      <Step key={step} ex={ex} col={COL[lang]} onAnswer={answer} onNext={next} />
+    </>
+  )
+}
+
+export function Summary({ store, result, onAgain, extra }: { store: Store; result: Result; onAgain: () => void; extra?: React.ReactNode }) {
+  const { t, subj, base, query } = useSamvada()
+  const learned = learnedCount(store)
+  return (
+    <div className="flex flex-col gap-5 rounded-[28px] bg-paper p-[clamp(22px,4vw,40px)]">
+      <span className="eyebrow" style={{ color: DEEP[subj.color] }}>{t('td.doneToday')}</span>
+      <p className="disp m-0 text-[clamp(44px,8vw,88px)] leading-none font-extrabold">{t('td.streak', { n: store.streak })}</p>
+      <p className="m-0 text-lg">{t('td.summary', { r: result.score, n: result.of })} · {t('td.learned', { n: learned })}{result.froze ? ` · ${t('td.froze')}` : ''}</p>
+      {extra}
+      <p className="m-0 opacity-80">{t('td.comeBack')}</p>
+      <div className="flex flex-wrap gap-3">
+        <ShareButton t={`${store.streak} दिनानि`} s={t('td.shareLine', { n: store.streak, w: learned })} k="samvada.si/today" />
+        <button onClick={onAgain} className="pill min-h-12 rounded-full border border-ink/30 px-6 font-semibold">{t('td.again')}</button>
+        <Link href={base + '/path' + query} className="pill flex min-h-12 items-center rounded-full border border-ink/30 px-6 font-semibold no-underline">{t('nav.path')}</Link>
+      </div>
+    </div>
+  )
+}
+
+export function Shell({ children }: { children: React.ReactNode }) {
   const { subj } = useSamvada()
   return (
     <div className="min-h-screen transition-colors duration-700" style={{ background: TINT[subj.color] }}>
@@ -152,7 +167,7 @@ function Stat({ big, label, sub }: { big: string; label: string; sub: string }) 
 }
 
 /** One exercise. Calls onAnswer once (ids graded right/wrong), then onNext. */
-function Step({ ex, col, onAnswer, onNext }: { ex: Ex; col: number; onAnswer: (ids: string[], right: boolean) => void; onNext: () => void }) {
+export function Step({ ex, col, onAnswer, onNext }: { ex: Ex; col: number; onAnswer: (ids: string[], right: boolean) => void; onNext: () => void }) {
   const { sc, t, subj, base } = useSamvada()
   const font = `var(--font-sk-${sc})`
   const sk = (s: string) => toScript(s, sc)

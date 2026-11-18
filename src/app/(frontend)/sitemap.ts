@@ -10,11 +10,12 @@ export const revalidate = 86400
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()
-  const fixed = ['', '/today', '/phrases', '/verbs', '/nouns', '/words', '/build', '/packs', '/greetings', '/subhashitas', '/practice', '/support']
+  const fixed = ['', '/today', '/path', '/script', '/phrases', '/verbs', '/nouns', '/words', '/build', '/packs', '/greetings', '/subhashitas', '/practice', '/support']
   const [{ dhatus, featured }, nouns, packs, subh] = await Promise.all([allSlugs(), getNouns(), getPacks(), getSubhashitas()])
   type F = MetadataRoute.Sitemap[number]['changeFrequency']
   const pages: [string, F, number][] = [
     ...fixed.map((p): [string, F, number] => [p, 'weekly', p === '' ? 1 : 0.8]),
+    ...Array.from({ length: 30 }, (_, i): [string, F, number] => [`/path/${i + 1}`, 'monthly', 0.6]),
     ...subh.map((x): [string, F, number] => [`/subhashita/${x.slug}`, 'monthly', 0.7]),
     ...packs.map((k): [string, F, number] => [`/packs/${k.slug}`, 'monthly', 0.7]),
     ...nouns.map((n): [string, F, number] => [`/noun/${n.slug}`, 'monthly', 0.6]),

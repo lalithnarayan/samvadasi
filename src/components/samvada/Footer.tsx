@@ -6,6 +6,8 @@ import type { UIKey } from '@/lib/i18n'
 
 export const FOOT_LINKS: { href: string; label: UIKey }[] = [
   { href: '/today', label: 'nav.today' },
+  { href: '/path', label: 'nav.path' },
+  { href: '/script', label: 'nav.script2' },
   { href: '/phrases', label: 'nav.phrases' },
   { href: '/verbs', label: 'nav.verbs' },
   { href: '/verb/01.1137', label: 'nav.oneVerb' },

@@ -19,6 +19,7 @@ export type Store = {
   first: number // day of the first session
   days: number[] // finished days, newest last (kept to 60)
   returned?: boolean // day-2 return already reported
+  placed?: number // learning path: last unit passed in the placement test
 }
 const EMPTY: Store = { cards: {}, last: 0, streak: 0, best: 0, freezeWeek: -1, first: 0, days: [] }
 
@@ -88,62 +89,79 @@ function choices(answer: string, pool: string[], r: () => number) {
   return { options: opts, answer: opts.indexOf(answer) }
 }
 
+export type Plan = { words: number; pairs: boolean; verbs: number; verses: number; tense?: 'lat' | 'lrt'; distract?: TodayWord[] }
+export const TODAY_PLAN: Plan = { words: 6, pairs: true, verbs: 2, verses: 1 }
+
 /**
- * Today's session: due reviews first (most overdue first), then new items, about 10 steps:
+ * A session: due reviews first (most overdue first), then new items. Today's plan is about 10 steps:
  * words (meaning / reverse / listen), a match-pairs round, two verb steps and one verse step.
+ * A learning-path unit passes its own pool and plan (all verbs, all verses …).
  */
-export function buildSession(pool: TodayPool, s: Store, col: number, seed: number, hasAudio: (sa: string) => boolean, size = 10): Ex[] {
+export function buildSession(pool: TodayPool, s: Store, col: number, seed: number, hasAudio: (sa: string) => boolean, plan: Plan = TODAY_PLAN): Ex[] {
   const r = rng(seed), d = today()
   const mean = (w: TodayWord) => w.m[col] || w.m[0]
   const due = (id: string) => (s.cards[id] ? s.cards[id].due <= d : false)
   const fresh = (id: string) => !s.cards[id]
   const byDue = (a: { id: string }, b: { id: string }) => s.cards[a.id].due - s.cards[b.id].due
+  // in a unit, words already learned but not yet due still come back, weakest first
+  const weak = (a: { id: string }, b: { id: string }) => (s.cards[a.id]?.box ?? -1) - (s.cards[b.id]?.box ?? -1)
 
   const words = pool.words.filter((w) => mean(w))
   const dueWords = words.filter((w) => due(w.id)).sort(byDue)
   const newWords = shuffle(words.filter((w) => fresh(w.id)), r)
+  const restWords = words.filter((w) => !due(w.id) && !fresh(w.id)).sort(weak)
+  const order = [...dueWords, ...newWords, ...restWords]
   const dueVerbs = pool.verbs.filter((v) => due(v.id)).sort(byDue)
   const newVerbs = pool.verbs.filter((v) => fresh(v.id))
+  const restVerbs = pool.verbs.filter((v) => !due(v.id) && !fresh(v.id)).sort(weak)
   const out: Ex[] = []
 
-  // words: up to 5 reviews, topped up with new ones to 6
-  const ws = [...dueWords.slice(0, 5), ...newWords].slice(0, 6)
-  const allMeanings = words.map(mean), allSa = words.map((w) => w.sa)
+  // words: reviews first, topped up with new ones, then weakest known
+  const ws = order.slice(0, plan.words)
+  const dw = [...words, ...(plan.distract || [])]
+  const allMeanings = dw.map(mean), allSa = dw.map((w) => w.sa)
   ws.forEach((w, i) => {
     const kind = w.sa.length < 24 && hasAudio(w.sa) && i % 3 === 2 ? 'listen' : (s.cards[w.id]?.box || 0) >= 2 || i % 3 === 1 ? 'reverse' : 'meaning'
     if (kind === 'meaning') out.push({ kind, id: w.id, word: w, ...choices(mean(w), allMeanings, r) })
     else out.push({ kind, id: w.id, word: w, ...choices(w.sa, allSa, r) })
   })
 
-  // match pairs: four more words (reviews first)
-  const pairPool = [...dueWords.slice(5), ...newWords.slice(6)].filter((w) => !ws.includes(w))
-  const pairs = pairPool.slice(0, 4)
-  if (pairs.length === 4 && new Set(pairs.map(mean)).size === 4) out.push({ kind: 'match', ids: pairs.map((w) => w.id), pairs })
+  // match pairs: four more words
+  if (plan.pairs) {
+    const pairs = order.slice(plan.words, plan.words + 4)
+    if (pairs.length === 4 && new Set(pairs.map(mean)).size === 4) out.push({ kind: 'match', ids: pairs.map((w) => w.id), pairs })
+  }
 
-  // verbs: two steps
-  const vs = [...dueVerbs, ...newVerbs.slice(0, 8)].slice(0, 2)
+  // verbs: pick the ending, every second one "spot the mistake"
+  const vs = [...dueVerbs, ...newVerbs.slice(0, 8), ...restVerbs].slice(0, plan.verbs)
+  // a unit with few verbs asks each one twice (another person, or spot the mistake)
+  for (let k = 0; vs.length && vs.length < plan.verbs && k < plan.verbs; k++) vs.push(vs[k])
   vs.forEach((v, i) => {
-    const tense: 'lat' | 'lrt' = (s.cards[v.id]?.box || 0) >= 2 && v.lrt[0] ? 'lrt' : 'lat'
+    const tense: 'lat' | 'lrt' = plan.tense || ((s.cards[v.id]?.box || 0) >= 2 && v.lrt[0] ? 'lrt' : 'lat')
     const person = Math.floor(r() * 3) as 0 | 1 | 2
-    if (i === 1) {
-      // spot the mistake: three short sentences, one with the wrong person
+    if (i % 2 === 1 && tense === 'lat') {
       const wrong = Math.floor(r() * 3)
       const lines = [0, 1, 2].map((p) => `${PRON[p]} ${v.lat[p === wrong ? (p + 1 + Math.floor(r() * 2)) % 3 : p]}`)
       if (new Set(lines).size === 3 && lines[wrong] !== `${PRON[wrong]} ${v.lat[wrong]}` && lines.every((l, p) => p === wrong || l.endsWith(v.lat[p]))) { out.push({ kind: 'spot', id: v.id, verb: v, lines, answer: wrong }); return }
     }
     const right = v[tense][person]
-    const pool2 = [...v[tense], ...(tense === 'lat' ? v.lrt : v.lat)]
-    out.push({ kind: 'ending', id: v.id, verb: v, person, tense, ...choices(right, pool2, r) })
+    if (!right) return
+    out.push({ kind: 'ending', id: v.id, verb: v, person, tense, ...choices(right, [...v[tense], ...(tense === 'lat' ? v.lrt : v.lat)], r) })
   })
 
-  // verse: today's verse first, otherwise a due one, otherwise any
+  // verses: today's verse first, otherwise due ones, otherwise any
   const vod = pool.verses.find((x) => x.slug === pool.verseOfDay)
-  const verse = pool.verses.find((x) => due(x.id)) || vod || pool.verses[Math.floor(r() * pool.verses.length)]
-  if (verse) {
+  const vlist = [...pool.verses.filter((x) => due(x.id)), ...(vod ? [vod] : []), ...shuffle(pool.verses, r)]
+  const usedV = new Set<string>()
+  for (const verse of vlist) {
+    if (usedV.size >= plan.verses) break
+    if (usedV.has(verse.id)) continue
+    usedV.add(verse.id)
     const lines = verse.lines.filter((l) => l.split(/\s+/).length >= 2)
     const line = lines[Math.floor(r() * lines.length)] || verse.lines[0]
+    if (!line) continue
     const tokens = line.split(/\s+/)
-    if (tokens.length >= 3 && tokens.length <= 6 && new Set(tokens).size === tokens.length) out.push({ kind: 'order', id: verse.id, verse, line, tokens: shuffle(tokens, r) })
+    if (tokens.length >= 3 && tokens.length <= 6 && new Set(tokens).size === tokens.length && r() < 0.6) out.push({ kind: 'order', id: verse.id, verse, line, tokens: shuffle(tokens, r) })
     else if (tokens.length >= 2) {
       const gap = Math.floor(r() * tokens.length)
       const others = pool.verses.flatMap((x) => (x === verse ? [] : x.lines.flatMap((l) => l.split(/\s+/)))).filter((t) => t.length > 2)
@@ -151,10 +169,10 @@ export function buildSession(pool: TodayPool, s: Store, col: number, seed: numbe
     }
   }
 
-  // keep words, then pairs, verbs and the verse spread through the session
+  // spread pairs, verbs and verses between the word steps
   const head = out.filter((e) => e.kind === 'meaning' || e.kind === 'reverse' || e.kind === 'listen')
   const rest = out.filter((e) => !(head as Ex[]).includes(e))
   const mixed: Ex[] = []
   head.forEach((e, i) => { mixed.push(e); if (i % 2 === 1 && rest.length) mixed.push(rest.shift()!) })
-  return [...mixed, ...rest].slice(0, size + 1)
+  return [...mixed, ...rest]
 }

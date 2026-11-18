@@ -234,31 +234,34 @@ export async function getSubhashita(slug: string) {
 }
 
 // ── Today (daily practice) ──────────────────────────────────────────────
-export type TodayWord = { id: string; sa: string; m: string[] }
-export type TodayVerb = { id: string; slug: string; display: string; m: string[]; lat: string[]; lrt: string[] }
-export type TodayVerse = { id: string; slug: string; lines: string[] }
+export type TodayWord = { id: string; sa: string; m: string[]; tag?: string }
+export type TodayVerb = { id: string; n: number; slug: string; display: string; m: string[]; lat: string[]; lrt: string[] }
+export type TodayVerse = { id: string; slug: string; lines: string[]; theme?: string }
 export type TodayPool = { words: TodayWord[]; verbs: TodayVerb[]; verses: TodayVerse[]; verseOfDay?: string }
 
 /** Everything a daily session draws from: pack words and nouns, the everyday verbs, the verses. */
 export async function getTodayPool(): Promise<TodayPool> {
-  const [verbs, nouns, packs, subh] = await Promise.all([getFeatured(), getNouns(), getPacks(), getSubhashitas()])
+  const [verbs, nouns, packs, subh, greet, avy] = await Promise.all([getFeatured(), getNouns(), getPacks(), getSubhashitas(), getGreetings(), getAvyayas()])
   const seen = new Set<string>(), words: TodayWord[] = []
-  const add = (sa: string, m: (string | null | undefined)[]) => {
+  // tag says where a word came from, so the learning path can pick a unit's words (pack:food, noun:home …)
+  const add = (sa: string, m: (string | null | undefined)[], tag: string) => {
     const k = sa.trim()
     if (!k || seen.has(k) || !m[0]) return
-    seen.add(k); words.push({ id: 'w:' + k, sa: k, m: m.map((x) => (x || '').trim()) })
+    seen.add(k); words.push({ id: 'w:' + k, sa: k, m: m.map((x) => (x || '').trim()), tag })
   }
-  for (const k of packs) for (const w of k.words) add(w.sa, w.m)
-  for (const n of nouns) if (n.kind === 'noun') add(n.nom, [n.meaning_en, n.meaning_te, n.meaning_kn, n.meaning_ta])
+  for (const g of greet) if (g.kind === 'greeting') add(g.text, g.meaning, 'greet')
+  for (const k of packs) for (const w of k.words) add(w.sa, w.m, 'pack:' + k.slug)
+  for (const n of nouns) if (n.kind === 'noun') add(n.nom, [n.meaning_en, n.meaning_te, n.meaning_kn, n.meaning_ta], 'noun:' + n.cat)
+  for (const a of avy) add(a.word, [a.meaning_en, a.meaning_te, a.meaning_kn, a.meaning_ta], 'avy:' + a.category)
   // he/she · you · I, singular — through tinCell so hand corrections (overrides) apply
   const row = (d: DhatuLite, lak: 'lat' | 'lrt') => [0, 3, 6].map((i) => tinCell(d, lak, i)?.form || '')
   return {
     words,
-    verbs: verbs.filter((d) => !d.slug.includes('+') && row(d, 'lat')[0]).map((d) => ({
-      id: 'v:' + d.slug, slug: d.slug, display: d.display,
+    verbs: verbs.map((d, i) => ({ d, n: i + 1 })).filter(({ d }) => row(d, 'lat')[0]).map(({ d, n }) => ({
+      id: 'v:' + d.slug, n, slug: d.slug, display: d.display,
       m: [(d.meaning_en || '').replace(/^to /, ''), d.meaning_te || '', d.meaning_kn || '', d.meaning_ta || ''], lat: row(d, 'lat'), lrt: row(d, 'lrt'),
     })),
-    verses: subh.map((s) => ({ id: 's:' + s.slug, slug: s.slug, lines: s.text.split('\n').map((l) => l.replace(/[।॥|]|\d+/g, '').trim()).filter(Boolean) })),
+    verses: subh.map((s) => ({ id: 's:' + s.slug, slug: s.slug, theme: s.theme, lines: s.text.split('\n').map((l) => l.replace(/[।॥|]|\d+/g, '').trim()).filter(Boolean) })),
     verseOfDay: verseOfDay(subh)?.slug,
   }
 }

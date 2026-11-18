@@ -90,6 +90,16 @@ export const PAGES = {
     title: ['Today — 5-minute Sanskrit practice', 'ఈరోజు — 5 నిమిషాల సంస్కృత అభ్యాసం', 'ಇಂದು — 5 ನಿಮಿಷದ ಸಂಸ್ಕೃತ ಅಭ್ಯಾಸ', 'இன்று — 5 நிமிட சமஸ்கிருதப் பயிற்சி'],
     desc: ['A short daily Sanskrit session: new words, review and one verse line. Keep your streak going.', 'రోజూ చిన్న సంస్కృత సెషన్: కొత్త పదాలు, పునశ్చరణ, ఒక శ్లోక పాదం. మీ వరుసను కొనసాగించండి.', 'ದಿನವೂ ಚಿಕ್ಕ ಸಂಸ್ಕೃತ ಅಭ್ಯಾಸ: ಹೊಸ ಪದಗಳು, ಪುನರಾವರ್ತನೆ, ಒಂದು ಶ್ಲೋಕ ಪಾದ. ನಿಮ್ಮ ಸರಣಿ ಮುಂದುವರಿಸಿ.', 'தினமும் சிறிய சமஸ்கிருதப் பயிற்சி: புதிய சொற்கள், மீள்பார்வை, ஒரு சுலோக வரி. உங்கள் தொடரைத் தொடருங்கள்.'],
   },
+  path: {
+    path: '/path',
+    title: ['Learn Sanskrit step by step — 30 units', 'సంస్కృతం దశలవారీగా నేర్చుకోండి — 30 పాఠాలు', 'ಸಂಸ್ಕೃತ ಹಂತ ಹಂತವಾಗಿ ಕಲಿಯಿರಿ — 30 ಪಾಠಗಳು', 'சமஸ்கிருதம் படிப்படியாகக் கற்க — 30 பாடங்கள்'],
+    desc: ['A free learning path for spoken Sanskrit: greetings, numbers, family, food, the verbs you need and famous verses, with a placement test and spaced review.', 'మాట్లాడే సంస్కృతానికి ఉచిత పాఠ్యక్రమం: పలకరింపులు, సంఖ్యలు, కుటుంబం, ఆహారం, అవసరమైన ధాతువులు, ప్రసిద్ధ శ్లోకాలు.', 'ಮಾತಿನ ಸಂಸ್ಕೃತಕ್ಕೆ ಉಚಿತ ಪಾಠಕ್ರಮ: ಶುಭಾಶಯಗಳು, ಸಂಖ್ಯೆಗಳು, ಕುಟುಂಬ, ಆಹಾರ, ಬೇಕಾದ ಧಾತುಗಳು, ಪ್ರಸಿದ್ಧ ಶ್ಲೋಕಗಳು.', 'பேச்சு சமஸ்கிருதத்துக்கான இலவசப் பாடத்திட்டம்: வாழ்த்துகள், எண்கள், குடும்பம், உணவு, தேவையான வினைகள், புகழ்பெற்ற சுலோகங்கள்.'],
+  },
+  script: {
+    path: '/script',
+    title: ['Learn to read Devanagari, a few letters at a time', 'దేవనాగరి చదవడం నేర్చుకోండి — తెలుగు నుండి', 'ದೇವನಾಗರಿ ಓದಲು ಕಲಿಯಿರಿ — ಕನ್ನಡದಿಂದ', 'தேவநாகரி படிக்கக் கற்க — தமிழிலிருந்து'],
+    desc: ['Read Sanskrit in your own script, then swap in Devanagari letters group by group until the whole line is Devanagari.', 'సంస్కృతాన్ని తెలుగు లిపిలో చదవండి, తర్వాత అక్షరాల గుంపుల వారీగా దేవనాగరికి మారండి.', 'ಸಂಸ್ಕೃತವನ್ನು ಕನ್ನಡ ಲಿಪಿಯಲ್ಲಿ ಓದಿ, ನಂತರ ಅಕ್ಷರಗಳ ಗುಂಪುಗಳಾಗಿ ದೇವನಾಗರಿಗೆ ಬದಲಿಸಿ.', 'சமஸ்கிருதத்தைத் தமிழ் எழுத்தில் படியுங்கள், பின் எழுத்துக் குழுக்களாகத் தேவநாகரிக்கு மாறுங்கள்.'],
+  },
   support: {
     path: '/support',
     title: ['Support Samvadasi', 'సంవదసికి సహాయం', 'ಸಂವದಸಿಗೆ ಬೆಂಬಲ', 'சம்வதஸிக்கு ஆதரவு'],
@@ -194,6 +204,7 @@ const CRUMB: Record<string, Four> = {
   nouns: ['Nouns', 'నామవాచకాలు', 'ನಾಮಪದಗಳು', 'பெயர்ச்சொற்கள்'],
   packs: ['Vocabulary', 'పదాలు', 'ಪದಗಳು', 'சொற்கள்'],
   subhashitas: ['Subhāṣitas', 'సుభాషితాలు', 'ಸುಭಾಷಿತಗಳು', 'சுபாஷிதங்கள்'],
+  path: ['Learning path', 'పాఠ్యక్రమం', 'ಪಾಠಕ್ರಮ', 'பாடத்திட்டம்'],
 }
 export function breadcrumbs(lang: Lang, trail: [keyof typeof CRUMB | string, string][]) {
   const p = prefix(lang)
@@ -211,3 +222,11 @@ export const termLd = (lang: Lang, name: string, alt: string, description: strin
   '@context': 'https://schema.org', '@type': 'DefinedTerm', name, alternateName: alt, description, inLanguage: 'sa', url: SITE + prefix(lang) + path,
   inDefinedTermSet: { '@type': 'DefinedTermSet', name: set === 'verbs' ? 'Sanskrit dhātus' : 'Sanskrit nouns', url: `${SITE}${prefix(lang)}/${set}` },
 })
+
+// ── learning-path units ─────────────────────────────────────────────────
+export function unitMeta(u: { n: number; title: string[] }, lang: Lang) {
+  const T = L(lang, u.title as Four) || u.title[0]
+  const title = L(lang, [`Unit ${u.n}: ${T} — learn Sanskrit`, `పాఠం ${u.n}: ${T} — సంస్కృతం నేర్చుకోండి`, `ಪಾಠ ${u.n}: ${T} — ಸಂಸ್ಕೃತ ಕಲಿಯಿರಿ`, `பாடம் ${u.n}: ${T} — சமஸ்கிருதம் கற்க`])
+  const description = L(lang, [`${T} in Sanskrit: the words and forms of unit ${u.n}, with short exercises and spaced review.`, `సంస్కృతంలో ${T}: పాఠం ${u.n} పదాలు, రూపాలు, చిన్న అభ్యాసాలతో.`, `ಸಂಸ್ಕೃತದಲ್ಲಿ ${T}: ಪಾಠ ${u.n} ಪದಗಳು, ರೂಪಗಳು, ಚಿಕ್ಕ ಅಭ್ಯಾಸಗಳೊಂದಿಗೆ.`, `சமஸ்கிருதத்தில் ${T}: பாடம் ${u.n} சொற்கள், வடிவங்கள், சிறு பயிற்சிகளுடன்.`])
+  return { title, description, alternates: alternates(`/path/${u.n}`, lang), openGraph: { title, description, locale: OG_LOCALE[lang] } }
+}

@@ -9,12 +9,12 @@ import { A11yMenu } from './A11y'
 
 const LINKS = [
   { href: '/today', label: 'nav.today' },
+  { href: '/path', label: 'nav.path', match: '/path/' },
   { href: '/phrases', label: 'nav.phrases' },
   { href: '/verbs', label: 'nav.verbs', match: '/verb/' },
   { href: '/nouns', label: 'nav.nouns', match: '/noun/' },
   { href: '/build', label: 'nav.build' },
   { href: '/packs', label: 'nav.packs', match: '/packs/' },
-  { href: '/practice', label: 'nav.practice' },
 ] as const
 
 export function SiteNav() {
