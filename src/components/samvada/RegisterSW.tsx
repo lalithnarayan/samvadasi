@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 export function RegisterSW() {
   useEffect(() => {
     if (process.env.NODE_ENV !== 'production' || !('serviceWorker' in navigator)) return
-    const go = () => navigator.serviceWorker.register('/sw.js').catch(() => {})
+    const go = () => navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' }).then((r) => r.update()).catch(() => {})
     if (document.readyState === 'complete') go(); else window.addEventListener('load', go, { once: true })
   }, [])
   return null

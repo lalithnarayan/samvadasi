@@ -1,5 +1,5 @@
 /* Samvadasi offline support: pages you open are kept, so they work without a connection. */
-const V = 'samvada-v1'
+const V = 'samvada-v2'
 const PRE = ['/', '/phrases', '/verbs', '/practice', '/offline', '/icons/icon-192.png']
 const MAX_PAGES = 120
 
@@ -20,8 +20,14 @@ self.addEventListener('fetch', (e) => {
   if (r.method !== 'GET') return
   const u = new URL(r.url)
   if (u.origin !== location.origin || /^\/(admin|cms-api|api)\b/.test(u.pathname)) return
-  if (u.pathname.startsWith('/_next/static/') || u.pathname.startsWith('/icons/') || /\.(woff2?|png|svg)$/.test(u.pathname)) {
+  // Fonts and icons never change: cache first. Styles and scripts: always the server's copy first,
+  // the cache only when offline, so a new deploy can never be shown with an old stylesheet.
+  if (u.pathname.startsWith('/icons/') || /\.(woff2?|png|svg)$/.test(u.pathname)) {
     e.respondWith(caches.match(r).then((hit) => hit || fetch(r).then((res) => { const cp = res.clone(); caches.open(V).then((c) => c.put(r, cp)); return res })))
+    return
+  }
+  if (u.pathname.startsWith('/_next/static/')) {
+    e.respondWith(fetch(r).then((res) => { if (res.ok) { const cp = res.clone(); caches.open(V).then((c) => c.put(r, cp)) } return res }).catch(() => caches.match(r).then((hit) => hit || Response.error())))
     return
   }
   if (r.mode === 'navigate' || r.headers.get('RSC')) {
