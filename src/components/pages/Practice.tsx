@@ -12,7 +12,7 @@ type Card = { person: PersonId; number: number; gender: Gender; lakara: WhenId; 
 const PNAME = { u: ['उत्तम', 'per.u'], m: ['मध्यम', 'per.m'], p: ['प्रथम', 'per.p'] } as const
 
 export function PracticeClient({ cards }: { cards: Card[] }) {
-  const { sc, tr, query, t, lang, style } = useSamvada()
+  const { sc, tr, query, t, lang, style, base } = useSamvada()
   const [deck, setDeck] = useState(() => cards.map((c, i) => ({ ...c, key: i })))
   const [pos, setPos] = useState(0)
   const [flipped, setFlipped] = useState(false)
@@ -101,7 +101,7 @@ export function PracticeClient({ cards }: { cards: Card[] }) {
               <p className="m-0 max-w-[520px] text-[19px] leading-relaxed">{missed.size === 0 ? t('pr.none') : t(missed.size === 1 ? 'pr.some1' : 'pr.someN', { n: missed.size })}</p>
               <div className="mt-2.5 flex flex-wrap gap-3">
                 <button onClick={restart} className="pill min-h-[58px] rounded-full border border-ink bg-ink px-7 text-base font-semibold text-stone">{t('pr.again')}</button>
-                <Link href={'/phrases' + query} className="pill flex min-h-[58px] items-center rounded-full border border-ink px-7 text-base font-semibold no-underline">{t('pr.back')}</Link>
+                <Link href={base + '/phrases' + query} className="pill flex min-h-[58px] items-center rounded-full border border-ink px-7 text-base font-semibold no-underline">{t('pr.back')}</Link>
               </div>
             </section>
           )}

@@ -3,6 +3,7 @@ import { getPayload, type Where } from 'payload'
 import config from '@payload-config'
 import { lookupSlugs, toDeva } from './lookup'
 import type { DhatuLite, LakaraId, PhraseLite } from './grammar'
+import { tinCell } from './grammar/forms'
 
 export const SPOKEN: LakaraId[] = ['lat', 'lan', 'lrt', 'lot', 'vidhi']
 const payload = () => getPayload({ config })
@@ -230,4 +231,34 @@ export async function getSubhashita(slug: string) {
   const all = await getSubhashitas()
   const i = all.findIndex((x) => x.slug === slug)
   return { s, links, prev: all[(i - 1 + all.length) % all.length], next: all[(i + 1) % all.length] }
+}
+
+// ── Today (daily practice) ──────────────────────────────────────────────
+export type TodayWord = { id: string; sa: string; m: string[] }
+export type TodayVerb = { id: string; slug: string; display: string; m: string[]; lat: string[]; lrt: string[] }
+export type TodayVerse = { id: string; slug: string; lines: string[] }
+export type TodayPool = { words: TodayWord[]; verbs: TodayVerb[]; verses: TodayVerse[]; verseOfDay?: string }
+
+/** Everything a daily session draws from: pack words and nouns, the everyday verbs, the verses. */
+export async function getTodayPool(): Promise<TodayPool> {
+  const [verbs, nouns, packs, subh] = await Promise.all([getFeatured(), getNouns(), getPacks(), getSubhashitas()])
+  const seen = new Set<string>(), words: TodayWord[] = []
+  const add = (sa: string, m: (string | null | undefined)[]) => {
+    const k = sa.trim()
+    if (!k || seen.has(k) || !m[0]) return
+    seen.add(k); words.push({ id: 'w:' + k, sa: k, m: m.map((x) => (x || '').trim()) })
+  }
+  for (const k of packs) for (const w of k.words) add(w.sa, w.m)
+  for (const n of nouns) if (n.kind === 'noun') add(n.nom, [n.meaning_en, n.meaning_te, n.meaning_kn, n.meaning_ta])
+  // he/she · you · I, singular — through tinCell so hand corrections (overrides) apply
+  const row = (d: DhatuLite, lak: 'lat' | 'lrt') => [0, 3, 6].map((i) => tinCell(d, lak, i)?.form || '')
+  return {
+    words,
+    verbs: verbs.filter((d) => !d.slug.includes('+') && row(d, 'lat')[0]).map((d) => ({
+      id: 'v:' + d.slug, slug: d.slug, display: d.display,
+      m: [(d.meaning_en || '').replace(/^to /, ''), d.meaning_te || '', d.meaning_kn || '', d.meaning_ta || ''], lat: row(d, 'lat'), lrt: row(d, 'lrt'),
+    })),
+    verses: subh.map((s) => ({ id: 's:' + s.slug, slug: s.slug, lines: s.text.split('\n').map((l) => l.replace(/[।॥|]|\d+/g, '').trim()).filter(Boolean) })),
+    verseOfDay: verseOfDay(subh)?.slug,
+  }
 }

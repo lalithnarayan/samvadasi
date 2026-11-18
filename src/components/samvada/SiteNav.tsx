@@ -3,11 +3,12 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { SCRIPTS } from '@/lib/grammar'
 import { cn } from '@/lib/utils'
-import { useSamvada } from './state'
+import { stripLang, useSamvada } from './state'
 import { Wordmark } from './Wordmark'
 import { A11yMenu } from './A11y'
 
 const LINKS = [
+  { href: '/today', label: 'nav.today' },
   { href: '/phrases', label: 'nav.phrases' },
   { href: '/verbs', label: 'nav.verbs', match: '/verb/' },
   { href: '/nouns', label: 'nav.nouns', match: '/noun/' },
@@ -17,18 +18,18 @@ const LINKS = [
 ] as const
 
 export function SiteNav() {
-  const path = usePathname()
-  const { sc, tr, set, query, t } = useSamvada()
+  const path = stripLang(usePathname())
+  const { sc, tr, set, query, t, base } = useSamvada()
   return (
     <header className="wrap relative flex flex-wrap items-center gap-x-4 gap-y-3 pt-[18px] pb-3.5">
-      <Link href={'/' + query} className="flex min-h-11 items-baseline gap-2 no-underline">
+      <Link href={base + '/' + query} className="flex min-h-11 items-baseline gap-2 no-underline">
         <Wordmark className="text-[30px] leading-[1.3]" />
       </Link>
       <nav aria-label={t('nav.main')} className="order-3 flex w-full gap-0.5 overflow-x-auto sm:order-none sm:w-auto">
         {LINKS.map((l) => {
           const on = path === l.href || ('match' in l && path.startsWith(l.match))
           return (
-            <Link key={l.href} href={l.href + query} aria-current={on ? 'page' : undefined}
+            <Link key={l.href} href={base + l.href + query} aria-current={on ? 'page' : undefined}
               className={cn('disp pill shrink-0 rounded-full border px-4 py-2.5 text-[15px] font-semibold no-underline', on ? 'border-ink/55' : 'border-transparent')}>
               {t(l.label)}
             </Link>

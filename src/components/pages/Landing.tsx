@@ -55,7 +55,7 @@ function Seg<T extends string>({ items, value, onPick, label }: { items: { id: T
 }
 
 export function LandingClient({ gam, tiles, total, featuredCount, verse }: { gam: DhatuLite; tiles: { root: string; meaning_en: string; artha_sa: string; slug: string }[]; total: number; featuredCount: number; verse?: SubhLite }) {
-  const { subj, when, sc, tr, query, t, lang } = useSamvada()
+  const { subj, when, sc, tr, query, t, lang, base } = useSamvada()
   const line = (s: ReturnType<typeof subject>, w: Parameters<typeof sentence>[2]) => sentence(lang, s, w, GO).replace(/[.!]$/, '')
   const [slide, setSlide] = useState(0)
   const [order, setOrder] = useState<'en' | 'sa'>('en')
@@ -106,6 +106,10 @@ export function LandingClient({ gam, tiles, total, featuredCount, verse }: { gam
           </div>
           {cell?.also.length ? <p className="m-0 text-sm opacity-80">{t('l.alsoSaid')}: {cell.also.map((a) => `${toScript(a.form, sc)} (${t(`lbl.${a.label}` as UIKey)})`).join(', ')}</p> : null}
           <p className="mt-3.5 mb-0 text-[15px] opacity-80">{t('l.useBar')}</p>
+          <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <Link href={base + '/today' + query} className="pill disp flex min-h-[56px] items-center rounded-full bg-ink px-8 text-lg font-bold text-stone no-underline">{t('l.todayCta')} →</Link>
+            <span className="text-[14px] opacity-80">{t('l.todaySub')}</span>
+          </div>
         </div>
         <svg className="spin absolute top-[14%] right-[clamp(20px,6vw,120px)] hidden size-[140px] sm:block" aria-hidden viewBox="0 0 200 200" style={{ color: DEEP[subj.color] }}>
           <defs><path id="circ" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" /></defs>
@@ -204,8 +208,8 @@ export function LandingClient({ gam, tiles, total, featuredCount, verse }: { gam
             <p className="disp m-0 max-w-[860px] text-[clamp(18px,1.7vw,24px)] font-semibold">{pick(lang, verse.meaning)}</p>
             <div className="flex flex-wrap items-center gap-3">
               <Speak text={verse.text} />
-              <Link href={`/subhashita/${verse.slug}${query}`} className="pill rounded-full bg-ink px-5 py-2.5 text-[14px] font-semibold text-stone no-underline">{t('sb.read')} →</Link>
-              <Link href={'/subhashitas' + query} className="text-[14px] font-semibold underline-offset-4 hover:underline">{t('sb.all')}</Link>
+              <Link href={base + `/subhashita/${verse.slug}${query}`} className="pill rounded-full bg-ink px-5 py-2.5 text-[14px] font-semibold text-stone no-underline">{t('sb.read')} →</Link>
+              <Link href={base + '/subhashitas' + query} className="text-[14px] font-semibold underline-offset-4 hover:underline">{t('sb.all')}</Link>
             </div>
           </div>
         </section>
@@ -214,11 +218,11 @@ export function LandingClient({ gam, tiles, total, featuredCount, verse }: { gam
         <div className="wrap flex flex-col gap-9">
           <div className="reveal flex flex-wrap items-end justify-between gap-4">
             <h2 id="s5" className="disp m-0 text-[clamp(42px,6vw,88px)] leading-[0.98] font-extrabold">{t('l.verbsN', { n: total.toLocaleString('en-IN') })}<br />{t('l.one')}</h2>
-            <Link href={'/verbs' + query} className="disp flex min-h-11 items-center text-[19px] font-bold">{t('l.seeEveryday', { n: featuredCount })}</Link>
+            <Link href={base + '/verbs' + query} className="disp flex min-h-11 items-center text-[19px] font-bold">{t('l.seeEveryday', { n: featuredCount })}</Link>
           </div>
           <div className="reveal flex flex-wrap gap-2.5">
             {tiles.map((v, i) => (
-              <Link key={v.slug} href={`/verb/${v.slug}${query}`} className={`tile c${i % 3} flex items-baseline gap-2.5 rounded-full border border-[#5A554D] px-[18px] py-2.5 no-underline`}>
+              <Link key={v.slug} href={base + `/verb/${v.slug}${query}`} className={`tile c${i % 3} flex items-baseline gap-2.5 rounded-full border border-[#5A554D] px-[18px] py-2.5 no-underline`}>
                 <span className="font-sk text-[21px] font-semibold">{toScript(v.root, sc)}</span><span className="text-sm">{meaningOf(v, lang, sc).main}</span>
               </Link>
             ))}
@@ -234,7 +238,7 @@ export function LandingClient({ gam, tiles, total, featuredCount, verse }: { gam
               { href: '/packs', n: '07', t: t('nav.packs'), d: t('c.packs'), bg: 'var(--color-u-tint)', c: 'var(--color-u-deep)', fg: 'var(--color-ink)' },
               { href: '/greetings', n: '08', t: t('nav.greetings'), d: t('c.greet'), bg: '#3A3631', c: 'var(--color-chalk)', fg: 'var(--color-chalk)' },
             ].map((c) => (
-              <Link key={c.href} href={c.href + query} className="lift flex min-h-[240px] flex-col justify-between rounded-[26px] border border-transparent p-[26px] no-underline" style={{ background: c.bg, color: c.fg }}>
+              <Link key={c.href} href={base + c.href + query} className="lift flex min-h-[240px] flex-col justify-between rounded-[26px] border border-transparent p-[26px] no-underline" style={{ background: c.bg, color: c.fg }}>
                 <span className="eyebrow" style={{ color: c.c }}>{c.n}</span>
                 <span className="flex flex-col gap-2"><span className="disp card-t text-[38px] leading-none font-extrabold">{c.t}</span><span className="text-[15px] leading-snug">{c.d}</span></span>
                 <span className="arr self-end text-[30px] [transform:rotate(-45deg)]" aria-hidden>→</span>

@@ -1,9 +1,9 @@
-import type { Metadata } from 'next'
+import { metaFor } from '@/lib/seo'
 import { PracticeClient } from '@/components/pages/Practice'
 import { getDeck } from '@/lib/data'
 
 export const revalidate = 3600
-export const metadata: Metadata = { title: 'Practice', description: 'Say it aloud, then turn the card over.' }
+export const generateMetadata = ({ params }: { params?: Promise<{ lang?: string }> }) => metaFor('practice', params)
 
 export default async function PracticePage() {
   const deck = await getDeck()

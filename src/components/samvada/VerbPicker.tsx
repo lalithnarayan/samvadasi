@@ -11,7 +11,7 @@ type Hit = { slug: string; display: string; meaning: string; gana: number; code:
 /** Search all ~2,200 dhatus by English, Devanagari, Dhātupāṭha meaning or number. */
 export function VerbPicker({ current }: { current: string }) {
   const router = useRouter()
-  const { query, t, sc } = useSamvada()
+  const { query, t, sc, base } = useSamvada()
   const [open, setOpen] = useState(false)
   const [q, setQ] = useState('')
   const [hits, setHits] = useState<Hit[]>([])
@@ -35,7 +35,7 @@ export function VerbPicker({ current }: { current: string }) {
             <CommandEmpty>{t('vb.noFound')}</CommandEmpty>
             <CommandGroup>
               {hits.map((h) => (
-                <CommandItem key={h.slug} value={h.slug} onSelect={() => { setOpen(false); router.push(`/verb/${h.slug}${query}`) }} className="flex items-baseline gap-3">
+                <CommandItem key={h.slug} value={h.slug} onSelect={() => { setOpen(false); router.push(base + `/verb/${h.slug}${query}`) }} className="flex items-baseline gap-3">
                   <span className="text-lg font-bold" style={{ fontFamily: `var(--font-sk-${sc})` }}>{toScript(h.display, sc)}</span>
                   <span className="flex-1 truncate">{h.meaning}</span>
                   <span className="text-xs opacity-75">{h.code}</span>

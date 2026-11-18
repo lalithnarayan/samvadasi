@@ -14,7 +14,7 @@ import { Footer } from '@/components/samvada/Footer'
 type Sit = { id: any; title: string; titleSa?: string | null; phrases: PhraseLite[] }
 
 export function PhrasesClient({ situations }: { situations: Sit[] }) {
-  const { subj, when, sc, tr, query, t, lang, style } = useSamvada()
+  const { subj, when, sc, tr, query, t, lang, style, base } = useSamvada()
   const w = WHENS.find((x) => x.id === when)!
   const deep = DEEP[subj.color], font = `var(--font-sk-${sc})`
   let n = 0
@@ -56,7 +56,7 @@ export function PhrasesClient({ situations }: { situations: Sit[] }) {
                 const i = n++
                 return (
                   <div key={p.id} className="grid gap-1.5 lg:grid-cols-[minmax(0,1fr)_280px] lg:gap-10">
-                    <Link href={`/verb/${p.dhatu.slug}${query}`} className="lift relative block rounded-[22px] border border-ink/12 bg-paper px-[clamp(20px,2.4vw,32px)] py-[clamp(18px,2vw,26px)] no-underline">
+                    <Link href={base + `/verb/${p.dhatu.slug}${query}`} className="lift relative block rounded-[22px] border border-ink/12 bg-paper px-[clamp(20px,2.4vw,32px)] py-[clamp(18px,2vw,26px)] no-underline">
                       <div className="mb-1 flex items-center justify-between gap-3">
                         <span className="disp text-[13px] font-extrabold opacity-75">{String(i + 1).padStart(2, '0')}</span>
                         <span className="flex items-baseline gap-2 rounded-full px-3 py-1 text-[13px]" style={{ background: TINT[subj.color] }}>
@@ -83,7 +83,7 @@ export function PhrasesClient({ situations }: { situations: Sit[] }) {
             </section>
           ))}
         </div>
-        <Link href={'/practice' + query} className="lift mt-[72px] flex max-w-[calc(100%-320px)] items-center justify-between gap-4 rounded-[26px] border border-transparent bg-charcoal px-8 py-7 text-chalk no-underline max-lg:max-w-none">
+        <Link href={base + '/practice' + query} className="lift mt-[72px] flex max-w-[calc(100%-320px)] items-center justify-between gap-4 rounded-[26px] border border-transparent bg-charcoal px-8 py-7 text-chalk no-underline max-lg:max-w-none">
           <span className="flex flex-col gap-1.5"><span className="disp text-[clamp(26px,3vw,40px)] leading-none font-extrabold">{t('ph.ctaH')}</span><span className="text-[15px] text-[#B9B2A6]">{t('ph.ctaP')}</span></span>
           <span className="arr text-[34px] [transform:rotate(-45deg)]" aria-hidden>→</span>
         </Link>

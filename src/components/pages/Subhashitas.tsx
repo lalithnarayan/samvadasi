@@ -12,7 +12,7 @@ import { ShareButton } from '@/components/samvada/Share'
 const THEMES = ['learning', 'effort', 'speech', 'kindness', 'friendship', 'life', 'world']
 
 export function SubhashitasClient({ list, today }: { list: SubhLite[]; today?: string }) {
-  const { t, sc, tr, lang, subj, query } = useSamvada()
+  const { t, sc, tr, lang, subj, query, base } = useSamvada()
   const font = `var(--font-sk-${sc})`, deep = DEEP[subj.color]
   const day = list.find((x) => x.slug === today)
   return (
@@ -33,7 +33,7 @@ export function SubhashitasClient({ list, today }: { list: SubhLite[]; today?: s
             <div className="flex flex-wrap items-center gap-2">
               <Speak text={day.text} />
               <ShareButton t={day.text} s={pick(lang, day.meaning).slice(0, 120)} k={`सुभाषितम् · ${day.source || ''}`} />
-              <Link href={`/subhashita/${day.slug}${query}`} className="pill ml-auto rounded-full bg-ink px-5 py-2.5 text-[14px] font-semibold text-stone no-underline">{t('sb.read')} →</Link>
+              <Link href={base + `/subhashita/${day.slug}${query}`} className="pill ml-auto rounded-full bg-ink px-5 py-2.5 text-[14px] font-semibold text-stone no-underline">{t('sb.read')} →</Link>
             </div>
           </section>
         )}
@@ -46,7 +46,7 @@ export function SubhashitasClient({ list, today }: { list: SubhLite[]; today?: s
               <ul className="m-0 grid list-none gap-3 p-0 lg:grid-cols-2">
                 {xs.map((x) => (
                   <li key={x.slug} className="min-w-0">
-                    <Link href={`/subhashita/${x.slug}${query}`} className="lift flex h-full flex-col gap-2 rounded-[22px] border border-ink/12 bg-paper px-5 py-4 no-underline">
+                    <Link href={base + `/subhashita/${x.slug}${query}`} className="lift flex h-full flex-col gap-2 rounded-[22px] border border-ink/12 bg-paper px-5 py-4 no-underline">
                       <span lang="sa" className="text-[clamp(19px,1.8vw,24px)] leading-[1.6] font-semibold whitespace-pre-line [overflow-wrap:anywhere]" style={{ fontFamily: font }}>{toScript(x.text, sc)}</span>
                       <span className="text-[15px] leading-snug">{pick(lang, x.meaning)}</span>
                       {x.source && <span className="text-[12px] font-semibold opacity-80">{x.source}</span>}

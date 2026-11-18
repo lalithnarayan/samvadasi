@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { familyView, iast, ktaCell, splitScript, LAKARA_NAMES, padaOf, tinCell, toScript, colorOfIdx, type Derived, type DhatuLite, type FamilyId, type LakaraId, type PadaId, type VoiceId } from '@/lib/grammar'
 import { meaningOf, type UIKey } from '@/lib/i18n'
+import { verbAbout } from '@/lib/seo'
 import { DEEP, TINT, useSamvada } from '@/components/samvada/state'
 import { SiteNav } from '@/components/samvada/SiteNav'
 import { Dock } from '@/components/samvada/Dock'
@@ -27,7 +28,7 @@ const VOICES: { id: VoiceId; sk: string }[] = [{ id: 'kartari', sk: 'कर्�
 type Rel = DhatuLite & { prefixes: string[] }
 
 export function VerbClient({ d: base, examples, relatives = [] }: { d: D; examples: Ex[]; relatives?: Rel[] }) {
-  const { subj, when, gen, num, sc, tr, t, lang, query } = useSamvada()
+  const { subj, when, gen, num, sc, tr, t, lang, query, base: lb } = useSamvada()
   const colh = COLH.map(([k, sk]) => `${t(k)} · ${toScript(sk, sc)}`)
   const mean = meaningOf(base, lang, sc)
   // Verb family (सनादि) and voice (प्रयोग): stored for everyday and prefixed verbs, asked from Vidyut for the rest.
@@ -108,13 +109,14 @@ export function VerbClient({ d: base, examples, relatives = [] }: { d: D; exampl
         <div className="grid items-end gap-6 lg:grid-cols-2 lg:gap-16">
           <div className="flex flex-col gap-1.5">
             <span className="eyebrow" style={{ color: deep }}>{t('vb.eyebrow', { code: d.code })}</span>
-            {rootRel && <Link href={`/verb/${rootRel.slug}${query}`} className="self-start text-sm font-semibold underline-offset-2 hover:underline">{t('pre.root')}: <span style={{ fontFamily: font }}>{toScript(rootRel.display, sc)}</span> · {meaningOf(rootRel, lang, sc).main} ↗</Link>}
-            <p lang="sa" className={cn('m-0 leading-[1.25]', d.display.includes('+') ? 'text-[clamp(56px,8vw,128px)]' : 'text-[clamp(96px,13vw,200px)]')} style={{ fontFamily: sc === 'deva' ? 'var(--font-display)' : font }}>{toScript(d.display, sc)}</p>
+            {rootRel && <Link href={lb + `/verb/${rootRel.slug}${query}`} className="self-start text-sm font-semibold underline-offset-2 hover:underline">{t('pre.root')}: <span style={{ fontFamily: font }}>{toScript(rootRel.display, sc)}</span> · {meaningOf(rootRel, lang, sc).main} ↗</Link>}
+            <h1 className={cn('m-0 font-normal leading-[1.25]', d.display.includes('+') ? 'text-[clamp(56px,8vw,128px)]' : 'text-[clamp(96px,13vw,200px)]')} style={{ fontFamily: sc === 'deva' ? 'var(--font-display)' : font }}><span lang="sa">{toScript(d.display, sc)}</span><span className="sr-only"> — {t('vb.h1')}</span></h1>
             <p className="disp m-0 text-[clamp(26px,3vw,40px)] font-extrabold">
               <span style={mean.sanskrit ? { fontFamily: font } : undefined}>{mean.main}</span>{mean.sub && <span className="font-sans text-lg font-normal opacity-80"> · {mean.sub}</span>}
               {tr && <span className="font-sans text-lg font-normal italic opacity-75"> · {iast(d.root)}</span>}
             </p>
             {!mean.sanskrit && d.artha_sa && <p className="m-0 text-[15px] opacity-75">{t('vb.dp')}: <span style={{ fontFamily: font }}>{toScript(d.artha_sa, sc)}</span>{d.gloss ? ` · ${d.gloss}` : ''}</p>}
+            <p className="m-0 mt-2 max-w-[62ch] text-[15px] leading-relaxed opacity-85">{verbAbout(d, lang, sc)}</p>
           </div>
           <div className="flex flex-col gap-3.5">
             <VerbPicker current={toScript(d.display, sc)} />
@@ -187,7 +189,7 @@ export function VerbClient({ d: base, examples, relatives = [] }: { d: D; exampl
             </div>
             <div className="flex flex-wrap gap-2">
               {prefixed.map((r) => (
-                <Link key={r.slug} href={`/verb/${r.slug}${query}`} className="pill flex min-h-11 items-baseline gap-2 rounded-full border border-ink/15 bg-paper px-4 py-2 no-underline">
+                <Link key={r.slug} href={lb + `/verb/${r.slug}${query}`} className="pill flex min-h-11 items-baseline gap-2 rounded-full border border-ink/15 bg-paper px-4 py-2 no-underline">
                   <span lang="sa" className="text-lg font-bold" style={{ fontFamily: font }}>{toScript(lat3(r), sc)}</span>
                   <span className="text-[13px] opacity-80">{meaningOf(r, lang, sc).main}</span>
                 </Link>

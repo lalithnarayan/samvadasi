@@ -17,6 +17,7 @@ type Ctx = State & {
   style: Style // translations: written or everyday spoken Telugu / Kannada / Tamil
   lang: Lang // UI language follows the lipi: deva → English, telu → Telugu, knda → Kannada, taml → Tamil
   t: T
+  base: string // '' for English pages, '/te' | '/kn' | '/ta' for the localized copies
 }
 const DEFAULT: State = { per: 'u', num: 0, gen: 'm', when: 'lat', sc: 'deva', tr: true, talk: 'w' }
 const C = createContext<Ctx | null>(null)
@@ -42,15 +43,20 @@ const toQuery = (s: State) => {
   if (s.num !== DEFAULT.num) q.set('num', String(s.num))
   if (s.gen !== DEFAULT.gen) q.set('gen', s.gen)
   if (s.when !== DEFAULT.when) q.set('when', s.when)
-  if (s.sc !== DEFAULT.sc) q.set('sc', s.sc)
   if (!s.tr) q.set('tr', '0')
   if (s.talk === 's') q.set('talk', 's')
   const str = q.toString()
   return str ? '?' + str : ''
 }
 
-export function SamvadaStateProvider({ children }: { children: React.ReactNode }) {
-  const [st, setSt] = useState<State>(DEFAULT)
+/** The script lives in the path (/te/…, /kn/…, /ta/…), so a localized page is a real, indexable URL. */
+const LOC = /^\/(te|kn|ta)(?=\/|$)/
+export const stripLang = (path: string) => path.replace(LOC, '') || '/'
+export const baseOf = (sc: ScriptId) => { const l = LANG_OF[sc]; return l === 'en' ? '' : '/' + l }
+export const withLang = (path: string, sc: ScriptId) => { const p = stripLang(path); return baseOf(sc) + (p === '/' && baseOf(sc) ? '' : p) }
+
+export function SamvadaStateProvider({ children, initialSc = 'deva' }: { children: React.ReactNode; initialSc?: ScriptId }) {
+  const [st, setSt] = useState<State>({ ...DEFAULT, sc: initialSc })
   const [morph, setMorph] = useState(0)
   const [wipe, setWipe] = useState<Ctx['wipe']>({ n: 0, ox: '50%', oy: '90%', from: 'u' })
   const ready = useRef(false)
@@ -58,7 +64,7 @@ export function SamvadaStateProvider({ children }: { children: React.ReactNode }
   useEffect(() => { setSt((s) => ({ ...s, ...fromUrl() })); ready.current = true }, [])
   useEffect(() => {
     if (!ready.current) return
-    const url = window.location.pathname + toQuery(st) + window.location.hash
+    const url = withLang(window.location.pathname, st.sc) + toQuery(st) + window.location.hash
     window.history.replaceState(window.history.state, '', url)
   }, [st])
 
@@ -85,7 +91,7 @@ export function SamvadaStateProvider({ children }: { children: React.ReactNode }
 
   const value = useMemo<Ctx>(() => {
     const lang = LANG_OF[st.sc]
-    return { ...st, subj: subject(st.per, st.num, st.gen), morph, wipe, set, query: toQuery(st), lang, t: makeT(lang), style: st.talk === 's' ? 'spoken' : 'written' }
+    return { ...st, subj: subject(st.per, st.num, st.gen), morph, wipe, set, query: toQuery(st), lang, t: makeT(lang), base: baseOf(st.sc), style: st.talk === 's' ? 'spoken' : 'written' }
   }, [st, morph, wipe, set])
   return <C.Provider value={value}>{children}</C.Provider>
 }

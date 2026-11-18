@@ -1,8 +1,8 @@
-import type { Metadata } from 'next'
+import { metaFor } from '@/lib/seo'
 import { VerbsClient } from '@/components/pages/Verbs'
 import { dhatuCount, getFeatured, getPrefixed, prefixedCount, searchDhatus } from '@/lib/data'
 
-export const metadata: Metadata = { title: 'Verbs', description: 'Every Sanskrit dhātu with its forms for the spoken lakāras, and the common verbs with prefixes.' }
+export const generateMetadata = ({ params }: { params?: Promise<{ lang?: string }> }) => metaFor('verbs', params)
 
 export default async function VerbsPage({ searchParams }: { searchParams: Promise<Record<string, string | undefined>> }) {
   const sp = await searchParams

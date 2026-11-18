@@ -11,7 +11,7 @@ import { Speak } from '@/components/samvada/Speak'
 const CATS = ['question', 'place', 'time', 'join', 'manner', 'yesno'] as const
 
 export function WordsClient({ words, kim }: { words: AvyayaLite[]; kim: NounLite[] }) {
-  const { t, sc, tr, lang, subj, query } = useSamvada()
+  const { t, sc, tr, lang, subj, query, base } = useSamvada()
   const font = `var(--font-sk-${sc})`, deep = DEEP[subj.color]
   return (
     <>
@@ -58,7 +58,7 @@ export function WordsClient({ words, kim }: { words: AvyayaLite[]; kim: NounLite
             <p className="m-0 max-w-[640px] text-[15px] text-[#D5CFC4]">{t('w.whoP')}</p>
             <div className="flex flex-wrap gap-2.5">
               {kim.map((n) => (
-                <Link key={n.slug} href={`/noun/${n.slug}${query}`} className="pill flex items-baseline gap-2 rounded-full border border-chalk/30 px-4 py-2 text-chalk no-underline">
+                <Link key={n.slug} href={base + `/noun/${n.slug}${query}`} className="pill flex items-baseline gap-2 rounded-full border border-chalk/30 px-4 py-2 text-chalk no-underline">
                   <span className="text-xl font-bold" style={{ fontFamily: font }}>{toScript(n.nom, sc)}</span><span className="text-[14px]">{nounMeaning(lang, n)}</span><span aria-hidden>→</span>
                 </Link>
               ))}

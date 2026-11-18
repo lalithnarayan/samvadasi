@@ -12,7 +12,7 @@ import { ShareButton } from '@/components/samvada/Share'
 const NUM_SK = ['एकवचनम्', 'द्विवचनम्', 'बहुवचनम्']
 
 export function NounClient({ n, same }: { n: NounLite; same: NounLite[] }) {
-  const { t, sc, tr, lang, subj, query } = useSamvada()
+  const { t, sc, tr, lang, subj, query, base } = useSamvada()
   const font = `var(--font-sk-${sc})`, deep = DEEP[subj.color]
   const forms = n.forms || []
   const stem = stemOf(forms.flatMap((row) => row.map((c) => c[0])).filter(Boolean))
@@ -29,10 +29,10 @@ export function NounClient({ n, same }: { n: NounLite; same: NounLite[] }) {
       <SiteNav />
       <main id="main" tabIndex={-1} className="wrap flex flex-col gap-8 pt-[clamp(24px,4vw,56px)] pb-[96px] outline-none">
         <div className="flex flex-col gap-2">
-          <Link href={'/nouns' + query} className="self-start text-sm font-semibold underline-offset-2 hover:underline">← {t('n.back')}</Link>
+          <Link href={base + '/nouns' + query} className="self-start text-sm font-semibold underline-offset-2 hover:underline">← {t('n.back')}</Link>
           <span className="eyebrow" style={{ color: deep }}><span style={{ fontFamily: font }}>{toScript(pat, sc)}</span> · {t(`g.${n.gender}` as UIKey)}</span>
           <div className="flex flex-wrap items-center gap-4">
-            <p lang="sa" className="m-0 min-w-0 text-[clamp(48px,11vw,168px)] leading-[1.25] [overflow-wrap:anywhere]" style={{ fontFamily: sc === 'deva' ? 'var(--font-display)' : font }}>{toScript(n.nom, sc)}</p>
+            <h1 className="m-0 min-w-0 font-normal text-[clamp(48px,11vw,168px)] leading-[1.25] [overflow-wrap:anywhere]" style={{ fontFamily: sc === 'deva' ? 'var(--font-display)' : font }}><span lang="sa">{toScript(n.nom, sc)}</span><span className="sr-only"> — {t('n.h1')}</span></h1>
             <Speak text={n.nom} className="size-11" />
             <ShareButton t={n.nom} s={nounMeaning('en', n)} k={pat} />
           </div>
@@ -77,7 +77,7 @@ export function NounClient({ n, same }: { n: NounLite; same: NounLite[] }) {
             <h2 id="same-h" className="disp m-0 text-2xl font-extrabold">{t('n.same')} <span className="text-base font-semibold opacity-80" style={{ fontFamily: font }}>{toScript(pat, sc)}</span></h2>
             <div className="flex flex-wrap gap-2">
               {same.map((x) => (
-                <Link key={x.slug} href={`/noun/${x.slug}${query}`} className="pill flex items-baseline gap-2 rounded-full border border-ink/20 bg-paper px-4 py-2 no-underline">
+                <Link key={x.slug} href={base + `/noun/${x.slug}${query}`} className="pill flex items-baseline gap-2 rounded-full border border-ink/20 bg-paper px-4 py-2 no-underline">
                   <span className="text-lg font-bold" style={{ fontFamily: font }}>{toScript(x.nom, sc)}</span><span className="text-[13px]">{nounMeaning(lang, x)}</span>
                 </Link>
               ))}

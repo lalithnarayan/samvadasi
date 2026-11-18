@@ -12,7 +12,7 @@ import { Input } from '@/components/ui/input'
 const CATS = ['pronoun', 'family', 'people', 'food', 'body', 'home', 'place', 'nature', 'time', 'study', 'travel', 'shop', 'life']
 
 export function NounsClient({ nouns }: { nouns: NounLite[] }) {
-  const { t, sc, tr, lang, subj, query } = useSamvada()
+  const { t, sc, tr, lang, subj, query, base } = useSamvada()
   const [q, setQ] = useState('')
   const font = `var(--font-sk-${sc})`, deep = DEEP[subj.color]
   const shown = useMemo(() => {
@@ -45,7 +45,7 @@ export function NounsClient({ nouns }: { nouns: NounLite[] }) {
               <ul className="m-0 grid list-none gap-2.5 p-0 sm:grid-cols-2 lg:grid-cols-4">
                 {list.map((n) => (
                   <li key={n.slug} className="min-w-0">
-                    <Link href={`/noun/${n.slug}${query}`} className="lift flex h-full flex-col gap-0.5 rounded-[20px] border border-ink/12 bg-paper px-4 py-3 no-underline">
+                    <Link href={base + `/noun/${n.slug}${query}`} className="lift flex h-full flex-col gap-0.5 rounded-[20px] border border-ink/12 bg-paper px-4 py-3 no-underline">
                       <span className="flex flex-wrap items-baseline justify-between gap-x-2">
                         <span lang="sa" className="min-w-0 text-[24px] leading-normal font-bold [overflow-wrap:anywhere]" style={{ fontFamily: font }}>{toScript(n.nom, sc)}</span>
                         <span className="shrink-0 text-[12px] font-semibold opacity-80">{t(`g.${n.gender}` as UIKey)}</span>

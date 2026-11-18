@@ -10,7 +10,7 @@ import { Footer } from '@/components/samvada/Footer'
 const TONES = ['u', 'm', 'p'] as const
 
 export function PacksClient({ packs }: { packs: PackLite[] }) {
-  const { t, sc, lang, subj, query } = useSamvada()
+  const { t, sc, lang, subj, query, base } = useSamvada()
   const font = `var(--font-sk-${sc})`, deep = DEEP[subj.color]
   return (
     <>
@@ -24,7 +24,7 @@ export function PacksClient({ packs }: { packs: PackLite[] }) {
         <ul className="m-0 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-4">
           {packs.map((k, i) => (
             <li key={k.slug} className="min-w-0">
-              <Link href={`/packs/${k.slug}${query}`} className="lift flex h-full min-h-[220px] flex-col gap-2 rounded-[26px] border border-transparent p-6 no-underline" style={{ background: TINT[TONES[i % 3]] }}>
+              <Link href={base + `/packs/${k.slug}${query}`} className="lift flex h-full min-h-[220px] flex-col gap-2 rounded-[26px] border border-transparent p-6 no-underline" style={{ background: TINT[TONES[i % 3]] }}>
                 <span className="disp text-[13px] font-extrabold opacity-80">{String(i + 1).padStart(2, '0')}</span>
                 <span lang="sa" className="text-[34px] leading-snug font-bold" style={{ fontFamily: font, color: DEEP[TONES[i % 3]] }}>{toScript(k.titleSa || '', sc)}</span>
                 <span className="disp card-t text-[26px] leading-tight font-extrabold">{pick(lang, k.title)}</span>

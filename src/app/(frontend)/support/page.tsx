@@ -1,8 +1,8 @@
-import type { Metadata } from 'next'
+import { metaFor } from '@/lib/seo'
 import QRCode from 'qrcode'
 import { SupportClient } from '@/components/pages/Support'
 
-export const metadata: Metadata = { title: 'Support', description: 'Samvadasi is free, open source and ad-free. Chip in for the domain and hosting, or help in other ways.' }
+export const generateMetadata = ({ params }: { params?: Promise<{ lang?: string }> }) => metaFor('support', params)
 
 /**
  * Payment options come from environment variables, so nothing is hard-coded:

@@ -21,7 +21,7 @@ const COLS = {
 type Props = { rows: DhatuLite[]; q: string; scope: 'everyday' | 'prefixed' | 'all'; page: number; pages: number; found: number; total: number; prefixedTotal: number }
 
 export function VerbsClient({ rows: allRows, q, scope, page, pages, found, total, prefixedTotal }: Props) {
-  const { subj, when, num, gen, sc, tr, query, t, lang } = useSamvada()
+  const { subj, when, num, gen, sc, tr, query, t, lang, base } = useSamvada()
   const router = useRouter()
   const [text, setText] = useState(q)
   // "With prefixes": filter by the root (गम्, विश्, भू …)
@@ -34,7 +34,7 @@ export function VerbsClient({ rows: allRows, q, scope, page, pages, found, total
   const go = (params: Record<string, string>) => {
     const u = new URLSearchParams(query.replace(/^\?/, ''))
     for (const [k, v] of Object.entries(params)) v ? u.set(k, v) : u.delete(k)
-    router.push('/verbs?' + u.toString())
+    router.push(base + '/verbs?' + u.toString())
   }
   const cols = kta ? (['m', 'f'] as const).map((g) => ({ g, sk: g === 'm' ? 'पुंलिङ्गम्' : 'स्त्रीलिङ्गम्', en: g === 'm' ? 'col.masc' : 'col.fem' })) : COLS[num]
   return (
@@ -99,7 +99,7 @@ export function VerbsClient({ rows: allRows, q, scope, page, pages, found, total
                 {rows.map((d, ri) => (
                   <tr key={d.slug} className="border-b border-ink/8">
                     <th scope="row" className="sticky left-0 z-[1] bg-paper py-3 pr-4 pl-6 font-normal">
-                      <Link href={`/verb/${d.slug}${query}`} className="flex flex-col gap-0.5 no-underline hover:underline">
+                      <Link href={base + `/verb/${d.slug}${query}`} className="flex flex-col gap-0.5 no-underline hover:underline">
                         <span className="text-[22px] leading-normal font-bold" style={{ fontFamily: font }}>{toScript(d.display, sc)}</span>
                         {(() => { const m = meaningOf(d, lang, sc); return <span className="text-[13px] opacity-75">{m.main}{m.sub && <span className="opacity-80"> · {m.sub}</span>} <span className="ml-1 rounded-full border border-ink/30 px-1.5 text-[10px] font-bold tracking-wider uppercase">{d.irregular ? t('v.irregular') : toScript(padaOf(d) === 'A' ? 'आत्मने' : 'परस्मै', sc)} · {d.gana}</span></span> })()}
                       </Link>

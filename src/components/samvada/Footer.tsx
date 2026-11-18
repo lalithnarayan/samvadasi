@@ -5,6 +5,7 @@ import { useSamvada } from './state'
 import type { UIKey } from '@/lib/i18n'
 
 export const FOOT_LINKS: { href: string; label: UIKey }[] = [
+  { href: '/today', label: 'nav.today' },
   { href: '/phrases', label: 'nav.phrases' },
   { href: '/verbs', label: 'nav.verbs' },
   { href: '/verb/01.1137', label: 'nav.oneVerb' },
@@ -19,11 +20,11 @@ export const FOOT_LINKS: { href: string; label: UIKey }[] = [
 ]
 
 export function Footer() {
-  const { t, query } = useSamvada()
+  const { t, query, base } = useSamvada()
   return (
     <footer className="relative overflow-hidden bg-charcoal text-chalk">
       <nav aria-label={t('nav.more')} className="wrap flex flex-wrap gap-x-6 gap-y-2 pt-9 text-[15px] font-semibold">
-        {FOOT_LINKS.map((l) => <Link key={l.href} href={l.href + query} className="underline-offset-4 hover:underline">{t(l.label)}</Link>)}
+        {FOOT_LINKS.map((l) => <Link key={l.href} href={base + l.href + query} className="underline-offset-4 hover:underline">{t(l.label)}</Link>)}
         <a href="https://github.com/lalithnarayan/samvadasi" className="underline-offset-4 hover:underline">GitHub</a>
       </nav>
       <div className="wrap flex flex-wrap gap-x-8 gap-y-2 pt-5 pb-2 text-[13px] leading-relaxed text-[#B9B2A6]">
