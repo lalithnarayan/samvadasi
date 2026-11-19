@@ -1,9 +1,13 @@
 import { NextResponse } from 'next/server'
-import { searchDhatus } from '@/lib/data'
+import { searchHits } from '@/lib/data'
 
-/** Lightweight lookup for the verb picker. */
+/**
+ * Lookup for the verb picker (forms like "gacchati" that the in-browser index can't match).
+ * Answers are the same for everyone, so Vercel's edge (Mumbai for Indian visitors) keeps them
+ * for a day and the function in iad1 is only asked once per query.
+ */
 export async function GET(req: Request) {
-  const q = new URL(req.url).searchParams.get('q')?.slice(0, 60) || ''
-  const r = await searchDhatus(q, 20)
-  return NextResponse.json(r.docs.map((d) => ({ slug: d.slug, display: d.display, meaning: d.meaning_en || d.artha_sa, gana: d.gana, code: d.code })))
+  const q = (new URL(req.url).searchParams.get('q') || '').trim().slice(0, 60)
+  const hits = await searchHits(q, 20)
+  return NextResponse.json(hits, { headers: { 'Cache-Control': 'public, max-age=300, s-maxage=86400, stale-while-revalidate=604800' } })
 }

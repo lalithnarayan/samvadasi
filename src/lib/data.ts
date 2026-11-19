@@ -1,7 +1,6 @@
 import 'server-only'
 import { getPayload, type Where } from 'payload'
 import config from '@payload-config'
-import { lookupSlugs, toDeva } from './lookup'
 import type { DhatuLite, LakaraId, PhraseLite } from './grammar'
 import { tinCell } from './grammar/forms'
 
@@ -51,15 +50,37 @@ export async function getFeatured() {
   return r.docs.map((d) => lite(d, SPOKEN))
 }
 
-export async function searchDhatus(q: string, limit = 20, page = 1) {
+/**
+ * The spoken-form index (60,000 forms, 2 MB) loads only when a search needs it, not on the cold
+ * start of every page that imports this file.
+ */
+/** The verb picker's lookup: only the columns it shows, and no total count. */
+export async function searchHits(q: string, limit = 20) {
   const p = await payload()
-  const t = q.trim()
+  const r = await p.find({ collection: 'dhatus', where: await searchWhere(q.trim()), sort: '-featured', limit, depth: 0, pagination: false, select: { slug: true, display: true, meaning_en: true, artha_sa: true, gana: true, code: true } })
+  return r.docs.map((d: Doc) => ({ slug: d.slug, display: d.display, meaning: d.meaning_en || d.artha_sa, gana: d.gana, code: d.code }))
+}
+
+/** Every verb in a few fields, for searching in the browser without a round trip. */
+export async function verbIndex() {
+  const p = await payload()
+  const r = await p.find({ collection: 'dhatus', limit: 5000, depth: 0, pagination: false, sort: '-featured', select: { slug: true, display: true, root: true, meaning_en: true, artha_sa: true, gana: true, code: true, featured: true, commonPrefixed: true } })
+  return r.docs.map((d: Doc) => [d.slug, d.display, (d.meaning_en || d.artha_sa || '').slice(0, 70), d.code, d.gana, d.featured || d.commonPrefixed ? 1 : 0, d.root] as const)
+}
+
+async function searchWhere(t: string): Promise<Where> {
+  const { lookupSlugs, toDeva } = await import('./lookup')
   const slugs = lookupSlugs(t)
   const dv = toDeva(t)
-  const where: Where = t
+  return t
     ? { or: [...(slugs.length ? [{ slug: { in: slugs } }] : []), ...(dv !== t ? [{ root: { like: dv } }, { display: { like: dv } }] : []), { root: { like: t } }, { display: { like: t } }, { meaning_en: { like: t } }, { artha_sa: { like: t } }, { code: { like: t } }, { aupadeshika: { like: t } },
         { meaning_te: { like: t } }, { meaning_kn: { like: t } }, { meaning_ta: { like: t } }] }
     : {}
+}
+
+export async function searchDhatus(q: string, limit = 20, page = 1) {
+  const p = await payload()
+  const where = await searchWhere(q.trim())
   const r = await p.find({ collection: 'dhatus', where, sort: '-featured', limit, page, depth: 0 })
   return { total: r.totalDocs, pages: r.totalPages, page: r.page || 1, docs: r.docs.map((d) => lite(d, SPOKEN)) }
 }
