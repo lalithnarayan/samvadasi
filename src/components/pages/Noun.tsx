@@ -32,7 +32,7 @@ export function NounClient({ n, same }: { n: NounLite; same: NounLite[] }) {
           <Link href={base + '/nouns' + query} className="self-start text-sm font-semibold underline-offset-2 hover:underline">← {t('n.back')}</Link>
           <span className="eyebrow" style={{ color: deep }}><span style={{ fontFamily: font }}>{toScript(pat, sc)}</span> · {t(`g.${n.gender}` as UIKey)}</span>
           <div className="flex flex-wrap items-center gap-4">
-            <h1 className="m-0 min-w-0 font-normal text-[clamp(48px,11vw,168px)] leading-[1.25] [overflow-wrap:anywhere]" style={{ fontFamily: sc === 'deva' ? 'var(--font-display)' : font }}><span lang="sa">{toScript(n.nom, sc)}</span><span className="sr-only"> — {t('n.h1')}</span></h1>
+            <h1 className={`m-0 min-w-0 font-normal text-[clamp(48px,11vw,168px)] ${sc === 'deva' ? 'leading-[1.25]' : 'leading-[1.5]'} [overflow-wrap:anywhere]`} style={{ fontFamily: sc === 'deva' ? 'var(--font-display)' : font }}><span lang="sa">{toScript(n.nom, sc)}</span><span className="sr-only"> — {t('n.h1')}</span></h1>
             <Speak text={n.nom} className="size-11" />
             <ShareButton t={n.nom} s={nounMeaning('en', n)} k={pat} />
           </div>

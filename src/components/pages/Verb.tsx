@@ -110,7 +110,7 @@ export function VerbClient({ d: base, examples, relatives = [] }: { d: D; exampl
           <div className="flex flex-col gap-1.5">
             <span className="eyebrow" style={{ color: deep }}>{t('vb.eyebrow', { code: d.code })}</span>
             {rootRel && <Link href={lb + `/verb/${rootRel.slug}${query}`} className="self-start text-sm font-semibold underline-offset-2 hover:underline">{t('pre.root')}: <span style={{ fontFamily: font }}>{toScript(rootRel.display, sc)}</span> · {meaningOf(rootRel, lang, sc).main} ↗</Link>}
-            <h1 className={cn('m-0 font-normal leading-[1.25]', d.display.includes('+') ? 'text-[clamp(56px,8vw,128px)]' : 'text-[clamp(96px,13vw,200px)]')} style={{ fontFamily: sc === 'deva' ? 'var(--font-display)' : font }}><span lang="sa">{toScript(d.display, sc)}</span><span className="sr-only"> — {t('vb.h1')}</span></h1>
+            <h1 className={cn('m-0 font-normal', sc === 'deva' ? 'leading-[1.25]' : 'leading-[1.5]', d.display.includes('+') ? 'text-[clamp(56px,8vw,128px)]' : 'text-[clamp(96px,13vw,200px)]')} style={{ fontFamily: sc === 'deva' ? 'var(--font-display)' : font }}><span lang="sa">{toScript(d.display, sc)}</span><span className="sr-only"> — {t('vb.h1')}</span></h1>
             <p className="disp m-0 text-[clamp(26px,3vw,40px)] font-extrabold">
               <span style={mean.sanskrit ? { fontFamily: font } : undefined}>{mean.main}</span>{mean.sub && <span className="font-sans text-lg font-normal opacity-80"> · {mean.sub}</span>}
               {tr && <span className="font-sans text-lg font-normal italic opacity-75"> · {iast(d.root)}</span>}
