@@ -29,12 +29,12 @@
     "devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev"
   },
   "dependencies": {
+    "@fontsource-variable/baloo-tamma-2": "^5.3.0",
+    "@fontsource-variable/baloo-tammudu-2": "^5.3.0",
+    "@fontsource-variable/baloo-thambi-2": "^5.3.0",
     "@fontsource-variable/bricolage-grotesque": "^5.3.0",
     "@fontsource-variable/instrument-sans": "^5.3.0",
     "@fontsource/noto-serif-devanagari": "^5.3.0",
-    "@fontsource/noto-serif-kannada": "^5.3.0",
-    "@fontsource/noto-serif-tamil": "^5.3.0",
-    "@fontsource/noto-serif-telugu": "^5.3.0",
     "@fontsource/rozha-one": "^5.3.0",
     "@payloadcms/db-postgres": "3.93.0",
     "@payloadcms/next": "3.93.0",

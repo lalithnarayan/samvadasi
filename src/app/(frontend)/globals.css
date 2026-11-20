@@ -5,9 +5,9 @@
   --font-bricolage: 'Bricolage Grotesque Variable';
   --font-display: 'Rozha One';
   --font-sk-deva: 'Noto Serif Devanagari';
-  --font-sk-telu: 'Noto Serif Telugu';
-  --font-sk-knda: 'Noto Serif Kannada';
-  --font-sk-taml: 'Noto Serif Tamil';
+  --font-sk-telu: 'Baloo Tammudu 2 Variable';
+  --font-sk-knda: 'Baloo Tamma 2 Variable';
+  --font-sk-taml: 'Baloo Thambi 2 Variable';
 }
 
 /* ── Samvadasi design tokens ─────────────────────────────────────────── */
@@ -20,7 +20,7 @@
   --color-u-tint: #E7E6EE;  --color-u-deep: #3F4C7A;   /* उत्तम  I / we        */
   --color-m-tint: #F1E6DE;  --color-m-deep: #9C5537;   /* मध्यम  you           */
   --color-p-tint: #E6E9DC;  --color-p-deep: #56652F;   /* प्रथम  he / she / भवान् */
-  /* Latin first; Telugu / Kannada / Tamil interface text falls through to the Noto Serif faces */
+  /* Latin first; Telugu / Kannada / Tamil interface text falls through to the Baloo 2 faces */
   --font-indic: var(--font-sk-telu), var(--font-sk-knda), var(--font-sk-taml);
   --font-sans: var(--font-instrument), var(--font-indic), system-ui, sans-serif;
   --font-disp: var(--font-bricolage), var(--font-instrument), var(--font-indic), sans-serif;

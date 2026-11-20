@@ -16,12 +16,11 @@ import '@fontsource/rozha-one/latin.css'
 import '@fontsource/noto-serif-devanagari/devanagari-400.css'
 import '@fontsource/noto-serif-devanagari/devanagari-600.css'
 import '@fontsource/noto-serif-devanagari/devanagari-700.css'
-import '@fontsource/noto-serif-telugu/telugu-500.css'
-import '@fontsource/noto-serif-telugu/telugu-700.css'
-import '@fontsource/noto-serif-kannada/kannada-500.css'
-import '@fontsource/noto-serif-kannada/kannada-700.css'
-import '@fontsource/noto-serif-tamil/tamil-500.css'
-import '@fontsource/noto-serif-tamil/tamil-700.css'
+// Telugu, Kannada and Tamil: Baloo 2 by Ek Type (rounded, weights 400–800). Each file covers only
+// its own script's letters (unicode-range), so a page downloads just the script it shows.
+import '@fontsource-variable/baloo-tammudu-2'
+import '@fontsource-variable/baloo-tamma-2'
+import '@fontsource-variable/baloo-thambi-2'
 import '@/app/(frontend)/globals.css'
 
 export const SITE = process.env.NEXT_PUBLIC_SERVER_URL || 'https://samvada.si'
