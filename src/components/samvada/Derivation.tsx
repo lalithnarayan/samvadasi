@@ -6,13 +6,13 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 type Step = { sutra: string; source: string; result: string }
 
 /** "How is it built?" — asks Vidyut for the sūtra-by-sūtra derivation of one form. */
-export function Derivation({ form, req }: { form: string; req: Record<string, unknown> }) {
+export function Derivation({ form, req }: { form: string; req: Record<string, string> }) {
   const { t } = useSamvada()
   const [steps, setSteps] = useState<Step[] | null>(null)
   const [err, setErr] = useState('')
   const load = () => {
     if (steps) return
-    fetch('/api/grammar', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'derive', ...req }) })
+    fetch(`/api/grammar?${new URLSearchParams({ a: 'derive', ...req })}`) // public, cached at the edge for good
       .then((r) => r.json())
       .then((d) => { const m = (d.derivations || []).find((x: { form: string }) => x.form === form) || d.derivations?.[0]; m ? setSteps(m.steps) : setErr(d.error || t('vb.noDeriv')) })
       .catch(() => setErr(t('vb.noService')))

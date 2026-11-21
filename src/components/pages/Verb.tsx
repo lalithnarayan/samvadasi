@@ -42,10 +42,10 @@ export function VerbClient({ d: base, examples, relatives = [] }: { d: D; exampl
   useEffect(() => {
     if (!wantsFamily || derived || asked.current) return
     asked.current = true
-    fetch('/api/grammar', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'derived', aupadeshika: base.aupadeshika, gana: base.gana, prefixes: base.prefixes }) })
+    fetch(`/api/grammar?a=derived&slug=${encodeURIComponent(base.slug)}`) // cached at the edge for good
       .then((r) => r.json()).then((j) => { if (j.derived) setDerived(j.derived); else setFailed(true) })
       .catch(() => setFailed(true))
-  }, [wantsFamily, derived, base.aupadeshika, base.gana, base.prefixes])
+  }, [wantsFamily, derived, base.slug])
   const loading: 'idle' | 'busy' | 'error' = derived || !wantsFamily ? 'idle' : failed ? 'error' : 'busy'
   const view = familyView(base, fam, voice, derived)
   const d: D = view ? { ...base, ...view } : base
@@ -57,7 +57,7 @@ export function VerbClient({ d: base, examples, relatives = [] }: { d: D; exampl
   const lat3 = (x: DhatuLite) => tinCell(x, 'lat', 0)?.form || x.display
   const font = `var(--font-sk-${sc})`, deep = DEEP[subj.color]
   const dict = `https://ambuda.org/tools/dictionaries/mw,apte/${encodeURIComponent(d.root)}`
-  const req = (lak: string, idx: number) => ({ aupadeshika: d.aupadeshika, gana: d.gana, prefixes: d.prefixes, lak, idx, pada, sanadi: fam === 'mula' ? null : fam, prayoga: voice })
+  const req = (lak: string, idx: number) => ({ slug: base.slug, lak, idx: String(idx), pada, ...(fam === 'mula' ? {} : { sanadi: fam }), ...(voice === 'kartari' ? {} : { prayoga: voice }) })
   const kta0 = ktaCell(d, 'm', 0)
 
   const grid = (lak: LakaraId, literary = false) => {

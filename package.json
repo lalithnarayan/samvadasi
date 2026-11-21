@@ -16,7 +16,7 @@
     "migrate:create": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:create",
     "seed": "tsx --env-file=.env scripts/seed.ts",
     "vidyut:data": "python3 -c \"import vidyut; vidyut.download_data('vidyut-data')\"",
-    "vidyut:generate": "python3 scripts/vidyut/generate_all.py && python3 scripts/vidyut/generate_nouns.py && python3 scripts/vidyut/build_lookup.py",
+    "vidyut:generate": "python3 scripts/vidyut/generate_all.py && python3 scripts/vidyut/generate_nouns.py && python3 scripts/vidyut/build_lookup.py && python3 scripts/vidyut/build_api_index.py",
     "vidyut:verify": "python3 scripts/vidyut/verify.py",
     "vidyut:verify:cms": "npm run export:forms && python3 scripts/vidyut/verify.py --cms data/export/cms-forms.json",
     "export:forms": "tsx --env-file=.env scripts/export-forms.ts",

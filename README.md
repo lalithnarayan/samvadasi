@@ -6,9 +6,11 @@
 Dhātupāṭha, every lakāra, respectful and gendered forms, all generated and verified with
 [Vidyut](https://github.com/ambuda-org/vidyut) (Ambuda's Pāṇinian grammar engine).
 
-- **Site** (Next.js + Tailwind + shadcn/ui): Home · Phrases · Verbs · One verb · Practice, with the WHO / WHEN bar
-  (I · you · *you, respectful* · he/she × one · two · many × masc. · fem.; spoken past · लङ् · लट् · लृट् · लोट् · विधिलिङ्),
-  Devanagari / Telugu / Kannada / Tamil, IAST on/off.
+- **Site** (Next.js + Tailwind + shadcn/ui): Home · Today (daily practice with streaks and spaced review) · Path
+  (30 units, placement test) · Phrases · Verbs · Nouns · Builder · Packs · Subhāṣitas · Script trainer, with the
+  WHO / WHEN bar (I · you · *you, respectful* · he/she × one · two · many × masc. · fem.; spoken past · लङ् · लट् ·
+  लृट् · लोट् · विधिलिङ्), Devanagari / Telugu / Kannada / Tamil, IAST on/off. Every page also exists at
+  `/te/…`, `/kn/…`, `/ta/…`, rendered on the server for search.
 - **CMS** (Payload 3, at `/admin`): dhātus, overrides, nouns & pronouns, situations, phrases, practice decks,
   Ambuda examples, users with roles (admin · editor · reviewer), version history, review workflow.
 - **Grammar** (Vidyut, Python): generates every form, verifies stored forms, and shows the sūtra-by-sūtra derivation.
@@ -51,6 +53,17 @@ npm run dev                     # site on http://localhost:3000, CMS on http://l
 
 Log in to `/admin` with `SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD` from `.env`.
 
+## Everyday commands
+
+```bash
+npm run dev          # site + CMS on http://localhost:3000
+npm run check        # typecheck + lint + tests (what CI runs; ~10 s)
+npm run test:watch   # tests while you work
+npm run build        # production build (regenerates the per-language string files first)
+```
+
+Architecture, caching and how to add a page, string, unit or exercise: see **ARCHITECTURE.md**.
+
 ## Working in the CMS
 
 1. **Dhatus → any root → “Forms (Vidyut)” tab.** *Generate all forms* asks Vidyut for every form; *Verify stored
@@ -62,7 +75,8 @@ Log in to `/admin` with `SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD` from `.env`.
 5. **Phrases / Situations / Practice decks** — sentence patterns: subject and verb change with WHO / WHEN; you
    write the words in between, already in the right case (विद्यालयं, उद्याने), and the English template.
 
-Every edit refreshes the public pages automatically.
+Every edit refreshes, within seconds, exactly the pages that use what changed, in all four languages
+(`src/lib/revalidate.ts`).
 
 ## Keeping every form correct
 
@@ -106,18 +120,19 @@ database sleeps when idle; the first visit after a quiet spell takes a moment lo
 ## Project layout
 
 ```
-api/grammar.py                 Vidyut HTTP service (Vercel Python function / local server)
-api/_vidyut/samvada_vidyut.py  generate · verify · derive · subanta — the single grammar module
-data/curated/                  hand-made layer: 64 verbs, phrases, practice deck, nouns
-data/generated/                Vidyut / Ambuda output (dhatus, nouns, glosses, examples)
-scripts/vidyut/                generate_all · generate_nouns · verify
-scripts/ambuda/                download · mw_glosses · find_examples
-scripts/seed.ts                import everything into the CMS
-src/collections/               Payload collections (Dhatus, Phrases, …)
-src/components/admin/          CMS Vidyut panel
-src/components/samvada/        WHO/WHEN state, dock, nav, verb picker, derivation dialog
-src/components/pages/          the five screens
-src/lib/grammar/               scripts (Telugu/Kannada/Tamil/IAST), subjects, forms, English
+api/grammar.py                 Vidyut: public GETs (cached forever, known verbs only) + editor-only POSTs
+api/_data/verbs.json           slug → root, for the public endpoint (scripts/vidyut/build_api_index.py)
+api/card.py                    share-card images (Pillow + RAQM)
+data/curated/                  hand-made layer: verbs, phrases, packs, nouns, verses, greetings
+data/generated/                Vidyut / Ambuda output (dhatus, nouns, glosses, examples, lookup)
+scripts/vidyut/ ambuda/ audio/ generators; scripts/i18n/ string tools; scripts/seed.ts CMS import
+src/app/(frontend)/            English pages        src/app/(loc)/[lang]/   the same pages in te / kn / ta
+src/collections/               Payload collections  src/lib/revalidate.ts   which pages each collection refreshes
+src/components/pages/          one client component per screen
+src/components/practice/       shared practice parts: shell, header, choices, steps, runner, summary
+src/components/samvada/        WHO/WHEN state, nav, dock, verb picker, speak, share, a11y menu
+src/lib/                       grammar/ (forms, scripts), i18n/ (strings, per-language dicts), data.ts (reads),
+                               practice.ts (spaced review, streak), path.ts, scriptTrainer.ts, seo.ts, storage.ts
 ```
 
 ## Data and licences
@@ -129,8 +144,8 @@ src/lib/grammar/               scripts (Telugu/Kannada/Tamil/IAST), subjects, fo
 - **Verses** (examples): GRETIL texts as published by Ambuda (<https://github.com/ambuda-org/gretil>), mostly
   **CC BY-NC-SA 4.0** — non-commercial, attribute, share alike. Each example stores its source and licence;
   `data/generated/examples.json` is shared under the same terms.
-- Fonts (self-hosted via Fontsource): Rozha One, Noto Serif Devanagari/Telugu/Kannada/Tamil, Bricolage Grotesque,
-  Instrument Sans — SIL Open Font License.
+- Fonts (self-hosted via Fontsource): Rozha One, Noto Serif Devanagari, Baloo Tammudu 2 / Tamma 2 / Thambi 2,
+  Bricolage Grotesque, Instrument Sans — SIL Open Font License.
 
 ## Known limits / next steps
 
