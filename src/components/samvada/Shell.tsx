@@ -8,6 +8,7 @@ import { RegisterSW } from '@/components/samvada/RegisterSW'
 import { Analytics } from '@/components/samvada/Analytics'
 import type { ScriptId } from '@/lib/grammar'
 import { LANG_OF } from '@/lib/i18n'
+import { SITE } from '@/lib/site'
 // Self-hosted fonts (Fontsource): no request to Google, builds work offline.
 import '@fontsource-variable/instrument-sans'
 import '@fontsource-variable/bricolage-grotesque/opsz.css'
@@ -23,7 +24,6 @@ import '@fontsource-variable/baloo-tamma-2'
 import '@fontsource-variable/baloo-thambi-2'
 import '@/app/(frontend)/globals.css'
 
-export const SITE = process.env.NEXT_PUBLIC_SERVER_URL || 'https://samvada.si'
 
 export const baseMetadata: Metadata = {
   metadataBase: new URL(SITE),

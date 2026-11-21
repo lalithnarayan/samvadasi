@@ -1,7 +1,9 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { useSamvada } from './state'
+import { audioKey } from '@/lib/audio'
+import { useIsClient } from '@/lib/storage'
 
 type Rec = Record<string, { url: string; kind: 'rec' | 'ai'; speaker?: string }>
 let recs: Promise<Rec> | null = null
@@ -17,7 +19,6 @@ function pickVoice(): SpeechSynthesisVoice | null {
 }
 
 let current: HTMLAudioElement | null = null
-const clean = (s: string) => s.replace(/[।॥|?]/g, ' ').replace(/\s+/g, ' ').trim()
 
 /**
  * Play button for Sanskrit text (Devanagari). Uses a teacher's recording when the Audio collection has
@@ -25,10 +26,9 @@ const clean = (s: string) => s.replace(/[।॥|?]/g, ' ').replace(/\s+/g, ' ').
  */
 export function Speak({ text, className, label }: { text: string; className?: string; label?: string }) {
   const { t } = useSamvada()
-  const [can, setCan] = useState(false)
+  const can = useIsClient() // audio and speech exist only in the browser
   const [state, setState] = useState<'idle' | 'play'>('idle')
   const [kind, setKind] = useState<'rec' | 'ai' | 'tts' | null>(null)
-  useEffect(() => { setCan(typeof window !== 'undefined' && ('speechSynthesis' in window || 'Audio' in window)) }, [])
   if (!can || !text) return null
   const key = text.trim()
 
@@ -36,7 +36,7 @@ export function Speak({ text, className, label }: { text: string; className?: st
     e.preventDefault(); e.stopPropagation()
     if (state === 'play') { current?.pause(); speechSynthesis?.cancel(); setState('idle'); return }
     const all = await recordings()
-    const rec = all[clean(key)] || all[key]
+    const rec = all[audioKey(key)] || all[key]
     current?.pause(); if ('speechSynthesis' in window) speechSynthesis.cancel()
     if (rec) {
       const a = new Audio(rec.url); current = a; setKind(rec.kind); setState('play')
@@ -45,7 +45,7 @@ export function Speak({ text, className, label }: { text: string; className?: st
       return
     }
     if (!('speechSynthesis' in window)) return
-    const u = new SpeechSynthesisUtterance(clean(key))
+    const u = new SpeechSynthesisUtterance(audioKey(key))
     const v = pickVoice()
     if (v) { u.voice = v; u.lang = v.lang } else u.lang = 'hi-IN'
     u.rate = 0.8

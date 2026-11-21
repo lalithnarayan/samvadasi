@@ -31,10 +31,11 @@ export function BuilderClient({ nouns, verbs, pronouns }: { nouns: NounLite[]; v
   const { subj, when, sc, tr, t, lang } = useSamvada()
   const font = `var(--font-sk-${sc})`, deep = DEEP[subj.color]
   const [verb, setVerb] = useState(verbs.find((v) => v.slug === '01.0381')?.slug || verbs[0]?.slug)
-  const [pick, setPick] = useState<Record<Slot, string>>({ object: 'pustaka-n', place: 'gfha-n', with: '', for: '', from: '' })
-  const [objNum, setObjNum] = useState<Num>(0)
+  // what the learner chose; `pick`, `voice` and `objNum` below are those choices made to fit the verb
+  const [rawPick, setPick] = useState<Record<Slot, string>>({ object: 'pustaka-n', place: 'gfha-n', with: '', for: '', from: '' })
+  const [rawObjNum, setObjNum] = useState<Num>(0)
   const [time, setTime] = useState('')
-  const [voice, setVoice] = useState<'kartari' | 'karmani'>('kartari')
+  const [rawVoice, setVoice] = useState<'kartari' | 'karmani'>('kartari')
   const byslug = useMemo(() => new Map(nouns.map((n) => [n.slug, n])), [nouns])
   const v = verbs.find((x) => x.slug === verb)
   const W = WHENS.find((x) => x.id === when)!
@@ -46,17 +47,15 @@ export function BuilderClient({ nouns, verbs, pronouns }: { nouns: NounLite[]; v
     for: (frame.for || []).filter((x) => byslug.has(x)),
     from: (frame.from || []).filter((x) => byslug.has(x)),
   }) as Record<Slot, string[]>, [frame, byslug, nouns])
-  // drop picks that do not fit the chosen verb
-  useEffect(() => {
-    setPick((p) => {
-      const n = { ...p }
-      for (const k of Object.keys(n) as Slot[]) if (n[k] && !allowed[k].includes(n[k])) n[k] = ''
-      if (!n.object && allowed.object.length) n.object = allowed.object[0]
-      return n
-    })
-    if (!frame.object) setVoice('kartari')
-  }, [allowed, frame])
-  useEffect(() => { if (pick.object && !countable(pick.object)) setObjNum(0) }, [pick.object])
+  // drop picks that do not fit the chosen verb (derived during render, so nothing flickers)
+  const pick = useMemo(() => {
+    const n = { ...rawPick }
+    for (const k of Object.keys(n) as Slot[]) if (n[k] && !allowed[k].includes(n[k])) n[k] = ''
+    if (!n.object && allowed.object.length) n.object = allowed.object[0]
+    return n
+  }, [rawPick, allowed])
+  const voice = frame.object ? rawVoice : 'kartari'
+  const objNum: Num = pick.object && !countable(pick.object) ? 0 : rawObjNum
 
   const result = useMemo(() => {
     if (!v) return null

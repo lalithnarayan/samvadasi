@@ -6,7 +6,7 @@ import { getTodayPool } from '@/lib/data'
 import { UNITS } from '@/lib/path'
 import { breadcrumbs, langOf, unitMeta } from '@/lib/seo'
 
-export const revalidate = 3600
+export const revalidate = 86400
 export const dynamicParams = false
 export function generateStaticParams() { return UNITS.map((u) => ({ n: String(u.n) })) }
 type P = { params: Promise<{ n: string; lang?: string }> }

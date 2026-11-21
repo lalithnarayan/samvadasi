@@ -2,11 +2,13 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { VerbClient } from '@/components/pages/Verb'
 import { JsonLd } from '@/components/samvada/JsonLd'
-import { getDhatu, getExamples, getRelatives } from '@/lib/data'
+import { getDhatu, getExamples, getRelatives, getFeatured } from '@/lib/data'
 import { cardUrl } from '@/lib/card'
 import { breadcrumbs, keyForms, langOf, plain, termLd, verbMeta } from '@/lib/seo'
 
-export const revalidate = 3600
+export const revalidate = 86400 // a safety net: edits refresh pages at once (src/lib/revalidate.ts)
+/** The everyday verbs are built ahead; every other verb page is built on its first visit, then cached. */
+export async function generateStaticParams() { return (await getFeatured()).map((d) => ({ slug: d.slug })) }
 type P = { params: Promise<{ slug: string; lang?: string }> }
 
 export async function generateMetadata({ params }: P): Promise<Metadata> {

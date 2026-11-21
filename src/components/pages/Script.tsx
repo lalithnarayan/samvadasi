@@ -1,26 +1,27 @@
 'use client'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import type { TodayPool } from '@/lib/data'
 import { rng } from '@/lib/practice'
 import { LEVELS, MAX_LEVEL, coverage, mix, own, quizItems } from '@/lib/scriptTrainer'
 import { track } from '@/lib/track'
 import { cn } from '@/lib/utils'
 import { DEEP, useSamvada } from '@/components/samvada/state'
-import { Shell } from './Today'
+import { PracticeShell as Shell, SessionHeader, ChoiceButton, choiceState } from '@/components/practice'
+import { langIndex } from '@/lib/i18n'
+import { useStored, writeStored } from '@/lib/storage'
 
 const KEY = 'samvada:script:v1'
-const COL = { en: 0, te: 1, kn: 2, ta: 3 } as const
+const parseLevel = (raw: string | null) => { const n = Number(raw); return Number.isInteger(n) && n >= 0 && n <= MAX_LEVEL ? n : 0 }
 const PASS = 7, QN = 8
 
 export function ScriptClient({ pool }: { pool: TodayPool }) {
   const { t, lang, sc, subj } = useSamvada()
-  const col = COL[lang]
+  const col = langIndex(lang)
   const ownFont = sc === 'deva' ? undefined : `var(--font-sk-${sc})`
-  const [level, setLevel] = useState(0)
+  const level = useStored(KEY, parseLevel, 0)
   const [reveal, setReveal] = useState(false)
-  const [quiz, setQuiz] = useState(false)
-  useEffect(() => { try { const n = Number(localStorage.getItem(KEY)); if (n >= 0 && n <= MAX_LEVEL) setLevel(n) } catch {} }, [])
-  const keep = (n: number) => { setLevel(n); try { localStorage.setItem(KEY, String(n)) } catch {} }
+  const [quiz, setQuiz] = useState<number | null>(null) // the quiz's random seed while it runs
+  const keep = (n: number) => writeStored(KEY, String(n))
 
   // what to read: greetings and short words, then two verse lines
   const passage = useMemo(() => {
@@ -32,7 +33,7 @@ export function ScriptClient({ pool }: { pool: TodayPool }) {
   const nextL = LEVELS[level]
   const yourScript = t(sc === 'deva' ? 'sc.roman' : 'sc.yours')
 
-  if (quiz && nextL) return <Shell><Quiz level={level + 1} onPass={() => { keep(level + 1); setQuiz(false); track('script_level', { level: level + 1 }) }} onQuit={() => setQuiz(false)} /></Shell>
+  if (quiz !== null && nextL) return <Shell><Quiz level={level + 1} seed={quiz} onPass={() => { keep(level + 1); setQuiz(null); track('script_level', { level: level + 1 }) }} onQuit={() => setQuiz(null)} /></Shell>
 
   return (
     <Shell>
@@ -80,7 +81,7 @@ export function ScriptClient({ pool }: { pool: TodayPool }) {
               </span>
             ))}
           </div>
-          <button onClick={() => setQuiz(true)} className="pill disp min-h-[58px] self-start rounded-full bg-ink px-8 text-lg font-bold text-stone">{t('sc.learn')} →</button>
+          <button onClick={() => setQuiz(Date.now() % 1e9)} className="pill disp min-h-[58px] self-start rounded-full bg-ink px-8 text-lg font-bold text-stone">{t('sc.learn')} →</button>
         </section>
       ) : <p className="m-0 text-lg font-semibold">{t('sc.all')}</p>}
     </Shell>
@@ -88,11 +89,11 @@ export function ScriptClient({ pool }: { pool: TodayPool }) {
 }
 
 /** Eight questions on the new letters (with earlier ones mixed in); seven right moves you up a level. */
-function Quiz({ level, onPass, onQuit }: { level: number; onPass: () => void; onQuit: () => void }) {
+function Quiz({ level, seed, onPass, onQuit }: { level: number; seed: number; onPass: () => void; onQuit: () => void }) {
   const { t, sc, subj } = useSamvada()
   const ownFont = sc === 'deva' ? undefined : `var(--font-sk-${sc})`
   const qs = useMemo(() => {
-    const r = rng(Date.now() % 1e9)
+    const r = rng(seed)
     const fresh = quizItems(level), old = Array.from({ length: level - 1 }, (_, i) => quizItems(i + 1)).flat()
     const pick = <T,>(xs: T[]) => xs[Math.floor(r() * xs.length)]
     return Array.from({ length: QN }, (_, i) => {
@@ -101,7 +102,7 @@ function Quiz({ level, onPass, onQuit }: { level: number; onPass: () => void; on
       const opts = [syl, ...pool.sort(() => r() - 0.5).slice(0, 3)].sort(() => r() - 0.5)
       return { syl, opts, answer: opts.indexOf(syl) }
     })
-  }, [level, sc])
+  }, [level, sc, seed])
   const [i, setI] = useState(0)
   const [right, setRight] = useState(0)
   const [picked, setPicked] = useState<number | null>(null)
@@ -122,17 +123,12 @@ function Quiz({ level, onPass, onQuit }: { level: number; onPass: () => void; on
   }
   return (
     <>
-      <div className="flex items-center gap-3">
-        <button onClick={onQuit} className="pill min-h-10 rounded-full border border-ink/25 px-4 text-sm font-semibold">{t('td.quit')}</button>
-        <span className="flex-1 text-sm font-semibold">{t('sc.qTitle')}</span>
-        <span className="text-sm font-semibold">{t('td.progress', { i: i + 1, n: QN })}</span>
-      </div>
+      <SessionHeader step={i} total={QN} onQuit={onQuit} title={t('sc.qTitle')} bar={false} />
       <p lang="sa" className="m-0 text-center text-[clamp(72px,14vw,140px)] leading-[1.3]" style={{ fontFamily: 'var(--font-sk-deva)' }}>{q.syl}</p>
       <div className="grid grid-cols-2 gap-2.5">
         {q.opts.map((o, k) => (
-          <button key={k} disabled={picked !== null} onClick={() => { setPicked(k); if (k === q.answer) setRight((n) => n + 1) }}
-            className={cn('pill min-h-[64px] rounded-[18px] border-2 bg-paper text-[28px]', picked === null ? 'border-ink/15' : k === q.answer ? 'border-[#2F7D4F]' : k === picked ? 'border-[#B3412E]' : 'border-ink/10 opacity-50')}
-            style={{ fontFamily: ownFont }}>{own(o, sc)}</button>
+          <ChoiceButton key={k} state={choiceState(picked !== null, k, q.answer, picked)} disabled={picked !== null} onClick={() => { setPicked(k); if (k === q.answer) setRight((n) => n + 1) }}
+            className="justify-center text-[28px]" style={{ fontFamily: ownFont }}>{own(o, sc)}</ChoiceButton>
         ))}
       </div>
       {picked !== null && <button autoFocus onClick={() => { setI(i + 1); setPicked(null) }} className="pill min-h-12 self-end rounded-full px-7 font-bold text-stone" style={{ background: DEEP[subj.color] }}>{t('td.next')} →</button>}

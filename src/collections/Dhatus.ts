@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { revalidateSite } from '../lib/revalidate'
+import { jsonField } from '../lib/jsonField'
 import { anyone, editors, admins, reviewersField } from '../access/roles'
 
 const LAKARAS = [
@@ -76,10 +77,10 @@ export const Dhatus: CollectionConfig = {
           label: 'Forms (Vidyut)',
           fields: [
             { name: 'vidyutPanel', type: 'ui', admin: { components: { Field: '/components/admin/VidyutPanel#VidyutPanel' } } },
-            { name: 'forms', type: 'json', admin: { hidden: true } },
-            { name: 'participle', type: 'json', admin: { hidden: true } },
-            { name: 'derived', type: 'json', admin: { hidden: true, description: 'Causative, desiderative, intensive and passive forms (Vidyut)' } },
-            { name: 'krdanta', type: 'json', admin: { hidden: true, description: 'Kṛdanta forms: ktvā/lyap, tumun, śatṛ, śānac, tavya, anīyar (Vidyut)' } },
+            jsonField('forms', { hidden: true }),
+            jsonField('participle', { hidden: true }),
+            jsonField('derived', { hidden: true, description: 'Causative, desiderative, intensive and passive forms (Vidyut)' }),
+            jsonField('krdanta', { hidden: true, description: 'Kṛdanta forms: ktvā/lyap, tumun, śatṛ, śānac, tavya, anīyar (Vidyut)' }),
             { name: 'generatedWith', type: 'text', admin: { readOnly: true, description: 'Vidyut version and date of the last generation' } },
           ],
         },

@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { familyView, iast, ktaCell, splitScript, LAKARA_NAMES, padaOf, tinCell, toScript, colorOfIdx, type Derived, type DhatuLite, type FamilyId, type LakaraId, type PadaId, type VoiceId } from '@/lib/grammar'
 import { meaningOf, type UIKey } from '@/lib/i18n'
 import { verbAbout } from '@/lib/seo'
@@ -35,15 +35,18 @@ export function VerbClient({ d: base, examples, relatives = [] }: { d: D; exampl
   const [fam, setFam] = useState<FamilyId>('mula')
   const [voice, setVoice] = useState<VoiceId>('kartari')
   const [derived, setDerived] = useState<Derived | null>(base.derived || null)
-  const [loading, setLoading] = useState<'idle' | 'busy' | 'error'>('idle')
   const wantsFamily = fam !== 'mula' || voice !== 'kartari'
+  // verbs stored without their family are asked from Vidyut once, when the reader opens that view
+  const [failed, setFailed] = useState(false)
+  const asked = useRef(false)
   useEffect(() => {
-    if (!wantsFamily || derived || loading === 'busy') return
-    setLoading('busy')
+    if (!wantsFamily || derived || asked.current) return
+    asked.current = true
     fetch('/api/grammar', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'derived', aupadeshika: base.aupadeshika, gana: base.gana, prefixes: base.prefixes }) })
-      .then((r) => r.json()).then((j) => { if (j.derived) { setDerived(j.derived); setLoading('idle') } else setLoading('error') })
-      .catch(() => setLoading('error'))
-  }, [wantsFamily, derived, loading, base.aupadeshika, base.gana, base.prefixes])
+      .then((r) => r.json()).then((j) => { if (j.derived) setDerived(j.derived); else setFailed(true) })
+      .catch(() => setFailed(true))
+  }, [wantsFamily, derived, base.aupadeshika, base.gana, base.prefixes])
+  const loading: 'idle' | 'busy' | 'error' = derived || !wantsFamily ? 'idle' : failed ? 'error' : 'busy'
   const view = familyView(base, fam, voice, derived)
   const d: D = view ? { ...base, ...view } : base
   const missing = wantsFamily && !view

@@ -11,6 +11,9 @@ export type Lang = 'en' | LocalLang
 export type { UIKey }
 export const LANG_OF: Record<ScriptId, Lang> = { deva: 'en', telu: 'te', knda: 'kn', taml: 'ta' }
 const COL: Record<Lang, number> = { en: 0, te: 1, kn: 2, ta: 3 }
+/** Column of a language in every [en, te, kn, ta] tuple. */
+export const langIndex = (lang: Lang) => COL[lang]
+export type Localized = [en: string, te: string, kn: string, ta: string]
 
 export type T = (key: UIKey, vars?: Record<string, string | number>) => string
 export function makeT(lang: Lang): T {

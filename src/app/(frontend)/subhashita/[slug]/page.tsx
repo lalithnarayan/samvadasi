@@ -2,11 +2,12 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { SubhashitaClient } from '@/components/pages/Subhashita'
 import { JsonLd } from '@/components/samvada/JsonLd'
-import { getSubhashita } from '@/lib/data'
+import { getSubhashita, getSubhashitas } from '@/lib/data'
 import { cardUrl } from '@/lib/card'
 import { SITE, breadcrumbs, langOf, prefix, verseMeta } from '@/lib/seo'
 
-export const revalidate = 3600
+export const revalidate = 86400 // a safety net: edits refresh pages at once (src/lib/revalidate.ts)
+export async function generateStaticParams() { return (await getSubhashitas()).map((s) => ({ slug: s.slug })) }
 type P = { params: Promise<{ slug: string; lang?: string }> }
 
 export async function generateMetadata({ params }: P): Promise<Metadata> {

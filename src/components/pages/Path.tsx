@@ -1,16 +1,16 @@
 'use client'
 import Link from 'next/link'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { toScript } from '@/lib/grammar'
 import type { TodayPool, TodayWord } from '@/lib/data'
-import { buildSession, rng, save, type Ex, type Store } from '@/lib/practice'
+import { buildSession, rng, save, usePracticeStore, type Ex } from '@/lib/practice'
+import { langIndex } from '@/lib/i18n'
 import { MASTERED, PLACEMENT_UNITS, SECTIONS, UNITS, mastery, nextUnit, unitPool, type Unit } from '@/lib/path'
 import { track } from '@/lib/track'
 import { cn } from '@/lib/utils'
 import { DEEP, TINT, useSamvada } from '@/components/samvada/state'
-import { Runner, Shell, Step, Summary, audioTest, openStore, useAudioSet, type Result } from './Today'
+import { PracticeShell as Shell, Runner, SessionHeader, Step, Summary, audioTest, useAudioSet, useDay2Return, type Result } from '@/components/practice'
 
-const COL = { en: 0, te: 1, kn: 2, ta: 3 } as const
 const TONES = ['u', 'm', 'p'] as const
 
 /** A ring that fills with mastery (0–1). */
@@ -30,10 +30,10 @@ function Ring({ value, size = 76, tone, children, current }: { value: number; si
 
 export function PathClient({ pool }: { pool: TodayPool }) {
   const { t, lang, sc, base, query, subj } = useSamvada()
-  const col = COL[lang], font = `var(--font-sk-${sc})`
-  const [store, setStore] = useState<Store | null>(null)
-  const [placing, setPlacing] = useState(false)
-  useEffect(() => { setStore(openStore()) }, [])
+  const col = langIndex(lang), font = `var(--font-sk-${sc})`
+  const store = usePracticeStore()
+  const [placing, setPlacing] = useState<number | null>(null) // the placement's random seed while it runs
+  useDay2Return()
   const m = useMemo(() => Object.fromEntries(UNITS.map((u) => [u.n, store ? mastery(u, pool, store) : 0])), [store, pool])
   if (!store) return <Shell><h1 className="disp m-0 text-[clamp(36px,6vw,64px)] font-extrabold">{t('pa.h1')}</h1></Shell>
   const placed = store.placed || 0
@@ -42,7 +42,7 @@ export function PathClient({ pool }: { pool: TodayPool }) {
   const nu = UNITS.find((u) => u.n === next)!
   const fresh = !placed && !Object.keys(store.cards).length
 
-  if (placing) return <Shell><Placement pool={pool} onDone={(n) => { const s = { ...store, placed: n }; save(s); setStore(s); setPlacing(false); track('placement_done', { unit: n }) }} onQuit={() => setPlacing(false)} /></Shell>
+  if (placing !== null) return <Shell><Placement pool={pool} seed={placing} onDone={(n) => { save({ ...store, placed: n }); setPlacing(null); track('placement_done', { unit: n }) }} onQuit={() => setPlacing(null)} /></Shell>
 
   return (
     <Shell>
@@ -65,7 +65,7 @@ export function PathClient({ pool }: { pool: TodayPool }) {
       {fresh && (
         <div className="flex flex-wrap items-center gap-4 rounded-[22px] border border-ink/15 bg-paper p-5">
           <p className="m-0 flex-1 text-[15px]">{t('pa.placeAsk')}</p>
-          <button onClick={() => setPlacing(true)} className="pill min-h-12 rounded-full border border-ink/30 px-6 font-semibold">{t('pa.placeBtn')}</button>
+          <button onClick={() => setPlacing(Date.now() % 1e9)} className="pill min-h-12 rounded-full border border-ink/30 px-6 font-semibold">{t('pa.placeBtn')}</button>
         </div>
       )}
 
@@ -97,11 +97,11 @@ export function PathClient({ pool }: { pool: TodayPool }) {
 }
 
 /** Placement: one meaning question from a spread of units; the second miss ends it. */
-function Placement({ pool, onDone, onQuit }: { pool: TodayPool; onDone: (unit: number) => void; onQuit: () => void }) {
+function Placement({ pool, seed, onDone, onQuit }: { pool: TodayPool; seed: number; onDone: (unit: number) => void; onQuit: () => void }) {
   const { t, lang } = useSamvada()
-  const col = COL[lang]
+  const col = langIndex(lang)
   const qs = useMemo(() => {
-    const r = rng(Date.now() % 1e9)
+    const r = rng(seed)
     const mean = (w: TodayWord) => w.m[col] || w.m[0]
     const all = pool.words.map(mean)
     return PLACEMENT_UNITS.map((n) => {
@@ -112,7 +112,7 @@ function Placement({ pool, onDone, onQuit }: { pool: TodayPool; onDone: (unit: n
       const options = [mean(w), ...others].sort(() => r() - 0.5)
       return { n, ex: { kind: 'meaning', id: w.id, word: w, options, answer: options.indexOf(mean(w)) } as Ex }
     }).filter(Boolean) as { n: number; ex: Ex }[]
-  }, [pool, col])
+  }, [pool, col, seed])
   const [i, setI] = useState(0)
   const [miss, setMiss] = useState(0)
   const [passed, setPassed] = useState(0)
@@ -127,11 +127,7 @@ function Placement({ pool, onDone, onQuit }: { pool: TodayPool; onDone: (unit: n
   if (!q) return null
   return (
     <>
-      <div className="flex items-center gap-3">
-        <button onClick={onQuit} className="pill min-h-10 rounded-full border border-ink/25 px-4 text-sm font-semibold">{t('td.quit')}</button>
-        <span className="flex-1 text-sm font-semibold">{t('pa.placeTitle')}</span>
-        <span className="text-sm font-semibold">{t('td.progress', { i: i + 1, n: qs.length })}</span>
-      </div>
+      <SessionHeader step={i} total={qs.length} onQuit={onQuit} title={t('pa.placeTitle')} bar={false} />
       <Step key={i} ex={q.ex} col={col} onAnswer={(_, right) => setLast(right)} onNext={next} />
     </>
   )
@@ -139,14 +135,13 @@ function Placement({ pool, onDone, onQuit }: { pool: TodayPool; onDone: (unit: n
 
 export function UnitClient({ pool, n }: { pool: TodayPool; n: number }) {
   const { t, lang, sc, base, query, subj } = useSamvada()
-  const col = COL[lang], font = `var(--font-sk-${sc})`
+  const col = langIndex(lang), font = `var(--font-sk-${sc})`
   const u = UNITS.find((x) => x.n === n) as Unit
   const up = useMemo(() => unitPool(u, pool), [u, pool])
-  const [store, setStore] = useState<Store | null>(null)
+  const store = usePracticeStore()
   const audio = useAudioSet()
   const [session, setSession] = useState<Ex[] | null>(null)
   const [result, setResult] = useState<Result | null>(null)
-  useEffect(() => { setStore(openStore()) }, [])
   const v = store ? mastery(u, pool, store) : 0
   const start = () => {
     if (!store || !audio) return
@@ -167,7 +162,7 @@ export function UnitClient({ pool, n }: { pool: TodayPool; n: number }) {
       } />
     </Shell>
   )
-  if (store && session) return <Shell><Runner session={session} store={store} setStore={setStore} onDone={setResult} onQuit={() => setSession(null)} unit={n} /></Shell>
+  if (store && session) return <Shell><Runner session={session} store={store} onDone={setResult} onQuit={() => setSession(null)} unit={n} /></Shell>
 
   return (
     <Shell>

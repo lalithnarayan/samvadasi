@@ -19,6 +19,7 @@
   --color-chalk: #EEE9E0;
   --color-u-tint: #E7E6EE;  --color-u-deep: #3F4C7A;   /* उत्तम  I / we        */
   --color-m-tint: #F1E6DE;  --color-m-deep: #9C5537;   /* मध्यम  you           */
+  --color-good: #2F7D4F;  --color-bad: #B3412E;    /* right / wrong answers */
   --color-p-tint: #E6E9DC;  --color-p-deep: #56652F;   /* प्रथम  he / she / भवान् */
   /* Latin first; Telugu / Kannada / Tamil interface text falls through to the Baloo 2 faces */
   --font-indic: var(--font-sk-telu), var(--font-sk-knda), var(--font-sk-taml);

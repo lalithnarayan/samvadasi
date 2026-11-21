@@ -2,7 +2,7 @@ import { metaFor } from '@/lib/seo'
 import { PracticeClient } from '@/components/pages/Practice'
 import { getDeck } from '@/lib/data'
 
-export const revalidate = 3600
+export const revalidate = 86400
 export const generateMetadata = ({ params }: { params?: Promise<{ lang?: string }> }) => metaFor('practice', params)
 
 export default async function PracticePage() {

@@ -61,6 +61,9 @@ export function SamvadaStateProvider({ children, initialSc = 'deva' }: { childre
   const [wipe, setWipe] = useState<Ctx['wipe']>({ n: 0, ox: '50%', oy: '90%', from: 'u' })
   const ready = useRef(false)
 
+  // Read ?who=…&when=… once after hydration: the server never sees the query on a cached page, so
+  // reading it during render would make the first client render differ from the HTML.
+  // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing from the URL, an external system
   useEffect(() => { setSt((s) => ({ ...s, ...fromUrl() })); ready.current = true }, [])
   useEffect(() => {
     if (!ready.current) return

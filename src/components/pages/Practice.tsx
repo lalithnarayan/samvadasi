@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { cellFor, splitScript, iast, joinWords, ktaCell, padaOf, subject, toScript, WHENS, type Gender, type Num, type PersonId, type PhraseLite, type WhenId } from '@/lib/grammar'
 import { genderWordsIn, sentence, subjectLabel } from '@/lib/i18n'
 import { DEEP, TINT, useSamvada } from '@/components/samvada/state'
@@ -29,13 +29,13 @@ export function PracticeClient({ cards }: { cards: Card[] }) {
   const deep = DEEP[s.color], font = `var(--font-sk-${sc})`
   const gw = genderWordsIn(lang, it.gender, it.number as Num)
   const who = subjectLabel(lang, s).replace(/\s*\(.*\)/, '') + (it.person === 'r' ? `, ${t('resp')}` : '') + (it.person === 'r' || it.lakara === 'kta' || (it.person === 'p' && it.number > 0) ? ` (${gw})` : '')
-  const why = useMemo(() => {
+  const why = (() => {
     const d = it.phrase.dhatu
     if (it.lakara === 'kta') { const k = ktaCell(d, it.gender, it.number); return t('pr.whyKta', { stem: toScript(k?.stem || '', sc), end: toScript(k?.end || '', sc), g: gw }) }
     if (it.person === 'r') return t('pr.whyResp')
     const [pk, pl] = PNAME[s.color]
     return (d.irregular ? t('pr.irr') : padaOf(d) === 'A' ? t('pr.atm') : '') + `${toScript(pk, sc)} (${t(pl)}) + ${toScript(W.name, sc)} (${t(`when.${W.id}`)}).`
-  }, [it, gw, s.color, W, t, sc])
+  })()
 
   const next = (gotIt: boolean) => {
     if (gotIt) { setSaid((n) => n + 1); if (!missed.has(it.key)) setFirst((n) => n + 1) }

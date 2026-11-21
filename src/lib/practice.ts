@@ -5,6 +5,7 @@
  *  - Streak: a day counts once a session is finished. One freeze per week covers a single missed day.
  */
 import type { TodayPool, TodayVerb, TodayVerse, TodayWord } from './data'
+import { readStored, useStored, writeStored } from './storage'
 
 export const INTERVALS = [1, 1, 3, 7, 21, 60]
 const KEY = 'samvada:practice:v1'
@@ -27,11 +28,14 @@ const EMPTY: Store = { cards: {}, last: 0, streak: 0, best: 0, freezeWeek: -1, f
 export const today = (d = new Date()) => Math.floor((d.getTime() - d.getTimezoneOffset() * 60e3) / 86400e3)
 export const weekOf = (day: number) => Math.floor((day + 3) / 7) // weeks start on Monday
 
-export function load(): Store {
-  try { const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s && typeof s === 'object') return { ...EMPTY, ...s } } catch {}
+const parse = (raw: string | null): Store => {
+  try { const s = raw ? JSON.parse(raw) : null; if (s && typeof s === 'object') return { ...EMPTY, ...s } } catch {}
   return { ...EMPTY, cards: {} }
 }
-export function save(s: Store) { try { localStorage.setItem(KEY, JSON.stringify(s)) } catch {} }
+export const load = (): Store => readStored(KEY, parse)
+export const save = (s: Store) => writeStored(KEY, s)
+/** The learner's progress; null while the server renders. Every view sees the same store. */
+export const usePracticeStore = (): Store | null => useStored<Store | null>(KEY, parse, null)
 
 /** The streak as it stands today: broken if more than one day (or two, with the freeze) was missed. */
 export function liveStreak(s: Store, d = today()) {

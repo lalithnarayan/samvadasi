@@ -5,7 +5,8 @@ import { SC_OF, LOCALES } from '@/lib/seo'
 
 export const metadata = baseMetadata
 export const viewport = baseViewport
-export const dynamicParams = false
+// No `dynamicParams = false` here: pages inherit it, and every verb not built ahead would 404.
+// Unknown languages are refused below instead.
 export function generateStaticParams() { return LOCALES.map((lang) => ({ lang })) }
 
 /** Telugu, Kannada and Tamil copies of every page, rendered on the server so search engines see them. */

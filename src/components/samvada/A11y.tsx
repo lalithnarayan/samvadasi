@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import { json, useStored, writeStored } from '@/lib/storage'
 import { cn } from '@/lib/utils'
 import { useSamvada } from './state'
 
@@ -15,16 +16,15 @@ function apply(p: Prefs) {
   if (p.size === 'm') delete d.dataset.size; else d.dataset.size = p.size
   if (p.contrast) d.dataset.contrast = 'more'; else delete d.dataset.contrast
   if (p.motion) d.dataset.motion = 'less'; else delete d.dataset.motion
-  try { localStorage.setItem(KEY, JSON.stringify(p)) } catch {}
+  writeStored(KEY, p)
 }
 
 /** "Aa" button in the header: text size, high contrast and less motion, remembered on this device. */
 export function A11yMenu() {
   const { t } = useSamvada()
   const [open, setOpen] = useState(false)
-  const [p, setP] = useState<Prefs>(DEF)
+  const p = useStored(KEY, json(DEF), DEF)
   const box = useRef<HTMLDivElement>(null), btn = useRef<HTMLButtonElement>(null)
-  useEffect(() => { try { setP({ ...DEF, ...JSON.parse(localStorage.getItem(KEY) || '{}') }) } catch {} }, [])
   useEffect(() => {
     if (!open) return
     const key = (e: KeyboardEvent) => { if (e.key === 'Escape') { setOpen(false); btn.current?.focus() } }
@@ -33,13 +33,7 @@ export function A11yMenu() {
     box.current?.querySelector<HTMLElement>('button')?.focus()
     return () => { document.removeEventListener('keydown', key); document.removeEventListener('mousedown', click) }
   }, [open])
-  const up = (patch: Partial<Prefs>) => setP((o) => { const n = { ...o, ...patch }; apply(n); return n })
-  const Toggle = ({ k, label }: { k: 'contrast' | 'motion'; label: string }) => (
-    <button role="switch" aria-checked={p[k]} onClick={() => up({ [k]: !p[k] })}
-      className="flex min-h-11 w-full items-center justify-between gap-3 rounded-2xl border border-ink/15 px-3.5 text-left text-[15px] font-semibold">
-      {label}<span className={cn('rounded-full px-2.5 py-0.5 text-[12px]', p[k] ? 'bg-ink text-stone' : 'border border-ink/30')}>{p[k] ? t('a11y.on') : t('a11y.off')}</span>
-    </button>
-  )
+  const up = (patch: Partial<Prefs>) => apply({ ...p, ...patch })
   return (
     <div className="relative">
       <button ref={btn} onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-controls="a11y-panel" aria-label={t('a11y.btn')}
@@ -57,10 +51,20 @@ export function A11yMenu() {
               ))}
             </div>
           </div>
-          <Toggle k="contrast" label={t('a11y.contrast')} />
-          <Toggle k="motion" label={t('a11y.motion')} />
+          <Toggle on={p.contrast} label={t('a11y.contrast')} onChange={() => up({ contrast: !p.contrast })} />
+          <Toggle on={p.motion} label={t('a11y.motion')} onChange={() => up({ motion: !p.motion })} />
         </div>
       )}
     </div>
+  )
+}
+
+function Toggle({ on, label, onChange }: { on: boolean; label: string; onChange: () => void }) {
+  const { t } = useSamvada()
+  return (
+    <button role="switch" aria-checked={on} onClick={onChange}
+      className="flex min-h-11 w-full items-center justify-between gap-3 rounded-2xl border border-ink/15 px-3.5 text-left text-[15px] font-semibold">
+      {label}<span className={cn('rounded-full px-2.5 py-0.5 text-[12px]', on ? 'bg-ink text-stone' : 'border border-ink/30')}>{on ? t('a11y.on') : t('a11y.off')}</span>
+    </button>
   )
 }

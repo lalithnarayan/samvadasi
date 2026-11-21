@@ -7,7 +7,9 @@ import { nounPattern } from '@/lib/grammar'
 import { cardUrl } from '@/lib/card'
 import { breadcrumbs, langOf, nounMeta, plain, termLd } from '@/lib/seo'
 
-export const revalidate = 3600
+export const revalidate = 86400 // a safety net: edits refresh pages at once (src/lib/revalidate.ts)
+/** Built on the first visit, then cached until a noun changes (an empty list turns on caching). */
+export async function generateStaticParams() { return [] }
 type P = { params: Promise<{ slug: string; lang?: string }> }
 
 export async function generateMetadata({ params }: P): Promise<Metadata> {

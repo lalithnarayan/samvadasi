@@ -6,7 +6,8 @@ import { getPack, getPacks } from '@/lib/data'
 import { cardUrl } from '@/lib/card'
 import { breadcrumbs, langOf, packMeta } from '@/lib/seo'
 
-export const revalidate = 3600
+export const revalidate = 86400 // a safety net: edits refresh pages at once (src/lib/revalidate.ts)
+export async function generateStaticParams() { return (await getPacks()).map((k) => ({ slug: k.slug })) }
 type P = { params: Promise<{ slug: string; lang?: string }> }
 
 export async function generateMetadata({ params }: P): Promise<Metadata> {

@@ -3,7 +3,7 @@ import { JsonLd } from '@/components/samvada/JsonLd'
 import { dhatuCount, getDhatu, getFeatured, getSubhashitas, verseOfDay } from '@/lib/data'
 import { langOf, metaFor, websiteLd } from '@/lib/seo'
 
-export const revalidate = 3600
+export const revalidate = 86400
 export const generateMetadata = ({ params }: { params?: Promise<{ lang?: string }> }) => metaFor('home', params)
 
 export default async function Home({ params }: { params?: Promise<{ lang?: string }> }) {

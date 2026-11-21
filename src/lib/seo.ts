@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
 import type { ScriptId } from './grammar/script'
 import { iast, toScript } from './grammar/script'
-import { meaningOf, nounMeaning, pick, type Lang } from './i18n'
+import { langIndex, meaningOf, nounMeaning, pick, type Lang } from './i18n'
 
 /**
  * Search: every page exists in English (/…) and as server-rendered Telugu, Kannada and Tamil
  * copies (/te/…, /kn/…, /ta/…), linked to each other with hreflang. Titles use the words people
  * type: "gam dhatu roop", "rama shabd roop", "గమ్ ధాతు రూపాలు".
  */
-export const SITE = process.env.NEXT_PUBLIC_SERVER_URL || 'https://samvada.si'
+import { SITE } from './site'
+export { SITE }
 export const LOCALES = ['te', 'kn', 'ta'] as const
 export type Locale = (typeof LOCALES)[number]
 export const SC_OF: Record<Locale, ScriptId> = { te: 'telu', kn: 'knda', ta: 'taml' }
@@ -31,7 +32,7 @@ export const sitemapAlternates = (path: string) => ({ languages: { en: SITE + (p
 export const plain = (deva: string) => iast(deva).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z ]/g, '')
 
 type Four = [string, string, string, string]
-const L = (lang: Lang, x: Four) => x[{ en: 0, te: 1, kn: 2, ta: 3 }[lang]]
+const L = (lang: Lang, x: Four) => x[langIndex(lang)]
 
 // ── fixed pages ─────────────────────────────────────────────────────────
 export const PAGES = {

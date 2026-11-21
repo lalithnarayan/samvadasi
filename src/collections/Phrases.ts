@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { revalidateSite } from '../lib/revalidate'
+import { jsonField } from '../lib/jsonField'
 import { anyone, editors } from '../access/roles'
 
 /** A sentence pattern: [subject] + words + [verb]. Subject and verb change with WHO / WHEN in the app. */
@@ -26,7 +27,7 @@ export const Phrases: CollectionConfig = {
         { name: 'tail', type: 'text', admin: { width: '25%', description: 'to school' } },
       ] },
     ] },
-    { name: 'local', type: 'json', admin: { description: 'Telugu / Kannada / Tamil wording: {"te": ["go", "బడికి"], "kn": [...], "ta": [...]} — the verb key from the translation engine and the words before it' } },
+    jsonField('local', { description: 'Telugu / Kannada / Tamil wording: {"te": ["go", "బడికి"], "kn": [...], "ta": [...]} — the verb key from the translation engine and the words before it' }),
     { name: 'note', type: 'textarea' },
   ],
 }

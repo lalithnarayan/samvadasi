@@ -17,14 +17,14 @@ export function RecordClient({ allowed, texts, recorded: rec0, ai }: { allowed: 
   const [kind, setKind] = useState('verse')
   const [onlyTodo, setOnlyTodo] = useState(true)
   const [q, setQ] = useState('')
-  const [sel, setSel] = useState<string | null>(null)
+  const [picked, setSel] = useState<string | null>(null)
   const [state, setState] = useState<'idle' | 'rec' | 'took' | 'saving' | 'saved' | 'error' | 'mic'>('idle')
   const [take, setTake] = useState<{ blob: Blob; url: string } | null>(null)
   const mr = useRef<MediaRecorder | null>(null), chunks = useRef<Blob[]>([])
 
   const list = useMemo(() => texts.filter((x) => x.kind === kind && (!onlyTodo || !recorded[x.text]) && (!q || x.text.includes(q) || iast(x.text).includes(q.toLowerCase()))), [texts, kind, onlyTodo, recorded, q])
   const done = Object.keys(recorded).length
-  useEffect(() => { if (!sel && list[0]) setSel(list[0].text) }, [list, sel])
+  const sel = picked ?? list[0]?.text ?? null // the first text is selected until one is picked
   useEffect(() => () => { if (take) URL.revokeObjectURL(take.url) }, [take])
 
   if (!allowed) return (
@@ -34,6 +34,7 @@ export function RecordClient({ allowed, texts, recorded: rec0, ai }: { allowed: 
         <span className="eyebrow" style={{ color: deep }}>{t('rec.eyebrow')}</span>
         <h1 className="disp m-0 text-[clamp(40px,6vw,80px)] font-extrabold">{t('rec.h1')}</h1>
         <p className="m-0 max-w-[560px] text-lg">{t('rec.login')}</p>
+        {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- the admin is a separate app (Payload), so a full page load is right */}
         <a href="/admin/login?redirect=%2Frecord" className="pill self-start rounded-full bg-ink px-6 py-3 font-semibold text-stone no-underline">{t('rec.loginBtn')} →</a>
       </main>
     </>
