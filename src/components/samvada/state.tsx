@@ -1,7 +1,7 @@
 'use client'
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { subject, type Gender, type Num, type PersonId, type ScriptId, type Subject, type WhenId } from '@/lib/grammar'
-import { LANG_OF, makeT, type Lang, type Style, type T } from '@/lib/i18n'
+import { LANG_OF, loadDict, makeT, type Dict, type Lang, type Style, type T } from '@/lib/i18n'
 
 /**
  * WHO / WHEN state shared by every page. Lives in the layout (so it survives navigation)
@@ -55,7 +55,12 @@ export const stripLang = (path: string) => path.replace(LOC, '') || '/'
 export const baseOf = (sc: ScriptId) => { const l = LANG_OF[sc]; return l === 'en' ? '' : '/' + l }
 export const withLang = (path: string, sc: ScriptId) => { const p = stripLang(path); return baseOf(sc) + (p === '/' && baseOf(sc) ? '' : p) }
 
-export function SamvadaStateProvider({ children, initialSc = 'deva' }: { children: React.ReactNode; initialSc?: ScriptId }) {
+/**
+ * `dict` is the page's own language, sent by the server. Switching script to another language loads
+ * that language's strings on demand; until they arrive the page keeps the strings it has.
+ */
+export function SamvadaStateProvider({ children, initialSc = 'deva', dict }: { children: React.ReactNode; initialSc?: ScriptId; dict: Dict }) {
+  const [dicts, setDicts] = useState<Partial<Record<Lang, Dict>>>(() => ({ [LANG_OF[initialSc]]: dict }))
   const [st, setSt] = useState<State>({ ...DEFAULT, sc: initialSc })
   const [morph, setMorph] = useState(0)
   const [wipe, setWipe] = useState<Ctx['wipe']>({ n: 0, ox: '50%', oy: '90%', from: 'u' })
@@ -90,12 +95,14 @@ export function SamvadaStateProvider({ children, initialSc = 'deva' }: { childre
     const l = LANG_OF[st.sc]
     document.documentElement.lang = l
     document.documentElement.dataset.lang = l
-  }, [st.sc])
+    if (!dicts[l]) loadDict(l).then((d) => setDicts((m) => ({ ...m, [l]: d })))
+  }, [st.sc, dicts])
 
   const value = useMemo<Ctx>(() => {
     const lang = LANG_OF[st.sc]
-    return { ...st, subj: subject(st.per, st.num, st.gen), morph, wipe, set, query: toQuery(st), lang, t: makeT(lang), base: baseOf(st.sc), style: st.talk === 's' ? 'spoken' : 'written' }
-  }, [st, morph, wipe, set])
+    const t = makeT(dicts[lang] ?? dicts[LANG_OF[initialSc]] ?? dict)
+    return { ...st, subj: subject(st.per, st.num, st.gen), morph, wipe, set, query: toQuery(st), lang, t, base: baseOf(st.sc), style: st.talk === 's' ? 'spoken' : 'written' }
+  }, [st, morph, wipe, set, dicts, initialSc, dict])
   return <C.Provider value={value}>{children}</C.Provider>
 }
 

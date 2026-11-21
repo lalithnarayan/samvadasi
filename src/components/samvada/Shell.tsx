@@ -9,6 +9,7 @@ import { Analytics } from '@/components/samvada/Analytics'
 import type { ScriptId } from '@/lib/grammar'
 import { LANG_OF } from '@/lib/i18n'
 import { SITE } from '@/lib/site'
+import { dictFor } from '@/lib/i18n/server'
 // Self-hosted fonts (Fontsource): no request to Google, builds work offline.
 import '@fontsource-variable/instrument-sans'
 import '@fontsource-variable/bricolage-grotesque/opsz.css'
@@ -42,7 +43,7 @@ export function Shell({ sc = 'deva', children }: { sc?: ScriptId; children: Reac
     <html lang={lang} data-lang={lang} suppressHydrationWarning>
       <head><script dangerouslySetInnerHTML={{ __html: A11Y_BOOT }} /></head>
       <body>
-        <SamvadaStateProvider initialSc={sc}>
+        <SamvadaStateProvider initialSc={sc} dict={dictFor(lang)}>
           <SkipLink />
           <RegisterSW />
           <Background />

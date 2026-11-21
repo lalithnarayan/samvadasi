@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useSamvada } from './state'
 import { SiteNav } from './SiteNav'
 import { Footer } from './Footer'
-import { VerbPicker } from './VerbPicker'
+import { VerbPicker } from './VerbPicker' // loads its search panel only on first use
 
 /** A dead end that isn't one: say so plainly, then offer search and the main places to go. */
 export function NotFoundView() {

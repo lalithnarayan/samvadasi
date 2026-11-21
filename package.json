@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
     "grammar": "python3 api/grammar.py",
+    "prebuild": "tsx scripts/i18n/build-dicts.ts",
     "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=6144\" next build",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "ci": "payload migrate && npm run build",

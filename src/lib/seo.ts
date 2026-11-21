@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import type { ScriptId } from './grammar/script'
 import { iast, toScript } from './grammar/script'
 import { langIndex, meaningOf, nounMeaning, pick, type Lang } from './i18n'
+import { keyForms, plain, type VerbLike } from './verbText'
+export { keyForms, plain }
 
 /**
  * Search: every page exists in English (/…) and as server-rendered Telugu, Kannada and Tamil
@@ -27,9 +29,6 @@ export function alternates(path: string, lang: Lang): Metadata['alternates'] {
   }
 }
 export const sitemapAlternates = (path: string) => ({ languages: { en: SITE + (path || '/'), te: `${SITE}/te${path}`, kn: `${SITE}/kn${path}`, ta: `${SITE}/ta${path}` } })
-
-/** "पठ्" → "path": the plain spelling people type into Google. */
-export const plain = (deva: string) => iast(deva).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-zA-Z ]/g, '')
 
 type Four = [string, string, string, string]
 const L = (lang: Lang, x: Four) => x[langIndex(lang)]
@@ -119,17 +118,6 @@ const OG_LOCALE: Record<Lang, string> = { en: 'en_IN', te: 'te_IN', kn: 'kn_IN',
 export const metaFor = async (key: PageKey, params?: Promise<{ lang?: string }>) => pageMeta(key, langOf((await params)?.lang))
 
 // ── verb pages ──────────────────────────────────────────────────────────
-const GANA = ['', 'bhvādi', 'adādi', 'juhotyādi', 'divādi', 'svādi', 'tudādi', 'rudhādi', 'tanādi', 'kryādi', 'curādi']
-const GANA_DEVA = ['', 'भ्वादि', 'अदादि', 'जुहोत्यादि', 'दिवादि', 'स्वादि', 'तुदादि', 'रुधादि', 'तनादि', 'क्र्यादि', 'चुरादि']
-const PADA_DEVA: Record<string, string> = { P: 'परस्मैपद', A: 'आत्मनेपद' }
-const PADA_EN: Record<string, string> = { P: 'parasmaipada', A: 'ātmanepada' }
-
-type VerbLike = Parameters<typeof meaningOf>[0] & { display: string; gana: number; code: string; padas: string[]; preferredPada?: string | null; forms?: any }
-const first = (d: VerbLike, lak: string) => d.forms?.[lak]?.[d.preferredPada || d.padas[0]]?.[0]?.[0] || ''
-
-/** The three forms that answer "what is it in present / past / future" (he/she, singular). */
-export const keyForms = (d: VerbLike) => ({ lat: first(d, 'lat'), lan: first(d, 'lan'), lrt: first(d, 'lrt'), lot: first(d, 'lot') })
-
 export function verbMeta(d: VerbLike, lang: Lang, slug: string) {
   const sc = scOf(lang === 'en' ? undefined : lang)
   const k = keyForms(d), D = toScript(d.display, sc), roman = plain(d.display)
@@ -148,18 +136,6 @@ export function verbMeta(d: VerbLike, lang: Lang, slug: string) {
     `${D}: ${m}. நிகழ் ${f(k.lat)}, இறந்த ${f(k.lan)}, எதிர் ${f(k.lrt)}, கட்டளை ${f(k.lot)}. நான், நீ, அவன்/அவள் எல்லா வடிவங்களும் தமிழ் எழுத்தில்.`,
   ])
   return { title, description, alternates: alternates(`/verb/${slug}`, lang), openGraph: { title, description, locale: OG_LOCALE[lang] } }
-}
-
-/** One real paragraph about the verb, so the page is more than a table. */
-export function verbAbout(d: VerbLike, lang: Lang, sc: ScriptId): string {
-  const k = keyForms(d), D = toScript(d.display, sc), f = (x: string) => toScript(x, sc)
-  const pada = d.preferredPada || d.padas[0], g = d.gana
-  const m = meaningOf(d, lang, sc).main || d.meaning_en || ''
-  const gd = toScript(GANA_DEVA[g] || '', sc), pd = toScript(PADA_DEVA[pada] || '', sc)
-  if (lang === 'en') return `${d.display} (${plain(d.display)}) means “${(d.meaning_en || m).replace(/^to /, '')}”. It is a ${PADA_EN[pada] || ''} verb of gaṇa ${g} (${GANA[g] || ''}), Dhātupāṭha number ${d.code}. He or she ${k.lat ? `says ${k.lat} in the present, ${k.lan} in the past and ${k.lrt} in the future` : 'uses the forms below'}; change only the ending for I, you, we and they.`
-  if (lang === 'te') return `${D} అంటే “${m}”. ఇది ${gd} గణం (${g}) లోని ${pd} ధాతువు, ధాతుపాఠ సంఖ్య ${d.code}. అతను/ఆమె — వర్తమానం ${f(k.lat)}, భూతం ${f(k.lan)}, భవిష్యత్తు ${f(k.lrt)}. నేను, నువ్వు, మేము, వాళ్ళు కోసం చివరి భాగం మాత్రమే మారుతుంది.`
-  if (lang === 'kn') return `${D} ಎಂದರೆ “${m}”. ಇದು ${gd} ಗಣದ (${g}) ${pd} ಧಾತು, ಧಾತುಪಾಠ ಸಂಖ್ಯೆ ${d.code}. ಅವನು/ಅವಳು — ವರ್ತಮಾನ ${f(k.lat)}, ಭೂತ ${f(k.lan)}, ಭವಿಷ್ಯತ್ ${f(k.lrt)}. ನಾನು, ನೀನು, ನಾವು, ಅವರು ಎಂಬುದಕ್ಕೆ ಕೊನೆಯ ಭಾಗ ಮಾತ್ರ ಬದಲಾಗುತ್ತದೆ.`
-  return `${D} என்றால் “${m}”. இது ${gd} கணத்தின் (${g}) ${pd} தாது, தாதுபாட எண் ${d.code}. அவன்/அவள் — நிகழ் ${f(k.lat)}, இறந்த ${f(k.lan)}, எதிர் ${f(k.lrt)}. நான், நீ, நாம், அவர்கள் என்பதற்கு இறுதிப் பகுதி மட்டுமே மாறும்.`
 }
 
 // ── noun pages ──────────────────────────────────────────────────────────

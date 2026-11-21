@@ -3,7 +3,7 @@ import { toScript } from '../grammar/script'
 import type { DhatuLite, Gender, Num, WhenId } from '../grammar/types'
 import { genderWords, type Subject } from '../grammar/subjects'
 import { englishLine } from '../grammar/english'
-import { UI, type UIKey } from './ui'
+import type { UIKey } from './ui'
 import { GENDER_WORDS, localLine, MEANINGS, pronounLabel, SITUATIONS, type LocalLang, type Style } from './local'
 export type { Style }
 
@@ -16,14 +16,17 @@ export const langIndex = (lang: Lang) => COL[lang]
 export type Localized = [en: string, te: string, kn: string, ta: string]
 
 export type T = (key: UIKey, vars?: Record<string, string | number>) => string
-export function makeT(lang: Lang): T {
-  const c = COL[lang]
+/** One language's strings (generated from ui.ts into ./dict, so a page ships only its own). */
+export type Dict = Record<UIKey, string>
+export function makeT(dict: Dict): T {
   return (key, vars) => {
-    let s: string = UI[key]?.[c] || UI[key]?.[0] || key
+    let s: string = dict[key] ?? key
     if (vars) for (const [k, v] of Object.entries(vars)) s = s.replaceAll(`{${k}}`, String(v))
     return s
   }
 }
+/** Load another language's strings on demand (a separate small chunk per language). */
+export const loadDict = (lang: Lang): Promise<Dict> => import(`./dict/${lang}`).then((m) => m.default as Dict)
 
 /** The phrase in the UI language, conjugated for WHO and WHEN. Falls back to English. */
 export function sentence(lang: Lang, s: Subject, when: WhenId, e: { base: string; third: string; past: string; tail?: string | null; local?: Partial<Record<LocalLang, [string, string]>> | null }, style: Style = 'written'): string {
